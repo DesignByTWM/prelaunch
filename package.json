@@ -1,0 +1,27 @@
+{
+  "name": "dbtwm-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "15.4.8",
+    "react": "19.1.2",
+    "react-dom": "19.1.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "eslint": "^9.31.0",
+    "eslint-config-next": "15.4.8",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3"
+  }
+}
