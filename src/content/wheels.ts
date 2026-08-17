@@ -100,6 +100,54 @@ export const fitmentFactors = [
   },
 ];
 
+/**
+ * CATALOG PREVIEW
+ *
+ * From Liz's Shop Wheels mock, August 14 2026. Eight representative sets
+ * shown as a browse grid so the page reads as a program rather than a
+ * form. No prices, by client instruction: every card routes to a fitment
+ * inquiry, matching her "Inquire for fitment" treatment.
+ *
+ * These are construction and finish descriptions, not manufacturer SKUs.
+ * No brand names appear, consistent with Liz's answer of August 14 that
+ * wheel brand access is not to be published. See review notes item 11.7.
+ *
+ * When a real catalog lands, this array is replaced by a CMS or commerce
+ * feed and the component underneath does not change.
+ */
+export const wheelCatalog = [
+  { name: '20" Forged, Gloss Black', style: "Forged", finish: "Gloss Black", size: '20"', frame: "/wheel-1.webp" },
+  { name: '22" Monoblock, Brushed Titanium', style: "Monoblock", finish: "Brushed Titanium", size: '22"', frame: "/wheel-2.webp" },
+  { name: '21" Multi-Spoke, Satin Black', style: "Multi-Spoke", finish: "Satin Black", size: '21"', frame: "/wheel-3.webp" },
+  { name: '24" Deep Concave, Matte Black', style: "Deep Concave", finish: "Matte Black", size: '24"', frame: "/wheel-4.webp" },
+  { name: '19" Forged, Polished', style: "Forged", finish: "Polished", size: '19"', frame: "/wheel-1.webp" },
+  { name: '20" Split-Spoke, Gunmetal', style: "Split-Spoke", finish: "Gunmetal", size: '20"', frame: "/wheel-2.webp" },
+  { name: '22" Concave, Satin Bronze', style: "Concave", finish: "Satin Bronze", size: '22"', frame: "/wheel-3.webp" },
+  { name: '21" Forged, Gloss White', style: "Forged", finish: "Gloss White", size: '21"', frame: "/wheel-4.webp" },
+];
+
+/**
+ * The three fitment questions from Liz's mock. Kept separate from the
+ * seven longer wheelFaqs below, which stay because they carry real search
+ * weight. Hers lead, ours follow.
+ */
+export const wheelQuickFaqs = [
+  {
+    question: "How do you confirm fitment before I order?",
+    answer:
+      "Your vehicle is measured in-house and fitment is calculated before any wheel is ordered.",
+  },
+  {
+    question: "Is mounting and balancing included?",
+    answer: "Yes, mounting and balancing is included with every wheel purchase.",
+  },
+  {
+    question: "Can I pair wheels with a suspension setup?",
+    answer:
+      "Yes. Wheels and suspension are planned together for correct fitment.",
+  },
+];
+
 export const wheelFaqs = [
   {
     question: "How do I know what wheels will fit my vehicle?",

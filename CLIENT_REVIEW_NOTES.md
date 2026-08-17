@@ -5,7 +5,55 @@
 
 **How to read this:** each item is something a visitor will read as a statement of fact about how DESIGNBYTWM operates. If it is wrong, it needs correcting before launch. If it is right, no action needed.
 
-**Status key:** `OPEN` needs client answer · `CONFIRMED` client verified · `CHANGED` client revised
+**Status key:** `OPEN` needs client answer · `CONFIRMED` client verified · `CHANGED` client revised · `CLOSED` resolved, no action
+
+---
+
+## AUGUST 17 2026 UPDATE · WHAT LIZ'S TEMPLATES RESOLVED
+
+Liz sent answers plus sixteen page templates on August 14. Her copy is now in the build. This is what moved.
+
+### Closed by her answers
+
+| Ref | Was | Now |
+|---|---|---|
+| 1.1 | Hours unconfirmed | **CONFIRMED.** Monday to Friday 8:00 to 17:00. Saturday and Sunday closed. Note this closes Saturday, which previously showed 10:00 to 16:00 |
+| 2.1 | Blackout 3 to 5 days | **CHANGED to 2 to 4 business days** |
+| 2.2 | Interior retrim 2 to 4 weeks | **CHANGED to 1 to 2 weeks** |
+| 2.3 | Full respray 2 to 4 weeks | **CHANGED to 1 to 3 weeks** |
+| 2.4 | Wrap lasts 3 to 5 years | **CHANGED to 5+ years with proper care** |
+| 2.5 | PPF 5 to 10 year warranty | **CHANGED to 10+ years** |
+| 3.3 | Customer-supplied parts policy | **CONFIRMED.** Accepted in most cases, confirmed at consultation |
+| 3.4 | Is alignment included with suspension | **CONFIRMED.** Yes, every suspension install |
+| 4.x | Publish prices or stay inquiry-only | **CONFIRMED inquiry-only.** No figures anywhere. Every cost path routes to a CTA |
+| 11.1b | Mention Tire and Wheel Master lineage | **CONFIRMED no.** Origin story removed from The House |
+| 11.7 | Wheel brand access | **CONFIRMED no.** Catalog describes size, construction and finish only |
+| 15.2 | Invented team members | **CLOSED.** Team section removed entirely per Liz |
+| 15.3 | Invented facility figures | **CLOSED.** Facility section removed entirely per Liz |
+| 15.4 | Origin story | **CLOSED.** Removed. Replaced with a modest intro |
+| 16.4 | Is SMS monitored | **CONFIRMED yes**, during shop hours |
+| 17.1 | Wheel brand names on wheels pages | **CLOSED.** See 11.7 |
+
+### Still open, and still blocking launch
+
+| Ref | Item | Why it still blocks |
+|---|---|---|
+| **15.1** | **Four testimonials remain fabricated** | Liz did not answer this. It is the one remaining FTC exposure and it cannot go live as written. Real quotes plus written permission |
+| **21.x** | **Six new commitments introduced by her own copy** | See section 21 below. Warranty terms and service promises that have never been published |
+| **8 / 17.8** | **Six Featured Builds now use Liz's vehicles** | Need confirmation these are real completed jobs, real photography, and owner permission where a vehicle is identifiable |
+| 14.1 / 14.2 | Google Business Profile and review program | Unanswered. Still the highest-leverage local ranking action |
+| 1.2 | Facility coordinates | Must match the Google Business Profile exactly |
+| 1.3 | Social profile URLs | Six assumed handles. Any that differ break the `sameAs` trust signal |
+| 19.x | Legal pages | Still need attorney review |
+| 7.x | Five service photos and a 1200x630 share image | See section 7 |
+
+### Our recommendations, for the pre-launch conversation
+
+Not changes. Proposals to raise once copy is signed off.
+
+1. **Reinstate the eight cost questions in the FAQ, answered without numbers.** Liz removed all of them, correctly, to avoid publishing prices. But we were never publishing prices: we answered "how much does it cost to wrap a car" by explaining what drives the figure and routing to a consultation. That is a very high volume commercial query. Deleting the question does not protect margin any better than answering it that way, it hands the query to a competitor.
+2. **Localise the lighting legality answer to Texas.** Her answer says legality depends on your state. We serve Texas, and a Texas-specific answer is worth real local ranking.
+3. **Replace the warranty non-answer on Lighting and Truck Accessories.** "Confirm with your dealer" appears verbatim on both and will not earn a citation from any answer engine.
 
 ---
 
@@ -15,14 +63,15 @@ The items below get raised directly in the delivery email rather than left for L
 
 | Ref | Question for Liz and Henry | Why it matters |
 |---|---|---|
-| **16.4** | **Is someone actually monitoring SMS to (832) 402-9174 during shop hours?** | The site tells visitors texting is often the fastest way to reach the house, and there is a floating Text the House button on every page. If nobody is watching that inbox, the site is actively generating a bad first impression at the highest intent moment. Either confirm who owns it, or the copy and the button need to change |
-| 15.1 | Four customer testimonials are fabricated placeholders. Real ones needed, with permission to publish | Cannot go live as written. FTC exposure |
-| 15.2 | Five of six team members are invented names | Cannot go live as written |
-| 11.1b | Does Henry want the Tire and Wheel Master lineage mentioned publicly? | Strongest available E-E-A-T signal. If no, the origin content comes out and other trust content becomes urgent |
-| 14.1 / 14.2 | Google Business Profile claimed, completed and a review process running | The single highest-leverage action for local rankings. Cannot be done technically, has to come from the team |
-| 1.1 | Confirm opening hours | Appear on the contact page, in the footer and in schema |
-| 4.x | Publish real price ranges, or keep pricing inquiry-only? | Affects service pages, FAQ and how location pages get written. Wanted early |
-| 11.7 | Does Design By TWM have access to the wheel brands carried by Tire and Wheel Master? | If yes, real brand names materially strengthen the wheels pages |
+| **15.1** | **Four customer testimonials are still fabricated.** Real ones needed, with written permission to publish | The one remaining item that cannot go live under any circumstances. FTC exposure on endorsements. Unanswered in the August 14 round |
+| **21.1** | **Does the house actually offer a two-year warranty?** It now appears on every service page | Introduced by the August 14 templates. A published warranty term is a promise that gets held against the business. Needs Henry, not Liz |
+| **21.5** | **The "Most Popular" badge implies sales data** | Confirm or remove. An unsupported popularity claim sits in the same category as a fabricated review |
+| **8 / 17.8** | **Six Featured Builds now carry real vehicle names** | Confirm these are real completed jobs, supply photography, and obtain owner permission where a vehicle is identifiable |
+| 14.1 / 14.2 | Google Business Profile claimed, completed and a review process running | The single highest-leverage action for local rankings. Cannot be done technically, has to come from the team. Still unanswered |
+| 21.2 / 21.3 | "Priority scheduling" and "dedicated project lead" are now published commitments | Operational and staffing promises. Note the team section came out in the same round |
+| 19.x | Legal pages need attorney review | Privacy, terms and accessibility |
+| 1.2 / 1.3 | Facility coordinates and the six social URLs | Both feed schema. Wrong values quietly weaken the trust signal rather than breaking anything visibly |
+| 7.x | Five service photos and a 1200x630 share image | Without the share image, every link to this site posted anywhere renders blank |
 | **20** | **The 22 city pages are placeholders and are deliberately hidden from Google for now.** Nothing is wrong. Explanation in section 20 | The location program is the biggest single piece of the four-month search strategy and it cannot start until page copy is approved |
 
 ---
@@ -31,7 +80,7 @@ The items below get raised directly in the delivery email rather than left for L
 
 | # | Item | Where it appears | Currently says | Status |
 |---|---|---|---|---|
-| 1.1 | Opening hours | Footer, contact page, LocalBusiness schema | Mon to Fri 9:00 to 18:00 · Sat 10:00 to 16:00 · Sun closed | OPEN |
+| 1.1 | Opening hours | Footer, contact page, LocalBusiness schema | **Mon to Fri 8:00 to 17:00 · Sat closed · Sun closed** | CONFIRMED |
 | 1.2 | Facility coordinates | LocalBusiness schema, map | Approximate lat/long for Ammi Trail. Must match Google Business Profile exactly | OPEN |
 | 1.3 | Social profile URLs | Footer, `sameAs` schema | Assumed handle `designbytwm` on all six platforms. Any that differ break the schema trust signal | OPEN |
 | 1.4 | General inbox | Footer, forms | `info@designbytwm.com` | OPEN |
@@ -40,15 +89,15 @@ The items below get raised directly in the delivery email rather than left for L
 
 ## 2. SERVICE COPY · TIMEFRAMES
 
-All timeframes below are industry-typical, not TWM-specific. Every one is visible to customers and sets expectations.
+All timeframes below are Liz's, supplied August 14 2026 and now live on the service pages. Every one is visible to customers and sets expectations.
 
 | # | Service | Currently says | Status |
 |---|---|---|---|
-| 2.1 | Blackout Packages | Typical package runs 3 to 5 days | OPEN |
-| 2.2 | Interior Transformation | Full retrim runs 2 to 4 weeks | OPEN |
-| 2.3 | Paint & Body | Full repaint runs 2 to 4 weeks | OPEN |
-| 2.4 | Vehicle Wraps | Wrap lasts 3 to 5 years in the Houston climate | OPEN |
-| 2.5 | Paint Protection Film | Film carries a 5 to 10 year manufacturer warranty | OPEN |
+| 2.1 | Blackout Packages | Most packages take 2 to 4 business days | CHANGED |
+| 2.2 | Interior Transformation | Most retrims take 1 to 2 weeks | CHANGED |
+| 2.3 | Paint & Body | Most full resprays take 1 to 3 weeks | CHANGED |
+| 2.4 | Vehicle Wraps | 5+ years with proper care | CHANGED |
+| 2.5 | Paint Protection Film | 10+ years | CHANGED |
 
 ---
 
@@ -460,6 +509,47 @@ The noindex matters. Publishing 22 thin pages now would attach a doorway page si
 ### What unblocks it
 
 Approved copy on the homepage, the ten service pages and the FAQ. Once those are locked, the location program runs against final content and the 22 pages get built properly, starting with Houston as the master.
+
+---
+
+## 21. NEW COMMITMENTS INTRODUCED BY THE AUGUST 14 TEMPLATES
+
+Liz's service page mocks introduce a Packages block on all ten services: three tiers per discipline, thirty tiers in total. The tier inclusions contain promises DESIGNBYTWM has never published anywhere.
+
+These are business commitments, not descriptions. Every one of them is now live on the site because Jose confirmed on August 17 that if Liz wrote it, she and Henry had already discussed it. Listing them here so that assumption is on the record and Henry can correct any of it.
+
+| # | Commitment | Where it appears | Status |
+|---|---|---|---|
+| 21.1 | **Warranty terms stated as fact.** "2-year warranty" on blackout tiers, "5-Year Warranty" in the Vehicle Wraps stat strip, and equivalent terms across the other disciplines | Stat strip and Packages block on all ten service pages | OPEN, needs Henry |
+| 21.2 | **"Priority scheduling"** offered on mid and upper tiers | Packages block | OPEN, needs Henry |
+| 21.3 | **"Dedicated project lead"** offered on top tiers | Packages block | OPEN. Note the team section was removed at the same time, so the site now promises a named lead while showing no staff |
+| 21.4 | **Three-tier package structure per discipline** | Packages block, and emitted as Offer schema | OPEN. Confirm these are real sellable tiers rather than illustrative |
+| 21.5 | **"Most Popular" ribbon** on the middle tier | Packages block | OPEN. This implies sales data. Confirm or remove: an unsupported popularity claim is the same category of risk as a fabricated review |
+| 21.6 | **Forty coverage sub-variant names**, four per discipline, for example "Chrome Delete", "Wheel & Caliper Blackout", "Trim & Badge Blackout" | Coverage grid on all ten service pages | OPEN. Confirm each names something actually sold. These are also now indexed search terms, so they should match how the house describes the work |
+| 21.7 | **Eight wheel catalog entries** describing size, construction and finish | Shop Wheels | OPEN. Representative rather than real inventory. Confirm the descriptions are accurate to what can be sourced |
+| 21.8 | **Four dealer program answers**, including "no minimum volume" and "multi-location accounts supported under one agreement" | Dealer Services | OPEN, needs Henry. These are contractual positions |
+
+### Why this section exists
+
+Everything above reads to a customer as a statement of what they will receive. A warranty term in particular is the kind of published promise that gets held against a business, and it appeared on the site for the first time via a page mock rather than a decision.
+
+None of it is wrong. It just has not been confirmed by the person who has to honour it.
+
+---
+
+## 22. TECHNICAL DECISIONS RECORDED
+
+Not client questions. Recorded so the reasoning survives.
+
+| # | Decision | Reasoning |
+|---|---|---|
+| 22.1 | **Liz's stylesheet was not used.** Her mocks shipped their own palette, teal on overlines and links, white text on teal buttons, Inter 700 and non-standard corner radii | Brand Guidelines v2.0 governs, per Jose August 17. Structure and copy were imported, styling was not |
+| 22.2 | **A placeholder phone number was found in all sixteen mocks.** `(713) 555-0199`, in 54 `sms:` attributes plus visible on the contact page | Discarded entirely. Every contact point renders from `lib/site.ts`. No number is typed into a component anywhere in the codebase |
+| 22.3 | **No visual breadcrumb bar**, per Jose. `BreadcrumbList` schema retained | The schema drives the breadcrumb trail Google renders in results and has no visual cost |
+| 22.4 | **The scope checklist survived.** Liz's layout has no slot for it | It is reviewed content carrying real search weight, so it sits inside the overview rather than being deleted. See section 6 |
+| 22.5 | **`duration` removed from Featured Builds** | The previous builds claimed a turnaround figure on invented projects. Publishing a timeline for a real customer's vehicle that nobody verified is a claim we cannot support. Liz's per-discipline timeframes in section 2 cover this properly |
+| 22.6 | **Next.js upgraded 15.4.5 to 15.5.23** | The lockfile was still resolving 15.4.5 despite package.json pinning 15.4.8, so the deployed site was running unpatched. All Next-specific advisories now cleared |
+| 22.7 | **Two advisories accepted, not fixed.** `postcss` and `sharp` | Both are transitive under Next and only resolve via Next 16, a major version bump two weeks before launch. Neither reaches this site: `sharp` is never invoked because `next/image` is not used, and the postcss advisories require attacker-controlled CSS in a build we fully author. Revisit after launch |
 
 ---
 

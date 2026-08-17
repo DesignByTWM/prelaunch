@@ -13,6 +13,33 @@
  * do to my front-end gross and my time to turn".
  */
 
+/**
+ * The four questions from Liz's Dealer Services mock, August 14 2026.
+ * Her wording verbatim, punctuation resolved per the project copy law.
+ * These lead the FAQ block. The longer drafted set follows.
+ */
+export const dealerQuickFaqs = [
+  {
+    question: "What's the typical turnaround time?",
+    answer:
+      "Turnaround depends on scope and current volume, confirmed at onboarding.",
+  },
+  {
+    question: "Is there a minimum volume requirement?",
+    answer: "No minimum is required to apply. Pricing terms scale with volume.",
+  },
+  {
+    question: "Can this cover multiple locations?",
+    answer:
+      "Yes. Multi-location accounts are supported under one dealer agreement.",
+  },
+  {
+    question: "How is pricing structured?",
+    answer:
+      "Pricing is confirmed during onboarding based on volume and services needed.",
+  },
+];
+
 export interface DealerPackage {
   slug: string;
   name: string;

@@ -2,32 +2,32 @@
  * THE HOUSE · PAGE CONTENT
  *
  * ============================================================
- * PLACEHOLDER CONTENT WARNING
+ * REDUCED, August 17 2026
  * ============================================================
- * Everything in this file marked `placeholder: true` is invented
- * to complete the build for client review. It is NOT real.
+ * Liz answered the open questions on August 14 2026:
  *
- * MUST be replaced before the site goes to production:
- *   - `team`         every member except the founder entry
- *   - `testimonials` every entry, all fabricated
- *   - `facilityStats` all figures invented
+ *   Tire and Wheel Master lineage . . . . . . remove
+ *   Origin story  . . . . . . . . . . . . . . remove
+ *   Team section  . . . . . . . . . . . . . . remove
+ *   Facility figures  . . . . . . . . . . . . remove
  *
- * Fabricated customer testimonials on a live site are a legal
- * exposure under FTC rules on endorsements and reviews. These
- * exist so Liz and Henry can see the layout and swap in real
- * content, not to be published.
+ * Per Jose, the page keeps a modest intro, Under One Roof, the ten
+ * disciplines and Process. Nothing that overstates the business.
  *
- * Tracked as launch blockers in CLIENT_REVIEW_NOTES.md section 15.
+ * The removed exports are gone rather than commented out. The copy is
+ * preserved in CLIENT_REVIEW_NOTES.md and in git history if it is ever
+ * wanted back.
+ *
+ * ------------------------------------------------------------
+ * STILL PLACEHOLDER, STILL A LAUNCH BLOCKER
+ * ------------------------------------------------------------
+ * `testimonials` is fabricated in full. Jose confirmed on August 17
+ * that it stays in place until Liz supplies real, permissioned quotes.
+ *
+ * Fabricated endorsements on a live site are an FTC exposure. This must
+ * not ship. Tracked in CLIENT_REVIEW_NOTES.md section 15.1.
  * ============================================================
  */
-
-export interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
-  image: string;
-  placeholder: boolean;
-}
 
 export interface Testimonial {
   quote: string;
@@ -37,13 +37,14 @@ export interface Testimonial {
   placeholder: boolean;
 }
 
-/* ---------------- THE ORIGIN ---------------- */
+/* ---------------- INTRO ----------------
+   Deliberately modest. Claims only what the business does, with no
+   history, no headcount and no facility figures behind it.
+---------------------------------------- */
 
-export const originStory = [
-  "Design By TWM did not begin as a customization house. It began behind a wheel and tire counter.",
-  "Tire and Wheel Master has been selling wheels in Houston for years, across three showrooms spread through the city. Wheels are an entry point. A client comes in for a set of forged twenty-twos, and while the truck is on the lift the conversation turns to everything else. Could the chrome go? Could the interior be redone in something better than what came from the factory? Could the whole thing be wrapped a colour nobody else has?",
-  "Those conversations kept happening, and the answers kept being no, or worse, the answer was a phone number for somebody else across town. Retail wheel sales runs on a rhythm of hours. A complete vehicle transformation runs on a rhythm of weeks. Trying to force the second into a building designed for the first would have broken both.",
-  "So rather than reshape an operation that was already working, Henry opened a separate house dedicated entirely to the work those clients were asking for. Design By TWM took its initials from where it came from, and its standard from what was missing in the market: one team, one building, one point of contact, from the first drawing to the moment the keys go back.",
+export const houseIntro = [
+  "Design By TWM is an automotive customization house in Houston. Wheels, wraps, blackout packages, paint protection film, interiors, suspension, paint and body, lighting, audio and truck accessories are all performed here, by one team, in one building.",
+  "That is the whole idea. A vehicle that needs four disciplines does not need four shops, four schedules and four people each pointing at the other when something needs correcting. It needs one plan and one point of contact.",
 ];
 
 /* ---------------- WHY IN HOUSE ---------------- */
@@ -92,69 +93,10 @@ export const processSteps = [
   },
 ];
 
-/* ---------------- FACILITY ----------------
-   PLACEHOLDER. Every figure below is invented.
-   Henry to supply real numbers or delete the section.
-------------------------------------------- */
-
-export const facilityStats = [
-  { figure: "10", label: "Disciplines under one roof", placeholder: false },
-  { figure: "22", label: "Cities served across greater Houston", placeholder: false },
-  { figure: "1", label: "Point of contact per build", placeholder: false },
-  { figure: "18,000", label: "Square feet of facility", placeholder: true },
-  { figure: "12", label: "Working bays", placeholder: true },
-  { figure: "3", label: "Dedicated finish booths", placeholder: true },
-];
-
-/* ---------------- TEAM ----------------
-   PLACEHOLDER except the founder entry.
-   Names, roles and bios below are invented.
---------------------------------------- */
-
-export const team: TeamMember[] = [
-  {
-    name: "Henry Velasquez",
-    role: "Founder",
-    bio: "Grew up around the wheel and tire business and opened Design By TWM to handle the work clients kept asking for and could not get in one place. Sets the standard every build is measured against.",
-    image: "/team-1.webp",
-    placeholder: true,
-  },
-  {
-    name: "Marco Delgado",
-    role: "Build Coordinator",
-    bio: "Owns the schedule and is the single point of contact on every project. Sequences the disciplines so a vehicle never waits on a stage that could have been planned around.",
-    image: "/team-2.webp",
-    placeholder: true,
-  },
-  {
-    name: "Andre Whitfield",
-    role: "Lead Installer, Film and Wrap",
-    bio: "Plots, cuts and lays every metre of protection film and vinyl that leaves the building. Known for edges nobody can find and for refusing to wrap paint that is not ready for it.",
-    image: "/team-3.webp",
-    placeholder: true,
-  },
-  {
-    name: "Renata Salinas",
-    role: "Lead Trimmer, Interiors",
-    bio: "Patterns every interior to the specific vehicle rather than to a universal kit. Handles leather, Alcantara, stitch design and the parts of a cabin owners touch every day.",
-    image: "/team-4.webp",
-    placeholder: true,
-  },
-  {
-    name: "Dominic Reyes",
-    role: "Paint and Body Lead",
-    bio: "Matches colour to the vehicle rather than to the paint code, because factory finishes shift with sun and age. Runs refinishing, panel repair and collision work.",
-    image: "/team-5.webp",
-    placeholder: true,
-  },
-  {
-    name: "Trey Bonner",
-    role: "Wheels, Fitment and Suspension",
-    bio: "Solves offset, clearance and ride height on the lift before anything is ordered. The reason fitment problems here get caught at the planning stage instead of on delivery day.",
-    image: "/team-6.webp",
-    placeholder: true,
-  },
-];
+/* ---------------- FACILITY, TEAM AND ORIGIN ----------------
+   Removed August 17 2026 per Liz. See the header note above.
+   `facilityStats`, `team` and `originStory` no longer exist.
+----------------------------------------------------------- */
 
 /* ---------------- TESTIMONIALS ----------------
    EVERY ENTRY BELOW IS FABRICATED PLACEHOLDER CONTENT.
@@ -198,7 +140,4 @@ export const testimonials: Testimonial[] = [
 ];
 
 /** Anything still flagged is a launch blocker. Used by the dev-only warning. */
-export const placeholderCount =
-  team.filter((m) => m.placeholder).length +
-  testimonials.filter((t) => t.placeholder).length +
-  facilityStats.filter((s) => s.placeholder).length;
+export const placeholderCount = testimonials.filter((t) => t.placeholder).length;

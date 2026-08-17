@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Monogram } from "@/components/BrandMarks";
 import { Reveal } from "@/components/Reveal";
-import { Photo } from "@/components/ui/Photo";
 import { PageHero, SecHead, CustomBand } from "@/components/ui/Page";
 import { IntakeForm } from "@/components/home/IntakeForm";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
 import {
-  originStory,
+  houseIntro,
   inHousePillars,
   processSteps,
-  facilityStats,
-  team,
   testimonials,
 } from "@/content/house";
 import { services } from "@/content/services";
@@ -21,10 +17,15 @@ import { nap, routes, site } from "@/lib/site";
  * THE HOUSE
  *
  * The entity page. Everything a search engine or an AI assistant needs to
- * answer "who is Design By TWM" lives here in long form, with the FAQ
- * carrying the compressed version.
+ * answer "who is Design By TWM" lives here, with the FAQ carrying the
+ * compressed version.
  *
- * Contains placeholder content. See src/content/house.ts.
+ * REDUCED August 17 2026. Liz removed the origin story, the Tire and Wheel
+ * Master lineage, the team section and the facility figures. What remains
+ * is a modest intro, Under One Roof, the ten disciplines and Process.
+ *
+ * Testimonials are still fabricated and still a launch blocker.
+ * See src/content/house.ts and CLIENT_REVIEW_NOTES.md section 15.1.
  */
 
 export const metadata: Metadata = {
@@ -49,7 +50,7 @@ export default function TheHousePage() {
             url: `${site.url}${routes.about}`,
             about: { "@id": `${site.url}/#organization` },
             description:
-              "The origin, process and team behind Design By TWM, an automotive customization house in Houston, Texas.",
+              "How Design By TWM works: ten automotive customization disciplines performed in house by one team in Houston, Texas.",
           },
         ]}
       />
@@ -59,15 +60,15 @@ export default function TheHousePage() {
         imageAlt="Completed DESIGNBYTWM build photographed in an open environmental setting"
         crumbs={[{ label: "Home", href: routes.home }, { label: "The House" }]}
         title={<>Not a shop.<br />A house.</>}
-        intro="Ten disciplines, one building, one team and one point of contact. Here is how that came to be and what it means for a vehicle that comes through the door."
+        intro="Ten disciplines, one building, one team and one point of contact. Here is what that means for a vehicle that comes through the door."
       />
 
-      {/* ORIGIN */}
+      {/* INTRO */}
       <section>
         <div className="wrap split">
-          <SecHead eyebrow="Origin" title={<>Where the<br />house started.</>} />
+          <SecHead eyebrow="The House" title={<>One team,<br />one building.</>} />
           <Reveal className="story">
-            {originStory.map((paragraph, i) => (
+            {houseIntro.map((paragraph, i) => (
               <p key={i}>{paragraph}</p>
             ))}
           </Reveal>
@@ -149,64 +150,9 @@ export default function TheHousePage() {
         </div>
       </section>
 
-      {/* FACILITY */}
-      <section className="custom-section">
-        <div className="wrap">
-          <Reveal className="custom" style={{ marginTop: 0, display: "block" }}>
-            <Monogram />
-            <div className="inner">
-              <span className="eyebrow on-dark">The Facility</span>
-              <h3 className="display" style={{ margin: "12px 0 6px" }}>
-                One building.
-                <br />
-                {nap.street}, {nap.city}.
-              </h3>
-              <p style={{ color: "rgba(255,255,255,.78)", fontSize: 15, maxWidth: "56ch", marginBottom: 30 }}>
-                Every discipline runs from a single facility in north Houston.
-                Vehicles are kept inside while they are with us, and no stage of
-                a build leaves the building.
-              </p>
-
-              <div className="stats">
-                {facilityStats.map((stat) => (
-                  <div className="stat" key={stat.label}>
-                    <div className="figure">{stat.figure}</div>
-                    <div className="label">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section>
-        <div className="wrap">
-          <SecHead
-            eyebrow="The Team"
-            title={<>The people<br />who do the work.</>}
-            lede="One team across every discipline, which is the reason a build has a single point of contact rather than one per service."
-          />
-          <div className="team-grid">
-            {team.map((member, i) => (
-              <Reveal
-                key={member.name}
-                className="member"
-                card
-                delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
-              >
-                <div className="ph r45">
-                  <Photo src={member.image} alt={`${member.name}, ${member.role} at DESIGNBYTWM`} />
-                </div>
-                <h3>{member.name}</h3>
-                <div className="role">{member.role}</div>
-                <p>{member.bio}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* FACILITY AND TEAM SECTIONS REMOVED, August 17 2026, per Liz.
+         Facility figures were invented and the team section is not wanted.
+         Both are gone rather than hidden. */}
 
       {/* TESTIMONIALS */}
       <section className="alt">

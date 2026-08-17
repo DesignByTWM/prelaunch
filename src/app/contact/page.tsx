@@ -52,11 +52,46 @@ export default function ContactPage() {
         image="/hero.webp"
         imageAlt="Completed DESIGNBYTWM build photographed in an open environmental setting"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Contact" }]}
-        title={<>Come see<br />the house.</>}
-        intro="Consultations happen with the vehicle in front of us, because a quote given over the phone is a guess. Call, text or send the form and we will get you scheduled."
+        title="Let's talk about your build."
+        intro="Text, call or stop by the shop, whichever's easiest."
         ctaLabel="Send A Message"
         ctaHref="#intake"
       />
+
+      {/* Three contact methods, from Liz's mock of August 14 2026.
+         "Book a Consult" routes to Design Your Build, which is where she
+         pointed it. There is no booking system and none is implied. */}
+      <section style={{ paddingBottom: 0 }}>
+        <div className="wrap">
+          <div className="routes-grid">
+            <Reveal className="route-card" delay={1}>
+              <h3>Text TWM</h3>
+              <p>Fastest way to reach us during shop hours.</p>
+              <a href={nap.smsHref} className="btn btn-primary">
+                Text TWM
+              </a>
+            </Reveal>
+
+            <Reveal className="route-card" delay={2}>
+              <h3>Book a Consult</h3>
+              <p>Schedule time to walk through your build in person.</p>
+              <Link href={routes.designYourBuild} className="btn btn-line">
+                Book Now
+              </Link>
+            </Reveal>
+
+            <Reveal className="route-card" delay={3}>
+              <h3>Visit the Shop</h3>
+              <p>
+                {nap.city}, {nap.state}. See the facility and current builds.
+              </p>
+              <a href="#map" className="btn btn-line">
+                Get Directions
+              </a>
+            </Reveal>
+          </div>
+        </div>
+      </section>
 
       {/* Details and map */}
       <section>
@@ -124,7 +159,7 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal card>
-            <div className="map-frame">
+            <div className="map-frame" id="map">
               <iframe
                 src={mapSrc}
                 title={`Map showing ${nap.businessName} at ${napLine}`}

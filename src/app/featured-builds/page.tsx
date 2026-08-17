@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Photo } from "@/components/ui/Photo";
 import { PageHero, SecHead, CustomBand } from "@/components/ui/Page";
+import { FinalCta } from "@/components/ui/ServiceSections";
 import { IntakeForm } from "@/components/home/IntakeForm";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
 import { featuredBuilds } from "@/content/builds";
@@ -43,28 +44,17 @@ export default function FeaturedBuildsPage() {
         image="/build-suv.webp"
         imageAlt="Completed multi discipline build by DESIGNBYTWM"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Featured Builds" }]}
-        title={
-          <>
-            Complete
-            <br />
-            transformations.
-          </>
-        }
-        intro="Not a gallery of finished cars. Each of these is the story of several disciplines planned together, and what that changed about the result."
+        title="The work speaks first."
+        intro="Complete transformations, multiple disciplines, one team. Every build documented from first consultation to final delivery."
+        ctaLabel="Design Your Build"
       />
 
       <section>
         <div className="wrap">
           <SecHead
-            eyebrow="The Work"
-            title={
-              <>
-                Every build here
-                <br />
-                used more than one discipline.
-              </>
-            }
-            lede="That is the point. A vehicle that needs wraps, wheels, suspension and protection is one project here, not four bookings across four shops."
+            eyebrow="Search The Portfolio"
+            title="Find your vehicle"
+            lede="See if we've already worked on something like yours. Every build here used more than one discipline, which is the point: a vehicle that needs wraps, wheels, suspension and protection is one project, not four bookings across four shops."
           />
 
           <div className="builds-list">
@@ -81,7 +71,9 @@ export default function FeaturedBuildsPage() {
                   <Photo src={build.hero} alt={build.heroAlt} />
                 </div>
                 <div className="build-row-body">
-                  <span className="eyebrow">{build.vehicle}</span>
+                  <span className="eyebrow">
+                    {build.vehicle} · {build.type}
+                  </span>
                   <h3 className="display">{build.title}</h3>
                   <p>{build.summary}</p>
                   <div className="tags">
@@ -101,14 +93,9 @@ export default function FeaturedBuildsPage() {
 
       <section className="alt" style={{ paddingBottom: 0 }}>
         <div className="wrap">
-          <CustomBand
-            heading={
-              <>
-                Your vehicle
-                <br />
-                could be next.
-              </>
-            }
+          <FinalCta
+            title="Have a vision for your vehicle?"
+            lede="Tell us about your vehicle and the transformation you have in mind."
           />
         </div>
       </section>

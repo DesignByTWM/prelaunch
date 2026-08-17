@@ -90,7 +90,7 @@ export default async function BuildPage({
       {/* Brief */}
       <section>
         <div className="wrap split">
-          <SecHead eyebrow="The Brief" title={<>What the owner<br />came in for.</>} />
+          <SecHead eyebrow="The Brief" title={<>Why these disciplines<br />were planned together.</>} />
           <Reveal className="prose">
             {build.brief.map((paragraph, i) => (
               <p key={i}>{paragraph}</p>
@@ -101,12 +101,12 @@ export default async function BuildPage({
                 <span>{build.vehicle}</span>
               </li>
               <li>
-                <span className="k">Disciplines</span>
-                <span>{build.tags.join(" · ")}</span>
+                <span className="k">Type</span>
+                <span>{build.type}</span>
               </li>
               <li>
-                <span className="k">Time in the house</span>
-                <span>{build.duration}</span>
+                <span className="k">Disciplines</span>
+                <span>{build.tags.join(" · ")}</span>
               </li>
             </ul>
           </Reveal>
@@ -169,7 +169,7 @@ export default async function BuildPage({
           <div className="wrap">
             <SecHead eyebrow="More Work" title={<>Other builds.</>} />
             <div className="index-grid">
-              {others.map((other, i) => (
+              {others.slice(0, 3).map((other, i) => (
                 <Reveal
                   key={other.slug}
                   as={Link}

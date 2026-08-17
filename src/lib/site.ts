@@ -92,9 +92,16 @@ export const socials = [
   { label: "YouTube", href: "https://www.youtube.com/@designbytwm" },
 ] as const;
 
+/**
+ * CONFIRMED by Liz, August 14 2026. Replaces the placeholder hours that
+ * shipped with the review build.
+ *
+ * Note her mock still showed the old 9 to 6 and an open Saturday. Her
+ * email governs, confirmed by Jose August 17 2026: Saturday is now closed.
+ */
 export const hours = [
-  { days: "Monday to Friday", opens: "09:00", closes: "18:00" },
-  { days: "Saturday", opens: "10:00", closes: "16:00" },
+  { days: "Monday to Friday", opens: "08:00", closes: "17:00" },
+  { days: "Saturday", opens: null, closes: null },
   { days: "Sunday", opens: null, closes: null },
 ] as const;
 

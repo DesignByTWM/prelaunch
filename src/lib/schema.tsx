@@ -101,6 +101,7 @@ export function serviceSchema(input: {
   description: string;
   slug: string;
   areaServed?: string[];
+  offers?: { name: string; description: string; includes: string[] }[];
 }) {
   return {
     "@type": "Service",
@@ -112,6 +113,58 @@ export function serviceSchema(input: {
     areaServed: (input.areaServed ?? [`${nap.city}, ${nap.stateFull}`]).map((area) => ({
       "@type": "City",
       name: area,
+    })),
+    /**
+     * Tiers are emitted WITHOUT price, by client instruction of August 14
+     * 2026. An Offer with no price is valid and still tells an answer
+     * engine the levels exist, which is what distinguishes a real operator
+     * from a directory listing. Adding a price later is a one line change.
+     */
+    ...(input.offers?.length
+      ? {
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: `${input.name} packages`,
+            itemListElement: input.offers.map((offer) => ({
+              "@type": "Offer",
+              name: offer.name,
+              description: offer.description,
+              itemOffered: {
+                "@type": "Service",
+                name: `${input.name}: ${offer.name}`,
+                description: offer.includes.join(". "),
+              },
+            })),
+          },
+        }
+      : {}),
+  };
+}
+
+/**
+ * HowTo, from the four step process block on every service page.
+ *
+ * This is the highest value addition in Liz's August 14 templates. Process
+ * content answers "how does this actually work" in a form answer engines
+ * quote directly, and no competitor in this market publishes it in a
+ * machine readable way.
+ *
+ * No estimatedCost is emitted, consistent with the no pricing instruction.
+ */
+export function howToSchema(input: {
+  name: string;
+  description: string;
+  steps: { name: string; text: string }[];
+}) {
+  return {
+    "@type": "HowTo",
+    name: input.name,
+    description: input.description,
+    step: input.steps.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.name,
+      text: step.text,
     })),
   };
 }

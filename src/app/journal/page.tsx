@@ -47,14 +47,8 @@ export default function JournalPage() {
         image="/mat-metal.webp"
         imageAlt="Detail of finish work in the DESIGNBYTWM facility"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Journal" }]}
-        title={
-          <>
-            Straight
-            <br />
-            answers.
-          </>
-        }
-        intro="What we get asked most, explained properly. Including the parts where the honest answer is that you do not need what we sell."
+        title="Insights from the shop floor."
+        intro="Straight answers on wraps, protection and care, written by the team that does the work."
         ctaLabel="Ask A Question"
         ctaHref={routes.contact}
       />
@@ -62,7 +56,7 @@ export default function JournalPage() {
       <section>
         <div className="wrap">
           <SecHead
-            eyebrow="Latest"
+            eyebrow="Featured"
             title={
               <>
                 Start
@@ -96,7 +90,7 @@ export default function JournalPage() {
 
       <section className="alt">
         <div className="wrap">
-          <SecHead eyebrow="More" title={<>Everything else.</>} />
+          <SecHead eyebrow="More Articles" title={<>From the journal.</>} />
 
           <div className="index-grid">
             {rest.map((post, i) => (

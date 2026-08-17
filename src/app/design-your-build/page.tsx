@@ -57,14 +57,8 @@ export default function DesignYourBuildPage() {
         image="/build-sedan.webp"
         imageAlt="Completed multi discipline build by DESIGNBYTWM"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Design Your Build" }]}
-        title={
-          <>
-            Design
-            <br />
-            your build.
-          </>
-        }
-        intro="Four questions about the vehicle and what you want it to become. Everything gets planned as one build, on one timeline, with one point of contact."
+        title="Let's design your build."
+        intro="Four short steps. Tell us about your vehicle and vision and we'll follow up to schedule a consultation."
         ctaLabel="Start Below"
         ctaHref="#flow"
       />

@@ -5,7 +5,7 @@ import { Photo } from "@/components/ui/Photo";
 import { PageHero, SecHead, CustomBand, FaqBlock } from "@/components/ui/Page";
 import { WheelInquiryForm } from "@/components/forms/WheelInquiryForm";
 import { JsonLd, breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
-import { wheelPrograms, fitmentFactors, wheelFaqs } from "@/content/wheels";
+import { wheelPrograms, fitmentFactors, wheelFaqs, wheelCatalog, wheelQuickFaqs } from "@/content/wheels";
 import { nap, routes, serviceAreas } from "@/lib/site";
 
 /**
@@ -42,7 +42,7 @@ export default function WheelsPage() {
             slug: "wheels-and-fitment",
             areaServed: serviceAreas.map((city) => `${city}, ${nap.stateFull}`),
           }),
-          faqSchema(wheelFaqs),
+          faqSchema([...wheelQuickFaqs, ...wheelFaqs]),
         ]}
       />
 
@@ -50,17 +50,53 @@ export default function WheelsPage() {
         image="/svc-wheels.webp"
         imageAlt="Forged wheel and tire fitment on a customized luxury vehicle"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Shop Wheels" }]}
-        title={
-          <>
-            Wheels that
-            <br />
-            actually fit.
-          </>
-        }
-        intro="Where the house started. Offset, clearance, load rating and ride height are solved on the lift before anything is ordered, which is why a wheel has never arrived here that could not be used."
-        ctaLabel="Get A Fitment Quote"
-        ctaHref="#wheel-inquiry"
+        title="Fitment first. Then the look."
+        intro="Browse the wheel program. Fitment is confirmed for your exact vehicle before anything is ordered."
+        ctaLabel="Browse Wheels"
+        ctaHref="#catalog"
       />
+
+      {/* CATALOG
+         From Liz's mock of August 14 2026. Eight representative sets so the
+         page reads as a program rather than a form. No prices anywhere:
+         every card routes to a fitment inquiry, which is her treatment and
+         the client's no-pricing instruction at the same time. */}
+      <section id="catalog">
+        <div className="wrap">
+          <SecHead
+            eyebrow="Catalog"
+            title="Browse the wheel program"
+            lede="A representative selection. The full program runs to thousands of sets, so tell us the vehicle and we come back with what actually fits it."
+            center
+          />
+          <div className="cov-grid">
+            {wheelCatalog.map((wheel, i) => (
+              <Reveal
+                key={wheel.name}
+                as="a"
+                href="#wheel-inquiry"
+                className="cov rv-card"
+                delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
+              >
+                <div className="ph r11">
+                  <Photo src={wheel.frame} alt={`${wheel.name} wheel`} />
+                  <span className="pill">{wheel.size}</span>
+                </div>
+                <div className="cov-body">
+                  <h3>{wheel.name}</h3>
+                  <span className="go">Inquire for fitment →</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="recent-more">
+            <Link href={`${routes.wheels}/catalog`} className="btn btn-line">
+              Full Catalog
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Why no catalog */}
       <section>

@@ -3,27 +3,53 @@ import { notFound } from "next/navigation";
 import {
   PageHero,
   SecHead,
-  CustomBand,
   Checklist,
   CrossSell,
   FaqBlock,
 } from "@/components/ui/Page";
+import {
+  StatStrip,
+  Coverage,
+  Process,
+  RecentWork,
+  Packages,
+  FinalCta,
+} from "@/components/ui/ServiceSections";
 import { Reveal } from "@/components/Reveal";
 import { IntakeForm } from "@/components/home/IntakeForm";
-import { JsonLd, breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
+import {
+  JsonLd,
+  breadcrumbSchema,
+  faqSchema,
+  serviceSchema,
+  howToSchema,
+} from "@/lib/schema";
 import { services, getService } from "@/content/services";
 import { serviceAreas, nap, routes } from "@/lib/site";
 
 /**
  * SERVICE PAGE TEMPLATE
  *
- * One file, ten pages. Every service in services.ts already carries its
- * intro, scope, pairings, keyword and FAQs, so this template composes
- * rather than authors. Adding an eleventh service later is a data entry,
- * not a build task.
+ * One file, ten pages. Section order follows Liz's approved mocks of
+ * August 14 2026:
  *
- * Statically generated at build time via generateStaticParams, which keeps
- * these pages on the fastest possible delivery path for Core Web Vitals.
+ *   hero -> stat strip -> overview -> coverage -> process
+ *        -> recent work -> packages -> faq -> related -> final CTA
+ *
+ * Two deliberate departures from her mock, both approved by Jose on
+ * August 17 2026:
+ *
+ *   1. No breadcrumb bar. The crumbs stay in the hero eyebrow slot where
+ *      they already were. BreadcrumbList schema is retained regardless,
+ *      since it drives the trail Google renders in results and costs
+ *      nothing visually.
+ *   2. The scope checklist survives. Her layout has no slot for it, but
+ *      it is reviewed content and carries real search weight, so it sits
+ *      inside the overview rather than being dropped. Flagged in
+ *      CLIENT_REVIEW_NOTES.md section 6.
+ *
+ * Everything renders from services.ts. Adding an eleventh service is a
+ * data entry, not a build task.
  */
 
 export function generateStaticParams() {
@@ -76,6 +102,21 @@ export default async function ServicePage({
             // The full service area is declared on every service page so the
             // 22 location pages reinforce one entity rather than compete.
             areaServed: serviceAreas.map((city) => `${city}, ${nap.stateFull}`),
+            // Tiers are emitted without price, by client instruction of
+            // August 14 2026. Every cost path routes to a consultation.
+            offers: service.packages.map((pkg) => ({
+              name: pkg.name,
+              description: pkg.sub,
+              includes: pkg.includes,
+            })),
+          }),
+          howToSchema({
+            name: `How ${service.name.toLowerCase()} is performed at DESIGNBYTWM`,
+            description: service.overviewBody,
+            steps: service.process.map((step) => ({
+              name: step.name,
+              text: step.detail,
+            })),
           }),
           faqSchema(service.faqs),
           breadcrumbSchema([
@@ -94,18 +135,21 @@ export default async function ServicePage({
           { label: "Services", href: routes.services },
           { label: service.shortName },
         ]}
-        title={service.name}
-        intro={service.cardLine}
+        title={service.heroTitle}
+        intro={service.heroLede}
       />
 
-      {/* Overview and scope */}
+      <StatStrip items={service.statStrip} />
+
+      {/* Overview. Liz's paragraph leads, the reviewed scope detail follows. */}
       <section>
         <div className="wrap split">
           <SecHead
             eyebrow={service.tier === "headline" ? "Headline Discipline" : "In-House Discipline"}
-            title={<>What it is,<br />and how we do it.</>}
+            title={service.overviewTitle}
           />
           <Reveal className="prose">
+            <p>{service.overviewBody}</p>
             <p>{service.intro}</p>
           </Reveal>
         </div>
@@ -120,13 +164,56 @@ export default async function ServicePage({
         </div>
       </section>
 
+      {/* Coverage. Four named sub variants, each a distinct search term. */}
+      <section className="alt" id="coverage">
+        <div className="wrap">
+          <SecHead eyebrow="Coverage" title={service.coverageTitle} center />
+          <Coverage items={service.coverage} />
+        </div>
+      </section>
+
+      {/* Process. Emitted above as HowTo. */}
+      <section id="process">
+        <div className="wrap">
+          <SecHead eyebrow="How It Works" title={service.processTitle} center />
+          <Process statement={service.processStatement} steps={service.process} />
+        </div>
+      </section>
+
+      {/* Recent work. Photography still outstanding, placeholders in place. */}
+      <section className="alt" id="recent">
+        <div className="wrap">
+          <SecHead eyebrow="Recent Work" title={service.recentTitle} center />
+          <RecentWork items={service.recentWork} />
+        </div>
+      </section>
+
+      {/* Packages. Three tiers, no prices anywhere. */}
+      <section>
+        <div className="wrap">
+          <SecHead eyebrow="Packages" title={service.packagesTitle} center />
+          <Packages items={service.packages} serviceName={service.name} />
+        </div>
+      </section>
+
+      {/* Questions. */}
+      <section className="alt" id="faq">
+        <div className="wrap">
+          <SecHead
+            eyebrow="Questions"
+            title={<>{service.shortName},<br />answered.</>}
+          />
+          <FaqBlock faqs={service.faqs} />
+        </div>
+      </section>
+
       {/* Pairings. The commercial core of the in-house argument. */}
       {pairs.length > 0 && (
-        <section className="alt">
+        <section>
           <div className="wrap">
             <SecHead
-              eyebrow="Pairs With"
-              title={<>Rarely ordered<br />on its own.</>}
+              eyebrow="Related"
+              title={<>Often paired<br />with.</>}
               lede={`Most vehicles that come in for ${service.shortName.toLowerCase()} leave having had more than one discipline performed. Because all of it happens here, the work is scheduled as a single build.`}
             />
             <CrossSell
@@ -136,28 +223,10 @@ export default async function ServicePage({
         </section>
       )}
 
-      {/* Custom build band, then FAQ.
-         The band sits above the questions rather than below them so it does
-         not stack directly on top of the intake form, which made the two
-         calls to action read as redundant. */}
-      <section>
+      {/* Closing band, then the intake form. */}
+      <section id="final-cta" style={{ paddingBottom: 0 }}>
         <div className="wrap">
-          <CustomBand
-            heading={
-              <>
-                Planning {service.shortName.toLowerCase()} as part
-                <br />
-                of a bigger build?
-              </>
-            }
-          />
-
-          <SecHead
-            eyebrow="Questions"
-            title={<>{service.shortName},<br />answered.</>}
-            className="services-second-head"
-          />
-          <FaqBlock faqs={service.faqs} />
+          <FinalCta title={service.ctaTitle} lede={service.ctaLede} />
         </div>
       </section>
 

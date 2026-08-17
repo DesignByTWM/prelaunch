@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
 import { PageHero, SecHead, CustomBand, FaqBlock } from "@/components/ui/Page";
+import { StatStrip, FinalCta } from "@/components/ui/ServiceSections";
 import { DealerForm } from "@/components/forms/DealerForm";
 import { JsonLd, breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 import {
@@ -8,6 +9,7 @@ import {
   dealerValue,
   dealerProcess,
   dealerFaqs,
+  dealerQuickFaqs,
 } from "@/content/dealers";
 import { nap, routes, serviceAreas, site } from "@/lib/site";
 
@@ -45,7 +47,7 @@ export default function DealerServicesPage() {
             slug: "dealer-services",
             areaServed: serviceAreas.map((city) => `${city}, ${nap.stateFull}`),
           }),
-          faqSchema(dealerFaqs),
+          faqSchema([...dealerQuickFaqs, ...dealerFaqs]),
           {
             "@type": "OfferCatalog",
             name: "Dealer Services Division packages",
@@ -67,16 +69,14 @@ export default function DealerServicesPage() {
         image="/build-truck.webp"
         imageAlt="Dealership inventory prepared with blackout, wheel and suspension packages"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Dealer Services" }]}
-        title={
-          <>
-            Dealer Services
-            <br />
-            Division.
-          </>
-        }
-        intro="One-stop automotive services for dealership inventory, from concept to scalable B2B delivery. Six package categories, every discipline performed in house, scheduled around your turn cycle."
-        ctaLabel="Start A Dealer Program"
+        title="A direct line to in-house capability."
+        intro="Reconditioning, customization and fleet work, handled by the same in-house team, on dealer timelines."
+        ctaLabel="Apply For An Account"
         ctaHref="#dealer-intake"
+      />
+
+      <StatStrip
+        items={["Volume Pricing", "Priority Turnaround", "One Point of Contact"]}
       />
 
       {/* Commercial argument */}
@@ -204,7 +204,17 @@ export default function DealerServicesPage() {
               </>
             }
           />
-          <FaqBlock faqs={dealerFaqs} />
+          <FaqBlock faqs={[...dealerQuickFaqs, ...dealerFaqs]} />
+        </div>
+      </section>
+
+      {/* Closing band, from Liz's mock of August 14 2026. */}
+      <section style={{ paddingBottom: 0 }}>
+        <div className="wrap">
+          <FinalCta
+            title="Let's talk volume"
+            lede="Apply for a dealer account and we'll follow up to confirm terms and onboarding."
+          />
         </div>
       </section>
 

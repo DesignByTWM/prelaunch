@@ -17,17 +17,26 @@
  *   performance, unleash, redefining automotive luxury, crafted to
  *   perfection, masterpiece on wheels, we don't just.
  *
- * The `faqs` on each service feed both the service page FAQ block and the
- * site-wide FAQ page, and are emitted as FAQPage schema. Answer engines
- * lift these almost verbatim, so each answer is written to stand alone
- * without the surrounding page for context.
+ * CLIENT COPY, August 14 2026. Liz supplied ten page mocks and confirmed the
+ * copy as close to final. Her wording is used verbatim for the hero, overview,
+ * coverage, process, packages, FAQ and closing CTA on every service.
  *
- * DRAFT COPY. Every answer below is a reasonable industry-standard position
- * written to give Henry and Liz something concrete to react to. Timeframes,
- * pricing structure, warranty terms and policy statements must be confirmed
- * against how the house actually operates before launch. Anything they
- * change here propagates automatically to the service page, the FAQ page and
- * the schema, since all three read from this one file.
+ * Applied on import, per the project copy law:
+ *   em dashes resolved, Oxford commas removed, mock artifacts stripped.
+ * Her facts, figures and phrasing are otherwise untouched.
+ *
+ * Her FAQ set replaces the previous draft set and settles five timeframe
+ * questions that had been open since the build. See CLIENT_REVIEW_NOTES.md
+ * section 2. A full FAQ restructure follows once all copy is approved.
+ *
+ * Retained from the previous draft and still requiring confirmation:
+ *   `intro`, `includes` and `summary`. Liz's layout has no slot for the scope
+ *   checklist, so `includes` renders inside the overview rather than being
+ *   discarded. Flagged in CLIENT_REVIEW_NOTES.md section 6.
+ *
+ * The `faqs` on each service feed the service page, the site wide FAQ page and
+ * FAQPage schema at once. `process` emits HowTo and `packages` emits Offer
+ * nodes, so a change here propagates to every surface that reads this file.
  */
 
 export type ServiceTier = "headline" | "additional";
@@ -35,6 +44,36 @@ export type ServiceTier = "headline" | "additional";
 export interface ServiceFaq {
   question: string;
   answer: string;
+}
+
+/** A named sub variant of a discipline. Drives the coverage grid. */
+export interface ServiceCoverage {
+  /** Short badge over the image. */
+  pill: string;
+  name: string;
+}
+
+export interface ServiceProcessStep {
+  /** Two digit label, "01" through "04". */
+  step: string;
+  name: string;
+  detail: string;
+}
+
+export interface ServiceRecentWork {
+  name: string;
+  tag: string;
+}
+
+export interface ServicePackage {
+  name: string;
+  /** One line qualifier under the tier name. */
+  sub: string;
+  /** Exactly one tier per service carries this. */
+  featured: boolean;
+  /** Present only on the featured tier. */
+  ribbon?: string;
+  includes: string[];
 }
 
 export interface Service {
@@ -58,11 +97,43 @@ export interface Service {
   imageAlt: string;
   /** Primary commercial intent phrase this page is built to answer. */
   primaryKeyword: string;
+
+  /* ---- Layout copy, from Liz's approved mocks of August 14 2026 ---- */
+
+  /** Page H1. Replaces the service name as the visible headline. */
+  heroTitle: string;
+  /** Hero supporting line, sits under the H1. */
+  heroLede: string;
+  /** Three short assertions under the hero. Warranty, materials, in house. */
+  statStrip: string[];
+  overviewTitle: string;
+  overviewBody: string;
+
+  coverageTitle: string;
+  /** Four sub variants of the discipline. Each is a distinct search term. */
+  coverage: ServiceCoverage[];
+
+  /** Single line statement over the process band. */
+  processStatement: string;
+  processTitle: string;
+  /** Four steps. Emitted as HowTo schema. */
+  process: ServiceProcessStep[];
+
+  recentTitle: string;
+  /** Four recent build captions. Photography still outstanding. */
+  recentWork: ServiceRecentWork[];
+
+  packagesTitle: string;
+  /** Three tiers. Emitted as Offer nodes. No prices, by client instruction. */
+  packages: ServicePackage[];
+
+  ctaTitle: string;
+  ctaLede: string;
+
   faqs: ServiceFaq[];
 }
 
 export const services: Service[] = [
-  /* ================= HEADLINE ================= */
   {
     slug: "blackout-packages",
     name: "Blackout Packages",
@@ -84,31 +155,113 @@ export const services: Service[] = [
     image: "/svc-blackout.webp",
     imageAlt: "Blacked out trim and grille detail on a customized luxury SUV",
     primaryKeyword: "blackout package Houston",
+
+    /* Layout copy from Liz's approved mocks, August 14 2026. */
+    heroTitle: "Every detail, finished in black.",
+    heroLede:
+      "Chrome delete, trim wrap and gloss-to-matte conversions, planned as one cohesive blackout, not a patchwork of separate jobs.",
+    statStrip: [
+      "2-Year Warranty",
+      "Premium Vinyl & Coatings",
+      "Installed In-House",
+    ],
+    overviewTitle: "A blackout is a decision, not a shortcut",
+    overviewBody:
+      "Done right, a blackout package changes the whole read of a vehicle, not just the trim. Every surface is planned together so the finish is consistent panel to panel, then applied by the same in-house team from first piece to last.",
+    coverageTitle: "Choose your coverage",
+    coverage: [
+      { pill: "Full", name: "Full Blackout Package" },
+      { pill: "Trim", name: "Trim & Badge Blackout" },
+      { pill: "Chrome", name: "Chrome Delete" },
+      { pill: "Wheels", name: "Wheel & Caliper Blackout" },
+    ],
+    processStatement: "Every surface, unified.",
+    processTitle: "The process",
+    process: [
+      {
+        step: "01",
+        name: "Consult",
+        detail: "Vehicle assessed, blackout scope defined.",
+      },
+      {
+        step: "02",
+        name: "Prep",
+        detail: "Surfaces cleaned and masked in-house.",
+      },
+      {
+        step: "03",
+        name: "Apply",
+        detail: "Vinyl, wrap or coating applied panel by panel.",
+      },
+      {
+        step: "04",
+        name: "Deliver",
+        detail: "Final inspection and walkthrough at handoff.",
+      },
+    ],
+    recentTitle: "Selected builds",
+    recentWork: [
+      { name: "Full Blackout", tag: "Full" },
+      { name: "Chrome Delete", tag: "Trim" },
+      { name: "Badge & Trim", tag: "Accent" },
+      { name: "Wheel Blackout", tag: "Detail" },
+    ],
+    packagesTitle: "Find your coverage level",
+    packages: [
+      {
+        name: "Trim Blackout",
+        sub: "Targeted coverage",
+        featured: false,
+        includes: [
+          "Design consultation",
+          "Premium vinyl",
+          "2-year warranty",
+        ],
+      },
+      {
+        name: "Full Blackout",
+        sub: "Complete package",
+        featured: true,
+        ribbon: "Most Popular",
+        includes: [
+          "Full surface prep",
+          "Chrome delete included",
+          "2-year warranty",
+          "Priority scheduling",
+        ],
+      },
+      {
+        name: "Full Blackout + Wheels",
+        sub: "Complete, including wheels",
+        featured: false,
+        includes: [
+          "Everything in Full Blackout",
+          "Wheel & caliper blackout",
+          "Dedicated project lead",
+        ],
+      },
+    ],
+    ctaTitle: "Design your blackout",
+    ctaLede:
+      "Tell us about your vehicle and how much of it you want blacked out. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "What is a blackout package on a car?",
-        answer:
-          "A blackout package is the removal or refinishing of every chrome and bright element on a vehicle so the exterior reads in one consistent finish. It typically covers window trim, the grille, badging, mirror caps, roof rails and exhaust tips, finished in gloss, satin or matte black.",
-      },
-      {
-        question: "Is a chrome delete permanent?",
-        answer:
-          "It depends on the method. Vinyl based chrome delete is reversible and can be removed later without damaging the trim underneath. Painted or powder coated trim is permanent. Design By TWM in Houston walks through both options during the build consultation so the choice matches how long the vehicle will be kept.",
-      },
-      {
         question: "How long does a blackout package take?",
-        answer:
-          "A typical blackout package runs three to five days depending on how much trim the vehicle carries and the finish selected. Vehicles combining blackout with wheels, paint protection film or interior work are scheduled as one coordinated build rather than separate visits.",
+        answer: "Most packages take 2 to 4 business days depending on scope.",
       },
       {
-        question: "How much does a blackout package cost?",
-        answer:
-          "Pricing depends on how much bright trim the vehicle carries, the finish selected and whether the trim is wrapped, painted or replaced. A basic emblem and trim package sits well below a full chrome delete on a vehicle with extensive brightwork. Design By TWM in Houston quotes per vehicle after inspecting it rather than from a flat price list.",
+        question: "Can chrome be restored later?",
+        answer: "In most cases yes. Chrome delete is reversible when applied correctly.",
       },
       {
-        question: "Can you black out only part of a vehicle?",
+        question: "Does this include the wheels?",
         answer:
-          "Yes. Many clients start with badging and window trim and leave the grille, mirrors or exhaust tips for a later stage. Because the work is performed in house, a partial blackout can be extended later in a finish that matches what was already done.",
+          "Wheel and caliper blackout is available as an add-on or as part of the full package.",
+      },
+      {
+        question: "Will it fade over time?",
+        answer:
+          "Premium materials are used throughout; exact warranty terms are confirmed at consultation.",
       },
     ],
   },
@@ -134,36 +287,113 @@ export const services: Service[] = [
     image: "/svc-ppf.webp",
     imageAlt: "Paint protection film being installed on the hood of a luxury vehicle",
     primaryKeyword: "paint protection film Houston",
+
+    /* Layout copy from Liz's approved mocks, August 14 2026. */
+    heroTitle: "Protection planned before the first mile.",
+    heroLede:
+      "Self-healing film applied to the panels that take the most impact, fitted and installed in-house alongside the rest of your build.",
+    statStrip: [
+      "10-Year Film Warranty",
+      "Self-Healing Film",
+      "Installed In-House",
+    ],
+    overviewTitle: "Protection that doesn't announce itself",
+    overviewBody:
+      "The best PPF install is invisible. No silvering at the edges, no visible seams, no compromise on the paint underneath. Every panel is measured and cut in-house, then installed under controlled shop conditions.",
+    coverageTitle: "Choose your coverage",
+    coverage: [
+      { pill: "Full", name: "Full Front Package" },
+      { pill: "Track", name: "Track Package (High-Impact)" },
+      { pill: "Body", name: "Full Vehicle Coverage" },
+      { pill: "Touch", name: "High-Touch Panels" },
+    ],
+    processStatement: "Protection you never see.",
+    processTitle: "The process",
+    process: [
+      {
+        step: "01",
+        name: "Assess",
+        detail: "Vehicle inspected, coverage plan defined.",
+      },
+      {
+        step: "02",
+        name: "Prep",
+        detail: "Panels decontaminated and corrected.",
+      },
+      {
+        step: "03",
+        name: "Install",
+        detail: "Film applied and edges wrapped in-house.",
+      },
+      {
+        step: "04",
+        name: "Cure & Deliver",
+        detail: "Cure time confirmed, final walkthrough.",
+      },
+    ],
+    recentTitle: "Selected builds",
+    recentWork: [
+      { name: "Full Front Package", tag: "Front" },
+      { name: "Full Body Coverage", tag: "Complete" },
+      { name: "Track Package", tag: "Track" },
+      { name: "Edge Wrap Detail", tag: "Craft" },
+    ],
+    packagesTitle: "Find your coverage level",
+    packages: [
+      {
+        name: "Front Package",
+        sub: "High-impact panels",
+        featured: false,
+        includes: [
+          "Bumper, hood & fenders",
+          "Self-healing film",
+          "10-year warranty",
+        ],
+      },
+      {
+        name: "Full Vehicle",
+        sub: "Complete coverage",
+        featured: true,
+        ribbon: "Most Popular",
+        includes: [
+          "Every exterior panel",
+          "Self-healing film",
+          "10-year warranty",
+          "Priority scheduling",
+        ],
+      },
+      {
+        name: "Full Vehicle + Ceramic",
+        sub: "Protection, layered",
+        featured: false,
+        includes: [
+          "Everything in Full Vehicle",
+          "Ceramic coating added",
+          "Dedicated project lead",
+        ],
+      },
+    ],
+    ctaTitle: "Design your protection",
+    ctaLede:
+      "Tell us about your vehicle and the coverage you're considering. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "What is paint protection film?",
+        question: "How long does PPF last?",
         answer:
-          "Paint protection film, or PPF, is a transparent urethane film applied over a vehicle's factory paint. It absorbs rock chips, road debris and light scratches, and most modern films are self healing, meaning minor marks disappear with heat from the sun or warm water.",
+          "Quality film typically performs for 10+ years; exact terms are confirmed at consultation.",
       },
       {
-        question: "Can paint protection film go over a vinyl wrap?",
+        question: "Will it yellow over time?",
         answer:
-          "Yes. Film is commonly installed over a color change wrap to protect the vinyl on high impact areas such as the front bumper, hood and mirrors. Design By TWM coordinates both services on one timeline so the wrap cures properly before film is applied.",
+          "No. Premium film is UV-stable and self-healing and won't discolor under normal conditions.",
       },
       {
-        question: "How long does paint protection film last?",
-        answer:
-          "Quality film carries a manufacturer warranty of five to ten years depending on the product and coverage. Actual life depends on climate, washing habits and how the vehicle is stored. Houston heat and sun make regular maintenance washing and an optional ceramic topper worthwhile.",
+        question: "Can it be removed without damaging paint?",
+        answer: "Yes, when installed and removed correctly by a trained team.",
       },
       {
-        question: "Is PPF better than ceramic coating?",
-        answer:
-          "They solve different problems. Paint protection film is a physical barrier that stops rock chips and scratches. Ceramic coating is a chemical layer that improves gloss, water beading and wash release but does not stop impact damage. Many builds use both, with the coating applied over the film.",
-      },
-      {
-        question: "How much does paint protection film cost?",
-        answer:
-          "Cost is driven by coverage rather than by the value of the vehicle. A partial front covering the bumper, hood edge and mirrors is the entry point, an extended front adds the full hood and fenders, and full body coverage is the largest scope. Complex body shapes take more film and more labour, so film is quoted per vehicle.",
-      },
-      {
-        question: "Can paint protection film be removed later?",
-        answer:
-          "Yes. Professionally installed film is removed with heat and controlled tension, and factory paint underneath is unaffected when the film is taken off within its service life. Film left well beyond its warranty period can become brittle, which makes removal slower and more labour intensive.",
+        question: "Does it need special care?",
+        answer: "Hand washing is recommended; no other special maintenance is required.",
       },
     ],
   },
@@ -189,31 +419,117 @@ export const services: Service[] = [
     image: "/svc-wraps.webp",
     imageAlt: "Color change vinyl wrap applied to a luxury coupe",
     primaryKeyword: "vehicle wrap Houston",
+
+    /* Layout copy from Liz's approved mocks, August 14 2026. */
+    heroTitle: "Wrapped in something unmistakably yours.",
+    heroLede:
+      "Full-body, partial and color-change wraps, designed and installed by one in-house team, start to finish.",
+    statStrip: [
+      "5-Year Warranty",
+      "Premium Cast Vinyl",
+      "Installed In-House",
+    ],
+    overviewTitle: "The feeling, before the finish",
+    overviewBody:
+      "The right wrap changes how a vehicle feels to own, not just how it looks in the driveway. Color and coverage are planned alongside the rest of your build, then installed by the same in-house team from consultation through final inspection.",
+    coverageTitle: "Choose your coverage",
+    coverage: [
+      { pill: "Full", name: "Full Vehicle Wrap" },
+      { pill: "Accent", name: "Partial & Accent" },
+      { pill: "Color", name: "Color Change" },
+      { pill: "Trim", name: "Chrome Delete & Trim" },
+    ],
+    processStatement: "Every panel, considered.",
+    processTitle: "The process",
+    process: [
+      {
+        step: "01",
+        name: "Consult",
+        detail: "Color and finish selected, design signed off before material is cut.",
+      },
+      {
+        step: "02",
+        name: "Prep",
+        detail: "Panels cleaned, corrected and inspected in-house.",
+      },
+      {
+        step: "03",
+        name: "Install",
+        detail: "Premium cast vinyl applied under controlled shop conditions.",
+      },
+      {
+        step: "04",
+        name: "Deliver",
+        detail: "Full inspection and a walkthrough at handoff.",
+      },
+    ],
+    recentTitle: "Selected builds",
+    recentWork: [
+      { name: "Satin Military Green", tag: "Full Wrap" },
+      { name: "Midnight Blue", tag: "Color Change" },
+      { name: "Accent Roof & Hood", tag: "Partial" },
+      { name: "Edge Detail", tag: "Craft" },
+    ],
+    packagesTitle: "Find your coverage level",
+    packages: [
+      {
+        name: "Partial",
+        sub: "Targeted coverage",
+        featured: false,
+        includes: [
+          "Design consultation",
+          "Premium cast vinyl",
+          "2-year warranty",
+        ],
+      },
+      {
+        name: "Full Wrap",
+        sub: "Complete finish change",
+        featured: true,
+        ribbon: "Most Popular",
+        includes: [
+          "Full surface prep",
+          "Complete color change",
+          "5-year warranty",
+          "Priority scheduling",
+        ],
+      },
+      {
+        name: "Full + Custom",
+        sub: "Fully bespoke",
+        featured: false,
+        includes: [
+          "Everything in Full Wrap",
+          "Custom color matching",
+          "Dedicated project lead",
+        ],
+      },
+    ],
+    ctaTitle: "Design your wrap",
+    ctaLede:
+      "Tell us about your vehicle and the finish you have in mind. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "Does a vinyl wrap damage the paint underneath?",
-        answer:
-          "A wrap installed on healthy factory paint protects it rather than damages it. Problems come from wrapping over failing paint, prior body work or aftermarket repaints, where removal can lift the finish. Design By TWM inspects the paint before quoting a wrap and says so directly if the surface is not a candidate.",
+        question: "How long does a full wrap take?",
+        answer: "Most take 3 to 5 business days, depending on coverage and prep.",
       },
       {
-        question: "How long does a car wrap last in Houston?",
-        answer:
-          "Three to five years is realistic for a quality film in the Houston climate. Sun exposure is the main factor, so a garaged vehicle will hold longer than one parked outside daily. Horizontal surfaces such as the roof and hood age first.",
+        question: "How long will it last?",
+        answer: "5+ years with proper care. Exact terms confirmed at consultation.",
       },
       {
-        question: "How much does it cost to wrap a car?",
+        question: "Will it damage my factory paint?",
         answer:
-          "Pricing depends on vehicle size, film selection and how much disassembly the body requires. A partial or roof wrap sits well below a full color change, and exotic body shapes take longer than a sedan. Design By TWM quotes per vehicle after seeing it rather than from a flat price list.",
+          "No. Installed and removed correctly, it protects the paint underneath rather than harming it.",
       },
       {
-        question: "Can you wrap a leased vehicle?",
-        answer:
-          "Yes, and it is one of the most common reasons people wrap rather than repaint. The wrap can be removed before the lease is returned, leaving the factory paint as it was. Confirm the terms with your leasing company first, since a small number restrict exterior changes.",
+        question: "Can PPF be installed with a wrap?",
+        answer: "Yes. Many builds combine both, planned together in-house.",
       },
       {
-        question: "How do I take care of a wrapped car?",
+        question: "How should the vehicle be cared for?",
         answer:
-          "Hand wash with a pH neutral soap, keep high pressure away from edges and seams, and avoid automatic brush washes. Vinyl does not need waxing, though a wrap safe sealant helps in the Houston sun. Removing bird droppings and fuel spills quickly prevents staining.",
+          "Hand wash only. Avoid automatic car washes, high-pressure sprayers and harsh chemical cleaners, which can lift edges and dull the finish over time.",
       },
     ],
   },
@@ -239,31 +555,113 @@ export const services: Service[] = [
     image: "/svc-wheels.webp",
     imageAlt: "Forged wheel and tire fitment on a customized luxury vehicle",
     primaryKeyword: "custom wheels Houston",
+
+    /* Layout copy from Liz's approved mocks, August 14 2026. */
+    heroTitle: "Fitment calculated, not guessed.",
+    heroLede:
+      "Wheels, tires and fitment planned together in-house, so the stance is right the first time, not adjusted after the fact.",
+    statStrip: [
+      "Fitment Guarantee",
+      "In-House Mounting & Balancing",
+      "Installed In-House",
+    ],
+    overviewTitle: "The stance comes from the numbers",
+    overviewBody:
+      "Offset, width and tire profile are calculated for your exact vehicle before anything is ordered, not eyeballed. Every wheel is mounted, balanced and torqued in-house, then re-checked before delivery.",
+    coverageTitle: "Choose your coverage",
+    coverage: [
+      { pill: "Forged", name: "Forged Wheels" },
+      { pill: "Cast", name: "Cast & Monoblock Wheels" },
+      { pill: "Susp", name: "Wheels + Suspension Package" },
+      { pill: "Fit", name: "Fitment Consultation Only" },
+    ],
+    processStatement: "Fitment, to the millimeter.",
+    processTitle: "The process",
+    process: [
+      {
+        step: "01",
+        name: "Consult",
+        detail: "Vehicle measured, fitment calculated.",
+      },
+      {
+        step: "02",
+        name: "Select",
+        detail: "Wheel and tire package confirmed.",
+      },
+      {
+        step: "03",
+        name: "Mount",
+        detail: "Mounted, balanced and torqued in-house.",
+      },
+      {
+        step: "04",
+        name: "Deliver",
+        detail: "Fitment re-checked, final walkthrough.",
+      },
+    ],
+    recentTitle: "Selected builds",
+    recentWork: [
+      { name: "22in Forged", tag: "Forged" },
+      { name: "Deep Concave", tag: "Concave" },
+      { name: "Wheels + Suspension", tag: "Combo" },
+      { name: "Fitment Detail", tag: "Craft" },
+    ],
+    packagesTitle: "Find your coverage level",
+    packages: [
+      {
+        name: "Wheels Only",
+        sub: "Wheel & tire package",
+        featured: false,
+        includes: [
+          "Fitment calculation",
+          "In-house mounting & balancing",
+          "1-year warranty",
+        ],
+      },
+      {
+        name: "Wheels + Fitment",
+        sub: "Complete package",
+        featured: true,
+        ribbon: "Most Popular",
+        includes: [
+          "Fitment guarantee",
+          "In-house mounting & balancing",
+          "1-year warranty",
+          "Priority scheduling",
+        ],
+      },
+      {
+        name: "Wheels + Suspension",
+        sub: "Complete stance package",
+        featured: false,
+        includes: [
+          "Everything in Wheels + Fitment",
+          "Suspension setup included",
+          "Dedicated project lead",
+        ],
+      },
+    ],
+    ctaTitle: "Design your fitment",
+    ctaLede:
+      "Tell us about your vehicle and the stance you're after. We'll calculate it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "What does wheel fitment mean?",
+        question: "How do you confirm fitment before ordering?",
         answer:
-          "Fitment is the relationship between a wheel, the tire on it and the vehicle it mounts to. It covers diameter, width, offset, backspacing, bolt pattern, center bore and tire profile. Correct fitment means no rubbing, correct brake clearance and the stance the build was designed around.",
+          "Your vehicle is measured in-house and fitment is calculated before any wheel is ordered.",
       },
       {
-        question: "Do I need suspension work when I change wheels?",
-        answer:
-          "Not always, but larger diameters or aggressive offsets often need ride height or alignment adjustment to clear properly. Because suspension is handled in house at Design By TWM, wheel and suspension decisions are planned together instead of discovered after the wheels arrive.",
+        question: "Do you carry specific wheel brands?",
+        answer: "Brand availability is confirmed at consultation.",
       },
       {
-        question: "Will aftermarket wheels affect my TPMS?",
-        answer:
-          "Existing sensors can usually be transferred to new wheels, and new sensors can be supplied and programmed when the originals are not compatible. Either way the system is verified before the vehicle is released.",
+        question: "Can you match a factory-plus look?",
+        answer: "Yes. Fitment can be calculated for a subtle or aggressive stance, your call.",
       },
       {
-        question: "How much do custom wheels cost?",
+        question: "Is alignment included?",
         answer:
-          "Wheel pricing spans a wide range depending on construction. Cast wheels are the entry point, flow formed sit in the middle and forged wheels are the most expensive because each one is machined from a solid billet. Tires, TPMS and mounting are quoted alongside the wheels so the figure reflects the finished vehicle.",
-      },
-      {
-        question: "Will larger wheels affect ride quality or speedometer accuracy?",
-        answer:
-          "A larger diameter usually means a shorter tire sidewall, which firms up the ride. Speedometer accuracy is preserved when the overall rolling diameter stays close to factory, which is part of the fitment planning done before any order is placed.",
+          "Alignment is included with any suspension-paired package and available standalone.",
       },
     ],
   },
@@ -276,7 +674,7 @@ export const services: Service[] = [
     summary:
       "Custom automotive interiors in Houston. Full leather and Alcantara retrims, custom stitching, suede headliners, steering wheels and ambient lighting, built in house.",
     intro:
-      "Interior work is the most labour intensive discipline in the building and the one clients notice every single day they drive. Seats are stripped to the frame, patterns are cut for the specific vehicle rather than pulled from a universal kit, and every panel comes back to the same standard. Leather, Alcantara, suede, contrast stitching, perforation and quilting are all executed by the same team that does the exterior work.",
+      "Interior work is the most labour intensive discipline in the building and the one clients notice every single day they drive. Seats are stripped to the frame, patterns are cut for the specific vehicle rather than pulled from a universal kit. Every panel comes back to the same standard. Leather, Alcantara, suede, contrast stitching, perforation and quilting are all executed by the same team that does the exterior work.",
     includes: [
       "Full leather and Alcantara retrims, seats, door cards and console",
       "Custom stitch patterns, quilting, perforation and contrast piping",
@@ -289,36 +687,114 @@ export const services: Service[] = [
     image: "/svc-interior.webp",
     imageAlt: "Custom stitched leather interior with ambient lighting",
     primaryKeyword: "custom car interior Houston",
+
+    /* Layout copy from Liz's approved mocks, August 14 2026. */
+    heroTitle: "Matched to the vision outside.",
+    heroLede:
+      "Full retrims, upgraded materials and custom interior work, designed alongside the rest of your build, not as an afterthought.",
+    statStrip: [
+      "2-Year Warranty",
+      "Premium Materials",
+      "Installed In-House",
+    ],
+    overviewTitle: "The cabin should match the build",
+    overviewBody:
+      "An interior finished separately from the rest of the vehicle always shows. Material, stitching and color are planned against the exterior direction from the start, then executed by our own upholstery and trim team.",
+    coverageTitle: "Choose your coverage",
+    coverage: [
+      { pill: "Seats", name: "Seat Retrim" },
+      { pill: "Full", name: "Full Cabin Retrim" },
+      { pill: "Trim", name: "Trim & Stitching Detail" },
+      { pill: "Custom", name: "Custom Console & Trim" },
+    ],
+    processStatement: "Every stitch, intentional.",
+    processTitle: "The process",
+    process: [
+      {
+        step: "01",
+        name: "Consult",
+        detail: "Materials and design direction selected.",
+      },
+      {
+        step: "02",
+        name: "Design",
+        detail: "Pattern and stitching plan confirmed.",
+      },
+      {
+        step: "03",
+        name: "Build",
+        detail: "Retrim completed in-house.",
+      },
+      {
+        step: "04",
+        name: "Deliver",
+        detail: "Final fit check and walkthrough.",
+      },
+    ],
+    recentTitle: "Selected builds",
+    recentWork: [
+      { name: "Full Retrim", tag: "Full" },
+      { name: "Contrast Stitch", tag: "Detail" },
+      { name: "Custom Console", tag: "Custom" },
+      { name: "Seat Detail", tag: "Craft" },
+    ],
+    packagesTitle: "Find your coverage level",
+    packages: [
+      {
+        name: "Seats Only",
+        sub: "Targeted retrim",
+        featured: false,
+        includes: [
+          "Design consultation",
+          "Premium materials",
+          "2-year warranty",
+        ],
+      },
+      {
+        name: "Full Cabin Retrim",
+        sub: "Complete interior",
+        featured: true,
+        ribbon: "Most Popular",
+        includes: [
+          "Seats, door panels & headliner",
+          "Premium materials",
+          "2-year warranty",
+          "Priority scheduling",
+        ],
+      },
+      {
+        name: "Full Cabin + Custom Console",
+        sub: "Fully bespoke",
+        featured: false,
+        includes: [
+          "Everything in Full Cabin",
+          "Custom console & trim work",
+          "Dedicated project lead",
+        ],
+      },
+    ],
+    ctaTitle: "Design your interior",
+    ctaLede:
+      "Tell us about your vehicle and the materials you have in mind. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "How long does a full interior retrim take?",
-        answer:
-          "A full retrim generally runs two to four weeks depending on the vehicle, the material selected and the complexity of the stitch pattern. Vehicles combining interior work with exterior disciplines are scheduled as one build so the car is off the road once rather than repeatedly.",
+        question: "How long does a full retrim take?",
+        answer: "Most full retrims take 1 to 2 weeks depending on scope and material.",
       },
       {
-        question: "Can you match a custom interior to my exterior colors?",
-        answer:
-          "Yes. Thread, leather and accent colors are selected against the exterior finish in person, which is one of the practical advantages of having both disciplines under one roof. Stitch color is commonly pulled from a wrap, a brake caliper or a wheel accent.",
+        question: "Can you match a specific material or color?",
+        answer: "Yes. Material and color are selected and confirmed at consultation.",
       },
       {
-        question: "Do custom interiors affect resale value?",
-        answer:
-          "It depends on the vehicle and the buyer. Restrained, well executed work in quality materials generally holds or improves value on enthusiast vehicles. Highly personalized color schemes narrow the buyer pool. This is discussed openly during the consultation rather than after the work is done.",
+        question: "Will factory electronics still work?",
+        answer: "Yes, factory electronics and controls are preserved and reinstalled correctly.",
       },
       {
-        question: "How much does a custom interior cost?",
-        answer:
-          "Interior pricing is driven by labour more than by material. A steering wheel retrim or a headliner is a contained job, while a full retrim with custom stitching across seats, door cards and console is among the largest scopes in the building. Every interior is quoted after the vehicle is inspected in person.",
-      },
-      {
-        question: "Can you repair one damaged seat instead of retrimming the whole interior?",
-        answer:
-          "Yes. Single panel repairs, bolster replacement and stitch repairs are routine, and matching an existing material is often possible. Where the original leather has aged or faded, retrimming a larger section usually gives a better result than matching a single panel against worn material.",
+        question: "Do you work with exotic materials?",
+        answer: "Yes, including exotic leathers and specialty materials. Ask at consultation.",
       },
     ],
   },
-
-  /* ================= ADDITIONAL IN-HOUSE DISCIPLINES ================= */
   {
     slug: "suspension",
     name: "Suspension",
@@ -328,7 +804,7 @@ export const services: Service[] = [
     summary:
       "Suspension work in Houston. Lift and leveling kits, lowering springs, coilovers and air suspension, installed with alignment and fitment planned around the wheels.",
     intro:
-      "Suspension changes how a vehicle sits, how it drives and what wheel and tire package will physically fit. Lift kits, leveling kits, lowering springs, coilovers and air management are installed with alignment performed after the fact rather than skipped, and with the wheel program planned alongside rather than after.",
+      "Suspension changes how a vehicle sits, how it drives and what wheel and tire package will physically fit. Lift kits, leveling kits, lowering springs, coilovers and air management are installed with alignment performed after the fact rather than skipped and with the wheel program planned alongside rather than after.",
     includes: [
       "Lift and leveling kits for trucks and SUVs",
       "Lowering springs, coilovers and adjustable damping setups",
@@ -340,26 +816,114 @@ export const services: Service[] = [
     image: "/svc-suspension.webp",
     imageAlt: "Suspension and ride height work on a lifted truck",
     primaryKeyword: "lift kit Houston",
+
+    /* Layout copy from Liz's approved mocks, August 14 2026. */
+    heroTitle: "Set up for the stance and the ride.",
+    heroLede:
+      "Air and coilover suspension, tuned in-house for the look you want without giving up how the vehicle actually drives.",
+    statStrip: [
+      "2-Year Warranty",
+      "In-House Tuning",
+      "Installed In-House",
+    ],
+    overviewTitle: "Stance is only half the job",
+    overviewBody:
+      "Dropping a vehicle is easy. Keeping it comfortable, aligned and drivable is the part that takes experience. Every setup is tuned in-house to the wheel and tire package it's paired with, not installed and left as-is.",
+    coverageTitle: "Choose your coverage",
+    coverage: [
+      { pill: "Air", name: "Air Suspension" },
+      { pill: "Coil", name: "Coilover Suspension" },
+      { pill: "Lower", name: "Lowering Springs" },
+      { pill: "Tune", name: "Tune & Alignment Only" },
+    ],
+    processStatement: "Set right, not just set low.",
+    processTitle: "The process",
+    process: [
+      {
+        step: "01",
+        name: "Consult",
+        detail: "Ride height and use case defined.",
+      },
+      {
+        step: "02",
+        name: "Select",
+        detail: "Setup matched to wheel and tire package.",
+      },
+      {
+        step: "03",
+        name: "Install",
+        detail: "Installed and tuned in-house.",
+      },
+      {
+        step: "04",
+        name: "Align & Deliver",
+        detail: "Aligned, tested and delivered.",
+      },
+    ],
+    recentTitle: "Selected builds",
+    recentWork: [
+      { name: "Full Air Setup", tag: "Air" },
+      { name: "Coilover Install", tag: "Coil" },
+      { name: "Wheels + Suspension", tag: "Combo" },
+      { name: "Tune Detail", tag: "Craft" },
+    ],
+    packagesTitle: "Find your coverage level",
+    packages: [
+      {
+        name: "Lowering Springs",
+        sub: "Entry-level stance",
+        featured: false,
+        includes: [
+          "Design consultation",
+          "Alignment included",
+          "1-year warranty",
+        ],
+      },
+      {
+        name: "Coilover Setup",
+        sub: "Adjustable stance",
+        featured: true,
+        ribbon: "Most Popular",
+        includes: [
+          "Height & damping adjustable",
+          "In-house tuning",
+          "2-year warranty",
+          "Priority scheduling",
+        ],
+      },
+      {
+        name: "Full Air Suspension",
+        sub: "Complete air setup",
+        featured: false,
+        includes: [
+          "Everything in Coilover Setup",
+          "Air management included",
+          "Dedicated project lead",
+        ],
+      },
+    ],
+    ctaTitle: "Design your setup",
+    ctaLede:
+      "Tell us about your vehicle and the stance you're after. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "Do I need an alignment after a lift kit?",
+        question: "Will this affect my ride quality?",
         answer:
-          "Yes. Any change to ride height changes suspension geometry, which affects tire wear and steering. Alignment is performed as part of the installation at Design By TWM rather than left for the customer to arrange elsewhere.",
+          "A properly tuned setup is built around how you actually want to drive, not just how low it sits.",
       },
       {
-        question: "Will a lift kit affect my truck's ride quality?",
+        question: "Air or coilovers: which is right for me?",
         answer:
-          "It can, and the degree depends on the kit. A leveling kit changes ride quality very little, while a large lift with new shocks changes it noticeably. The intended use of the truck, daily driving versus off road, drives the recommendation.",
+          "It depends on your use case and how much adjustability you want. We'll walk through it at consultation.",
       },
       {
-        question: "How much does a lift kit cost?",
-        answer:
-          "Cost depends on lift height, whether new shocks and control arms are included and how much supporting work the vehicle needs to clear the intended wheel and tire package. A leveling kit is the entry point and a full lift with upgraded components is considerably more. Alignment is included in the quote rather than billed afterward.",
+        question: "Is alignment included?",
+        answer: "Yes, every suspension install includes alignment.",
       },
       {
-        question: "Can you install air suspension?",
+        question: "How low can I go without rubbing?",
         answer:
-          "Yes. Air suspension is installed and managed in house, including tank, compressor and control placement. It is most often specified on builds where the client wants an aggressive parked stance without giving up daily drivability.",
+          "That's calculated against your specific wheel and tire package before install, not guessed.",
       },
     ],
   },
@@ -384,26 +948,111 @@ export const services: Service[] = [
     image: "/svc-paint-body.webp",
     imageAlt: "Custom paint finish on a refinished vehicle panel",
     primaryKeyword: "custom paint Houston",
+
+    /* Layout copy from Liz's approved mocks, August 14 2026. */
+    heroTitle: "Finished the way it should have left the factory.",
+    heroLede:
+      "Paint correction, bodywork and full respray work, handled in-house with the same standard as the rest of your build.",
+    statStrip: [
+      "Lifetime Workmanship Warranty",
+      "In-House Paint Booth",
+      "Installed In-House",
+    ],
+    overviewTitle: "Paint is where shortcuts show first",
+    overviewBody:
+      "Panel gaps, color match and finish depth are what separate a real paint job from a quick one. Every project runs through our own booth, under our own standard, from prep through final clear.",
+    coverageTitle: "Choose your coverage",
+    coverage: [
+      { pill: "Correct", name: "Paint Correction" },
+      { pill: "Respray", name: "Full Respray" },
+      { pill: "Body", name: "Bodywork & Panel Repair" },
+      { pill: "Match", name: "Color Match Touch-Up" },
+    ],
+    processStatement: "Depth you can see in the reflection.",
+    processTitle: "The process",
+    process: [
+      {
+        step: "01",
+        name: "Assess",
+        detail: "Panels inspected, scope defined.",
+      },
+      {
+        step: "02",
+        name: "Prep",
+        detail: "Bodywork and surface prep completed.",
+      },
+      {
+        step: "03",
+        name: "Paint",
+        detail: "Sprayed and cleared in our in-house booth.",
+      },
+      {
+        step: "04",
+        name: "Deliver",
+        detail: "Correction, inspection and handoff.",
+      },
+    ],
+    recentTitle: "Selected builds",
+    recentWork: [
+      { name: "Full Respray", tag: "Respray" },
+      { name: "Panel Repair", tag: "Body" },
+      { name: "Correction Detail", tag: "Correct" },
+      { name: "Color Match", tag: "Match" },
+    ],
+    packagesTitle: "Find your coverage level",
+    packages: [
+      {
+        name: "Correction Only",
+        sub: "Restore the finish",
+        featured: false,
+        includes: [
+          "Multi-stage correction",
+          "Gloss & clarity restored",
+          "1-year warranty",
+        ],
+      },
+      {
+        name: "Full Respray",
+        sub: "Complete refinish",
+        featured: true,
+        ribbon: "Most Popular",
+        includes: [
+          "Full bodywork prep",
+          "Sprayed & cleared in-house",
+          "Lifetime workmanship warranty",
+          "Priority scheduling",
+        ],
+      },
+      {
+        name: "Full Respray + Bodywork",
+        sub: "Complete restoration",
+        featured: false,
+        includes: [
+          "Everything in Full Respray",
+          "Panel repair included",
+          "Dedicated project lead",
+        ],
+      },
+    ],
+    ctaTitle: "Design your finish",
+    ctaLede:
+      "Tell us about your vehicle and the finish you have in mind. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "Can you match my factory paint on a repair?",
-        answer:
-          "Yes. Color is matched to the vehicle rather than to the paint code alone, since factory finishes shift with age and sun exposure. Blending into adjacent panels is standard practice where the repair calls for it.",
+        question: "How long does a full respray take?",
+        answer: "Most full resprays take 1 to 3 weeks depending on scope and bodywork needed.",
       },
       {
-        question: "Can collision repair be combined with customization?",
-        answer:
-          "That is one of the practical advantages of an in house shop. If a vehicle is already apart for panel repair, adding a blackout package, paint protection film or a color change is significantly more efficient than scheduling it as a separate build later.",
+        question: "Will the color match factory exactly?",
+        answer: "Yes. Color is matched and confirmed before spraying begins.",
       },
       {
-        question: "How long does a custom paint job take?",
-        answer:
-          "A full repaint generally runs two to four weeks depending on the color, how much preparation the body needs and whether trim is being refinished at the same time. Accent work such as a roof, mirror caps or brake calipers is a much shorter job.",
+        question: "Do you handle insurance claims?",
+        answer: "Ask at consultation. This depends on the scope and cause of the damage.",
       },
       {
-        question: "Do you work with insurance on collision repair?",
-        answer:
-          "Collision work is performed in house and can be coordinated with an insurance claim. Many clients use the opportunity to add cosmetic work while the vehicle is already apart, which is quoted separately from the insured repair so the two are never confused.",
+        question: "Is clear coat protection included?",
+        answer: "PPF and ceramic coating can be added on top of any respray.",
       },
     ],
   },
@@ -428,26 +1077,112 @@ export const services: Service[] = [
     image: "/svc-lighting.webp",
     imageAlt: "Custom lighting detail on a customized vehicle at night",
     primaryKeyword: "custom car lighting Houston",
+
+    /* Layout copy from Liz's approved mocks, August 14 2026. */
+    heroTitle: "Light that looks intentional, not installed.",
+    heroLede:
+      "Headlight, taillight and underglow lighting upgrades, wired and finished in-house so nothing looks bolted on.",
+    statStrip: [
+      "2-Year Warranty",
+      "In-House Wiring",
+      "Installed In-House",
+    ],
+    overviewTitle: "Lighting should read as part of the design",
+    overviewBody:
+      "A lighting upgrade done well disappears into the vehicle's factory lines. Every install is wired and finished in-house, matched to the rest of the build rather than treated as a separate add-on.",
+    coverageTitle: "Choose your coverage",
+    coverage: [
+      { pill: "Head", name: "Headlight Retrofit" },
+      { pill: "Tail", name: "Taillight Tint & Upgrade" },
+      { pill: "Under", name: "Underglow & Accent Lighting" },
+      { pill: "Full", name: "Full Lighting Package" },
+    ],
+    processStatement: "Light that belongs there.",
+    processTitle: "The process",
+    process: [
+      {
+        step: "01",
+        name: "Consult",
+        detail: "Lighting goals and vehicle assessed.",
+      },
+      {
+        step: "02",
+        name: "Source",
+        detail: "Components selected and confirmed.",
+      },
+      {
+        step: "03",
+        name: "Install",
+        detail: "Wired and installed in-house.",
+      },
+      {
+        step: "04",
+        name: "Deliver",
+        detail: "Function check and walkthrough.",
+      },
+    ],
+    recentTitle: "Selected builds",
+    recentWork: [
+      { name: "Headlight Retrofit", tag: "Head" },
+      { name: "Taillight Tint", tag: "Tail" },
+      { name: "Underglow Install", tag: "Under" },
+      { name: "Wiring Detail", tag: "Craft" },
+    ],
+    packagesTitle: "Find your coverage level",
+    packages: [
+      {
+        name: "Taillight Package",
+        sub: "Targeted upgrade",
+        featured: false,
+        includes: [
+          "Tint & upgrade",
+          "In-house wiring",
+          "2-year warranty",
+        ],
+      },
+      {
+        name: "Headlight Retrofit",
+        sub: "Most requested",
+        featured: true,
+        ribbon: "Most Popular",
+        includes: [
+          "Full retrofit",
+          "In-house wiring",
+          "2-year warranty",
+          "Priority scheduling",
+        ],
+      },
+      {
+        name: "Full Lighting Package",
+        sub: "Complete package",
+        featured: false,
+        includes: [
+          "Everything in Headlight Retrofit",
+          "Underglow & accent lighting",
+          "Dedicated project lead",
+        ],
+      },
+    ],
+    ctaTitle: "Design your lighting",
+    ctaLede:
+      "Tell us about your vehicle and the look you're after. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "Is tinting headlights or taillights legal in Texas?",
+        question: "Is this street legal?",
         answer:
-          "Texas law requires that required lamps remain visible and effective, and heavily darkened lenses can fail inspection or draw enforcement attention. Design By TWM advises on how far a finish can reasonably go and will say when a requested look creates a compliance problem.",
+          "Legality depends on your state and the specific setup. We'll walk through it at consultation.",
       },
       {
-        question: "Can you add ambient lighting to a car that did not come with it?",
-        answer:
-          "Yes. Fiber optic and LED ambient systems can be integrated into door cards, footwells, the dash and the headliner on vehicles that were never equipped from the factory, and are commonly done alongside an interior retrim while the panels are already out.",
+        question: "Will it affect my factory warranty?",
+        answer: "This is worth confirming with your dealer for warranty-specific questions.",
       },
       {
-        question: "Will aftermarket lighting cause warning lights or drain the battery?",
-        answer:
-          "Not when it is installed correctly. LED conversions can trigger bulb out warnings on some vehicles, which is resolved with the correct load resistors or decoders. Auxiliary lighting is wired through a relay and a fuse so it cannot draw power with the vehicle switched off.",
+        question: "Can lighting be added to an existing build?",
+        answer: "Yes, lighting upgrades can be added at any stage.",
       },
       {
-        question: "How much does a lighting upgrade cost?",
-        answer:
-          "A headlight or taillight replacement is a contained job. Ambient interior lighting routed through door cards, footwells, the dash and the headliner is far more labour intensive because the panels have to come out. Interior lighting is most efficient when scheduled alongside an interior retrim.",
+        question: "How long does install take?",
+        answer: "Most installs take 1 to 3 days depending on scope.",
       },
     ],
   },
@@ -472,26 +1207,112 @@ export const services: Service[] = [
     image: "/svc-audio.webp",
     imageAlt: "Custom audio installation integrated into a vehicle interior",
     primaryKeyword: "car audio Houston",
+
+    /* Layout copy from Liz's approved mocks, August 14 2026. */
+    heroTitle: "Sound built into the vehicle, not bolted on.",
+    heroLede:
+      "Custom audio systems designed and installed in-house, integrated into the cabin rather than added on top of it.",
+    statStrip: [
+      "2-Year Warranty",
+      "Custom Fabrication",
+      "Installed In-House",
+    ],
+    overviewTitle: "Integration is what separates a real build",
+    overviewBody:
+      "Anyone can add speakers. A system that's fabricated to fit the cabin, tuned to the vehicle and wired cleanly in-house is a different level of work. It's the only way we install audio.",
+    coverageTitle: "Choose your coverage",
+    coverage: [
+      { pill: "Sound", name: "Sound System Upgrade" },
+      { pill: "Sub", name: "Custom Subwoofer Enclosure" },
+      { pill: "Full", name: "Full Audio Build" },
+      { pill: "Tune", name: "Tuning Only" },
+    ],
+    processStatement: "Built into the cabin, not onto it.",
+    processTitle: "The process",
+    process: [
+      {
+        step: "01",
+        name: "Consult",
+        detail: "Goals and cabin layout assessed.",
+      },
+      {
+        step: "02",
+        name: "Design",
+        detail: "System and enclosure designed.",
+      },
+      {
+        step: "03",
+        name: "Build",
+        detail: "Fabricated and installed in-house.",
+      },
+      {
+        step: "04",
+        name: "Tune & Deliver",
+        detail: "Tuned, tested and delivered.",
+      },
+    ],
+    recentTitle: "Selected builds",
+    recentWork: [
+      { name: "Full Audio Build", tag: "Full" },
+      { name: "Custom Enclosure", tag: "Sub" },
+      { name: "Cabin Integration", tag: "Detail" },
+      { name: "Wiring Detail", tag: "Craft" },
+    ],
+    packagesTitle: "Find your coverage level",
+    packages: [
+      {
+        name: "Sound Upgrade",
+        sub: "Entry-level upgrade",
+        featured: false,
+        includes: [
+          "Component speaker upgrade",
+          "In-house wiring",
+          "2-year warranty",
+        ],
+      },
+      {
+        name: "Custom Subwoofer Build",
+        sub: "Most requested",
+        featured: true,
+        ribbon: "Most Popular",
+        includes: [
+          "Custom-fabricated enclosure",
+          "In-house tuning",
+          "2-year warranty",
+          "Priority scheduling",
+        ],
+      },
+      {
+        name: "Full Audio Build",
+        sub: "Complete system",
+        featured: false,
+        includes: [
+          "Everything in Subwoofer Build",
+          "Full system integration",
+          "Dedicated project lead",
+        ],
+      },
+    ],
+    ctaTitle: "Design your sound",
+    ctaLede:
+      "Tell us about your vehicle and what you're looking for. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "Can you upgrade audio without changing the factory look?",
+        question: "Can this be added to an existing interior?",
         answer:
-          "Yes. Most upgrades keep the factory head unit and interior appearance while replacing speakers, adding amplification and processing behind trim panels. Enclosures are built to the vehicle so nothing looks added on.",
+          "Yes. Audio builds are planned around the cabin you already have or as part of a full retrim.",
       },
       {
-        question: "Does sound deadening actually make a difference?",
-        answer:
-          "It does, in two ways. It reduces road and panel noise, and it gives speakers a more rigid surface to work against, which improves clarity and bass response. On most builds it is the highest value part of the installation.",
+        question: "Will factory controls still work?",
+        answer: "Yes, factory controls and integration are preserved wherever possible.",
       },
       {
-        question: "Can I keep Apple CarPlay and my factory screen with an upgraded system?",
-        answer:
-          "Yes. Most upgrades keep the factory head unit and screen, including Apple CarPlay and Android Auto, and add amplification, processing and better speakers behind the trim. Replacing the head unit is only necessary when the factory unit cannot deliver a clean enough signal to build on.",
+        question: "How long does a full build take?",
+        answer: "Most full builds take 3 to 7 business days depending on scope.",
       },
       {
-        question: "How much does a car audio upgrade cost?",
-        answer:
-          "A speaker upgrade with sound deadening is the entry point. Adding amplification, a subwoofer, digital signal processing and a custom enclosure increases both parts and labour. Systems are specified around how the client actually listens rather than around a target power figure.",
+        question: "Do you work with amateur or pro-level systems?",
+        answer: "Both. Systems are scoped to your goals and budget at consultation.",
       },
     ],
   },
@@ -516,26 +1337,111 @@ export const services: Service[] = [
     image: "/svc-truck-accessories.webp",
     imageAlt: "Custom truck with accessories, wheels and lift package",
     primaryKeyword: "truck accessories Houston",
+
+    /* Layout copy from Liz's approved mocks, August 14 2026. */
+    heroTitle: "Built for how the truck actually gets used.",
+    heroLede:
+      "Bed accessories, lift kits and functional upgrades, installed in-house and matched to the rest of the build.",
+    statStrip: [
+      "2-Year Warranty",
+      "In-House Fabrication",
+      "Installed In-House",
+    ],
+    overviewTitle: "Function first, finished to match",
+    overviewBody:
+      "Truck accessories have to hold up to real use, not just look right in photos. Every upgrade is installed in-house and finished to match the rest of the vehicle, from bed accessories to lift kits.",
+    coverageTitle: "Choose your coverage",
+    coverage: [
+      { pill: "Bed", name: "Bed Accessories" },
+      { pill: "Lift", name: "Lift Kits" },
+      { pill: "Rack", name: "Racks & Overland Builds" },
+      { pill: "Armor", name: "Bumpers & Armor" },
+    ],
+    processStatement: "Built for the way it's actually driven.",
+    processTitle: "The process",
+    process: [
+      {
+        step: "01",
+        name: "Consult",
+        detail: "Use case and vehicle assessed.",
+      },
+      {
+        step: "02",
+        name: "Select",
+        detail: "Accessories and fitment confirmed.",
+      },
+      {
+        step: "03",
+        name: "Install",
+        detail: "Installed and fabricated in-house.",
+      },
+      {
+        step: "04",
+        name: "Deliver",
+        detail: "Function check and walkthrough.",
+      },
+    ],
+    recentTitle: "Selected builds",
+    recentWork: [
+      { name: "Lift + Wheels", tag: "Lift" },
+      { name: "Bed Accessories", tag: "Bed" },
+      { name: "Overland Build", tag: "Rack" },
+      { name: "Armor Detail", tag: "Craft" },
+    ],
+    packagesTitle: "Find your coverage level",
+    packages: [
+      {
+        name: "Bed Accessories",
+        sub: "Functional upgrades",
+        featured: false,
+        includes: [
+          "Bed liner & tie-downs",
+          "In-house install",
+          "2-year warranty",
+        ],
+      },
+      {
+        name: "Lift Kit Package",
+        sub: "Most requested",
+        featured: true,
+        ribbon: "Most Popular",
+        includes: [
+          "Lift kit & alignment",
+          "In-house install",
+          "2-year warranty",
+          "Priority scheduling",
+        ],
+      },
+      {
+        name: "Full Overland Build",
+        sub: "Complete build-out",
+        featured: false,
+        includes: [
+          "Everything in Lift Kit Package",
+          "Racks, armor & recovery gear",
+          "Dedicated project lead",
+        ],
+      },
+    ],
+    ctaTitle: "Design your build-out",
+    ctaLede:
+      "Tell us about your truck and how it's actually used. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "Can accessories be finished to match my truck?",
-        answer:
-          "Yes. Because paint and body is in house, bumpers, steps, racks and other accessories can be refinished in gloss, satin or matte black or matched to the body color before they are installed rather than left in the manufacturer's finish.",
+        question: "Will a lift kit affect my warranty?",
+        answer: "This is worth confirming with your dealer for warranty-specific questions.",
       },
       {
-        question: "Should accessories be installed before or after a lift?",
-        answer:
-          "Both are planned together. Ride height affects step placement, bumper clearance and how a rack sits, so on a full truck build the suspension, wheels and accessories are specified as one package before any parts are ordered.",
+        question: "Can this be paired with new wheels?",
+        answer: "Yes. Lift and wheel packages are planned together for correct fitment.",
       },
       {
-        question: "Can you install accessories I bought elsewhere?",
-        answer:
-          "In most cases yes. Bring the parts and they can be fitted and, where the build calls for it, refinished to match the vehicle. Parts supplied by the client carry no warranty from us on the part itself, only on the installation.",
+        question: "How long does a full build take?",
+        answer: "Most builds take 3 to 7 business days depending on scope.",
       },
       {
-        question: "Do bed covers and racks affect fuel economy?",
-        answer:
-          "A tonneau cover generally has a small positive or neutral effect. Roof racks, light bars and heavy bumpers add drag and weight, which does reduce economy. On a full truck build these are specified together so the trade offs are understood before parts are ordered.",
+        question: "Do you install aftermarket parts I already own?",
+        answer: "In most cases yes. Bring your parts list to consultation and we'll confirm.",
       },
     ],
   },
