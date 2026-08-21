@@ -23,6 +23,30 @@ import type {
    ============================================================= */
 
 /**
+ * StatStrip
+ *
+ * Three short assertions directly under the hero. Kept as a standalone
+ * band for pages built on the generic PageHero (e.g. Dealer Services)
+ * rather than ServiceHero, which folds its own stats inline.
+ */
+export function StatStrip({ items }: { items: string[] }) {
+  return (
+    <div className="stat-strip">
+      <div className="wrap">
+        <ul>
+          {items.map((item, i) => (
+            <li key={item}>
+              <span className="label">{item}</span>
+              {i < items.length - 1 && <i aria-hidden="true">◆</i>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+/**
  * ServiceHero
  *
  * Liz's hero, exactly as composed in her mocks: eyebrow, H1, lede, two
