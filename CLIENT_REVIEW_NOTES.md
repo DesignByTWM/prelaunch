@@ -553,4 +553,108 @@ Not client questions. Recorded so the reasoning survives.
 
 ---
 
+## 23. SERVICE PAGE REBUILT TO LIZ'S LAYOUT, AUGUST 21 2026
+
+The August 17 implementation carried Liz's copy correctly but did not carry her **layout**. Her section order was approximated rather than followed, and several blocks of ours were left in place around hers. Corrected on August 21 per Jose.
+
+The rule now in force: **her composition, our design language.** Every block sits where she put it, in her order, with her copy and her labels, rendered in Brand Guidelines v2.0. Where her frame is a square with a bottom-only radius, the frame stays in her position and wears the approved 34px 0 34px 0 corner. None of her CSS, palette or type is in the codebase.
+
+### What changed
+
+| # | Her mock | What we had | Now |
+|---|---|---|---|
+| 23.1 | Stat strip sits **inside** the hero on a hairline rule | Separate dark band below the hero | Inside the hero, as hers |
+| 23.2 | Hero carries two CTAs, Design Your Build and View Recent Work | One CTA | Both, as hers |
+| 23.3 | Overview is two column: copy left, one image right | Copy only, plus a second paragraph and a scope checklist | Two column with the image frame, her paragraph only |
+| 23.4 | Process statement, head and steps all sit **on** the dark ground | Head sat above the band on white | All three inside the band, centred |
+| 23.5 | Recent Work is a four frame mosaic, one tall, two stacked, one wide | Four equal squares | Her mosaic |
+| 23.6 | Packages band sits on a dark ground | White | Dark |
+| 23.7 | FAQ head is centred and reads "Common questions" | Left aligned, "Blackout, answered" | Hers, centred |
+| 23.8 | Related is three photographic cards, "Often paired with" | Four text tiles with a paragraph we wrote | Three photo cards, her head, no invented lede |
+| 23.9 | Page closes on the final CTA | An intake form followed it | Closes on the CTA, as hers |
+
+### Deliberate departures, for confirmation
+
+| # | Item | Why | Status |
+|---|---|---|---|
+| 23.10 | **Hero is flat black with no photograph.** Her hero is a full bleed vehicle shot under a gradient | Global instruction from Jose, August 21 2026, applies to every page | CONFIRMED by Jose. The hero photo slot in her mock is unused |
+| 23.11 | **No breadcrumb bar** | Standing decision. BreadcrumbList schema retained | CONFIRMED |
+| 23.12 | **Process sits on the approved black band**, not her photograph with a dark overlay | The black band is the approved treatment for this module across the site | OPEN, low risk. One line to swap to a photo ground if Liz wants it |
+| 23.13 | **The scope checklist is gone.** Her layout has no slot for it | Instruction is to follow her layout exactly. `includes` is still in `services.ts` untouched | OPEN. This was reviewed content carrying real search weight, see section 6. Reinstating it is one line |
+| 23.14 | **The second overview paragraph is gone.** Her overview has one paragraph | Same reason. `intro` is still in `services.ts` | OPEN. Same one line reversal |
+| 23.15 | **No intake form at the foot of the service pages.** Her page ends at the final CTA | Same reason | OPEN. This removes a lead capture point from ten pages. The CTAs still route to Design Your Build and to the text line, so no path is lost, but the friction is higher |
+| 23.16 | **Related shows three pairings, not four.** Blackout pairs with four | Her band is three columns | OPEN, cosmetic |
+
+### Applies to all ten service pages
+
+The ten service pages render from one template. Blackout Packages was rebuilt as the pilot and the other nine inherit the same layout automatically, since every one of Liz's ten service mocks uses the identical framework.
+
+---
+
+## 24. TEAL SCOPE WIDENED, AUGUST 21 2026
+
+Instructed by Jose on August 21 2026, second pass on the Blackout pilot.
+
+Brand Guidelines v2.0 restricts Signal Teal to the DSB monogram and primary CTAs, caps it at roughly 5 percent of the surface and states it is never decorative and never on headlines, body, backgrounds, the wordmark or photography. The following extend teal past that rule, matching the treatment in Liz's own mocks:
+
+| # | Where teal now appears | Note |
+|---|---|---|
+| 24.1 | All eyebrows, on light and on dark grounds | Includes "How It Works", "Overview", "Coverage", "Packages", "FAQ", "Related" and the hero eyebrow |
+| 24.2 | The diamond separators in the hero stat rule, at triple size | Decorative by definition |
+| 24.3 | "Explore" links on the coverage cards and the related cards | |
+| 24.4 | The "Most Popular" ribbon ground | Label text now white, see 24.5 |
+| 24.5 | **White label text on every teal surface**, reversing the v2.0 rule that teal always carries a black label | Instructed by Jose, August 21 2026. Affects the primary CTA on every page, the nav Design Your Build button, the floating text pill and the featured ribbon |
+
+This is a deliberate, instructed change, not drift. It is recorded here so that if Liz or Henry later ask why the site carries more teal than the guidelines document specifies, the answer is on file. If the guidelines are meant to be updated to match, that is a one line amendment to v2.0 rather than a rebuild.
+
+Also changed in the same pass, no brand implication:
+
+- Every photo placeholder and the service hero set to flat `#1c1c1c`, replacing the zebra fill. Placeholders and dark section grounds now read as one black rather than two
+- Hero foot gap reduced twice, and the section following the hero opens on a tighter top padding
+- Hero secondary CTA and "View More Builds" given the mirrored `0 16px 0 16px` corner
+- Coverage and Recent Work pills set to a white shape with a black label, matching Liz's mocks
+- Footer tagline under the wordmark changed to "Designed in-house.", teal, all caps, replacing "Complete, in-house luxury automotive customization."
+
+---
+
+## 25. WHAT IS AND IS NOT CARRIED SITEWIDE, AUGUST 21 2026
+
+### Fully done, all ten service pages
+
+The ten service pages render from a single template, so the Liz layout rebuild of section 23 and the colour direction of section 24 are live on all ten, not just the Blackout pilot. Nothing further is needed on them.
+
+### Carried sitewide automatically
+
+These were global changes and are already live on every page:
+
+- Teal eyebrows
+- White label text on every teal surface
+- Flat `#1c1c1c` photo placeholders
+- White pill shapes with black labels
+- Footer tagline "Designed in-house."
+- Charcoal hero with no photograph, on every inner page
+
+The homepage hero is deliberately excluded from the last item. It is the approved V2 treatment and was not among the sixteen pages the instruction covered. Confirm with Jose whether it should follow.
+
+### NOT done yet
+
+The six explore page mocks Liz sent on August 14 have **not** been rebuilt to their own layouts:
+
+| Page | Status |
+|---|---|
+| Contact | Old layout, new colours |
+| Dealer Services | Old layout, new colours |
+| Design Your Build | Old layout, new colours |
+| Featured Builds | Old layout, new colours |
+| Journal | Old layout, new colours |
+| Shop Wheels | Old layout, new colours |
+
+Each of these is a distinct composition in her files, not a variant of the service template, so each needs the same section-by-section rebuild that Blackout received. This is the next block of work.
+
+### Minor cleanup outstanding
+
+Inner hero photographs are suppressed in CSS rather than removed from the markup, so the browser still requests the hero image on those pages even though it is never painted. No visual impact. Worth removing from `PageHero` before launch.
+
+---
+
 *Log opened during the services build. Append every new item as pages are completed.*

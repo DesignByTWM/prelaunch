@@ -131,9 +131,15 @@ export function CustomBand({
  * lift these, and content hidden behind JavaScript often is not indexed.
  * The caller is responsible for emitting matching FAQPage schema.
  */
-export function FaqBlock({ faqs }: { faqs: { question: string; answer: string }[] }) {
+export function FaqBlock({
+  faqs,
+  center = false,
+}: {
+  faqs: { question: string; answer: string }[];
+  center?: boolean;
+}) {
   return (
-    <div className="faq">
+    <div className={`faq${center ? " center" : ""}`}>
       {faqs.map((faq, i) => (
         <Reveal key={faq.question} as="details" delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}>
           <summary>{faq.question}</summary>

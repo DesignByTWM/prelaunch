@@ -35,9 +35,10 @@ export function Footer() {
         <div className="foot-grid">
           <div>
             <Wordmark />
+            {/* Tagline line set per Jose, August 21 2026. Matches the
+                footer lockup in Liz's mocks. */}
+            <p className="foot-tagline display">Designed in-house.</p>
             <p>
-              Complete, in-house luxury automotive customization.
-              <br />
               {nap.city}, {nap.stateFull}.
             </p>
             <p style={{ marginTop: 14 }}>

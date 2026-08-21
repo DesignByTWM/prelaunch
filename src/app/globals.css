@@ -878,3 +878,245 @@ section#intake { background: var(--off-white); }
    Primary is 16px 0 16px 0 (top-left, bottom-right).
    This is 0 16px 0 16px (top-right, bottom-left). */
 .final-actions .btn-line-light { border-radius: 0 16px 0 16px; }
+
+/* =============================================================
+   SERVICE PAGE  ·  LIZ LAYOUT PARITY
+   Added August 21 2026. Her composition, our design language.
+
+   Rule applied throughout this block: her position, our treatment.
+   Where her frame is a square with a 28px bottom-only radius, the
+   frame stays exactly where she put it and wears the approved
+   34px 0 34px 0 corner instead. No colour, type role or corner is
+   introduced here that is not already on the approved homepage.
+   ============================================================= */
+
+/* ----- SERVICE HERO -----
+   Flat charcoal, no photograph, per Jose August 21 2026.
+
+   Sized by its content, deliberately. The first build used a `min-height`
+   with the content flex-anchored to the bottom, and the leftover height
+   was landing as dead space under the stat rule. There is no min-height
+   now, so the gap below the stat rule is exactly the padding below and
+   nothing else. */
+.hero.svc-hero {
+  background: var(--charcoal);
+  display: block;
+  height: auto;
+  min-height: 0;
+}
+.hero.svc-hero .hero-in {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  padding: clamp(96px,13vh,150px) 0 clamp(30px,3.4vh,40px);
+}
+
+/* The section directly after the service hero opens tighter, so the stat
+   rule does not float in a band of dead space. */
+.hero.svc-hero + section { padding-top: clamp(34px,4.5vw,56px); }
+
+/* ----- EVERY OTHER INNER HERO -----
+   Same treatment carried across the rest of the inner pages, per Jose's
+   global instruction of August 21 2026: every hero on a charcoal ground,
+   no photograph, no second colour. The photo frame and its scrim are
+   suppressed rather than removed from the markup, so restoring a
+   photographic hero later is a CSS change and nothing else.
+
+   The homepage hero is NOT included. It is the approved V2 treatment
+   and was not part of the sixteen pages this instruction covered.
+   See CLIENT_REVIEW_NOTES.md section 25. */
+.hero.inner {
+  background: var(--charcoal);
+  display: block;
+  height: auto;
+  min-height: 0;
+}
+.hero.inner .ph,
+.hero.inner .hero-scrim { display: none; }
+.hero.inner .hero-in {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  padding: clamp(96px,13vh,150px) 0 clamp(30px,3.4vh,40px);
+}
+.hero.inner + section { padding-top: clamp(34px,4.5vw,56px); }
+.hero.svc-hero .hero-content { max-width: 780px; }
+.hero.svc-hero h1.display { font-size: clamp(30px,4.6vw,58px); margin: 12px 0 18px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Three assertions on a hairline, separator gray and never teal. */
+.hero-stats {
+  list-style: none; display: flex; align-items: center; flex-wrap: wrap;
+  margin-top: clamp(30px,4vw,42px); padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.22);
+}
+.hero-stats li { display: inline-flex; align-items: center; }
+.hero-stats .label { color: rgba(255,255,255,.80); padding-right: 20px; }
+.hero-stats i { font-style: normal; font-size: 6px; color: var(--gray-mid); padding-right: 20px; }
+@media (max-width: 680px) {
+  .hero-stats { flex-direction: column; align-items: flex-start; gap: 9px; }
+  .hero-stats i { display: none; }
+  .hero-stats .label { padding-right: 0; }
+}
+
+/* ----- OVERVIEW -----
+   Her two column block. Copy left, one frame right, frame first on
+   small screens exactly as her media query orders it. */
+.svc-overview {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(32px,5vw,64px); align-items: center;
+}
+.svc-overview .sec-head { margin-bottom: 22px; }
+.svc-overview .media { display: block; }
+.svc-overview .ph {
+  aspect-ratio: 4/3; border-radius: 34px 0 34px 0; overflow: hidden;
+}
+@media (max-width: 900px) {
+  .svc-overview { grid-template-columns: 1fr; gap: 30px; }
+  .svc-overview .media { order: -1; }
+}
+
+/* ----- PROCESS -----
+   Her order inside the band: statement, then head, then steps. Both
+   the statement and the head are centred on the dark ground. */
+.proc .proc-statement {
+  text-align: center; max-width: 26ch;
+  margin: 0 auto clamp(34px,5vw,56px);
+}
+.proc .sec-head { max-width: 640px; margin: 0 auto clamp(30px,4vw,46px); }
+.proc .sec-head h2 { color: var(--white); }
+.proc .sec-head .eyebrow { color: rgba(255,255,255,.72); }
+
+/* ----- RECENT WORK -----
+   Her mosaic: one tall frame left, two stacked right, one wide across
+   the foot. Approved corner and hairline retained on every frame. */
+.ph.fill { position: absolute; inset: 0; aspect-ratio: auto; }
+.recent-grid {
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: 205px 205px 240px;
+  gap: 18px;
+}
+.recent-grid > *:nth-child(1) { grid-column: 1; grid-row: 1 / 3; }
+.recent-grid > *:nth-child(2) { grid-column: 2; grid-row: 1; }
+.recent-grid > *:nth-child(3) { grid-column: 2; grid-row: 2; }
+.recent-grid > *:nth-child(4) { grid-column: 1 / 3; grid-row: 3; }
+.recent .pill { left: auto; right: 16px; top: auto; bottom: 16px; }
+@media (max-width: 1000px) { .recent-grid { grid-template-columns: 1.4fr 1fr; } }
+@media (max-width: 800px) {
+  .recent-grid { grid-template-columns: 1fr; grid-template-rows: none; }
+  .recent-grid > * { grid-column: 1 !important; grid-row: auto !important; height: 270px; }
+}
+
+/* ----- PACKAGES ON DARK -----
+   Her packages band sits on the dark ground. Flat charcoal, no metal
+   texture: the texture is reserved for the process and closing bands
+   so the page does not read as three identical dark slabs. */
+section.dark { background: var(--charcoal); }
+section.dark .sec-head h2 { color: var(--white); }
+section.dark .sec-head .eyebrow { color: rgba(255,255,255,.72); }
+
+/* ----- FAQ, CENTRED -----
+   Her FAQ column is centred under a centred head. */
+.faq.center { margin-left: auto; margin-right: auto; max-width: 780px; }
+
+/* ----- RELATED -----
+   Her three photographic cards with the name over a scrim, in place of
+   the text tiles that were here before. */
+.rel-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.rel {
+  position: relative; display: block; overflow: hidden; min-height: 215px;
+  border: 1px solid var(--gray-light); border-radius: 34px 0 34px 0;
+  transition: transform .45s cubic-bezier(.16,.84,.32,1), border-color .35s, box-shadow .45s;
+}
+.rel:hover { transform: translateY(-4px); border-color: var(--black); box-shadow: 0 22px 44px -30px rgba(0,0,0,.5); }
+.rel-scrim {
+  position: absolute; inset: auto 0 0 0; height: 66%; z-index: 2;
+  background: linear-gradient(0deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,0) 100%);
+  pointer-events: none;
+}
+.rel-body { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 3; }
+.rel-body h3 {
+  font-family: var(--body); font-weight: 600; font-size: 12.5px;
+  text-transform: uppercase; letter-spacing: .05em; color: var(--white);
+}
+.rel-body .go {
+  margin-top: 9px; font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--white); display: inline-flex; gap: 7px; transition: gap .3s;
+}
+.rel:hover .go { gap: 13px; }
+@media (max-width: 860px) { .rel-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; } }
+
+/* =============================================================
+   SERVICE PAGE  ·  SECOND PASS, AUGUST 21 2026
+   Colour direction from Jose, items 1 to 11.
+
+   NOTE FOR THE RECORD: Brand Guidelines v2.0 restricts Signal Teal to
+   the monogram and primary CTAs, capped at 5 percent and explicitly
+   not decorative. Items 2, 5, 6, 8, 9 and 11 below extend teal to
+   eyebrows, separators, explore links and the featured ribbon, which
+   is the treatment in Liz's mocks. Instructed by Jose on August 21
+   2026 and logged in CLIENT_REVIEW_NOTES.md section 24.
+
+   The one rule held: label text on a teal ground stays black, never
+   white. Applied to the Most Popular ribbon.
+
+   SUPERSEDED later the same day: Jose reversed this. Every teal surface
+   now carries a white label. See the third pass block at the foot of
+   this file.
+   ============================================================= */
+
+/* 1 + 7. Placeholders are flat charcoal, not zebra. Revised August 21
+   2026 per Jose: placeholders and dark grounds all sit on #1c1c1c so
+   nothing on the page reads as two different blacks. */
+.ph { background: var(--charcoal); }
+
+/* 2 + 6 + 9. Every eyebrow reads teal, on light and on dark. */
+.eyebrow,
+.eyebrow.on-dark,
+.proc .sec-head .eyebrow,
+section.dark .sec-head .eyebrow { color: var(--signal-teal); }
+
+/* 3. Hero secondary CTA mirrors the primary corner:
+      primary 16px 0 16px 0, this one 0 16px 0 16px. */
+.hero-actions .btn-line-light { border-radius: 0 16px 0 16px; }
+
+/* 5. Separators teal. Sized at 14.4px, reduced 20 percent from the
+      first pass at 18px. */
+.hero-stats i {
+  font-size: 14.4px;
+  color: var(--signal-teal);
+  line-height: 1;
+  position: relative;
+  top: 1px;
+}
+
+/* 8. Explore links on coverage and related. */
+.cov-body .go,
+.rel-body .go { color: var(--signal-teal); }
+
+/* 10. View More Builds mirrors the same corner as the hero secondary. */
+.recent-more .btn-line { border-radius: 0 16px 0 16px; }
+
+/* 11. Featured ribbon on teal. */
+.pkg .ribbon { background: var(--signal-teal); color: var(--white); }
+
+/* =============================================================
+   SERVICE PAGE  ·  THIRD PASS, AUGUST 21 2026
+   ============================================================= */
+
+/* Label text on every teal surface is now white, per Jose.
+   This reverses the standing v2.0 rule that teal always carries a black
+   label. Logged in CLIENT_REVIEW_NOTES.md section 24. */
+.btn-primary { color: var(--white); }
+.sms, .sms .mark-mono { color: var(--white); }
+
+/* Pills sit on a white shape with a black label, matching Liz's mocks.
+   Approved 16px 0 16px 0 corner retained. */
+.pill { background: var(--white); color: var(--black); }
+
+/* Footer tagline under the wordmark. */
+.foot-tagline {
+  color: var(--signal-teal);
+  font-size: 13px;
+  margin-bottom: 10px;
+}

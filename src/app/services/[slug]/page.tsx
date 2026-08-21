@@ -1,22 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { SecHead, FaqBlock } from "@/components/ui/Page";
 import {
-  PageHero,
-  SecHead,
-  Checklist,
-  CrossSell,
-  FaqBlock,
-} from "@/components/ui/Page";
-import {
-  StatStrip,
+  ServiceHero,
   Coverage,
   Process,
   RecentWork,
   Packages,
+  Related,
   FinalCta,
 } from "@/components/ui/ServiceSections";
 import { Reveal } from "@/components/Reveal";
-import { IntakeForm } from "@/components/home/IntakeForm";
 import {
   JsonLd,
   breadcrumbSchema,
@@ -30,23 +24,41 @@ import { serviceAreas, nap, routes } from "@/lib/site";
 /**
  * SERVICE PAGE TEMPLATE
  *
- * One file, ten pages. Section order follows Liz's approved mocks of
- * August 14 2026:
+ * REBUILT August 21 2026 to Liz's mock exactly, per Jose.
  *
- *   hero -> stat strip -> overview -> coverage -> process
- *        -> recent work -> packages -> faq -> related -> final CTA
+ * Her page, section for section, in her order:
  *
- * Two deliberate departures from her mock, both approved by Jose on
- * August 17 2026:
+ *   hero (eyebrow, H1, lede, two CTAs, stat strip inside the hero)
+ *     -> overview, two column, copy left and one frame right
+ *     -> coverage, centred head, four cards
+ *     -> process, statement then head then four steps, all on dark
+ *     -> recent work, four frame mosaic, then View More Builds
+ *     -> packages, three tiers on a dark ground
+ *     -> FAQ, centred head, "Common questions"
+ *     -> related, three photographic cards, "Often paired with"
+ *     -> final CTA
  *
- *   1. No breadcrumb bar. The crumbs stay in the hero eyebrow slot where
- *      they already were. BreadcrumbList schema is retained regardless,
- *      since it drives the trail Google renders in results and costs
- *      nothing visually.
- *   2. The scope checklist survives. Her layout has no slot for it, but
- *      it is reviewed content and carries real search weight, so it sits
- *      inside the overview rather than being dropped. Flagged in
- *      CLIENT_REVIEW_NOTES.md section 6.
+ * Nothing of hers is styled by her. Every surface above renders in
+ * Brand Guidelines v2.0: our corners, our type, our palette, teal on
+ * primary CTAs and the monogram only. Where her frame is square and
+ * ours is 34px 0 34px 0, the frame sits in her position wearing our
+ * corner. That is the whole rule.
+ *
+ * Departures from her file, all deliberate, all logged in
+ * CLIENT_REVIEW_NOTES.md section 23:
+ *
+ *   1. Hero ground is flat black with no photograph. Global instruction
+ *      from Jose, August 21 2026. Her hero photo slot is unused.
+ *   2. No breadcrumb bar. BreadcrumbList schema retained.
+ *   3. Process sits on the approved black band rather than her
+ *      photograph with a dark overlay.
+ *   4. The scope checklist is gone. Her layout has no slot for it and
+ *      the instruction is to follow her layout. `includes` is still in
+ *      services.ts and is one line away from returning.
+ *   5. The overview shows her paragraph only. The second paragraph we
+ *      had there is not in her mock.
+ *   6. No intake form at the foot of the page. Her page closes on the
+ *      final CTA.
  *
  * Everything renders from services.ts. Adding an eleventh service is a
  * data entry, not a build task.
@@ -87,9 +99,12 @@ export default async function ServicePage({
   const service = getService(slug);
   if (!service) notFound();
 
+  // Her related band is three columns. The fourth pairing is held back
+  // rather than breaking her composition.
   const pairs = service.pairsWith
     .map((pairSlug) => getService(pairSlug))
-    .filter((s): s is NonNullable<typeof s> => Boolean(s));
+    .filter((s): s is NonNullable<typeof s> => Boolean(s))
+    .slice(0, 3);
 
   return (
     <>
@@ -127,38 +142,25 @@ export default async function ServicePage({
         ]}
       />
 
-      <PageHero
-        image={service.image}
-        imageAlt={service.imageAlt}
-        crumbs={[
-          { label: "Home", href: routes.home },
-          { label: "Services", href: routes.services },
-          { label: service.shortName },
-        ]}
+      <ServiceHero
+        eyebrow={service.name}
         title={service.heroTitle}
-        intro={service.heroLede}
+        lede={service.heroLede}
+        stats={service.statStrip}
       />
 
-      <StatStrip items={service.statStrip} />
-
-      {/* Overview. Liz's paragraph leads, the reviewed scope detail follows. */}
+      {/* Overview. Her two column block: copy left, one frame right. */}
       <section>
-        <div className="wrap split">
-          <SecHead
-            eyebrow={service.tier === "headline" ? "Headline Discipline" : "In-House Discipline"}
-            title={service.overviewTitle}
-          />
-          <Reveal className="prose">
-            <p>{service.overviewBody}</p>
-            <p>{service.intro}</p>
-          </Reveal>
-        </div>
-
-        <div className="wrap" style={{ marginTop: "clamp(40px,5vw,68px)" }}>
-          <div className="split">
-            <SecHead eyebrow="Scope" title={<>What the work<br />includes.</>} />
-            <Reveal>
-              <Checklist items={service.includes} />
+        <div className="wrap">
+          <div className="svc-overview">
+            <div>
+              <SecHead eyebrow="Overview" title={service.overviewTitle} />
+              <Reveal className="prose">
+                <p>{service.overviewBody}</p>
+              </Reveal>
+            </div>
+            <Reveal className="media rv-card">
+              <div className="ph" role="img" aria-label={service.imageAlt} />
             </Reveal>
           </div>
         </div>
@@ -172,11 +174,15 @@ export default async function ServicePage({
         </div>
       </section>
 
-      {/* Process. Emitted above as HowTo. */}
+      {/* Process. Statement, head and steps all sit inside the band, which
+          is her order. Emitted above as HowTo. */}
       <section id="process">
         <div className="wrap">
-          <SecHead eyebrow="How It Works" title={service.processTitle} center />
-          <Process statement={service.processStatement} steps={service.process} />
+          <Process
+            statement={service.processStatement}
+            title={service.processTitle}
+            steps={service.process}
+          />
         </div>
       </section>
 
@@ -188,55 +194,38 @@ export default async function ServicePage({
         </div>
       </section>
 
-      {/* Packages. Three tiers, no prices anywhere. */}
-      <section>
+      {/* Packages. Three tiers on a dark ground, no prices anywhere. */}
+      <section className="dark">
         <div className="wrap">
           <SecHead eyebrow="Packages" title={service.packagesTitle} center />
           <Packages items={service.packages} serviceName={service.name} />
         </div>
       </section>
 
-      {/* Questions. */}
-      <section className="alt" id="faq">
+      {/* Questions. Her head, centred, and her wording. */}
+      <section id="faq">
         <div className="wrap">
-          <SecHead
-            eyebrow="Questions"
-            title={<>{service.shortName},<br />answered.</>}
-          />
-          <FaqBlock faqs={service.faqs} />
+          <SecHead eyebrow="FAQ" title="Common questions" center />
+          <FaqBlock faqs={service.faqs} center />
         </div>
       </section>
 
-      {/* Pairings. The commercial core of the in-house argument. */}
+      {/* Pairings. Three photographic cards, her composition. */}
       {pairs.length > 0 && (
-        <section>
+        <section className="alt">
           <div className="wrap">
-            <SecHead
-              eyebrow="Related"
-              title={<>Often paired<br />with.</>}
-              lede={`Most vehicles that come in for ${service.shortName.toLowerCase()} leave having had more than one discipline performed. Because all of it happens here, the work is scheduled as a single build.`}
-            />
-            <CrossSell
-              items={pairs.map((p) => ({ slug: p.slug, name: p.name, cardLine: p.cardLine }))}
-            />
+            <SecHead eyebrow="Related" title="Often paired with" center />
+            <Related items={pairs.map((p) => ({ slug: p.slug, name: p.name }))} />
           </div>
         </section>
       )}
 
-      {/* Closing band, then the intake form. */}
-      <section id="final-cta" style={{ paddingBottom: 0 }}>
+      {/* Closing band. Her page ends here. */}
+      <section id="final-cta">
         <div className="wrap">
           <FinalCta title={service.ctaTitle} lede={service.ctaLede} />
         </div>
       </section>
-
-      <IntakeForm
-        eyebrow="Get Started"
-        title={`Start with ${service.shortName.toLowerCase()}.`}
-        lede={`Tell us about your vehicle and we follow up to schedule a consultation in ${nap.city}.`}
-        source={`service-${service.slug}`}
-        preselect={service.name}
-      />
     </>
   );
 }

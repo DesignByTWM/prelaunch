@@ -23,27 +23,60 @@ import type {
    ============================================================= */
 
 /**
- * StatStrip
+ * ServiceHero
  *
- * Three short assertions directly under the hero. Warranty term,
- * material grade, in-house. Short factual statements this high in the
- * document are read by answer engines as entity attributes, which is
- * why they sit above the fold rather than in the footer.
+ * Liz's hero, exactly as composed in her mocks: eyebrow, H1, lede, two
+ * calls to action, then the three stat assertions on a hairline rule
+ * inside the hero rather than as a separate band below it.
+ *
+ * Ground is flat black with no photograph, per Jose's global instruction
+ * of August 21 2026. Her mock places a full bleed vehicle photograph here
+ * with a gradient scrim. That slot is intentionally unused.
+ *
+ * No visual breadcrumb. BreadcrumbList schema is emitted by the caller.
  */
-export function StatStrip({ items }: { items: string[] }) {
+export function ServiceHero({
+  eyebrow,
+  title,
+  lede,
+  stats,
+}: {
+  eyebrow: string;
+  title: string;
+  lede: string;
+  stats: string[];
+}) {
   return (
-    <div className="stat-strip">
-      <div className="wrap">
-        <ul>
-          {items.map((item, i) => (
-            <li key={item}>
-              <span className="label">{item}</span>
-              {i < items.length - 1 && <i aria-hidden="true">◆</i>}
-            </li>
-          ))}
-        </ul>
+    <section className="hero svc-hero">
+      <div className="hero-in">
+        <div className="wrap">
+          <div className="hero-content">
+            <Monogram />
+            <span className="eyebrow on-dark">{eyebrow}</span>
+            <h1 className="display">{title}</h1>
+            <p>{lede}</p>
+
+            <div className="hero-actions">
+              <Link href={routes.designYourBuild} className="btn btn-primary">
+                Design Your Build
+              </Link>
+              <a href="#recent" className="btn btn-line-light">
+                View Recent Work
+              </a>
+            </div>
+
+            <ul className="hero-stats">
+              {stats.map((item, i) => (
+                <li key={item}>
+                  <span className="label">{item}</span>
+                  {i < stats.length - 1 && <i aria-hidden="true">◆</i>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -91,16 +124,25 @@ export function Coverage({ items }: { items: ServiceCoverage[] }) {
  */
 export function Process({
   statement,
+  title,
   steps,
 }: {
   statement: string;
+  title: string;
   steps: ServiceProcessStep[];
 }) {
   return (
     <Reveal className="proc">
       <Monogram />
       <div className="proc-in">
+        {/* Her order inside the band: statement, then the head, then the
+            four steps. The head sits on the dark ground rather than above
+            it, which is how her mock reads. */}
         <p className="proc-statement display">{statement}</p>
+        <div className="sec-head center">
+          <span className="eyebrow">How It Works</span>
+          <h2 className="display">{title}</h2>
+        </div>
         <ol className="proc-grid">
           {steps.map((step) => (
             <li key={step.step}>
@@ -132,7 +174,7 @@ export function RecentWork({ items }: { items: ServiceRecentWork[] }) {
             className="recent rv-card"
             delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
           >
-            <div className="ph r11" />
+            <div className="ph fill" />
             <div className="recent-scrim" />
             <span className="recent-cap label">{item.name}</span>
             <span className="pill">{item.tag}</span>
@@ -233,5 +275,43 @@ export function FinalCta({
         </div>
       </div>
     </Reveal>
+  );
+}
+
+/**
+ * Related
+ *
+ * "Often paired with". Her mock renders this as three photographic cards
+ * with the discipline name over a scrim, not as text tiles. Three, not
+ * four: her layout is a three column band and the fourth pairing would
+ * change the composition.
+ *
+ * Frames carry the approved 34px 0 34px 0 corner. Her cards are square
+ * with a bottom-only radius.
+ */
+export function Related({
+  items,
+}: {
+  items: { slug: string; name: string }[];
+}) {
+  return (
+    <div className="rel-grid">
+      {items.map((item, i) => (
+        <Reveal
+          key={item.slug}
+          as={Link}
+          href={routes.service(item.slug)}
+          className="rel rv-card"
+          delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
+        >
+          <div className="ph fill" />
+          <div className="rel-scrim" />
+          <div className="rel-body">
+            <h3>{item.name}</h3>
+            <span className="go">Explore →</span>
+          </div>
+        </Reveal>
+      ))}
+    </div>
   );
 }
