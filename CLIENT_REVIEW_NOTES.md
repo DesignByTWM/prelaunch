@@ -682,4 +682,34 @@ Her spreadsheet supplies eight of the ten service meta descriptions. Suspension 
 
 ---
 
+## 27. EXPLORE PAGE REBUILDS, AUGUST 28 2026
+
+Liz green-lit the six explore mocks in her email of August 27. Same rule as the service pages: her composition, our design language. Rebuilt one at a time.
+
+### 27.1 Contact · DONE
+
+Her page is considerably smaller than the one we had built. Her order: hero, three contact cards, one two-column block with the message form on the left and hours and location on the right. No final CTA band, no FAQ, no second routing grid.
+
+**Removed to match her composition:**
+
+| Item | Note |
+|---|---|
+| The second routing grid: new builds, dealers and press | Three route cards with their own copy. Not in her mock. The dealer and locations links still exist in the footer, so no page becomes unreachable |
+| The service area section | Listed the 22 cities and linked to /locations. Internal linking value lost here is partly covered by the footer |
+| The full IntakeForm at the foot of the page | Her form is a short message form inside the two-column block, so a second longer form underneath would be a duplicate |
+
+**Kept although her mock does not show them:**
+
+| Item | Why |
+|---|---|
+| Call and text, email and facility rows | This is the NAP page. Removing the address, phone and email from it would cost real local ranking, which is a measurable loss rather than a style preference. Placed inside her right hand column so her structure still holds |
+| The social row | Locked decision from Jose. Six links from the Shopify site |
+| A live Google map instead of her placeholder image | Strictly better than a photograph of a map, and needs no photography |
+
+**Copy changes:** hero lede em dash resolved and the Oxford comma removed. The first contact card now reads "Text the House", which is her label and matches her instruction of August 27 that the SMS action keeps that wording.
+
+**New image slots: none.** The hero is charcoal, and the map is live rather than a photograph. This page adds nothing to IMAGE_PREP_LIST.md.
+
+---
+
 *Log opened during the services build. Append every new item as pages are completed.*

@@ -252,6 +252,7 @@ export function Packages({
               </li>
             ))}
           </ul>
+          {pkg.note && <p className="pkg-note">{pkg.note}</p>}
           <Link
             href={`${routes.designYourBuild}?service=${encodeURIComponent(serviceName)}&tier=${encodeURIComponent(pkg.name)}`}
             className={`btn ${pkg.featured ? "btn-primary" : "btn-line"}`}
@@ -294,7 +295,7 @@ export function FinalCta({
             Design Your Build
           </Link>
           <a href={nap.smsHref} className="btn btn-line-light">
-            Text TWM
+            Contact the House
           </a>
         </div>
       </div>

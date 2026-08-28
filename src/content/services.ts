@@ -74,6 +74,8 @@ export interface ServicePackage {
   /** Present only on the featured tier. */
   ribbon?: string;
   includes: string[];
+  /** Optional note rendered under the bullet list, smaller and quieter. */
+  note?: string;
 }
 
 export interface Service {
@@ -371,6 +373,7 @@ export const services: Service[] = [
           "Ceramic coating over film",
           "One point of contact through the build",
         ],
+        note: "Ceramic coating is a liquid glass layer applied over the film. It adds depth to the finish and gives the surface a hydrophobic top layer, so water and dirt sit on it rather than in it. Specified and applied as part of the same build.",
       },
     ],
     ctaTitle: "Design your protection",

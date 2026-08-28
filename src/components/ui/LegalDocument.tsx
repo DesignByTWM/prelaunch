@@ -40,7 +40,7 @@ export function LegalDocument({ slug }: { slug: string }) {
         crumbs={[{ label: "Home", href: routes.home }, { label: doc.title }]}
         title={doc.title}
         intro={doc.summary}
-        ctaLabel="Contact The House"
+        ctaLabel="Contact the House"
         ctaHref={routes.contact}
       />
 

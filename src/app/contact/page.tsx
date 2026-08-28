@@ -3,21 +3,40 @@ import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { SocialRow } from "@/components/ui/Socials";
 import { PageHero, SecHead } from "@/components/ui/Page";
-import { IntakeForm } from "@/components/home/IntakeForm";
+import { FormPending } from "@/components/forms/FormPending";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
-import { hours, nap, napLine, routes, serviceAreas, site } from "@/lib/site";
+import { hours, nap, napLine, routes, site } from "@/lib/site";
 
 /**
  * CONTACT
  *
- * The NAP page. Every value rendered here comes from lib/site.ts, which is
- * the same source the schema, the footer and the forms read from. That is
- * deliberate: inconsistent name, address or phone across a site is one of
- * the most common and least visible causes of local ranking loss, and the
- * only reliable fix is to make it structurally impossible.
+ * REBUILT August 28 2026 to Liz's mock of August 14 2026.
+ *
+ * Her page, in her order:
+ *   hero -> three contact cards -> two column block, message form left,
+ *   hours and location right -> footer.
+ *
+ * That is a considerably smaller page than the one we had built. Removed
+ * to match her composition, all logged in CLIENT_REVIEW_NOTES.md 27:
+ *   - the second routing grid, new builds / dealers / press
+ *   - the service area section
+ *   - the full IntakeForm at the foot of the page
+ *
+ * Kept inside her right hand column although her mock does not show them,
+ * because this is the NAP page and dropping the address, phone and email
+ * from it would cost real local ranking:
+ *   - call and text, email and facility rows
+ *   - the social row, which is a locked decision from Jose
+ *
+ * Every NAP value is read from lib/site.ts, the same source the schema,
+ * the footer and the forms use. Inconsistent name, address or phone across
+ * a site is a common and nearly invisible cause of local ranking loss, and
+ * the only reliable fix is to make it structurally impossible.
  *
  * The map is a keyless Google Maps embed pointed at the address string, so
- * there is no API key to manage and nothing to expire.
+ * there is no API key to manage and nothing to expire. Liz's mock has a
+ * placeholder image in this slot. A live map is strictly better and needs
+ * no photography.
  */
 
 export const metadata: Metadata = {
@@ -53,22 +72,20 @@ export default function ContactPage() {
         imageAlt="Completed DESIGNBYTWM build photographed in an open environmental setting"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Contact" }]}
         title="Let's talk about your build."
-        intro="Text, call or stop by the shop, whichever's easiest."
-        ctaLabel="Send A Message"
-        ctaHref="#intake"
+        intro="Text, call or stop by the shop, whichever is easiest."
       />
 
-      {/* Three contact methods, from Liz's mock of August 14 2026.
-         "Book a Consult" routes to Design Your Build, which is where she
-         pointed it. There is no booking system and none is implied. */}
+      {/* Three ways in, her wording and her order. "Book a Consult" routes
+         to Design Your Build, which is where she pointed it. There is no
+         booking system and none is implied. */}
       <section style={{ paddingBottom: 0 }}>
         <div className="wrap">
           <div className="routes-grid">
             <Reveal className="route-card" delay={1}>
-              <h3>Text TWM</h3>
+              <h3>Text the House</h3>
               <p>Fastest way to reach us during shop hours.</p>
               <a href={nap.smsHref} className="btn btn-primary">
-                Text TWM
+                Text the House
               </a>
             </Reveal>
 
@@ -93,13 +110,54 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Details and map */}
-      <section>
-        <div className="wrap contact-grid">
+      {/* Her two column block. Message form left, hours and location right. */}
+      <section className="alt" id="message">
+        <div className="wrap contact-grid even">
           <Reveal>
-            <SecHead eyebrow="The House" title={<>Where to<br />find us.</>} />
+            <SecHead eyebrow="Send a Message" title="Get in touch" />
 
-            <div className="info">
+            <div className="row">
+              <div className="field">
+                <label htmlFor="c-name">Name</label>
+                <input id="c-name" name="name" type="text" placeholder="Full name" autoComplete="name" />
+              </div>
+              <div className="field">
+                <label htmlFor="c-email">Email</label>
+                <input id="c-email" name="email" type="email" placeholder="name@email.com" autoComplete="email" />
+              </div>
+            </div>
+
+            <div className="field">
+              <label htmlFor="c-phone">Phone</label>
+              <input id="c-phone" name="phone" type="tel" placeholder="(832) 000-0000" autoComplete="tel" />
+            </div>
+
+            <div className="field">
+              <label htmlFor="c-message">Message</label>
+              <textarea id="c-message" name="message" placeholder="How can we help?" />
+            </div>
+
+            <input type="hidden" name="source" value="contact" />
+            <FormPending label="Send Message" />
+          </Reveal>
+
+          <Reveal>
+            <SecHead eyebrow="Hours &amp; Location" title="Shop hours" />
+
+            <ul className="hours-list">
+              {hours.map((entry) => (
+                <li key={entry.days}>
+                  <span>{entry.days}</span>
+                  <span>
+                    {entry.opens ? `${entry.opens} to ${entry.closes}` : "Closed"}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            {/* NAP block. Not in her mock, kept deliberately. See the note
+               at the head of this file. */}
+            <div className="info" style={{ marginTop: 28 }}>
               <div className="info-row">
                 <div className="k">Call or text</div>
                 <div className="v">
@@ -134,32 +192,14 @@ export default function ContactPage() {
               </div>
 
               <div className="info-row">
-                <div className="k">Hours</div>
-                <div className="v">
-                  <ul className="hours-list">
-                    {hours.map((entry) => (
-                      <li key={entry.days}>
-                        <span>{entry.days}</span>
-                        <span>
-                          {entry.opens ? `${entry.opens} to ${entry.closes}` : "Closed"}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="info-row">
                 <div className="k">Follow the work</div>
                 <div className="v">
                   <SocialRow onLight />
                 </div>
               </div>
             </div>
-          </Reveal>
 
-          <Reveal card>
-            <div className="map-frame" id="map">
+            <div className="map-frame" id="map" style={{ marginTop: 28 }}>
               <iframe
                 src={mapSrc}
                 title={`Map showing ${nap.businessName} at ${napLine}`}
@@ -171,90 +211,6 @@ export default function ContactPage() {
           </Reveal>
         </div>
       </section>
-
-      {/* Routing */}
-      <section className="alt">
-        <div className="wrap">
-          <SecHead
-            eyebrow="Get To The Right Place"
-            title={<>Three ways<br />to reach us.</>}
-            lede="Retail builds, dealer programs and press all go to different people, so pick the one that fits and it gets to the right desk first time."
-          />
-
-          <div className="routes-grid">
-            <Reveal className="route-card" delay={1}>
-              <h3>New builds</h3>
-              <p>
-                Wraps, paint protection film, wheels, interiors, suspension or a
-                complete transformation. Start with a consultation and we plan
-                the disciplines as one package.
-              </p>
-              <Link href={routes.designYourBuild} className="btn btn-primary">
-                Design Your Build
-              </Link>
-            </Reveal>
-
-            <Reveal className="route-card" delay={2}>
-              <h3>Dealers and fleet</h3>
-              <p>
-                Inventory programs, volume blackout and wheel packages, wraps
-                and protection prepared for retail delivery. Handled by the
-                Dealer Services Division.
-              </p>
-              <Link href={routes.dealers} className="btn btn-line">
-                Dealer Services
-              </Link>
-            </Reveal>
-
-            <Reveal className="route-card" delay={3}>
-              <h3>Press and media</h3>
-              <p>
-                Feature requests, photography, collaborations and anything else
-                media related. Send the details and we will point you to the
-                right person.
-              </p>
-              <a href={`mailto:${nap.email}`} className="btn btn-line">
-                Email Us
-              </a>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Service area */}
-      <section>
-        <div className="wrap split">
-          <SecHead
-            eyebrow="Service Area"
-            title={<>Who we<br />build for.</>}
-          />
-          <Reveal className="prose">
-            <p>
-              The facility serves the greater Houston area, and vehicles are
-              regularly transported in from elsewhere in Texas for larger
-              builds. If you are outside the immediate area, enclosed transport
-              can be arranged as part of the plan.
-            </p>
-            <p style={{ marginTop: 20 }}>
-              <span className="areas" style={{ color: "var(--gray-mid)" }}>
-                {serviceAreas.join(" · ")}
-              </span>
-            </p>
-            <p style={{ marginTop: 22 }}>
-              <Link href={routes.locations} className="arrow-link">
-                Areas we serve →
-              </Link>
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      <IntakeForm
-        eyebrow="Send A Message"
-        title="Tell us about the vehicle."
-        lede={`The more you tell us up front, the more useful the first conversation is. Or call and text ${nap.phone} directly.`}
-        source="contact"
-      />
     </>
   );
 }

@@ -9,7 +9,8 @@ import { routes } from "@/lib/site";
  *
  * Approved V2 structure, with the one approved change: five headline cards
  * instead of four, because PPF was separated from Blackout Packages.
- * Heading updated from "Four disciplines" to "Five disciplines" to match.
+ * Heading reads "Ten disciplines" for the full catalog the section links to,
+ * even though only five cards render here.
  *
  * Everything else is untouched: the 4:5 frame, the 34px 0 34px 0 corner,
  * the hover lift, the umbrella strip and the black metal custom build band.
@@ -21,7 +22,7 @@ export function Services() {
         <Reveal className="sec-head">
           <span className="eyebrow">What We Build</span>
           <h2 className="display">
-            Five disciplines,
+            Ten disciplines,
             <br />
             one process.
           </h2>

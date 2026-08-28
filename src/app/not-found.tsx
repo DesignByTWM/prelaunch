@@ -32,7 +32,7 @@ export default function NotFound() {
             Back to the house
           </Link>
           <a href={nap.phoneHref} className="btn btn-line">
-            Call {nap.phone}
+            Contact the House
           </a>
         </div>
 
