@@ -30,6 +30,8 @@ export function PageHero({
   intro,
   ctaLabel = "Design Your Build",
   ctaHref = routes.designYourBuild,
+  secondaryLabel,
+  secondaryHref,
 }: {
   image: string;
   imageAlt: string;
@@ -38,6 +40,8 @@ export function PageHero({
   intro?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
 }) {
   return (
     <section className="hero inner">
@@ -62,9 +66,19 @@ export function PageHero({
             <h1 className="display">{title}</h1>
             {intro && <p>{intro}</p>}
 
-            <Link href={ctaHref} className="btn btn-primary">
-              {ctaLabel}
-            </Link>
+            {/* Second action is optional. Liz uses a pair on some explore
+               pages and a single button on others, so the slot exists and
+               stays empty unless a page asks for it. */}
+            <div className="hero-actions">
+              <Link href={ctaHref} className="btn btn-primary">
+                {ctaLabel}
+              </Link>
+              {secondaryLabel && secondaryHref && (
+                <Link href={secondaryHref} className="btn btn-line-light">
+                  {secondaryLabel}
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>

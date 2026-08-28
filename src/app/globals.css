@@ -283,6 +283,8 @@ section.alt { background: var(--off-white); }
 .wheel { text-align: center; }
 .wheel .ph { background: var(--white); border: 1px solid var(--gray-light); border-radius: 0 34px 0 34px; overflow: hidden; }
 .wheel h4 { font-family: var(--body); font-weight: 600; font-size: 12.5px; margin-top: 16px; }
+/* Catalog cards use h3, since they sit directly under the section h2. */
+.wheel h3 { font-family: var(--body); font-weight: 600; font-size: 12.5px; margin-top: 16px; }
 .wheel p { font-size: 11.5px; color: var(--gray-mid); margin: 6px 0 14px; }
 .wheel .btn { width: 100%; justify-content: center; padding: 11px 0; font-size: 11px; }
 @media (max-width: 960px) { .wheels { grid-template-columns: repeat(2,1fr); } }
@@ -1131,3 +1133,10 @@ section.dark .sec-head .eyebrow { color: var(--signal-teal); }
 /* The map sits inside a column here rather than spanning one, so it is
    shorter than the full height version used on wider layouts. */
 .contact-grid.even .map-frame iframe { height: clamp(280px, 34vh, 380px); }
+
+/* Shop Wheels. Her catalog runs eight across two rows rather than the four
+   of the homepage strip, so the cards need a little more room below. */
+.wheels .wheel { margin-bottom: 6px; }
+@media (max-width: 1100px) { .wheels { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 760px) { .wheels { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 460px) { .wheels { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; } }

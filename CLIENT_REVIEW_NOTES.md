@@ -712,4 +712,32 @@ Her page is considerably smaller than the one we had built. Her order: hero, thr
 
 ---
 
+### 27.2 Shop Wheels · DONE
+
+Her order: hero, catalog grid of eight sets, fitment FAQ, closing CTA. Approved by Jose on August 28, which supersedes the earlier decision to ship this route as a form-only module. It is still not a store: no prices, no cart, no stock, and every card routes to the fitment inquiry, which is her own "Inquire for fitment" treatment. The Shopify integration remains deferred and this page does not pre-empt it.
+
+**Removed to match her composition:**
+
+| Item | Note |
+|---|---|
+| Four wheel construction programs: forged, flow formed, cast, off-road | Each had a summary and four bullets. Real search weight on construction terms is lost here. `wheelPrograms` is untouched in `wheels.ts` and reinstating the section is a small edit |
+| Six fitment factors block | Diameter, offset, brake clearance, bolt pattern, load rating, ride height. `fitmentFactors` also untouched |
+| CustomBand | Not in her mock |
+| WheelInquiryForm | Her closing CTA routes to Design Your Build, which is the same lead capture one step further along, so no capture point is lost |
+
+**Two deliberate departures:**
+
+| # | Item | Reasoning |
+|---|---|---|
+| 27.2a | **Her filter pills are not built.** All, By Style, By Finish, By Size | In her mock they filter nothing. Dead controls on a luxury site read as a broken page. The catalog data already carries style, finish and size fields, so real filters are available whenever someone wants them. Flagged to Liz |
+| 27.2b | **Ten FAQs render, not her three** | Hers lead, in her order, followed by the seven longer ones. Those seven carry real search weight and are in the FAQPage schema, and schema has to match what is visible on the page. Cutting to three is one line |
+
+**Also changed:** `PageHero` gained an optional second call to action, since her Shop Wheels hero uses a pair, Browse Wheels and Get a Fitment Check, where Contact uses none. The slot stays empty unless a page asks for it, so no existing page changes.
+
+**Open question for Jose:** `/wheels/catalog` still exists as a separate route. Now that Shop Wheels carries the catalog, the two overlap and that is a duplicate content risk. Left in place pending a decision.
+
+**New image slots: four.** The catalog shows eight sets and only `wheel-1` through `wheel-4` exist, so four are currently reused twice. Needed: `wheel-5` to `wheel-8`, 1:1, 560 × 560.
+
+---
+
 *Log opened during the services build. Append every new item as pages are completed.*

@@ -2,29 +2,53 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Photo } from "@/components/ui/Photo";
-import { PageHero, SecHead, CustomBand, FaqBlock } from "@/components/ui/Page";
-import { WheelInquiryForm } from "@/components/forms/WheelInquiryForm";
-import { JsonLd, breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
-import { wheelPrograms, fitmentFactors, wheelFaqs, wheelCatalog, wheelQuickFaqs } from "@/content/wheels";
-import { nap, routes, serviceAreas } from "@/lib/site";
+import { PageHero, SecHead, FaqBlock } from "@/components/ui/Page";
+import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { wheelFaqs, wheelCatalog, wheelQuickFaqs } from "@/content/wheels";
+import { routes, site } from "@/lib/site";
 
 /**
  * SHOP WHEELS
  *
- * Inquiry module rather than a catalog at launch. Rather than apologise for
- * the absence of a browse experience, the page argues the case for the
- * opposite: fitment is a measurement problem, and a catalog lets people
- * order wheels that will not fit their vehicle. That framing is honest, it
- * is genuinely the house position given where the business came from, and
- * it converts better than an empty product grid.
+ * REBUILT August 28 2026 to Liz's mock of August 14 2026, approved by Jose.
+ *
+ * Her page, in her order:
+ *   hero -> catalog grid, eight sets -> fitment FAQ -> closing CTA.
+ *
+ * This is a browse grid rather than a store. No prices, no cart, no stock.
+ * Every card routes to the fitment inquiry, which is her own treatment:
+ * "Inquire for fitment" on each card. So it does not pre-empt the Shopify
+ * integration that is still deferred, it just stops the page reading as a
+ * form with nothing to look at.
+ *
+ * Removed to match her composition, logged in CLIENT_REVIEW_NOTES.md 27.2:
+ *   - the four wheel construction programs, forged, flow formed, cast,
+ *     off-road, with their summaries and bullet points
+ *   - the six fitment factors block
+ *   - the CustomBand
+ *   - the WheelInquiryForm. Her closing CTA routes to Design Your Build,
+ *     which is the same lead capture one step further along
+ *
+ * Two deliberate departures, both flagged:
+ *   1. Her filter pills, All / By Style / By Finish / By Size, are not
+ *      built. In her mock they are decoration and filter nothing. Shipping
+ *      dead controls on a luxury site is worse than not having them. The
+ *      catalog data carries style, finish and size fields, so real filters
+ *      can be added the day someone wants them.
+ *   2. Her FAQ shows three questions. All ten are rendered, hers first in
+ *      her order, because the other seven carry real search weight and are
+ *      already in the FAQPage schema. Cutting to three is a one line change.
  */
 
 export const metadata: Metadata = {
   title: "Shop Wheels",
   description:
-    "Custom wheels and fitment in Houston. Forged, flow formed, cast and off-road wheel programs, with offset, clearance and load rating confirmed on your vehicle before anything is ordered.",
+    "Custom wheels and fitment in Houston. Forged, monoblock, multi-spoke and deep concave sets in a range of finishes, with fitment measured on your vehicle before anything is ordered.",
   alternates: { canonical: routes.wheels },
 };
+
+/* Hers lead, ours follow. Same order as the data file. */
+const allWheelFaqs = [...wheelQuickFaqs, ...wheelFaqs];
 
 export default function WheelsPage() {
   return (
@@ -35,211 +59,107 @@ export default function WheelsPage() {
             { name: "Home", path: "/" },
             { name: "Shop Wheels", path: routes.wheels },
           ]),
-          serviceSchema({
-            name: "Custom Wheels and Fitment",
+          /**
+           * CollectionPage, not Service.
+           *
+           * `serviceSchema` builds its url as /services/{slug}, so using it
+           * here would emit a second Service entity for wheels pointing at
+           * /services/wheels-and-fitment, which is a different page that
+           * already carries that entity. Two Service nodes for one offering
+           * is how a crawler ends up unsure which page to rank.
+           *
+           * This page is a browse grid, so it is described as a collection
+           * belonging to the organization, and the Service entity stays
+           * where it belongs on the service page.
+           */
+          {
+            "@type": "CollectionPage",
+            name: "Wheel Program",
+            url: `${site.url}${routes.wheels}`,
             description:
-              "Forged, flow formed, cast and off-road wheel programs with fitment confirmed on the vehicle, tire pairing, road force balancing and TPMS.",
-            slug: "wheels-and-fitment",
-            areaServed: serviceAreas.map((city) => `${city}, ${nap.stateFull}`),
-          }),
-          faqSchema([...wheelQuickFaqs, ...wheelFaqs]),
+              "Forged, monoblock, multi-spoke and deep concave wheel sets supplied and fitted in Houston, with offset, brake clearance and load rating measured on the vehicle before ordering.",
+            isPartOf: { "@id": `${site.url}/#website` },
+            about: { "@id": `${site.url}/#organization` },
+            mainEntity: {
+              "@type": "ItemList",
+              numberOfItems: wheelCatalog.length,
+              itemListElement: wheelCatalog.map((item, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                name: item.name,
+              })),
+            },
+          },
+          faqSchema(allWheelFaqs),
         ]}
       />
 
       <PageHero
-        image="/svc-wheels.webp"
-        imageAlt="Forged wheel and tire fitment on a customized luxury vehicle"
+        image="/wheel-1.webp"
+        imageAlt="Forged wheel fitted to a customized vehicle"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Shop Wheels" }]}
         title="Fitment first. Then the look."
         intro="Browse the wheel program. Fitment is confirmed for your exact vehicle before anything is ordered."
         ctaLabel="Browse Wheels"
         ctaHref="#catalog"
+        secondaryLabel="Get a Fitment Check"
+        secondaryHref={routes.designYourBuild}
       />
 
-      {/* CATALOG
-         From Liz's mock of August 14 2026. Eight representative sets so the
-         page reads as a program rather than a form. No prices anywhere:
-         every card routes to a fitment inquiry, which is her treatment and
-         the client's no-pricing instruction at the same time. */}
+      {/* Catalog. Eight representative sets, her grid. */}
       <section id="catalog">
         <div className="wrap">
-          <SecHead
-            eyebrow="Catalog"
-            title="Browse the wheel program"
-            lede="A representative selection. The full program runs to thousands of sets, so tell us the vehicle and we come back with what actually fits it."
-            center
-          />
-          <div className="cov-grid">
-            {wheelCatalog.map((wheel, i) => (
+          <SecHead eyebrow="Catalog" title="Browse the wheel program" center />
+
+          <div className="wheels">
+            {wheelCatalog.map((item, i) => (
               <Reveal
-                key={wheel.name}
-                as="a"
-                href="#wheel-inquiry"
-                className="cov rv-card"
+                key={item.name}
+                className="wheel rv-card"
                 delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
               >
                 <div className="ph r11">
-                  <Photo src={wheel.frame} alt={`${wheel.name} wheel`} />
-                  <span className="pill">{wheel.size}</span>
+                  <Photo src={item.frame} alt={`${item.name} wheel`} />
                 </div>
-                <div className="cov-body">
-                  <h3>{wheel.name}</h3>
-                  <span className="go">Inquire for fitment →</span>
-                </div>
+                <h3>{item.name}</h3>
+                <p>Inquire for fitment</p>
+                <Link href={routes.designYourBuild} className="btn btn-line">
+                  Inquire
+                </Link>
               </Reveal>
             ))}
-          </div>
-
-          <div className="recent-more">
-            <Link href={`${routes.wheels}/catalog`} className="btn btn-line">
-              Full Catalog
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* Why no catalog */}
+      {/* Fitment questions. Her head, her three at the top. */}
+      <section className="alt" id="faq">
+        <div className="wrap">
+          <SecHead eyebrow="FAQ" title="Fitment questions" center />
+          <FaqBlock faqs={allWheelFaqs} center />
+        </div>
+      </section>
+
+      {/* Her closing band. One call to action, not two. */}
       <section>
-        <div className="wrap split">
-          <SecHead
-            eyebrow="How This Works"
-            title={
-              <>
-                Fitment first,
-                <br />
-                then the wheel.
-              </>
-            }
-          />
-          <Reveal className="prose">
-            <p>
-              A wheel catalog is a list of parts sorted by how they look. It
-              cannot tell you whether a given wheel clears your brakes, sits
-              flush under your arch, carries the load your truck actually needs
-              or works with the ride height you are planning.
-            </p>
-            <p>
-              So we do it the other way around. Tell us the vehicle and the look
-              you are after, and we come back with options that have already
-              been checked against it. Nothing gets ordered on a guess, and
-              nothing arrives that cannot be used.
-            </p>
-            <p>
-              This is the part of the business the house grew out of, and it is
-              the reason fitment problems here get caught at the planning stage
-              rather than on delivery day.
-            </p>
+        <div className="wrap">
+          <Reveal className="final-cta">
+            <div className="final-in">
+              <span className="eyebrow on-dark">Not Sure What Fits?</span>
+              <h2 className="display">Get a fitment check</h2>
+              <p>
+                Tell us about your vehicle and we confirm what actually fits
+                before you order.
+              </p>
+              <div className="final-actions">
+                <Link href={routes.designYourBuild} className="btn btn-primary">
+                  Get a Fitment Check
+                </Link>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
-
-      {/* Programs */}
-      <section className="alt">
-        <div className="wrap">
-          <SecHead
-            eyebrow="Wheel Programs"
-            title={
-              <>
-                Four ways
-                <br />
-                a wheel gets made.
-              </>
-            }
-            lede="Construction determines strength, weight, how bespoke the sizing can be and how long it takes to arrive. It is the first decision, before finish or style."
-          />
-
-          <div className="index-grid">
-            {wheelPrograms.map((program, i) => (
-              <Reveal
-                key={program.slug}
-                className="pkg-card"
-                card
-                delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
-              >
-                <div className="ph r11" style={{ borderRadius: "0 34px 0 34px", marginBottom: 22 }}>
-                  <Photo src={program.frame} alt={program.alt} />
-                </div>
-                <h3>{program.name}</h3>
-                <p>{program.summary}</p>
-                <ul>
-                  {program.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Fitment factors */}
-      <section>
-        <div className="wrap">
-          <SecHead
-            eyebrow="What Gets Checked"
-            title={
-              <>
-                Six measurements
-                <br />
-                before an order.
-              </>
-            }
-            lede="Every one of these is confirmed on your vehicle. Any one of them being wrong is how people end up with wheels sitting in a garage."
-          />
-          <div className="pillars">
-            {fitmentFactors.map((factor, i) => (
-              <Reveal
-                key={factor.title}
-                className="pillar"
-                delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
-              >
-                <h3>{factor.title}</h3>
-                <p>{factor.copy}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="alt" style={{ paddingBottom: 0 }}>
-        <div className="wrap">
-          <CustomBand
-            heading={
-              <>
-                Wheels are usually
-                <br />
-                not the only thing.
-              </>
-            }
-            ctaLabel="Design Your Build"
-            ctaHref={routes.designYourBuild}
-          />
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="alt">
-        <div className="wrap">
-          <SecHead
-            eyebrow="Questions"
-            title={
-              <>
-                Wheels,
-                <br />
-                answered.
-              </>
-            }
-          />
-          <FaqBlock faqs={wheelFaqs} />
-          <Reveal style={{ marginTop: 26 }}>
-            <Link href={routes.service("wheels-and-fitment")} className="arrow-link">
-              Wheels &amp; Fitment in full →
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      <WheelInquiryForm />
     </>
   );
 }
