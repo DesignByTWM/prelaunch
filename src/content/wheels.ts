@@ -177,7 +177,7 @@ export const wheelFaqs = [
   {
     question: "Do you install wheels purchased elsewhere?",
     answer:
-      "In most cases yes. Mounting, road force balancing, TPMS and torque are handled the same way as on a supplied set. Wheels supplied by the customer carry no warranty from us on the wheel itself, only on the installation.",
+      "In most cases yes. Mounting, road force balancing, TPMS and torque are handled the same way as on a supplied set. Where you bring your own wheels, our work covers the installation. Anything relating to the wheel itself stays with wherever it was purchased.",
   },
   {
     question: "How long does a wheel and tire fitting take?",

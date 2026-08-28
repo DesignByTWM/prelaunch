@@ -7,7 +7,12 @@
  * These are standard, reasonable documents for a Texas service
  * business operating a website with lead capture. They are not
  * drafted by a lawyer and they are not tailored to how Design By
- * TWM actually handles data, warranties or disputes.
+ * TWM actually handles data or disputes.
+ *
+ * REVISED August 28 2026. Per Liz's site-wide instruction, no
+ * coverage or guarantee language appears on any page. These
+ * documents were reworded to keep the same protective effect in
+ * plain, friendly language without those words.
  *
  * Specific items requiring confirmation are flagged in
  * CLIENT_REVIEW_NOTES.md section 19.
@@ -75,7 +80,7 @@ export const legalDocs: Record<string, LegalDoc> = {
       {
         heading: "How long it is kept",
         body: [
-          "Inquiry records are kept for as long as needed to respond and to maintain a record of the relationship. Records relating to work performed are kept longer, since warranty and service history depend on them.",
+          "Inquiry records are kept for as long as needed to respond and to maintain a record of the relationship. Records relating to work performed are kept longer, since service history depends on them.",
           "You can ask us to delete information we hold about you and we will do so where we are not required to retain it.",
         ],
       },
@@ -120,8 +125,8 @@ export const legalDocs: Record<string, LegalDoc> = {
       {
         heading: "Information on this site",
         body: [
-          "Descriptions of services, timeframes and processes on this site are general and are provided to help you understand the work. They are not a quote and are not a guarantee of a particular outcome, price or schedule for your vehicle.",
-          "Every vehicle is different. Pricing and timing are confirmed in writing after the vehicle has been inspected.",
+          "Descriptions of services, timeframes and processes on this site are general, written to help you understand how the work is approached. They are not a quote and they do not set a fixed outcome, price or schedule for your vehicle.",
+          "Every vehicle is different, which is the whole reason we ask to see yours. Pricing and timing are confirmed in writing after the vehicle has been inspected.",
         ],
       },
       {

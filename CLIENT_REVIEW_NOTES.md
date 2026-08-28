@@ -657,4 +657,29 @@ Inner hero photographs are suppressed in CSS rather than removed from the markup
 
 ---
 
+## 26. LEGAL-RISK SWEEP BEYOND LIZ'S SPREADSHEET, AUGUST 28 2026
+
+Liz's site-wide rule of August 27 removes every instance of warranty, guarantee, guaranteed and lifetime. Her spreadsheet lists the hero badges and package tiers. A full-text sweep of the codebase found six further instances she had not seen. All were corrected on the same pattern: keep the marketing meaning, drop the coverage language, introduce no new commitment.
+
+| # | File | Was | Now |
+|---|---|---|---|
+| 26.1 | `faqs.ts` | FAQ section titled "Warranty and Aftercare", anchor `#warranty-and-aftercare` | "Aftercare", anchor `#aftercare`. Matches her section naming |
+| 26.2 | `faqs.ts` | "Do you warranty your work?" | Removed. On her removal list |
+| 26.3 | `faqs.ts` | "Will customization void my factory warranty?", including the Magnuson-Moss passage | Removed. On her removal list |
+| 26.4 | `faqs.ts` | "Is my vehicle insured while it is in your care?", citing garage keepers coverage | Removed. On her removal list |
+| 26.5 | `house.ts` | Process step 5: "aftercare and warranty terms are walked through" | "aftercare is walked through in person" |
+| 26.6 | `wheels.ts` | "Wheels supplied by the customer carry no warranty from us on the wheel itself" | "our work covers the installation. Anything relating to the wheel itself stays with wherever it was purchased" |
+| 26.7 | `legal.ts` privacy | "since warranty and service history depend on them" | "since service history depends on them" |
+| 26.8 | `legal.ts` terms | "not a quote and are not a guarantee of a particular outcome, price or schedule" | "not a quote and they do not set a fixed outcome, price or schedule". Same protective effect, friendlier register, no banned word |
+
+### Meta descriptions written in-house
+
+Her spreadsheet supplies eight of the ten service meta descriptions. Suspension and Audio were not included. Both were written here to match the pattern and length of hers, using only facts already published on those pages and no coverage language. Flagged to Liz for approval.
+
+### Outstanding and more serious than the coverage language
+
+`house.ts` still carries four fabricated testimonials attributed to named individuals: Marcus T., Priya N., Devon R. and Alicia G. These people do not exist. Publishing invented endorsements is an FTC exposure and is a harder problem than any warranty wording on the site. This is a launch blocker. See section 15.1.
+
+---
+
 *Log opened during the services build. Append every new item as pages are completed.*

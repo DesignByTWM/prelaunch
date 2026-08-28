@@ -89,7 +89,7 @@ export const processSteps = [
   },
   {
     title: "Delivery",
-    copy: "The vehicle is presented clean and complete, with care guidance for whatever was done to it. What happens after delivery matters as much as the build, so aftercare and warranty terms are walked through rather than handed over on paper.",
+    copy: "The vehicle is presented clean and complete, with care guidance for whatever was done to it. What happens after delivery matters as much as the build, so aftercare is walked through in person rather than handed over on paper.",
   },
 ];
 

@@ -802,7 +802,7 @@ export const services: Service[] = [
     tier: "additional",
     cardLine: "Lift, level, lowering and coilover programs with alignment.",
     summary:
-      "Suspension work in Houston. Lift and leveling kits, lowering springs, coilovers and air suspension, installed with alignment and fitment planned around the wheels.",
+      "Suspension work in Houston. Lift and leveling kits, lowering springs, coilovers and air suspension, installed with alignment and matched to your wheel package.",
     intro:
       "Suspension changes how a vehicle sits, how it drives and what wheel and tire package will physically fit. Lift kits, leveling kits, lowering springs, coilovers and air management are installed with alignment performed after the fact rather than skipped and with the wheel program planned alongside rather than after.",
     includes: [
@@ -1193,7 +1193,7 @@ export const services: Service[] = [
     tier: "additional",
     cardLine: "Speaker, amplifier and subwoofer systems with sound treatment.",
     summary:
-      "Car audio in Houston. Speaker, amplifier, subwoofer and DSP systems with sound deadening and custom enclosures, integrated cleanly into factory interiors.",
+      "Car audio in Houston. Speaker, amplifier, subwoofer and DSP systems with sound deadening and custom enclosures, fabricated and tuned in house.",
     intro:
       "Audio work is judged by what you do not see. Speakers, amplifiers, subwoofers, digital signal processing and sound deadening are integrated into the existing interior with custom enclosures and panels built to the vehicle, so the system reads as a factory option rather than an addition.",
     includes: [

@@ -170,11 +170,6 @@ export const companyFaqGroups: FaqGroup[] = [
           "Vehicles are kept inside the facility, not on an open lot. Storage arrangements for longer builds are confirmed as part of the plan.",
       },
       {
-        question: "Is my vehicle insured while it is in your care?",
-        answer:
-          "The facility carries garage keepers coverage for vehicles on the premises. Specific coverage details can be provided on request before you leave the vehicle.",
-      },
-      {
         question: "Can you arrange transport for my vehicle?",
         answer:
           "Enclosed transport can be coordinated for clients outside the immediate Houston area or for vehicles that are not comfortably driven to the facility. This is arranged during the consultation.",
@@ -183,15 +178,10 @@ export const companyFaqGroups: FaqGroup[] = [
   },
 
   {
-    id: "warranty-and-aftercare",
-    label: "Warranty and Aftercare",
+    id: "aftercare",
+    label: "Aftercare",
     intro: "What happens after you collect the vehicle.",
     items: [
-      {
-        question: "Do you warranty your work?",
-        answer:
-          "Yes. Workmanship is warranted, and materials such as paint protection film and wrap vinyl additionally carry their own manufacturer warranty. Terms differ by discipline and are set out in writing with your quote.",
-      },
       {
         question: "What happens if something is not right after I pick up the vehicle?",
         answer:
@@ -206,11 +196,6 @@ export const companyFaqGroups: FaqGroup[] = [
         question: "Do you offer maintenance after a build?",
         answer:
           "Yes. Ongoing detailing, protection maintenance and inspection of film and coatings can be scheduled, and long-term clients frequently return for additional work as vehicles change.",
-      },
-      {
-        question: "Will customization void my factory warranty?",
-        answer:
-          "Cosmetic work such as wraps, film, blackout packages and interiors does not void a factory warranty. Mechanical changes such as suspension can affect coverage on the specific components involved. Under the Magnuson-Moss Warranty Act a manufacturer must show that a modification caused a failure in order to deny a related claim, and anything with warranty implications is raised with you before work begins.",
       },
     ],
   },
