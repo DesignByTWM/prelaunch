@@ -2,10 +2,36 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Photo } from "@/components/ui/Photo";
-import { PageHero, SecHead, CustomBand } from "@/components/ui/Page";
+import { PageHero, SecHead } from "@/components/ui/Page";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
 import { journalPosts } from "@/content/journal";
 import { routes, site } from "@/lib/site";
+
+/**
+ * JOURNAL
+ *
+ * REBUILT August 28 2026 to Liz's mock of August 14 2026.
+ *
+ * Her order:
+ *   hero -> featured article, two column with the frame left -> "More
+ *   Articles / From the journal", four card grid -> footer.
+ *
+ * Her mock shows five articles, one featured and four in the grid, which
+ * is exactly what journalPosts holds. The first post leads and the rest
+ * fill the grid, so publishing a sixth article changes nothing here.
+ *
+ * Removed to match her composition, logged in CLIENT_REVIEW_NOTES.md 27.3:
+ *   - the "Start here" section head above the featured article. Her
+ *     overline sits inside the right hand column instead
+ *   - the CustomBand asking for questions, and the empty trailing section
+ *     that followed it
+ *   - reading time on the cards. Her card carries the category pill only
+ *
+ * Her titles are illustrative rather than real: "When Wrapping Is the
+ * Wrong Call", "Two Questions That Expose a Cheap Blackout Quote". Those
+ * are not our articles. The five real posts render in her layout instead,
+ * since renaming published slugs to match a mock would break the URLs.
+ */
 
 export const metadata: Metadata = {
   title: "Journal",
@@ -49,93 +75,66 @@ export default function JournalPage() {
         crumbs={[{ label: "Home", href: routes.home }, { label: "Journal" }]}
         title="Insights from the shop floor."
         intro="Straight answers on wraps, protection and care, written by the team that does the work."
-        ctaLabel="Ask A Question"
+        ctaLabel="Contact the House"
         ctaHref={routes.contact}
       />
 
+      {/* Featured. Her two column block, frame left, no section head above. */}
       <section>
         <div className="wrap">
-          <SecHead
-            eyebrow="Featured"
-            title={
-              <>
-                Start
-                <br />
-                here.
-              </>
-            }
-          />
-
-          {/* Lead article */}
           <Reveal
             as={Link}
             href={`${routes.journal}/${lead.slug}`}
-            className="build-row"
+            className="featured-article"
             card
           >
-            <div className="ph r169">
-              <Photo src={lead.hero} alt={lead.heroAlt} />
+            <div className="ph r1610">
+              <Photo src={lead.hero} alt={lead.heroAlt} priority />
+              <span className="pill">{lead.category}</span>
             </div>
-            <div className="build-row-body">
-              <span className="eyebrow">
-                {lead.category} · {lead.readingTime}
+
+            <div>
+              <span className="eyebrow">Featured</span>
+              <h2 className="display" style={{ margin: "12px 0 14px" }}>
+                {lead.title}
+              </h2>
+              <p className="lede">{lead.summary}</p>
+              <span
+                className="btn btn-line"
+                style={{ marginTop: 22, borderRadius: "16px 0 16px 0" }}
+              >
+                Read Article
               </span>
-              <h3 className="display">{lead.title}</h3>
-              <p>{lead.summary}</p>
-              <span className="arrow-link">Read it →</span>
             </div>
           </Reveal>
         </div>
       </section>
 
+      {/* Her four card grid. */}
       <section className="alt">
         <div className="wrap">
-          <SecHead eyebrow="More Articles" title={<>From the journal.</>} />
+          <SecHead eyebrow="More Articles" title="From the journal" center />
 
-          <div className="index-grid">
+          <div className="journal-grid">
             {rest.map((post, i) => (
               <Reveal
                 key={post.slug}
                 as={Link}
                 href={`${routes.journal}/${post.slug}`}
-                className="build"
-                card
+                className="journal-card rv-card"
                 delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
               >
-                <div className="ph r169" style={{ borderRadius: "34px 0 34px 0" }}>
+                <div className="ph r45">
                   <Photo src={post.hero} alt={post.heroAlt} />
+                  <span className="pill">{post.category}</span>
                 </div>
-                <span className="eyebrow" style={{ marginTop: 16, display: "block" }}>
-                  {post.category} · {post.readingTime}
-                </span>
-                <h3 style={{ marginTop: 8 }}>{post.title}</h3>
-                <p style={{ fontSize: 13.5, color: "var(--gray-mid)", marginTop: 10 }}>
-                  {post.summary}
-                </p>
+                <h3>{post.title}</h3>
+                <p>{post.summary}</p>
+                <span className="go">Read Article →</span>
               </Reveal>
             ))}
           </div>
         </div>
-      </section>
-
-      <section style={{ paddingBottom: 0 }}>
-        <div className="wrap">
-          <CustomBand
-            heading={
-              <>
-                Question we
-                <br />
-                have not answered?
-              </>
-            }
-            ctaLabel="Ask The House"
-            ctaHref={routes.contact}
-          />
-        </div>
-      </section>
-
-      <section style={{ paddingTop: "clamp(40px,6vw,72px)" }}>
-        <div className="wrap" />
       </section>
     </>
   );

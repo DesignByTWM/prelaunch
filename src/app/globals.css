@@ -148,6 +148,8 @@ h3.display { font-size: clamp(20px, 2vw, 26px); }
 .ph { position: relative; background: repeating-linear-gradient(135deg,#ececec 0 14px,#e3e3e3 14px 28px); overflow: hidden; }
 .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .r169 { aspect-ratio: 16/9; } .r45 { aspect-ratio: 4/5; } .r11 { aspect-ratio: 1/1; }
+/* Journal featured frame. Liz uses 16:10 here rather than 16:9. */
+.r1610 { aspect-ratio: 16/10; }
 
 /* ===== HEADER ===== */
 header.site {
@@ -1140,3 +1142,32 @@ section.dark .sec-head .eyebrow { color: var(--signal-teal); }
 @media (max-width: 1100px) { .wheels { grid-template-columns: repeat(3,1fr); } }
 @media (max-width: 760px) { .wheels { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 460px) { .wheels { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; } }
+
+/* ----- JOURNAL -----
+   Her featured block: frame left, copy right, no section head above it. */
+.featured-article {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: clamp(28px,4vw,44px); align-items: center;
+}
+.featured-article .ph { border-radius: 34px 0 34px 0; overflow: hidden; }
+.featured-article:hover .ph img { transform: scale(1.04); }
+.featured-article .lede { font-size: 15px; }
+@media (max-width: 900px) { .featured-article { grid-template-columns: 1fr; } }
+
+/* Her four card grid. Borderless cards, frame then copy beneath. */
+.journal-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.journal-card .ph { border-radius: 34px 0 34px 0; overflow: hidden; }
+.journal-card:hover .ph img { transform: scale(1.04); }
+.journal-card h3 {
+  margin-top: 16px; font-family: var(--body); font-weight: 600;
+  font-size: 14px; line-height: 1.4;
+}
+.journal-card p { margin-top: 9px; font-size: 12.5px; color: var(--gray-mid); }
+.journal-card .go {
+  margin-top: 12px; display: inline-flex; gap: 7px; font-size: 11.5px;
+  font-weight: 600; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--signal-teal); transition: gap .3s;
+}
+.journal-card:hover .go { gap: 13px; }
+@media (max-width: 1000px) { .journal-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 540px) { .journal-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; } }
