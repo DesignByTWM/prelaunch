@@ -29,7 +29,7 @@ import { nap, routes } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
-    "Answers about automotive customization at DESIGNBYTWM in Houston: how builds work, what services cost, timelines, warranty, aftercare and questions on all ten in-house disciplines.",
+    "Answers about automotive customization at DESIGNBYTWM in Houston: how builds work, what services cost, timelines, aftercare and questions on all ten in-house disciplines.",
   alternates: { canonical: routes.faq },
 };
 

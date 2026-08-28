@@ -38,9 +38,9 @@ export function Hero() {
               </span>
             </h1>
             <p>
-              Wraps, paint protection film, wheels, interiors and every other
-              discipline a build requires, designed and executed in-house from
-              first consultation through final delivery.
+              Wraps, paint protection film, wheels, interiors and the
+              disciplines that surround them, designed and executed in-house,
+              from first consultation through final delivery.
             </p>
             <Link href={routes.designYourBuild} className="btn btn-primary">
               Design Your Build

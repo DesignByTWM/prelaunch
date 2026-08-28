@@ -189,7 +189,7 @@ export default async function ServicePage({
       {/* Recent work. Photography still outstanding, placeholders in place. */}
       <section className="alt" id="recent">
         <div className="wrap">
-          <SecHead eyebrow="Recent Work" title={service.recentTitle} center />
+          <SecHead eyebrow="Reference" title={service.recentTitle} center />
           <RecentWork items={service.recentWork} />
         </div>
       </section>

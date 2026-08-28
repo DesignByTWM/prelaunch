@@ -321,10 +321,18 @@ for (const [slug, items] of Object.entries(SERVICE_FAQS)) {
 
   // `faqs` is the last property on every service object, so everything
   // from there to the end of the block is replaced wholesale.
+  //
+  // The block runs up to and including the opening brace of the NEXT
+  // service object, because sliceService ends at the newline before the
+  // next `slug:` line. That trailing `  {` has to be put back, or the
+  // next object loses its opening brace. The last service in the array
+  // has no trailing brace to restore.
+  const tail = block.trimEnd().endsWith("{") ? "\n  {" : "";
+
   const body = items
     .map(([question, answer]) => `      {\n        question: ${q(question)},\n        answer:\n          ${q(answer)},\n      },`)
     .join("\n");
-  const rebuilt = `    faqs: [\n${body}\n    ],\n  },\n`;
+  const rebuilt = `    faqs: [\n${body}\n    ],\n  },${tail}`;
 
   svc = svc.slice(0, scope.start) + block.slice(0, at) + rebuilt + svc.slice(scope.end);
   applied.push(`${slug} :: FAQs rebuilt (${items.length})`);
@@ -437,15 +445,22 @@ for (const [rel, from, to, label] of LABEL_EDITS) {
  * ------------------------------------------------------------------ */
 
 const PROSE_EDITS = [
+  // These sit inside JSX and are wrapped across several lines, so the
+  // match has to include the line breaks and indentation exactly as the
+  // component has them.
   ["r7 home hero subhead",
-    "Wraps, paint protection film, wheels, interiors and every other discipline a build requires, designed and executed in-house from first consultation through final delivery.",
-    "Wraps, paint protection film, wheels, interiors and the disciplines that surround them, designed and executed in-house, from first consultation through final delivery."],
+    "              Wraps, paint protection film, wheels, interiors and every other\n              discipline a build requires, designed and executed in-house from\n              first consultation through final delivery.",
+    "              Wraps, paint protection film, wheels, interiors and the\n              disciplines that surround them, designed and executed in-house,\n              from first consultation through final delivery."],
   ["r9 portfolio lede",
-    "Complete transformations, multiple disciplines, one team and one standard of quality control.",
-    "Complete transformations drawing on several disciplines, planned and executed as a single build."],
+    "            Complete transformations, multiple disciplines, one team and one\n            standard of quality control.",
+    "            Complete transformations drawing on several disciplines, planned\n            and executed as a single build."],
   ["r10 wheels lede",
-    "Browse the wheel program. Fitment is confirmed for your vehicle before anything is ordered.",
-    "A selection from the forged and monoblock lines we specify. Fitment is measured for your vehicle before anything is ordered."],
+    "            Browse the wheel program. Fitment is confirmed for your vehicle\n            before anything is ordered.",
+    "            A selection from the forged and monoblock lines we specify.\n            Fitment is measured for your vehicle before anything is ordered."],
+  // The FAQ page meta description still advertised warranty as a topic.
+  ["faq page meta description",
+    "Answers about automotive customization at DESIGNBYTWM in Houston: how builds work, what services cost, timelines, warranty, aftercare and questions on all ten in-house disciplines.",
+    "Answers about automotive customization at DESIGNBYTWM in Houston: how builds work, what services cost, timelines, aftercare and questions on all ten in-house disciplines."],
   ["r11 services intro",
     "Every service below is performed inside the same building by the same team, which means a build using four of them still runs on one timeline with one point of contact.",
     "Every discipline below is practiced inside the same building by the same team, so a build drawing on four of them is still planned and run as a single project, with one point of contact."],

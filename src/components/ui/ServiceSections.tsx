@@ -207,7 +207,7 @@ export function RecentWork({ items }: { items: ServiceRecentWork[] }) {
       </div>
       <div className="recent-more">
         <Link href={routes.builds} className="btn btn-line">
-          View More Builds
+          View the Portfolio
         </Link>
       </div>
     </>

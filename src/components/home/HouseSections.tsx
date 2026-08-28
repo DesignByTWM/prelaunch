@@ -86,8 +86,8 @@ export function FeaturedBuilds() {
           <span className="eyebrow">Portfolio</span>
           <h2 className="display">Featured builds.</h2>
           <p className="lede">
-            Complete transformations, multiple disciplines, one team and one
-            standard of quality control.
+            Complete transformations drawing on several disciplines, planned
+            and executed as a single build.
           </p>
         </Reveal>
 
@@ -141,8 +141,8 @@ export function ShopWheels() {
           <span className="eyebrow">Wheels &amp; Fitment</span>
           <h2 className="display">Shop wheels.</h2>
           <p className="lede" style={{ margin: "0 auto" }}>
-            Browse the wheel program. Fitment is confirmed for your vehicle
-            before anything is ordered.
+            A selection from the forged and monoblock lines we specify.
+            Fitment is measured for your vehicle before anything is ordered.
           </p>
         </Reveal>
 

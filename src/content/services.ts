@@ -141,7 +141,7 @@ export const services: Service[] = [
     tier: "headline",
     cardLine: "Chrome and trim brought to one finish, coordinated with the rest of the build from the start.",
     summary:
-      "Blackout packages in Houston. Chrome delete, badging, grille, trim and accent work in gloss, satin or matte, finished in house on a single vehicle timeline.",
+      "Blackout packages in Houston. Chrome delete, badging, grille, trim and accent work in gloss, satin or matte, specified and finished in house.",
     intro:
       "A blackout package resolves every bright piece on a vehicle into one deliberate finish. Chrome window surrounds, grille slats, badging, mirror caps, roof rails, exhaust tips and trim are removed, refinished or replaced, then reinstalled to factory tolerances. Because the work happens in house, the finish is matched across every panel on the car rather than approximated across three vendors.",
     includes: [
@@ -161,9 +161,9 @@ export const services: Service[] = [
     heroLede:
       "Chrome delete, trim wrap and gloss-to-matte conversions, planned as one cohesive blackout, not a patchwork of separate jobs.",
     statStrip: [
-      "2-Year Warranty",
-      "Premium Vinyl & Coatings",
-      "Installed In-House",
+      "Precision-Cut Film",
+      "Specialist Coatings",
+      "Finished In-House",
     ],
     overviewTitle: "A blackout is a decision, not a shortcut",
     overviewBody:
@@ -199,7 +199,7 @@ export const services: Service[] = [
         detail: "Final inspection and walkthrough at handoff.",
       },
     ],
-    recentTitle: "Selected builds",
+    recentTitle: "Design directions",
     recentWork: [
       { name: "Full Blackout", tag: "Full" },
       { name: "Chrome Delete", tag: "Trim" },
@@ -214,20 +214,19 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Design consultation",
-          "Premium vinyl",
-          "2-year warranty",
+          "Premium cast vinyl",
+          "Trim, badging and grille",
         ],
       },
       {
         name: "Full Blackout",
         sub: "Complete package",
         featured: true,
-        ribbon: "Most Popular",
+        ribbon: "Signature",
         includes: [
-          "Full surface prep",
-          "Chrome delete included",
-          "2-year warranty",
-          "Priority scheduling",
+          "Full surface preparation",
+          "Chrome delete throughout the exterior",
+          "Finish matched panel to panel",
         ],
       },
       {
@@ -236,8 +235,8 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Everything in Full Blackout",
-          "Wheel & caliper blackout",
-          "Dedicated project lead",
+          "Wheel and caliper finishing",
+          "One point of contact through the build",
         ],
       },
     ],
@@ -247,11 +246,13 @@ export const services: Service[] = [
     faqs: [
       {
         question: "How long does a blackout package take?",
-        answer: "Most packages take 2 to 4 business days depending on scope.",
+        answer:
+          "Most blackout packages run 3 to 5 business days in production depending on scope. The window for your vehicle is confirmed at consultation.",
       },
       {
         question: "Can chrome be restored later?",
-        answer: "In most cases yes. Chrome delete is reversible when applied correctly.",
+        answer:
+          "It depends on the method. With a vinyl chrome delete, the film is removed and the original trim remains underneath. A painted chrome delete is permanent, because the finish is applied to the trim itself. Which method suits your vehicle is covered before the work is specified.",
       },
       {
         question: "Does this include the wheels?",
@@ -259,9 +260,9 @@ export const services: Service[] = [
           "Wheel and caliper blackout is available as an add-on or as part of the full package.",
       },
       {
-        question: "Will it fade over time?",
+        question: "How does a blackout finish age?",
         answer:
-          "Premium materials are used throughout; exact warranty terms are confirmed at consultation.",
+          "Both wrap and paint change with time and use. How quickly depends on sun exposure, washing and general wear. We go through the material options and what care each one asks for at consultation.",
       },
     ],
   },
@@ -272,7 +273,7 @@ export const services: Service[] = [
     tier: "headline",
     cardLine: "Protection planned alongside finish work from the start, all in-house.",
     summary:
-      "Paint protection film in Houston. Self healing PPF in partial, track and full body coverage, cut and installed in house with wrapped edges and no visible seams.",
+      "Paint protection film in Houston. Self-healing film in partial, track and full-body coverage, patterned and cut in house with wrapped edges.",
     intro:
       "Paint protection film is a clear, self healing urethane layer applied over factory paint to absorb rock chips, road debris and wash marring. It is the one service on this list that protects value rather than changes appearance, which is why it pairs with almost everything else here. Film is plotted, cut and installed in house, with edges wrapped rather than laid to the panel line wherever the panel allows.",
     includes: [
@@ -293,13 +294,13 @@ export const services: Service[] = [
     heroLede:
       "Self-healing film applied to the panels that take the most impact, fitted and installed in-house alongside the rest of your build.",
     statStrip: [
-      "10-Year Film Warranty",
       "Self-Healing Film",
-      "Installed In-House",
+      "Patterned In-House",
+      "Specialist Installation",
     ],
     overviewTitle: "Protection that doesn't announce itself",
     overviewBody:
-      "The best PPF install is invisible. No silvering at the edges, no visible seams, no compromise on the paint underneath. Every panel is measured and cut in-house, then installed under controlled shop conditions.",
+      "A PPF install should disappear into the car. Edges are wrapped where the panel allows, seams are placed with intent, and every panel is measured and cut in-house before it goes on under controlled shop conditions.",
     coverageTitle: "Choose your coverage",
     coverage: [
       { pill: "Full", name: "Full Front Package" },
@@ -331,7 +332,7 @@ export const services: Service[] = [
         detail: "Cure time confirmed, final walkthrough.",
       },
     ],
-    recentTitle: "Selected builds",
+    recentTitle: "Design directions",
     recentWork: [
       { name: "Full Front Package", tag: "Front" },
       { name: "Full Body Coverage", tag: "Complete" },
@@ -345,21 +346,20 @@ export const services: Service[] = [
         sub: "High-impact panels",
         featured: false,
         includes: [
-          "Bumper, hood & fenders",
+          "Bumper, hood and fenders",
           "Self-healing film",
-          "10-year warranty",
+          "Edges wrapped where the panel allows",
         ],
       },
       {
         name: "Full Vehicle",
         sub: "Complete coverage",
         featured: true,
-        ribbon: "Most Popular",
+        ribbon: "Signature",
         includes: [
           "Every exterior panel",
           "Self-healing film",
-          "10-year warranty",
-          "Priority scheduling",
+          "Patterned and cut in-house",
         ],
       },
       {
@@ -368,8 +368,8 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Everything in Full Vehicle",
-          "Ceramic coating added",
-          "Dedicated project lead",
+          "Ceramic coating over film",
+          "One point of contact through the build",
         ],
       },
     ],
@@ -378,22 +378,24 @@ export const services: Service[] = [
       "Tell us about your vehicle and the coverage you're considering. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "How long does PPF last?",
+        question: "What affects how long PPF lasts?",
         answer:
-          "Quality film typically performs for 10+ years; exact terms are confirmed at consultation.",
+          "Film life depends on the product selected, how the vehicle is used and how it is maintained. The options and what each involves are discussed at consultation.",
       },
       {
-        question: "Will it yellow over time?",
+        question: "How does the film age over time?",
         answer:
-          "No. Premium film is UV-stable and self-healing and won't discolor under normal conditions.",
+          "The films installed here are built with UV-stable, self-healing topcoats. How any film ages depends on the product, sun exposure and care, and we go through the options at consultation.",
       },
       {
-        question: "Can it be removed without damaging paint?",
-        answer: "Yes, when installed and removed correctly by a trained team.",
+        question: "How is the film removed?",
+        answer:
+          "Film is made to be removable, and removal is done in house by the same team that installs it. Because the result depends on the condition and history of the paint underneath, that is assessed before quoting.",
       },
       {
         question: "Does it need special care?",
-        answer: "Hand washing is recommended; no other special maintenance is required.",
+        answer:
+          "Hand washing is recommended. Care guidance for the specific film on your vehicle is given at handover.",
       },
     ],
   },
@@ -404,7 +406,7 @@ export const services: Service[] = [
     tier: "headline",
     cardLine: "Full and partial wraps, designed and installed in-house with documented material selection.",
     summary:
-      "Vehicle wraps in Houston. Full color change, partial wraps, roof and hood treatments and commercial fleet graphics, installed in house with panels disassembled.",
+      "Vehicle wraps in Houston. Full color change, partial wraps and roof and hood treatments in premium cast vinyl, designed and installed in house.",
     intro:
       "A color change wrap rewrites the character of a vehicle without touching the paint underneath. Panels are disassembled rather than tucked, which is the difference between a wrap that holds for years and one that lifts at the edges in a Houston summer. Gloss, satin, matte, metallic, color shift and textured films are all available, selected against the vehicle in person rather than from a swatch on a screen.",
     includes: [
@@ -425,9 +427,9 @@ export const services: Service[] = [
     heroLede:
       "Full-body, partial and color-change wraps, designed and installed by one in-house team, start to finish.",
     statStrip: [
-      "5-Year Warranty",
       "Premium Cast Vinyl",
-      "Installed In-House",
+      "Designed In-House",
+      "Specialist Installation",
     ],
     overviewTitle: "The feeling, before the finish",
     overviewBody:
@@ -463,7 +465,7 @@ export const services: Service[] = [
         detail: "Full inspection and a walkthrough at handoff.",
       },
     ],
-    recentTitle: "Selected builds",
+    recentTitle: "Design directions",
     recentWork: [
       { name: "Satin Military Green", tag: "Full Wrap" },
       { name: "Midnight Blue", tag: "Color Change" },
@@ -479,19 +481,18 @@ export const services: Service[] = [
         includes: [
           "Design consultation",
           "Premium cast vinyl",
-          "2-year warranty",
+          "Roof, hood or accent panels",
         ],
       },
       {
         name: "Full Wrap",
         sub: "Complete finish change",
         featured: true,
-        ribbon: "Most Popular",
+        ribbon: "Signature",
         includes: [
-          "Full surface prep",
+          "Full surface preparation",
           "Complete color change",
-          "5-year warranty",
-          "Priority scheduling",
+          "Finish reviewed panel by panel",
         ],
       },
       {
@@ -500,8 +501,8 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Everything in Full Wrap",
-          "Custom color matching",
-          "Dedicated project lead",
+          "Bespoke color and print work",
+          "One point of contact through the build",
         ],
       },
     ],
@@ -511,20 +512,23 @@ export const services: Service[] = [
     faqs: [
       {
         question: "How long does a full wrap take?",
-        answer: "Most take 3 to 5 business days, depending on coverage and prep.",
-      },
-      {
-        question: "How long will it last?",
-        answer: "5+ years with proper care. Exact terms confirmed at consultation.",
-      },
-      {
-        question: "Will it damage my factory paint?",
         answer:
-          "No. Installed and removed correctly, it protects the paint underneath rather than harming it.",
+          "How much of the vehicle is being wrapped, and how much prep it needs, drive the timeline. Most full wraps run 3 to 5 business days, and a window for your vehicle is estimated at consultation.",
+      },
+      {
+        question: "What affects how long a wrap lasts?",
+        answer:
+          "Wrap life depends on the film selected, sun and weather exposure, and how the vehicle is washed and stored. What to expect from each material is covered at consultation.",
+      },
+      {
+        question: "How does a wrap sit over factory paint?",
+        answer:
+          "Wrap film sits over the factory finish rather than replacing it, and both installation and removal are done in house. Paint condition and any previous repair work affect how a wrap behaves, so the finish is assessed before we quote.",
       },
       {
         question: "Can PPF be installed with a wrap?",
-        answer: "Yes. Many builds combine both, planned together in-house.",
+        answer:
+          "Yes. Many builds combine both, planned together in-house.",
       },
       {
         question: "How should the vehicle be cared for?",
@@ -540,7 +544,7 @@ export const services: Service[] = [
     tier: "headline",
     cardLine: "Fitment calibrated to the build and confirmed for your vehicle before anything is ordered.",
     summary:
-      "Custom wheels and fitment in Houston. Forged and flow formed wheels, offset and stance planning, tire pairing, TPMS and road force balancing, all done in house.",
+      "Custom wheels and fitment in Houston. Forged and flow-formed wheels, offset and stance planning, tire pairing, TPMS and road force balancing, all done in house.",
     intro:
       "Wheels are the fastest way to change how a vehicle sits and the easiest place to get it wrong. Fitment is a measurement problem before it is a styling problem: offset, backspacing, brake clearance, tire profile and suspension geometry all have to agree before an order is placed. That planning happens here, in house, with the vehicle on the lift rather than over text messages.",
     includes: [
@@ -561,13 +565,13 @@ export const services: Service[] = [
     heroLede:
       "Wheels, tires and fitment planned together in-house, so the stance is right the first time, not adjusted after the fact.",
     statStrip: [
-      "Fitment Guarantee",
-      "In-House Mounting & Balancing",
-      "Installed In-House",
+      "Measured Fitment",
+      "Mounted & Balanced In-House",
+      "Forged & Monoblock",
     ],
     overviewTitle: "The stance comes from the numbers",
     overviewBody:
-      "Offset, width and tire profile are calculated for your exact vehicle before anything is ordered, not eyeballed. Every wheel is mounted, balanced and torqued in-house, then re-checked before delivery.",
+      "Offset, width and tire profile are calculated for your exact vehicle before anything is ordered, not eyeballed. Every wheel is mounted, balanced and torqued in-house, then re-checked before the vehicle leaves.",
     coverageTitle: "Choose your coverage",
     coverage: [
       { pill: "Forged", name: "Forged Wheels" },
@@ -599,7 +603,7 @@ export const services: Service[] = [
         detail: "Fitment re-checked, final walkthrough.",
       },
     ],
-    recentTitle: "Selected builds",
+    recentTitle: "Design directions",
     recentWork: [
       { name: "22in Forged", tag: "Forged" },
       { name: "Deep Concave", tag: "Concave" },
@@ -613,21 +617,20 @@ export const services: Service[] = [
         sub: "Wheel & tire package",
         featured: false,
         includes: [
-          "Fitment calculation",
-          "In-house mounting & balancing",
-          "1-year warranty",
+          "Fitment measured for your vehicle",
+          "Mounted and balanced in-house",
+          "Wheel and tire package",
         ],
       },
       {
         name: "Wheels + Fitment",
         sub: "Complete package",
         featured: true,
-        ribbon: "Most Popular",
+        ribbon: "Signature",
         includes: [
-          "Fitment guarantee",
-          "In-house mounting & balancing",
-          "1-year warranty",
-          "Priority scheduling",
+          "Fitment measured and re-checked",
+          "Mounted and balanced in-house",
+          "Stance planned with you",
         ],
       },
       {
@@ -636,8 +639,8 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Everything in Wheels + Fitment",
-          "Suspension setup included",
-          "Dedicated project lead",
+          "Suspension set up to match",
+          "One point of contact through the build",
         ],
       },
     ],
@@ -652,16 +655,18 @@ export const services: Service[] = [
       },
       {
         question: "Do you carry specific wheel brands?",
-        answer: "Brand availability is confirmed at consultation.",
+        answer:
+          "Brand availability is confirmed at consultation.",
       },
       {
         question: "Can you match a factory-plus look?",
-        answer: "Yes. Fitment can be calculated for a subtle or aggressive stance, your call.",
+        answer:
+          "Yes. Fitment can be calculated for a subtle or aggressive stance, your call.",
       },
       {
-        question: "Is alignment included?",
+        question: "Is alignment included with a wheel package?",
         answer:
-          "Alignment is included with any suspension-paired package and available standalone.",
+          "Alignment is included in suspension-paired wheel packages and can also be scheduled on its own. What your build includes is listed on the quote.",
       },
     ],
   },
@@ -672,7 +677,7 @@ export const services: Service[] = [
     tier: "headline",
     cardLine: "Complete retrims and interior work, coordinated with the exterior finish as one build.",
     summary:
-      "Custom automotive interiors in Houston. Full leather and Alcantara retrims, custom stitching, suede headliners, steering wheels and ambient lighting, built in house.",
+      "Custom automotive interiors in Houston. Full leather and technical textile retrims, bespoke stitching, suede headliners and bespoke console work, built in house.",
     intro:
       "Interior work is the most labour intensive discipline in the building and the one clients notice every single day they drive. Seats are stripped to the frame, patterns are cut for the specific vehicle rather than pulled from a universal kit. Every panel comes back to the same standard. Leather, Alcantara, suede, contrast stitching, perforation and quilting are all executed by the same team that does the exterior work.",
     includes: [
@@ -693,9 +698,9 @@ export const services: Service[] = [
     heroLede:
       "Full retrims, upgraded materials and custom interior work, designed alongside the rest of your build, not as an afterthought.",
     statStrip: [
-      "2-Year Warranty",
-      "Premium Materials",
-      "Installed In-House",
+      "Fine Leathers & Textiles",
+      "Bespoke Patterning",
+      "Trimmed In-House",
     ],
     overviewTitle: "The cabin should match the build",
     overviewBody:
@@ -731,7 +736,7 @@ export const services: Service[] = [
         detail: "Final fit check and walkthrough.",
       },
     ],
-    recentTitle: "Selected builds",
+    recentTitle: "Design directions",
     recentWork: [
       { name: "Full Retrim", tag: "Full" },
       { name: "Contrast Stitch", tag: "Detail" },
@@ -746,20 +751,19 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Design consultation",
-          "Premium materials",
-          "2-year warranty",
+          "Fine leathers and textiles",
+          "Seat retrim",
         ],
       },
       {
         name: "Full Cabin Retrim",
         sub: "Complete interior",
         featured: true,
-        ribbon: "Most Popular",
+        ribbon: "Signature",
         includes: [
-          "Seats, door panels & headliner",
-          "Premium materials",
-          "2-year warranty",
-          "Priority scheduling",
+          "Seats, door panels and headliner",
+          "Fine leathers and textiles",
+          "Pattern and stitching designed with you",
         ],
       },
       {
@@ -768,8 +772,8 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Everything in Full Cabin",
-          "Custom console & trim work",
-          "Dedicated project lead",
+          "Bespoke console and trim work",
+          "One point of contact through the build",
         ],
       },
     ],
@@ -779,19 +783,23 @@ export const services: Service[] = [
     faqs: [
       {
         question: "How long does a full retrim take?",
-        answer: "Most full retrims take 1 to 2 weeks depending on scope and material.",
+        answer:
+          "Most full retrims run 2 to 3 weeks depending on scope and material. The window for your vehicle is confirmed once the material and scope are set.",
       },
       {
         question: "Can you match a specific material or color?",
-        answer: "Yes. Material and color are selected and confirmed at consultation.",
+        answer:
+          "Yes. Material and color are selected and confirmed at consultation.",
       },
       {
-        question: "Will factory electronics still work?",
-        answer: "Yes, factory electronics and controls are preserved and reinstalled correctly.",
+        question: "How are factory electronics handled in a retrim?",
+        answer:
+          "A retrim is planned around the factory electronics and controls in the cabin, which are removed and refitted as part of the work. Anything in your vehicle that needs particular handling is identified before trim work starts.",
       },
       {
         question: "Do you work with exotic materials?",
-        answer: "Yes, including exotic leathers and specialty materials. Ask at consultation.",
+        answer:
+          "Yes, including exotic leathers and specialty materials. Ask at consultation.",
       },
     ],
   },
@@ -822,9 +830,9 @@ export const services: Service[] = [
     heroLede:
       "Air and coilover suspension, tuned in-house for the look you want without giving up how the vehicle actually drives.",
     statStrip: [
-      "2-Year Warranty",
-      "In-House Tuning",
-      "Installed In-House",
+      "Air & Coilover Programs",
+      "Tuned In-House",
+      "Matched To Your Wheels",
     ],
     overviewTitle: "Stance is only half the job",
     overviewBody:
@@ -860,7 +868,7 @@ export const services: Service[] = [
         detail: "Aligned, tested and delivered.",
       },
     ],
-    recentTitle: "Selected builds",
+    recentTitle: "Design directions",
     recentWork: [
       { name: "Full Air Setup", tag: "Air" },
       { name: "Coilover Install", tag: "Coil" },
@@ -875,20 +883,19 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Design consultation",
-          "Alignment included",
-          "1-year warranty",
+          "Alignment as part of the install",
+          "Ride height matched to your wheels",
         ],
       },
       {
         name: "Coilover Setup",
         sub: "Adjustable stance",
         featured: true,
-        ribbon: "Most Popular",
+        ribbon: "Signature",
         includes: [
-          "Height & damping adjustable",
-          "In-house tuning",
-          "2-year warranty",
-          "Priority scheduling",
+          "Height and damping adjustable",
+          "Set up and tuned in-house",
+          "Matched to your wheel and tire package",
         ],
       },
       {
@@ -897,8 +904,8 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Everything in Coilover Setup",
-          "Air management included",
-          "Dedicated project lead",
+          "Air management specified and installed",
+          "One point of contact through the build",
         ],
       },
     ],
@@ -907,9 +914,9 @@ export const services: Service[] = [
       "Tell us about your vehicle and the stance you're after. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "Will this affect my ride quality?",
+        question: "How will this affect ride quality?",
         answer:
-          "A properly tuned setup is built around how you actually want to drive, not just how low it sits.",
+          "Any change to suspension changes how the vehicle rides. The setup is specified around how you actually drive the car rather than ride height alone, and the trade-offs of each option are covered at consultation.",
       },
       {
         question: "Air or coilovers: which is right for me?",
@@ -917,13 +924,14 @@ export const services: Service[] = [
           "It depends on your use case and how much adjustability you want. We'll walk through it at consultation.",
       },
       {
-        question: "Is alignment included?",
-        answer: "Yes, every suspension install includes alignment.",
+        question: "Is alignment included with a suspension install?",
+        answer:
+          "Alignment is part of a suspension install. What your build includes is listed on the quote.",
       },
       {
         question: "How low can I go without rubbing?",
         answer:
-          "That's calculated against your specific wheel and tire package before install, not guessed.",
+          "Clearance is calculated against your specific wheel and tire package before anything is installed, and we walk through where the limits sit on your vehicle at consultation.",
       },
     ],
   },
@@ -934,7 +942,7 @@ export const services: Service[] = [
     tier: "additional",
     cardLine: "Custom paint, refinishing, panel repair and collision work.",
     summary:
-      "Custom paint and body work in Houston. Full and partial repaints, custom color, panel repair, refinishing and collision work, executed in house with color matched finish.",
+      "Custom paint and body in Houston. Full and partial repaints, custom color, panel repair and refinishing, executed in house in our own booth.",
     intro:
       "Paint is the discipline that determines whether a build looks finished or looks assembled. Custom color, accent panels, calipers, trim refinishing, panel repair and collision work all happen in house, which means a repaired panel is matched to the rest of the vehicle by the same people who will be reinstalling the trim over it.",
     includes: [
@@ -954,9 +962,9 @@ export const services: Service[] = [
     heroLede:
       "Paint correction, bodywork and full respray work, handled in-house with the same standard as the rest of your build.",
     statStrip: [
-      "Lifetime Workmanship Warranty",
+      "Custom Color Development",
       "In-House Paint Booth",
-      "Installed In-House",
+      "Multi-Stage Finishing",
     ],
     overviewTitle: "Paint is where shortcuts show first",
     overviewBody:
@@ -992,7 +1000,7 @@ export const services: Service[] = [
         detail: "Correction, inspection and handoff.",
       },
     ],
-    recentTitle: "Selected builds",
+    recentTitle: "Design directions",
     recentWork: [
       { name: "Full Respray", tag: "Respray" },
       { name: "Panel Repair", tag: "Body" },
@@ -1007,20 +1015,19 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Multi-stage correction",
-          "Gloss & clarity restored",
-          "1-year warranty",
+          "Gloss and clarity restored",
+          "Finish assessed panel by panel",
         ],
       },
       {
         name: "Full Respray",
         sub: "Complete refinish",
         featured: true,
-        ribbon: "Most Popular",
+        ribbon: "Signature",
         includes: [
-          "Full bodywork prep",
-          "Sprayed & cleared in-house",
-          "Lifetime workmanship warranty",
-          "Priority scheduling",
+          "Full bodywork preparation",
+          "Sprayed and cleared in our own booth",
+          "Color developed and reviewed with you",
         ],
       },
       {
@@ -1030,7 +1037,7 @@ export const services: Service[] = [
         includes: [
           "Everything in Full Respray",
           "Panel repair included",
-          "Dedicated project lead",
+          "One point of contact through the build",
         ],
       },
     ],
@@ -1040,19 +1047,23 @@ export const services: Service[] = [
     faqs: [
       {
         question: "How long does a full respray take?",
-        answer: "Most full resprays take 1 to 3 weeks depending on scope and bodywork needed.",
+        answer:
+          "Scope and the amount of bodywork needed drive the timeline. Most full resprays run 1 to 3 weeks, and a window for your vehicle is estimated once the plan is set.",
       },
       {
-        question: "Will the color match factory exactly?",
-        answer: "Yes. Color is matched and confirmed before spraying begins.",
+        question: "How is the color matched?",
+        answer:
+          "Color is matched to your vehicle and confirmed with you before spraying begins. Age, sun exposure and previous repair work all affect how a factory color has weathered, and that is part of what the match is worked out against.",
       },
       {
         question: "Do you handle insurance claims?",
-        answer: "Ask at consultation. This depends on the scope and cause of the damage.",
+        answer:
+          "Yes. Insurance work is something the house takes on. Bring the claim details along with the vehicle so the damage can be assessed and documented. What the process looks like from there depends on the scope, the cause of the damage and how your carrier handles the claim.",
       },
       {
         question: "Is clear coat protection included?",
-        answer: "PPF and ceramic coating can be added on top of any respray.",
+        answer:
+          "Paint protection film and ceramic coating can be specified on top of a respray. Whether either is included in your build is set out on the quote.",
       },
     ],
   },
@@ -1063,7 +1074,7 @@ export const services: Service[] = [
     tier: "additional",
     cardLine: "Headlight and taillight work, ambient and auxiliary lighting.",
     summary:
-      "Automotive lighting in Houston. Headlight and taillight upgrades, tinting, smoked finishes, ambient interior lighting and auxiliary off road lighting, installed in house.",
+      "Automotive lighting in Houston. Headlight and taillight work, ambient interior lighting and accent lighting, wired and installed in house.",
     intro:
       "Lighting is the detail that reads at night and the one most often done badly. Headlight and taillight upgrades, smoked or tinted finishes, sequential signals, ambient interior lighting and auxiliary lighting for trucks are wired properly, sealed properly and tested before the vehicle leaves.",
     includes: [
@@ -1083,9 +1094,9 @@ export const services: Service[] = [
     heroLede:
       "Headlight, taillight and underglow lighting upgrades, wired and finished in-house so nothing looks bolted on.",
     statStrip: [
-      "2-Year Warranty",
-      "In-House Wiring",
-      "Installed In-House",
+      "Factory-Line Integration",
+      "Wired In-House",
+      "Headlight & Taillight",
     ],
     overviewTitle: "Lighting should read as part of the design",
     overviewBody:
@@ -1094,7 +1105,7 @@ export const services: Service[] = [
     coverage: [
       { pill: "Head", name: "Headlight Retrofit" },
       { pill: "Tail", name: "Taillight Tint & Upgrade" },
-      { pill: "Under", name: "Underglow & Accent Lighting" },
+      { pill: "Ambient", name: "Ambient & Accent Lighting" },
       { pill: "Full", name: "Full Lighting Package" },
     ],
     processStatement: "Light that belongs there.",
@@ -1121,7 +1132,7 @@ export const services: Service[] = [
         detail: "Function check and walkthrough.",
       },
     ],
-    recentTitle: "Selected builds",
+    recentTitle: "Design directions",
     recentWork: [
       { name: "Headlight Retrofit", tag: "Head" },
       { name: "Taillight Tint", tag: "Tail" },
@@ -1135,21 +1146,20 @@ export const services: Service[] = [
         sub: "Targeted upgrade",
         featured: false,
         includes: [
-          "Tint & upgrade",
-          "In-house wiring",
-          "2-year warranty",
+          "Taillight upgrade",
+          "Wired in-house",
+          "Finished to the factory lines",
         ],
       },
       {
         name: "Headlight Retrofit",
         sub: "Most requested",
         featured: true,
-        ribbon: "Most Popular",
+        ribbon: "Signature",
         includes: [
           "Full retrofit",
-          "In-house wiring",
-          "2-year warranty",
-          "Priority scheduling",
+          "Wired in-house",
+          "Components specified with you",
         ],
       },
       {
@@ -1158,8 +1168,8 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Everything in Headlight Retrofit",
-          "Underglow & accent lighting",
-          "Dedicated project lead",
+          "Ambient and accent lighting",
+          "One point of contact through the build",
         ],
       },
     ],
@@ -1170,19 +1180,17 @@ export const services: Service[] = [
       {
         question: "Is this street legal?",
         answer:
-          "Legality depends on your state and the specific setup. We'll walk through it at consultation.",
-      },
-      {
-        question: "Will it affect my factory warranty?",
-        answer: "This is worth confirming with your dealer for warranty-specific questions.",
+          "Lighting regulations vary by state and by the specific setup. We can tell you what a given setup involves, but what is legal where you drive is worth checking against your state's current requirements.",
       },
       {
         question: "Can lighting be added to an existing build?",
-        answer: "Yes, lighting upgrades can be added at any stage.",
+        answer:
+          "Lighting can be added to a vehicle that has already been built, or planned as part of a larger build. Scope is confirmed at consultation.",
       },
       {
         question: "How long does install take?",
-        answer: "Most installs take 1 to 3 days depending on scope.",
+        answer:
+          "Scope drives the timeline. Most lighting installs run 1 to 3 days, and a window is estimated at consultation.",
       },
     ],
   },
@@ -1213,9 +1221,9 @@ export const services: Service[] = [
     heroLede:
       "Custom audio systems designed and installed in-house, integrated into the cabin rather than added on top of it.",
     statStrip: [
-      "2-Year Warranty",
       "Custom Fabrication",
-      "Installed In-House",
+      "Tuned In-House",
+      "Cabin Integration",
     ],
     overviewTitle: "Integration is what separates a real build",
     overviewBody:
@@ -1251,7 +1259,7 @@ export const services: Service[] = [
         detail: "Tuned, tested and delivered.",
       },
     ],
-    recentTitle: "Selected builds",
+    recentTitle: "Design directions",
     recentWork: [
       { name: "Full Audio Build", tag: "Full" },
       { name: "Custom Enclosure", tag: "Sub" },
@@ -1266,20 +1274,19 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Component speaker upgrade",
-          "In-house wiring",
-          "2-year warranty",
+          "Wired in-house",
+          "Integrated with factory controls where the vehicle allows",
         ],
       },
       {
         name: "Custom Subwoofer Build",
         sub: "Most requested",
         featured: true,
-        ribbon: "Most Popular",
+        ribbon: "Signature",
         includes: [
           "Custom-fabricated enclosure",
-          "In-house tuning",
-          "2-year warranty",
-          "Priority scheduling",
+          "Tuned in-house",
+          "Finished to match the cabin",
         ],
       },
       {
@@ -1289,7 +1296,7 @@ export const services: Service[] = [
         includes: [
           "Everything in Subwoofer Build",
           "Full system integration",
-          "Dedicated project lead",
+          "One point of contact through the build",
         ],
       },
     ],
@@ -1303,16 +1310,19 @@ export const services: Service[] = [
           "Yes. Audio builds are planned around the cabin you already have or as part of a full retrim.",
       },
       {
-        question: "Will factory controls still work?",
-        answer: "Yes, factory controls and integration are preserved wherever possible.",
+        question: "How does audio integrate with factory controls?",
+        answer:
+          "Audio work is planned around the factory controls and head unit already in the vehicle. What integration is possible depends on the platform, and that is confirmed before the build is specified.",
       },
       {
-        question: "How long does a full build take?",
-        answer: "Most full builds take 3 to 7 business days depending on scope.",
+        question: "How long does an audio build take?",
+        answer:
+          "It depends on the depth of the build. An install using existing locations is a short job. A full custom build involving fabrication runs longer, and a window is estimated once the system is specified.",
       },
       {
         question: "Do you work with amateur or pro-level systems?",
-        answer: "Both. Systems are scoped to your goals and budget at consultation.",
+        answer:
+          "Both. Systems are scoped to your goals and budget at consultation.",
       },
     ],
   },
@@ -1323,7 +1333,7 @@ export const services: Service[] = [
     tier: "additional",
     cardLine: "Bumpers, racks, steps, covers and off road equipment, fitted.",
     summary:
-      "Truck accessories in Houston. Bumpers, steps, racks, bed covers, off road equipment and protection, fitted and finished in house alongside wheels and suspension.",
+      "Truck accessories in Houston. Bumpers, steps, racks, bed covers and off-road equipment, fitted and finished in house alongside wheels and suspension.",
     intro:
       "Truck work is where the disciplines here overlap most. Bumpers, steps, racks, bed covers, lighting and off road equipment are fitted and, where the build calls for it, refinished to match the vehicle rather than bolted on in whatever finish they shipped in.",
     includes: [
@@ -1343,9 +1353,9 @@ export const services: Service[] = [
     heroLede:
       "Bed accessories, lift kits and functional upgrades, installed in-house and matched to the rest of the build.",
     statStrip: [
-      "2-Year Warranty",
       "In-House Fabrication",
-      "Installed In-House",
+      "Fitted & Finished",
+      "Built For Real Use",
     ],
     overviewTitle: "Function first, finished to match",
     overviewBody:
@@ -1381,7 +1391,7 @@ export const services: Service[] = [
         detail: "Function check and walkthrough.",
       },
     ],
-    recentTitle: "Selected builds",
+    recentTitle: "Design directions",
     recentWork: [
       { name: "Lift + Wheels", tag: "Lift" },
       { name: "Bed Accessories", tag: "Bed" },
@@ -1395,21 +1405,20 @@ export const services: Service[] = [
         sub: "Functional upgrades",
         featured: false,
         includes: [
-          "Bed liner & tie-downs",
-          "In-house install",
-          "2-year warranty",
+          "Bed liner and tie-downs",
+          "Fitted in-house",
+          "Finished to match the vehicle",
         ],
       },
       {
         name: "Lift Kit Package",
         sub: "Most requested",
         featured: true,
-        ribbon: "Most Popular",
+        ribbon: "Signature",
         includes: [
-          "Lift kit & alignment",
-          "In-house install",
-          "2-year warranty",
-          "Priority scheduling",
+          "Lift kit and alignment",
+          "Fitted in-house",
+          "Planned around your wheel and tire package",
         ],
       },
       {
@@ -1418,8 +1427,8 @@ export const services: Service[] = [
         featured: false,
         includes: [
           "Everything in Lift Kit Package",
-          "Racks, armor & recovery gear",
-          "Dedicated project lead",
+          "Racks and armor",
+          "One point of contact through the build",
         ],
       },
     ],
@@ -1428,20 +1437,19 @@ export const services: Service[] = [
       "Tell us about your truck and how it's actually used. We'll plan it, price it and book it, all in-house.",
     faqs: [
       {
-        question: "Will a lift kit affect my warranty?",
-        answer: "This is worth confirming with your dealer for warranty-specific questions.",
-      },
-      {
         question: "Can this be paired with new wheels?",
-        answer: "Yes. Lift and wheel packages are planned together for correct fitment.",
+        answer:
+          "Yes. Lift and wheel packages are planned together, with clearance and fitment calculated before parts are ordered.",
       },
       {
         question: "How long does a full build take?",
-        answer: "Most builds take 3 to 7 business days depending on scope.",
+        answer:
+          "Scope drives the timeline. Most truck builds run 3 to 7 business days, and a window is estimated once the parts list is set.",
       },
       {
         question: "Do you install aftermarket parts I already own?",
-        answer: "In most cases yes. Bring your parts list to consultation and we'll confirm.",
+        answer:
+          "Often yes. Bring your parts list to consultation so we can look at what you have and what installing it involves.",
       },
     ],
   },

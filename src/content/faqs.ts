@@ -71,7 +71,7 @@ export const companyFaqGroups: FaqGroup[] = [
       {
         question: "Does that wheel and tire background affect how you build?",
         answer:
-          "It shows in fitment. Wheels were the starting point, so offset, backspacing, brake clearance and ride height are treated as measurement problems solved before anything is ordered rather than discovered after the parts arrive. That habit carries into how every other discipline on a build gets planned.",
+          "It shows in fitment. Wheels were the starting point, so offset, backspacing, brake clearance and ride height are measured and calculated before parts are ordered. That same approach carries into how the other disciplines on a build are planned.",
       },
       {
         question: "What does automotive customization house mean?",
@@ -81,12 +81,12 @@ export const companyFaqGroups: FaqGroup[] = [
       {
         question: "Why does in-house work matter?",
         answer:
-          "Three practical reasons. Finishes match, because the same people select and apply them across every panel. Schedules hold, because no stage waits on an outside shop. And accountability is singular, so when something needs correcting there is no question about who is responsible for it.",
+          "Three practical reasons. Finish work is selected and applied by the same team across every panel. Stages are sequenced on one calendar rather than waiting on an outside shop. And you deal with one house throughout, instead of coordinating between separate vendors.",
       },
       {
         question: "What kinds of vehicles do you work on?",
         answer:
-          "Luxury and exotic cars, performance vehicles, SUVs and trucks. The disciplines are the same across all of them, though scope differs: an exotic is more likely to come in for paint protection film and wheels, a truck for suspension, accessories and lighting.",
+          "Domestic and imported vehicles alike: luxury and exotic cars, performance vehicles, SUVs and trucks. The disciplines are the same across all of them, though scope differs. An exotic is more likely to come in for paint protection film and wheels, a truck for suspension, accessories and lighting.",
       },
       {
         question: "Do I need an exotic or luxury car to work with you?",
@@ -104,7 +104,8 @@ export const companyFaqGroups: FaqGroup[] = [
   {
     id: "getting-started",
     label: "Getting Started",
-    intro: "How a project begins, from first inquiry through an approved plan.",
+    intro:
+      "How a project begins, from first inquiry through an approved plan.",
     items: [
       {
         question: "How do I get a quote?",
@@ -114,7 +115,7 @@ export const companyFaqGroups: FaqGroup[] = [
       {
         question: "Do I need an appointment?",
         answer:
-          "Yes, for a consultation. Bringing the vehicle in lets us assess paint condition, existing modifications and fitment before quoting, which is what prevents a number changing after work has started.",
+          "Yes, for a consultation. Seeing the vehicle in person lets us assess paint condition, existing modifications and fitment, which is what the quote is based on.",
       },
       {
         question: "I know I want something done but not exactly what. Can you help?",
@@ -129,7 +130,7 @@ export const companyFaqGroups: FaqGroup[] = [
       {
         question: "Do you require a deposit?",
         answer:
-          "Yes. A deposit secures the schedule slot and covers materials and parts ordered specifically for your vehicle, which on a custom build are not returnable. The balance is due on completion.",
+          "Yes. A deposit is taken before parts and materials are ordered for your vehicle, which on a custom build are not returnable. Deposit and balance terms are set out in writing with your quote.",
       },
       {
         question: "What payment methods do you accept?",
@@ -139,7 +140,7 @@ export const companyFaqGroups: FaqGroup[] = [
       {
         question: "Can I change the scope after the build has started?",
         answer:
-          "Often yes, and it is common once a client sees the vehicle mid-process. Additions are quoted as an amendment before any extra work begins, and anything that affects the timeline is confirmed with you first rather than absorbed silently.",
+          "Often yes, and it is common once a client sees the vehicle mid-process. Any addition is quoted as an amendment to the original plan before it is scheduled.",
       },
     ],
   },
@@ -147,12 +148,13 @@ export const companyFaqGroups: FaqGroup[] = [
   {
     id: "during-the-build",
     label: "During the Build",
-    intro: "What happens once your vehicle is with us.",
+    intro:
+      "What happens once your vehicle is with us.",
     items: [
       {
         question: "How long will my vehicle be here?",
         answer:
-          "Anywhere from a few days for a contained job to several weeks for a full multi-discipline build. A specific window is given when the plan is approved, and because every discipline runs in the same building there is no time lost moving the vehicle between shops.",
+          "Anywhere from a few days for a contained job to several weeks for a full multi-discipline build. An estimated window is discussed when the plan is approved. Because every discipline runs in the same building, the vehicle does not move between shops between stages.",
       },
       {
         question: "Will I get updates while the work is happening?",
@@ -167,7 +169,7 @@ export const companyFaqGroups: FaqGroup[] = [
       {
         question: "Where is my vehicle kept while it is being worked on?",
         answer:
-          "Vehicles are kept inside the facility, not on an open lot. Storage arrangements for longer builds are confirmed as part of the plan.",
+          "Work and staging happen inside the facility. Arrangements for longer builds are discussed as part of the plan.",
       },
       {
         question: "Can you arrange transport for my vehicle?",
@@ -180,17 +182,18 @@ export const companyFaqGroups: FaqGroup[] = [
   {
     id: "aftercare",
     label: "Aftercare",
-    intro: "What happens after you collect the vehicle.",
+    intro:
+      "What happens after you collect the vehicle.",
     items: [
       {
         question: "What happens if something is not right after I pick up the vehicle?",
         answer:
-          "Bring it back. Because the work was performed here rather than subcontracted, corrections are handled by the same team that did the original work, with no dispute about which vendor is responsible.",
+          "Bring it back so we can look at it. Because the work was performed here rather than subcontracted, the team you speak to is the same team that did the original work.",
       },
       {
         question: "How do I care for the work after delivery?",
         answer:
-          "Care depends on what was done, and specific guidance is given at handover. As a general rule, hand washing with a pH neutral soap, avoiding automatic brush washes and keeping high pressure away from film and vinyl edges protects the finish in the Houston climate.",
+          "Care depends on what was done, and guidance for your specific build is given at handover. In general we recommend hand washing with a pH neutral soap, avoiding automatic brush washes, and keeping high pressure away from film and vinyl edges.",
       },
       {
         question: "Do you offer maintenance after a build?",
@@ -214,12 +217,12 @@ export const companyFaqGroups: FaqGroup[] = [
       {
         question: "Can you handle multiple vehicles at once?",
         answer:
-          "Yes. Dealer and fleet work is scheduled as a program rather than as individual bookings, with consistent specification applied across every unit so inventory presents uniformly on the lot.",
+          "Yes. Dealer and fleet work is scheduled as a program rather than as individual bookings, with a single agreed specification applied across the units in that program.",
       },
       {
         question: "Do you do commercial fleet wraps?",
         answer:
-          "Yes. Fleet graphics and full colour change wraps are performed in house with brand-accurate colour matching, which matters when the same livery has to look identical across a dozen vehicles.",
+          "Yes. Fleet graphics and full color change wraps are performed in house, with color matched to your brand specification as part of the planning stage.",
       },
       {
         question: "How does a dealership get started?",

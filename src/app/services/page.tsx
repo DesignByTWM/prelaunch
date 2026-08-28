@@ -74,7 +74,7 @@ export default function ServicesPage() {
         imageAlt="Completed DESIGNBYTWM build photographed in an open environmental setting"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Services" }]}
         title={<>Ten disciplines.<br />One team.</>}
-        intro="Every service below is performed inside the same building by the same team, which means a build using four of them still runs on one timeline with one point of contact."
+        intro="Every discipline below is practiced inside the same building by the same team, so a build drawing on four of them is still planned and run as a single project, with one point of contact."
       />
 
       <section>
@@ -82,7 +82,7 @@ export default function ServicesPage() {
           <SecHead
             eyebrow="Headline Disciplines"
             title={<>The five most<br />requested.</>}
-            lede="These five account for the majority of the work that comes through the house, and most vehicles combine at least two of them."
+            lede="These five shape the character of a vehicle most directly, and they are rarely specified on their own."
           />
 
           <div className="svc-grid">
@@ -94,7 +94,7 @@ export default function ServicesPage() {
           <SecHead
             eyebrow="Additional In-House Disciplines"
             title={<>Five more,<br />same building.</>}
-            lede="Full services with their own pages. Most often specified as part of a larger build rather than ordered on their own."
+            lede="Full disciplines with their own pages, typically specified as part of a larger build."
             className="services-second-head"
           />
 
