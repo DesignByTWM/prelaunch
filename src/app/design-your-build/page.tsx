@@ -1,10 +1,35 @@
 import type { Metadata } from "next";
-import { Reveal } from "@/components/Reveal";
-import { PageHero, SecHead, FaqBlock } from "@/components/ui/Page";
+import { PageHero } from "@/components/ui/Page";
 import { BuildFlow } from "@/components/forms/BuildFlow";
-import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
-import { processSteps } from "@/content/house";
-import { nap, routes } from "@/lib/site";
+import { JsonLd, breadcrumbSchema } from "@/lib/schema";
+import { routes } from "@/lib/site";
+
+/**
+ * DESIGN YOUR BUILD
+ *
+ * REBUILT August 31 2026 to Liz's mock of August 14 2026.
+ *
+ * Her page is deliberately bare: hero, step indicator, form. Nothing
+ * else. That is the right instinct for a conversion page, so it is
+ * followed rather than argued with. A form page with a long tail of
+ * content underneath gives people somewhere to go other than the form.
+ *
+ * Removed to match her composition, logged in CLIENT_REVIEW_NOTES.md 27.6:
+ *   - the five stage "What Happens Next" process block
+ *   - the five question FAQ, and its FAQPage schema with it
+ *   - the hero button. Her hero carries none, and the form sits directly
+ *     below it anyway
+ *
+ * The flow itself is untouched apart from the step labels, which now read
+ * Vehicle, Services, Vision and Contact, her wording. It was already four
+ * steps because it was built from this same mock on August 14.
+ *
+ * OPEN FOR JOSE: our flow asks three things hers does not, vehicle
+ * condition, budget range and preferred contact method. Budget in
+ * particular qualifies a lead well but costs completions. Left in place
+ * rather than cut, because removing fields from a working flow on launch
+ * day is not a change worth making blind.
+ */
 
 export const metadata: Metadata = {
   title: "Design Your Build",
@@ -12,33 +37,6 @@ export const metadata: Metadata = {
     "Start a custom vehicle build with DESIGNBYTWM in Houston. Tell us the vehicle, select the disciplines and we plan the whole build as one coordinated project with one point of contact.",
   alternates: { canonical: routes.designYourBuild },
 };
-
-const flowFaqs = [
-  {
-    question: "What happens after I submit a build request?",
-    answer:
-      "We review the vehicle and the disciplines selected, then get in touch to schedule a consultation. Quotes are given after seeing the vehicle in person rather than from the form alone, because the same service can differ substantially between two cars.",
-  },
-  {
-    question: "Do I need to know exactly what I want before starting?",
-    answer:
-      "No. There is a not sure yet option in the flow for exactly that reason. Many clients arrive knowing how they want the vehicle to feel without knowing which disciplines get them there, and working that out is part of the consultation.",
-  },
-  {
-    question: "Can I select more than one service?",
-    answer:
-      "Yes, and most people do. Select every discipline you are considering. Because all ten are performed in house they get planned together as a single build on one timeline rather than quoted as separate jobs.",
-  },
-  {
-    question: "Is submitting a build request a commitment?",
-    answer:
-      "No. It starts a conversation and nothing more. No deposit is taken and no work is scheduled until a plan has been agreed and you have approved it.",
-  },
-  {
-    question: "How long before someone gets back to me?",
-    answer: `You will hear back from the house to arrange a consultation. If you would rather not wait, call or text ${nap.phone} and you can usually get an answer during shop hours.`,
-  },
-];
 
 export default function DesignYourBuildPage() {
   return (
@@ -49,71 +47,24 @@ export default function DesignYourBuildPage() {
             { name: "Home", path: "/" },
             { name: "Design Your Build", path: routes.designYourBuild },
           ]),
-          faqSchema(flowFaqs),
         ]}
       />
 
       <PageHero
         image="/build-sedan.webp"
         imageAlt="Completed multi discipline build by DESIGNBYTWM"
-        crumbs={[{ label: "Home", href: routes.home }, { label: "Design Your Build" }]}
+        crumbs={[
+          { label: "Home", href: routes.home },
+          { label: "Design Your Build" },
+        ]}
         title="Let's design your build."
         intro="Four short steps. Tell us about your vehicle and vision and we'll follow up to schedule a consultation."
-        ctaLabel="Start Below"
-        ctaHref="#flow"
+        hideCta
       />
 
       <section id="flow">
         <div className="wrap">
           <BuildFlow />
-        </div>
-      </section>
-
-      {/* What happens next */}
-      <section className="alt">
-        <div className="wrap">
-          <SecHead
-            eyebrow="What Happens Next"
-            title={
-              <>
-                From request
-                <br />
-                to delivery.
-              </>
-            }
-            lede="The same five stages whether a vehicle is in for one discipline or six."
-          />
-          <div className="process">
-            {processSteps.map((step, i) => (
-              <Reveal
-                key={step.title}
-                className="process-step"
-                delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
-              >
-                <div className="num">{String(i + 1).padStart(2, "0")}</div>
-                <div>
-                  <h3>{step.title}</h3>
-                  <p>{step.copy}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div className="wrap">
-          <SecHead
-            eyebrow="Before You Start"
-            title={
-              <>
-                Common
-                <br />
-                questions.
-              </>
-            }
-          />
-          <FaqBlock faqs={flowFaqs} />
         </div>
       </section>
     </>

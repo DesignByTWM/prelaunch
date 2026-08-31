@@ -1222,3 +1222,60 @@ section.dark .sec-head .eyebrow { color: var(--signal-teal); }
 
 @media (max-width: 860px) { .builds-grid { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 560px) { .builds-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }
+
+/* ----- DEALER SERVICES -----
+   Henry's six catalog categories. Text cards, no photography, so the
+   section reads as a specification rather than a gallery. */
+.dealer-pkg {
+  border: 1px solid var(--gray-light); background: var(--white);
+  border-radius: 34px 0 34px 0; padding: clamp(24px,3vw,32px);
+  transition: border-color .35s, transform .45s cubic-bezier(.16,.84,.32,1);
+}
+.dealer-pkg:hover { border-color: var(--black); transform: translateY(-3px); }
+.dealer-pkg h3 {
+  font-family: var(--body); font-weight: 600; font-size: 13px;
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.dealer-pkg > p { margin-top: 12px; font-size: 13.5px; color: var(--gray-mid); }
+.dealer-pkg ul {
+  margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--gray-light);
+  list-style: none;
+}
+.dealer-pkg li {
+  position: relative; padding-left: 18px; font-size: 12.5px;
+  color: var(--black); margin-bottom: 8px;
+}
+.dealer-pkg li::before {
+  content: "\25C6"; position: absolute; left: 0; top: 1px;
+  font-size: 6px; color: var(--signal-teal);
+}
+.dealer-pkg li:last-child { margin-bottom: 0; }
+
+/* ----- LIVE FORMS -----
+   Added August 31 2026 with the Resend lead pipeline. */
+
+/* Honeypot. Off-screen rather than display:none, because some bots skip
+   hidden fields but fill positioned ones. */
+.hp-field {
+  position: absolute !important; left: -9999px !important;
+  width: 1px !important; height: 1px !important; opacity: 0 !important;
+}
+
+.form-submit { margin-top: 6px; }
+.form-error {
+  margin-bottom: 14px; padding: 12px 16px;
+  border-left: 2px solid #b3261e; background: #fdf2f1;
+  font-size: 13px; color: #7a1a14;
+}
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+
+/* Success replaces the form outright, so nobody submits twice. */
+.form-done {
+  border: 1px solid var(--gray-light); background: var(--off-white);
+  border-radius: 34px 0 34px 0; padding: clamp(28px,4vw,40px);
+}
+.form-done h3 {
+  font-family: var(--display); font-weight: 300; text-transform: uppercase;
+  letter-spacing: .10em; font-size: clamp(19px,2.4vw,24px); margin: 10px 0 12px;
+}
+.form-done p { font-size: 14px; color: var(--gray-mid); }

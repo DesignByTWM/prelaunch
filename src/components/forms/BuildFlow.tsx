@@ -23,7 +23,12 @@ import { nap, routes } from "@/lib/site";
  * validation and delivery arrive with the lead pipeline.
  */
 
-const STEPS = ["Vehicle", "Disciplines", "Scope", "Contact"] as const;
+/**
+ * Step labels are Liz's, from the Design Your Build mock: Vehicle,
+ * Services, Vision, Contact. They were Disciplines and Scope before
+ * August 31 2026.
+ */
+const STEPS = ["Vehicle", "Services", "Vision", "Contact"] as const;
 
 interface FormState {
   year: string;

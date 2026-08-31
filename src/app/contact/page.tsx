@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { SocialRow } from "@/components/ui/Socials";
 import { PageHero, SecHead } from "@/components/ui/Page";
-import { FormPending } from "@/components/forms/FormPending";
+import { ContactForm } from "@/components/forms/ContactForm";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
 import { hours, nap, napLine, routes, site } from "@/lib/site";
 
@@ -115,30 +115,7 @@ export default function ContactPage() {
         <div className="wrap contact-grid even">
           <Reveal>
             <SecHead eyebrow="Send a Message" title="Get in touch" />
-
-            <div className="row">
-              <div className="field">
-                <label htmlFor="c-name">Name</label>
-                <input id="c-name" name="name" type="text" placeholder="Full name" autoComplete="name" />
-              </div>
-              <div className="field">
-                <label htmlFor="c-email">Email</label>
-                <input id="c-email" name="email" type="email" placeholder="name@email.com" autoComplete="email" />
-              </div>
-            </div>
-
-            <div className="field">
-              <label htmlFor="c-phone">Phone</label>
-              <input id="c-phone" name="phone" type="tel" placeholder="(832) 000-0000" autoComplete="tel" />
-            </div>
-
-            <div className="field">
-              <label htmlFor="c-message">Message</label>
-              <textarea id="c-message" name="message" placeholder="How can we help?" />
-            </div>
-
-            <input type="hidden" name="source" value="contact" />
-            <FormPending label="Send Message" />
+            <ContactForm />
           </Reveal>
 
           <Reveal>

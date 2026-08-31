@@ -32,6 +32,8 @@ export function PageHero({
   ctaHref = routes.designYourBuild,
   secondaryLabel,
   secondaryHref,
+  stats,
+  hideCta = false,
 }: {
   image: string;
   imageAlt: string;
@@ -42,6 +44,14 @@ export function PageHero({
   ctaHref?: string;
   secondaryLabel?: string;
   secondaryHref?: string;
+  /** Short assertions on a hairline rule, as in Liz's dealer hero. */
+  stats?: string[];
+  /**
+   * Some of Liz's explore heroes carry no buttons at all. Design Your
+   * Build is one: the form is immediately below, so a button pointing at
+   * it is noise.
+   */
+  hideCta?: boolean;
 }) {
   return (
     <section className="hero inner">
@@ -68,17 +78,39 @@ export function PageHero({
 
             {/* Second action is optional. Liz uses a pair on some explore
                pages and a single button on others, so the slot exists and
-               stays empty unless a page asks for it. */}
-            <div className="hero-actions">
-              <Link href={ctaHref} className="btn btn-primary">
-                {ctaLabel}
-              </Link>
-              {secondaryLabel && secondaryHref && (
-                <Link href={secondaryHref} className="btn btn-line-light">
-                  {secondaryLabel}
+               stays empty unless a page asks for it.
+
+               Anything that is not an internal route, sms: or tel: for
+               example, renders as a plain anchor rather than a Link. */}
+            {!hideCta && (
+              <div className="hero-actions">
+                <Link href={ctaHref} className="btn btn-primary">
+                  {ctaLabel}
                 </Link>
-              )}
-            </div>
+                {secondaryLabel && secondaryHref && (
+                  secondaryHref.startsWith("/") ? (
+                    <Link href={secondaryHref} className="btn btn-line-light">
+                      {secondaryLabel}
+                    </Link>
+                  ) : (
+                    <a href={secondaryHref} className="btn btn-line-light">
+                      {secondaryLabel}
+                    </a>
+                  )
+                )}
+              </div>
+            )}
+
+            {stats && stats.length > 0 && (
+              <ul className="hero-stats">
+                {stats.map((item, i) => (
+                  <li key={item}>
+                    <span className="label">{item}</span>
+                    {i < stats.length - 1 && <i aria-hidden="true">◆</i>}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>
