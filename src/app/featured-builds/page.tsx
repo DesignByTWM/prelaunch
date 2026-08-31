@@ -1,19 +1,41 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
-import { Photo } from "@/components/ui/Photo";
-import { PageHero, SecHead, CustomBand } from "@/components/ui/Page";
-import { FinalCta } from "@/components/ui/ServiceSections";
-import { IntakeForm } from "@/components/home/IntakeForm";
+import { PageHero, SecHead } from "@/components/ui/Page";
+import { BuildFinder } from "@/components/builds/BuildFinder";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
 import { featuredBuilds } from "@/content/builds";
 import { routes, site } from "@/lib/site";
 
+/**
+ * FEATURED BUILDS
+ *
+ * REBUILT August 31 2026 to Liz's mock of August 14 2026.
+ *
+ * Her order:
+ *   hero -> "Search The Portfolio / Find your vehicle", search field,
+ *   type pills, three column card grid -> closing CTA -> footer.
+ *
+ * Her search and filters are real in her file, not decoration, so they
+ * are built as working controls in BuildFinder. The cards themselves are
+ * rendered inside a client component, which means they are still in the
+ * server rendered HTML and still crawlable.
+ *
+ * Removed to match her composition, logged in CLIENT_REVIEW_NOTES.md 27.4:
+ *   - the CustomBand
+ *   - the IntakeForm at the foot of the page. Her closing CTA routes to
+ *     Design Your Build, which is the same capture one step along
+ *
+ * ItemList schema is emitted for the six builds. It describes a list of
+ * pages rather than making any claim about the work itself, which matters
+ * while the build descriptions are still unverified draft copy.
+ */
+
 export const metadata: Metadata = {
   title: "Featured Builds",
   description:
-    "Complete vehicle transformations by DESIGNBYTWM in Houston. Multi discipline builds combining wraps, paint protection film, wheels, suspension, interiors, audio and lighting under one roof.",
-  alternates: { canonical: routes.builds },
+    "Complete vehicle transformations by DESIGNBYTWM in Houston. Blackout packages, wraps, wheels, interiors, suspension and paint, planned and executed as single builds.",
+  alternates: { canonical: routes.featuredBuilds },
 };
 
 export default function FeaturedBuildsPage() {
@@ -23,84 +45,77 @@ export default function FeaturedBuildsPage() {
         graph={[
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Featured Builds", path: routes.builds },
+            { name: "Featured Builds", path: routes.featuredBuilds },
           ]),
           {
             "@type": "CollectionPage",
             name: "Featured Builds",
-            url: `${site.url}${routes.builds}`,
+            url: `${site.url}${routes.featuredBuilds}`,
+            description:
+              "Complete vehicle transformations executed in house by DESIGNBYTWM in Houston, Texas.",
+            isPartOf: { "@id": `${site.url}/#website` },
             about: { "@id": `${site.url}/#organization` },
-            hasPart: featuredBuilds.map((build) => ({
-              "@type": "CreativeWork",
-              name: `${build.title}, ${build.vehicle}`,
-              url: `${site.url}${routes.builds}/${build.slug}`,
-              description: build.summary,
-            })),
+            mainEntity: {
+              "@type": "ItemList",
+              numberOfItems: featuredBuilds.length,
+              itemListElement: featuredBuilds.map((build, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                name: `${build.vehicle}: ${build.title}`,
+                url: `${site.url}${routes.featuredBuilds}/${build.slug}`,
+              })),
+            },
           },
         ]}
       />
 
       <PageHero
         image="/build-suv.webp"
-        imageAlt="Completed multi discipline build by DESIGNBYTWM"
-        crumbs={[{ label: "Home", href: routes.home }, { label: "Featured Builds" }]}
+        imageAlt="Completed multi-discipline build by DESIGNBYTWM"
+        crumbs={[
+          { label: "Home", href: routes.home },
+          { label: "Featured Builds" },
+        ]}
         title="The work speaks first."
         intro="Complete transformations, multiple disciplines, one team. Every build documented from first consultation to final delivery."
-        ctaLabel="Design Your Build"
       />
 
+      {/* Her search block. */}
       <section>
         <div className="wrap">
           <SecHead
             eyebrow="Search The Portfolio"
             title="Find your vehicle"
-            lede="See if we've already worked on something like yours. Every build here used more than one discipline, which is the point: a vehicle that needs wraps, wheels, suspension and protection is one project, not four bookings across four shops."
+            lede="See if we have already worked on something like yours."
+            center
           />
 
-          <div className="builds-list">
-            {featuredBuilds.map((build, i) => (
-              <Reveal
-                key={build.slug}
-                as={Link}
-                href={`${routes.builds}/${build.slug}`}
-                className="build-row"
-                card
-                delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
-              >
-                <div className="ph r169">
-                  <Photo src={build.hero} alt={build.heroAlt} />
-                </div>
-                <div className="build-row-body">
-                  <span className="eyebrow">
-                    {build.vehicle} · {build.type}
-                  </span>
-                  <h3 className="display">{build.title}</h3>
-                  <p>{build.summary}</p>
-                  <div className="tags">
-                    {build.tags.map((tag) => (
-                      <span key={tag} className="tag">{tag}</span>
-                    ))}
-                  </div>
-                  <span className="arrow-link" style={{ marginTop: 22 }}>
-                    Read the build →
-                  </span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <BuildFinder builds={featuredBuilds} />
+          </Reveal>
         </div>
       </section>
 
-      <section className="alt" style={{ paddingBottom: 0 }}>
+      {/* Her closing band. One call to action. */}
+      <section>
         <div className="wrap">
-          <FinalCta
-            title="Have a vision for your vehicle?"
-            lede="Tell us about your vehicle and the transformation you have in mind."
-          />
+          <Reveal className="final-cta">
+            <div className="final-in">
+              <span className="eyebrow on-dark">Ready When You Are</span>
+              <h2 className="display">Have a vision for your vehicle?</h2>
+              <p>
+                Tell us about your vehicle and the transformation you have in
+                mind.
+              </p>
+              <div className="final-actions">
+                <Link href={routes.designYourBuild} className="btn btn-primary">
+                  Design Your Build
+                </Link>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
-
-      <IntakeForm source="featured-builds" />
     </>
   );
 }
