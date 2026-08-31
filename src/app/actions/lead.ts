@@ -162,7 +162,7 @@ export async function submitLead(lead: LeadPayload): Promise<LeadResult> {
       from: MAIL_FROM,
       to: LEAD_RECIPIENTS,
       replyTo: lead.email,
-      subject: `New Request: ${lead.name} — ${label}`,
+      subject: `New Request: ${lead.name}, ${label}`,
       html: houseEmail(lead, label),
     });
 

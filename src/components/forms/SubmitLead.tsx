@@ -6,7 +6,7 @@ import { submitLead, type LeadPayload } from "@/app/actions/lead";
 /**
  * SubmitLead
  *
- * The live replacement for FormPending. Handles the three states a form
+ * The one submit control on the site. Handles the three states a form
  * can be in, and nothing else: ready, sending, done.
  *
  * On success the whole form is replaced by a confirmation rather than

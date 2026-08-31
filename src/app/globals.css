@@ -715,20 +715,6 @@ section#intake { background: var(--off-white); }
 .areas a:hover { color: var(--white); }
 
 /* =============================================================
-   REVIEW BUILD · INACTIVE SUBMIT STATE
-   Forms are not wired during client review. Rather than a live
-   looking button that silently does nothing, submit controls are
-   presented as deliberately inactive with an explanation.
-   REMOVE THIS BLOCK when the lead pipeline goes in.
-   ============================================================= */
-.btn-inactive {
-  background: var(--off-white); color: var(--gray-mid);
-  border: 1px solid var(--gray-light); border-radius: 16px 0 16px 0;
-  cursor: not-allowed;
-}
-.btn-inactive:hover { transform: none; box-shadow: none; }
-
-/* =============================================================
    SERVICE PAGE SECTIONS
    Structure from Liz's approved mocks, August 14 2026.
    Every value below is Brand Guidelines v2.0. Nothing was taken from

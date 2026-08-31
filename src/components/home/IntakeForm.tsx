@@ -1,7 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { Reveal } from "@/components/Reveal";
-import { FormPending } from "@/components/forms/FormPending";
+import { SubmitLead } from "@/components/forms/SubmitLead";
 import { services } from "@/content/services";
-import { nap } from "@/lib/site";
 
 /**
  * IntakeForm
@@ -13,17 +15,21 @@ import { nap } from "@/lib/site";
  * can attribute a lead to the exact page that produced it. Without it the
  * 22 location pages and 10 service pages are unmeasurable.
  *
- * `preselect` matches a service name so a visitor arriving from a service
- * page finds the dropdown already set.
+ * A source with no entry in SOURCE_LABELS is not a failure. The lead
+ * action falls back to the raw tag, so a page can stamp anything and the
+ * house email still says where it came from.
  *
- * NOT YET WIRED. The button is inert, exactly as in the V2 demo.
- * Submission, Resend delivery and Airtable sync are the next task.
+ * `preselect` matches a service name so a visitor arriving from a service
+ * page finds the dropdown already set. It seeds the state rather than
+ * setting a defaultValue, because the select is controlled now.
+ *
+ * LIVE as of August 31 2026, wired to the Resend lead pipeline.
  */
 export function IntakeForm({
   eyebrow = "Get Started",
   title = "Design your build.",
   lede = "Tell us about your vehicle and what you have in mind. We follow up to schedule a consultation.",
-  source = "homepage",
+  source = "home",
   preselect,
 }: {
   eyebrow?: string;
@@ -32,6 +38,20 @@ export function IntakeForm({
   source?: string;
   preselect?: string;
 }) {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    vehicle: "",
+    service: preselect ?? "",
+    timeline: "",
+    vision: "",
+    company: "",
+  });
+
+  const set = (key: keyof typeof form, value: string) =>
+    setForm((prev) => ({ ...prev, [key]: value }));
+
   return (
     <section id="intake">
       <div className="wrap">
@@ -42,34 +62,63 @@ export function IntakeForm({
         </Reveal>
 
         <Reveal className="form-card">
-          <input type="hidden" name="source" value={source} />
-
           <div className="row">
             <div className="field">
               <label htmlFor="name">Name</label>
-              <input id="name" name="name" type="text" placeholder="Full name" autoComplete="name" />
+              <input
+                id="name"
+                type="text"
+                placeholder="Full name"
+                autoComplete="name"
+                value={form.name}
+                onChange={(e) => set("name", e.target.value)}
+              />
             </div>
             <div className="field">
               <label htmlFor="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="name@email.com" autoComplete="email" />
+              <input
+                id="email"
+                type="email"
+                placeholder="name@email.com"
+                autoComplete="email"
+                value={form.email}
+                onChange={(e) => set("email", e.target.value)}
+              />
             </div>
           </div>
 
           <div className="row">
             <div className="field">
               <label htmlFor="phone">Phone</label>
-              <input id="phone" name="phone" type="tel" placeholder="(832) 000-0000" autoComplete="tel" />
+              <input
+                id="phone"
+                type="tel"
+                placeholder="(832) 000-0000"
+                autoComplete="tel"
+                value={form.phone}
+                onChange={(e) => set("phone", e.target.value)}
+              />
             </div>
             <div className="field">
               <label htmlFor="vehicle">Vehicle</label>
-              <input id="vehicle" name="vehicle" type="text" placeholder="Year, make and model" />
+              <input
+                id="vehicle"
+                type="text"
+                placeholder="Year, make and model"
+                value={form.vehicle}
+                onChange={(e) => set("vehicle", e.target.value)}
+              />
             </div>
           </div>
 
           <div className="row">
             <div className="field">
               <label htmlFor="service">Service of interest</label>
-              <select id="service" name="service" defaultValue={preselect ?? ""}>
+              <select
+                id="service"
+                value={form.service}
+                onChange={(e) => set("service", e.target.value)}
+              >
                 <option value="" disabled>Select a service</option>
                 {services.map((service) => (
                   <option key={service.slug} value={service.name}>
@@ -82,7 +131,11 @@ export function IntakeForm({
             </div>
             <div className="field">
               <label htmlFor="timeline">Timeline</label>
-              <select id="timeline" name="timeline" defaultValue="">
+              <select
+                id="timeline"
+                value={form.timeline}
+                onChange={(e) => set("timeline", e.target.value)}
+              >
                 <option value="" disabled>Select a timeline</option>
                 <option>As soon as possible</option>
                 <option>1 to 3 months</option>
@@ -96,12 +149,40 @@ export function IntakeForm({
             <label htmlFor="vision">Tell us about the project</label>
             <textarea
               id="vision"
-              name="vision"
               placeholder="Describe your vehicle and the transformation you have in mind."
+              value={form.vision}
+              onChange={(e) => set("vision", e.target.value)}
             />
           </div>
 
-          <FormPending label="Request Consultation" />
+          {/* Honeypot. Never shown, never focusable, never announced. */}
+          <input
+            type="text"
+            name="company"
+            className="hp-field"
+            tabIndex={-1}
+            aria-hidden="true"
+            autoComplete="off"
+            value={form.company}
+            onChange={(e) => set("company", e.target.value)}
+          />
+
+          <SubmitLead
+            label="Request Consultation"
+            collect={() => ({
+              source,
+              name: form.name,
+              email: form.email,
+              phone: form.phone,
+              message: form.vision,
+              company: form.company,
+              fields: [
+                { label: "Vehicle", value: form.vehicle },
+                { label: "Service of interest", value: form.service },
+                { label: "Timeline", value: form.timeline },
+              ],
+            })}
+          />
         </Reveal>
       </div>
     </section>

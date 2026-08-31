@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { FormPending } from "@/components/forms/FormPending";
+import { SubmitLead } from "@/components/forms/SubmitLead";
 import { services } from "@/content/services";
 import { nap, routes } from "@/lib/site";
 
@@ -19,8 +19,9 @@ import { nap, routes } from "@/lib/site";
  * stand on its own. A single-select dropdown would quietly suppress the
  * highest value lead type on the site.
  *
- * State is held locally and nothing leaves the browser yet. Submission,
- * validation and delivery arrive with the lead pipeline.
+ * State is held locally across all four steps and delivered in one call
+ * from the final step. LIVE as of August 31 2026, wired to the Resend
+ * lead pipeline.
  */
 
 /**
@@ -43,6 +44,8 @@ interface FormState {
   email: string;
   phone: string;
   preferred: string;
+  /** Honeypot. Real people never fill this in, bots usually do. */
+  company: string;
 }
 
 const EMPTY: FormState = {
@@ -58,6 +61,7 @@ const EMPTY: FormState = {
   email: "",
   phone: "",
   preferred: "",
+  company: "",
 };
 
 export function BuildFlow() {
@@ -371,8 +375,43 @@ export function BuildFlow() {
               </ul>
             </div>
 
+            {/* Honeypot. Never shown, never focusable, never announced. */}
+            <input
+              type="text"
+              name="company"
+              className="hp-field"
+              tabIndex={-1}
+              aria-hidden="true"
+              autoComplete="off"
+              value={form.company}
+              onChange={(e) => set("company", e.target.value)}
+            />
+
             <div style={{ marginTop: 28 }}>
-              <FormPending label="Submit Build Request" />
+              <SubmitLead
+                label="Submit Build Request"
+                collect={() => ({
+                  source: "design-your-build",
+                  name: form.name,
+                  email: form.email,
+                  phone: form.phone,
+                  message: form.vision,
+                  company: form.company,
+                  fields: [
+                    { label: "Year", value: form.year },
+                    { label: "Make", value: form.make },
+                    { label: "Model and trim", value: form.model },
+                    { label: "Condition", value: form.condition },
+                    {
+                      label: "Disciplines",
+                      value: form.disciplines.join(", "),
+                    },
+                    { label: "Timeline", value: form.timeline },
+                    { label: "Budget", value: form.budget },
+                    { label: "Preferred contact", value: form.preferred },
+                  ],
+                })}
+              />
             </div>
 
             <p className="form-note">

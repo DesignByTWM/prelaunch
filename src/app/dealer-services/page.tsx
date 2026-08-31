@@ -4,7 +4,7 @@ import { Reveal } from "@/components/Reveal";
 import { Monogram } from "@/components/BrandMarks";
 import { Photo } from "@/components/ui/Photo";
 import { PageHero, SecHead, FaqBlock } from "@/components/ui/Page";
-import { FormPending } from "@/components/forms/FormPending";
+import { DealerForm } from "@/components/forms/DealerForm";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { dealerPackages, dealerFaqs, dealerQuickFaqs } from "@/content/dealers";
 import { nap, routes, serviceAreas, site } from "@/lib/site";
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   title: "Dealer Services",
   description:
     "Dealer Services Division at DESIGNBYTWM in Houston. Blackout and trim packages, wheel and tire programs, wraps, lift kits, protection and audio upgrades prepared for retail delivery at volume.",
-  alternates: { canonical: routes.dealerServices },
+  alternates: { canonical: routes.dealers },
 };
 
 /* Hers lead, ours follow. Same pattern as Shop Wheels. */
@@ -78,7 +78,7 @@ export default function DealerServicesPage() {
         graph={[
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Dealer Services", path: routes.dealerServices },
+            { name: "Dealer Services", path: routes.dealers },
           ]),
           {
             /* Built inline rather than through serviceSchema, which hard
@@ -89,7 +89,7 @@ export default function DealerServicesPage() {
             serviceType: "Automotive dealer reconditioning and customization",
             description:
               "Volume reconditioning and customization for dealership inventory in Houston, including blackout and trim packages, wheel and tire programs, wraps, lift kits, protection and audio upgrades.",
-            url: `${site.url}${routes.dealerServices}`,
+            url: `${site.url}${routes.dealers}`,
             provider: { "@id": `${site.url}/#organization` },
             audience: {
               "@type": "BusinessAudience",
@@ -97,7 +97,7 @@ export default function DealerServicesPage() {
             },
             areaServed: serviceAreas.map((area) => ({
               "@type": "City",
-              name: area.name,
+              name: area,
             })),
           },
           faqSchema(allDealerFaqs),
@@ -240,50 +240,10 @@ export default function DealerServicesPage() {
         <div className="wrap">
           <SecHead eyebrow="Apply" title="Apply for a dealer account" center />
 
+          {/* Extracted to DealerForm on August 31 2026 so it can hold
+              state and submit. Her markup moved across unchanged. */}
           <Reveal className="form-panel">
-            <div className="row">
-              <div className="field">
-                <label htmlFor="d-dealership">Dealership Name</label>
-                <input id="d-dealership" name="dealership" type="text" placeholder="Dealership name" autoComplete="organization" />
-              </div>
-              <div className="field">
-                <label htmlFor="d-contact">Contact Name</label>
-                <input id="d-contact" name="contact" type="text" placeholder="Full name" autoComplete="name" />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="field">
-                <label htmlFor="d-email">Email</label>
-                <input id="d-email" name="email" type="email" placeholder="name@dealership.com" autoComplete="email" />
-              </div>
-              <div className="field">
-                <label htmlFor="d-phone">Phone</label>
-                <input id="d-phone" name="phone" type="tel" placeholder="(832) 000-0000" autoComplete="tel" />
-              </div>
-            </div>
-
-            <div className="field">
-              <label htmlFor="d-volume">Estimated Monthly Volume</label>
-              <select id="d-volume" name="volume" defaultValue="1 to 5 vehicles">
-                <option>1 to 5 vehicles</option>
-                <option>6 to 15 vehicles</option>
-                <option>16 to 30 vehicles</option>
-                <option>30 or more vehicles</option>
-              </select>
-            </div>
-
-            <div className="field">
-              <label htmlFor="d-message">Message</label>
-              <textarea
-                id="d-message"
-                name="message"
-                placeholder="Tell us about your dealership and what you are looking for."
-              />
-            </div>
-
-            <input type="hidden" name="source" value="dealer-services" />
-            <FormPending label="Submit Application" />
+            <DealerForm />
           </Reveal>
         </div>
       </section>
