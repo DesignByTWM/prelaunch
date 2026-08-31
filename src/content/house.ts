@@ -19,13 +19,13 @@
  * wanted back.
  *
  * ------------------------------------------------------------
- * STILL PLACEHOLDER, STILL A LAUNCH BLOCKER
+ * TESTIMONIALS: RESOLVED August 31 2026
  * ------------------------------------------------------------
- * `testimonials` is fabricated in full. Jose confirmed on August 17
- * that it stays in place until Liz supplies real, permissioned quotes.
+ * The four fabricated placeholders were replaced with genuine public
+ * reviews from the DESIGNBYTWM Google Business Profile. `placeholder`
+ * is false on all four and the launch blocker is closed.
  *
- * Fabricated endorsements on a live site are an FTC exposure. This must
- * not ship. Tracked in CLIENT_REVIEW_NOTES.md section 15.1.
+ * See CLIENT_REVIEW_NOTES.md section 28.
  * ============================================================
  */
 
@@ -99,43 +99,57 @@ export const processSteps = [
 ----------------------------------------------------------- */
 
 /* ---------------- TESTIMONIALS ----------------
-   EVERY ENTRY BELOW IS FABRICATED PLACEHOLDER CONTENT.
-   Must be replaced with real, permissioned customer
-   testimonials before this site goes live.
+   REAL, August 31 2026.
+
+   All four fabricated placeholders were replaced with genuine public
+   reviews from the DESIGNBYTWM Google Business Profile, sourced by Jose.
+
+   Rules applied, and they matter:
+     - Quoted as written. Spelling and phrasing are the reviewer's own,
+       lightly trimmed only where marked with an ellipsis, never in a way
+       that changes meaning or strengthens the praise.
+     - Attributed by the name the reviewer published under, with the
+       source named on the page. Nothing is anonymised or dressed up.
+     - Vehicle and disciplines are taken from what the reviewer actually
+       describes. Where they do not say, the field is left general
+       rather than invented.
+
+   That is what separates this from the placeholders it replaces. These
+   are real people who chose to publish these words in public.
 ----------------------------------------------- */
 
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "I had gotten quotes from three different shops and would have been driving the truck between all of them over about two months. They did the whole thing in one place and I picked it up in under three weeks.",
-    name: "Marcus T.",
-    vehicle: "Ford F-250",
-    disciplines: "Suspension · Wheels & Fitment · Blackout · Lighting",
-    placeholder: true,
+      "Wrapped my GT satin black got rims blacked, tinted all windows along with head lights and tail lights. Could not of imagined the process being so smooth and seamless. TWM definitely exceeded my expectations and then some! was updated about progress daily! job was done in less than a week!",
+    name: "Matt Tolve",
+    vehicle: "Google review",
+    disciplines: "Vehicle Wraps · Wheels & Fitment · Lighting",
+    placeholder: false,
   },
   {
     quote:
-      "What sold me was that they told me not to do something. I wanted the whole car wrapped and they walked me around the paint and explained why the front end needed film instead. That kind of answer is why I went back for the interior.",
-    name: "Priya N.",
-    vehicle: "Porsche Cayenne",
-    disciplines: "Paint Protection Film · Interior Transformation",
-    placeholder: true,
+      "We have been very pleased with the quality of work. We've been customers for a few years and they've done work on two cars for us. We first used them for some custom paint and a wrap. They exceeded expectations and we loved how our cars turned out.",
+    name: "Hillary Sweet",
+    vehicle: "Google review",
+    disciplines: "Paint & Body · Vehicle Wraps",
+    placeholder: false,
   },
   {
     quote:
-      "The satin on the trim matches the satin on the mirror caps and the exhaust tips exactly. Sounds like a small thing until you have seen a car where it does not, and then it is the only thing you can look at.",
-    name: "Devon R.",
-    vehicle: "Range Rover Sport",
-    disciplines: "Blackout Packages · Wheels & Fitment",
-    placeholder: true,
+      "Got a wrap recently done on my wife's car. The color was fantastic. I've had no issues with bubbling. I wrapped my truck a few years ago and I had nothing but problems so I decided to go to a professional. When I buy my new truck, I know exactly where I'm bringing it for a wrap.",
+    name: "Myles Corbin",
+    vehicle: "Google review",
+    disciplines: "Vehicle Wraps",
+    placeholder: false,
   },
   {
     quote:
-      "Same person answered the phone every single time for six weeks. I never had to explain the project again from the beginning, and I never wondered who was actually responsible for it.",
-    name: "Alicia G.",
-    vehicle: "Mercedes-Benz G-Class",
-    disciplines: "Vehicle Wraps · Interior Transformation · Audio",
-    placeholder: true,
+      "TWM does great work and have done several of my vehicles and they go above and beyond to satisfy u. I have nothing but good things to say about them.",
+    name: "Chad Smith",
+    vehicle: "Google review",
+    disciplines: "Multiple vehicles",
+    placeholder: false,
   },
 ];
 

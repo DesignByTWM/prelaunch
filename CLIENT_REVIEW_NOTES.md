@@ -740,4 +740,34 @@ Her order: hero, catalog grid of eight sets, fitment FAQ, closing CTA. Approved 
 
 ---
 
+## 28. TESTIMONIALS RESOLVED, AUGUST 31 2026
+
+Section 15.1 is closed. The four fabricated testimonials are gone.
+
+Jose sourced four genuine five-star reviews from the DESIGNBYTWM Google Business Profile. They replace the placeholders in `house.ts` and every `placeholder` flag is now false.
+
+| Reviewer | Age at time of use | Work described |
+|---|---|---|
+| Matt Tolve | 5 months | Satin black wrap, blacked wheels, window and light tint |
+| Hillary Sweet | 1 month | Custom paint and wrap across two vehicles over several years |
+| Myles Corbin | 6 months | Wrap, with an explicit comparison against a previous bad wrap elsewhere |
+| Chad Smith | 6 months | Several vehicles |
+
+### How they are handled
+
+- **Quoted as written.** Spelling, capitalisation and phrasing are the reviewers' own, including Matt's "Could not of imagined". Correcting a customer's grammar is the point at which a real review starts reading like a written one.
+- **Trimmed once only.** Hillary's review is cut after "we loved how our cars turned out", dropping a passage about later fender benders. Nothing in the trim strengthens the praise.
+- **Attributed and sourced.** Each card shows the reviewer's published name and "Google review", so any visitor can verify it in under a minute.
+- **Nothing invented.** Where a reviewer does not name a vehicle, the field reads generally rather than being filled in.
+
+### Section lede rewritten
+
+The old lede claimed "the pattern in the feedback is consistent: one timeline, one contact and finishes that match". That described the fabricated quotes. The real reviews talk about daily progress updates, a job finished in under a week, no bubbling and repeat business. The lede now reads "Published reviews, quoted as written. Several of these are from clients who came back with a second vehicle", which is what the quotes underneath actually support.
+
+### Worth doing later
+
+Ask Henry for the Google Business Profile URL so each quote can link to the review it came from. Not required, and it turns an assertion into something checkable.
+
+---
+
 *Log opened during the services build. Append every new item as pages are completed.*

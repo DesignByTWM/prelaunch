@@ -24,8 +24,8 @@ import { nap, routes, site } from "@/lib/site";
  * Master lineage, the team section and the facility figures. What remains
  * is a modest intro, Under One Roof, the ten disciplines and Process.
  *
- * Testimonials are still fabricated and still a launch blocker.
- * See src/content/house.ts and CLIENT_REVIEW_NOTES.md section 15.1.
+ * Testimonials are genuine public Google reviews as of August 31 2026.
+ * See src/content/house.ts and CLIENT_REVIEW_NOTES.md section 28.
  */
 
 export const metadata: Metadata = {
@@ -160,7 +160,7 @@ export default function TheHousePage() {
           <SecHead
             eyebrow="Clients"
             title={<>What owners<br />say afterwards.</>}
-            lede="The pattern in the feedback is consistent: one timeline, one contact and finishes that match across the whole vehicle."
+            lede="Published reviews, quoted as written. Several of these are from clients who came back with a second vehicle."
           />
           <div className="quotes">
             {testimonials.map((testimonial, i) => (
