@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Monogram } from "@/components/BrandMarks";
 import { Reveal } from "@/components/Reveal";
+import { featuredBuilds } from "@/content/builds";
 import { routes } from "@/lib/site";
 
 /* ===== MATERIALS OF THE HOUSE ===============================
@@ -51,34 +52,20 @@ export function Materials() {
 
 /* ===== FEATURED BUILDS ======================================
    Approved V2: 16:9 frames, body-font h3 at 14.5px, outlined tags.
-   Tag sets updated only where PPF now stands alone.
+
+   FIXED August 31 2026. This section previously held its own hardcoded
+   list of three builds with slugs that did not exist in builds.ts:
+   full-size-suv-blackout-interior, sport-sedan-wrap-wheels and
+   pickup-suspension-interior. All three cards linked to 404 pages.
+
+   It now renders the first three entries of featuredBuilds, the same
+   source the Featured Builds page uses, so a card can never again point
+   at a build that does not exist.
    ============================================================ */
 
-const builds = [
-  {
-    slug: "full-size-suv-blackout-interior",
-    image: "/build-suv.webp",
-    alt: "Completed blackout SUV build",
-    title: "Full-size SUV · blackout and interior build",
-    tags: ["Blackout", "PPF", "Interior"],
-  },
-  {
-    slug: "sport-sedan-wrap-wheels",
-    image: "/build-sedan.webp",
-    alt: "Completed wrapped sedan build",
-    title: "Sport sedan · wrap and wheel package",
-    tags: ["Wraps", "Wheels", "PPF"],
-  },
-  {
-    slug: "pickup-suspension-interior",
-    image: "/build-truck.webp",
-    alt: "Completed lifted truck build",
-    title: "Pickup · suspension and interior build",
-    tags: ["Suspension", "Interior", "Audio"],
-  },
-];
-
 export function FeaturedBuilds() {
+  const builds = featuredBuilds.slice(0, 3);
+
   return (
     <section id="builds">
       <div className="wrap">
@@ -102,9 +89,11 @@ export function FeaturedBuilds() {
               delay={(i + 1) as 1 | 2 | 3}
             >
               <div className="ph r169">
-                <img src={build.image} alt={build.alt} loading="lazy" />
+                <img src={build.hero} alt={build.heroAlt} loading="lazy" />
               </div>
-              <h3>{build.title}</h3>
+              <h3>
+                {build.vehicle}: {build.title}
+              </h3>
               <div className="tags">
                 {build.tags.map((tag) => (
                   <span key={tag} className="tag">{tag}</span>

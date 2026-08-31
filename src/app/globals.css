@@ -158,23 +158,31 @@ header.site {
   border-bottom: 1px solid var(--gray-light);
 }
 .site-in { display: flex; align-items: center; gap: 30px; height: 78px; }
-.site nav { margin-left: auto; display: flex; align-items: center; gap: 30px; }
-.site nav a:not(.btn) {
+.site-in nav { margin-left: auto; display: flex; align-items: center; gap: 30px; }
+.site-in nav a:not(.btn) {
   font-family: var(--body); font-weight: 600; font-size: 12px; text-transform: uppercase;
   letter-spacing: .06em; color: var(--black); transition: color .25s;
 }
-.site nav a:not(.btn):hover { color: var(--gray-mid); }
+.site-in nav a:not(.btn):hover { color: var(--gray-mid); }
 .site .btn { padding: 12px 22px; }
 .nav-toggle { display: none; background: none; border: 0; cursor: pointer; margin-left: auto; padding: 8px; }
 .nav-toggle span { display: block; width: 24px; height: 1.5px; background: var(--black); }
 .nav-toggle span + span { margin-top: 6px; }
 @media (max-width: 900px) {
-  .site nav a:not(.btn) { display: none; }
-  .nav-toggle { display: block; }
-  .site nav { margin-left: 0; }
+  /* The whole bar nav goes, teal CTA included. Hiding only the text links
+     left the CTA in the bar, where at 440px it wrapped to three lines and
+     pushed the burger off the right edge. Design Your Build lives in the
+     drawer on mobile instead.
+
+     Scoped to .site-in rather than .site. The drawer renders its own nav
+     inside this same header, so a bare .site nav hid the drawer contents
+     as well and the menu opened one pixel tall with every link hidden. */
+  .site-in nav { display: none; }
+  .nav-toggle { display: block; margin-left: auto; }
   .drawer { border-top: 1px solid var(--gray-light); background: var(--white); }
   .drawer ul { list-style: none; display: grid; gap: 2px; padding: 18px 0 26px; }
-  .drawer a { display: block; padding: 10px 0; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+  .drawer a:not(.btn) { display: block; padding: 10px 0; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+  .drawer .btn { display: inline-flex; margin-top: 14px; }
 }
 @media (min-width: 901px) { .drawer { display: none; } }
 

@@ -77,6 +77,18 @@ export function Header() {
                   Dealer Services
                 </Link>
               </li>
+              {/* The header CTA is hidden on mobile, so it belongs here.
+                 Without it there is no path to the quote flow from a
+                 phone except the floating text pill. */}
+              <li>
+                <Link
+                  href={routes.designYourBuild}
+                  className="btn btn-primary"
+                  onClick={() => setOpen(false)}
+                >
+                  Design Your Build
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>
