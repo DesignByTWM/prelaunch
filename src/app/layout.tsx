@@ -69,6 +69,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${quicksand.variable} ${inter.variable}`}>
       <body>
+        {/*
+          Hides any image that fails to load, leaving the charcoal frame
+          behind it visible instead of a broken image icon.
+
+          This has to be a plain inline script rather than the onError
+          handler on the Photo component. An image referenced in server
+          rendered HTML can fail before React hydrates, and React never
+          sees that error, so the broken icon stays on screen. A capture
+          phase listener registered at the top of the body catches it
+          whenever it happens.
+
+          Every photo slot on the site is deliberately empty right now,
+          so this is doing real work rather than guarding an edge case.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'){t.style.display='none'}},true)",
+          }}
+        />
         <BrandSprite />
         <JsonLd graph={[organizationSchema(), websiteSchema()]} />
         <Header />
