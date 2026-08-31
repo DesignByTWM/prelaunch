@@ -186,6 +186,25 @@ header.site {
 }
 @media (min-width: 901px) { .drawer { display: none; } }
 
+/* On a phone the homepage hero and the ticker below it should fill the
+   screen exactly on first load. The 780px cap left roughly 100px of the
+   next section showing under the ticker, which reads as an accident
+   rather than a first impression.
+
+   132px is the 78px header plus the 54px ticker. svh rather than vh so
+   the hero does not jump when mobile browser chrome hides on scroll,
+   with a vh fallback first for anything that does not support it.
+
+   Inner and service heroes are excluded: those are sized by their own
+   content by design, per Jose's instruction of August 21 2026. */
+@media (max-width: 900px) {
+  .hero:not(.inner):not(.svc-hero) {
+    height: calc(100vh - 132px);
+    height: calc(100svh - 132px);
+    min-height: 420px;
+  }
+}
+
 /* ===== HERO ===== */
 .hero { position: relative; height: min(88vh, 780px); min-height: 520px; }
 .hero .ph { position: absolute; inset: 0; aspect-ratio: auto; }
