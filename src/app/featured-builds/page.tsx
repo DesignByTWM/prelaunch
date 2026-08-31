@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   title: "Featured Builds",
   description:
     "Complete vehicle transformations by DESIGNBYTWM in Houston. Blackout packages, wraps, wheels, interiors, suspension and paint, planned and executed as single builds.",
-  alternates: { canonical: routes.featuredBuilds },
+  alternates: { canonical: routes.builds },
 };
 
 export default function FeaturedBuildsPage() {
@@ -45,12 +45,12 @@ export default function FeaturedBuildsPage() {
         graph={[
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Featured Builds", path: routes.featuredBuilds },
+            { name: "Featured Builds", path: routes.builds },
           ]),
           {
             "@type": "CollectionPage",
             name: "Featured Builds",
-            url: `${site.url}${routes.featuredBuilds}`,
+            url: `${site.url}${routes.builds}`,
             description:
               "Complete vehicle transformations executed in house by DESIGNBYTWM in Houston, Texas.",
             isPartOf: { "@id": `${site.url}/#website` },
@@ -62,7 +62,7 @@ export default function FeaturedBuildsPage() {
                 "@type": "ListItem",
                 position: index + 1,
                 name: `${build.vehicle}: ${build.title}`,
-                url: `${site.url}${routes.featuredBuilds}/${build.slug}`,
+                url: `${site.url}${routes.builds}/${build.slug}`,
               })),
             },
           },

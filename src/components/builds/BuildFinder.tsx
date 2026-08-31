@@ -87,7 +87,7 @@ export function BuildFinder({ builds }: { builds: FeaturedBuild[] }) {
           {visible.map((build) => (
             <Link
               key={build.slug}
-              href={`${routes.featuredBuilds}/${build.slug}`}
+              href={`${routes.builds}/${build.slug}`}
               className="build-card"
             >
               <div className="ph r45">
