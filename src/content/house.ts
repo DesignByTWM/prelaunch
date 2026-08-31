@@ -34,6 +34,8 @@ export interface Testimonial {
   name: string;
   vehicle: string;
   disciplines: string;
+  /** Link to the published review, so any claim is checkable. */
+  sourceUrl?: string;
   placeholder: boolean;
 }
 
@@ -125,6 +127,7 @@ export const testimonials: Testimonial[] = [
     name: "Matt Tolve",
     vehicle: "Google review",
     disciplines: "Vehicle Wraps · Wheels & Fitment · Lighting",
+    sourceUrl: "https://maps.app.goo.gl/kQzdVSQN3fkpcXqk9",
     placeholder: false,
   },
   {
@@ -133,6 +136,7 @@ export const testimonials: Testimonial[] = [
     name: "Hillary Sweet",
     vehicle: "Google review",
     disciplines: "Paint & Body · Vehicle Wraps",
+    sourceUrl: "https://maps.app.goo.gl/bSoydXkxVrmGGphB8",
     placeholder: false,
   },
   {
@@ -141,6 +145,7 @@ export const testimonials: Testimonial[] = [
     name: "Myles Corbin",
     vehicle: "Google review",
     disciplines: "Vehicle Wraps",
+    sourceUrl: "https://maps.app.goo.gl/g9tRVoz6tiA6ox2y6",
     placeholder: false,
   },
   {
@@ -149,6 +154,7 @@ export const testimonials: Testimonial[] = [
     name: "Chad Smith",
     vehicle: "Google review",
     disciplines: "Multiple vehicles",
+    sourceUrl: "https://maps.app.goo.gl/559UN6nDpmunsgUFA",
     placeholder: false,
   },
 ];

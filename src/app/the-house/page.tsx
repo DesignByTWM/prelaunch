@@ -160,7 +160,7 @@ export default function TheHousePage() {
           <SecHead
             eyebrow="Clients"
             title={<>What owners<br />say afterwards.</>}
-            lede="Published reviews, quoted as written. Several of these are from clients who came back with a second vehicle."
+            lede="Published reviews, quoted as written and linked to the original. Several of these are from clients who came back with a second vehicle."
           />
           <div className="quotes">
             {testimonials.map((testimonial, i) => (
@@ -173,7 +173,18 @@ export default function TheHousePage() {
                 <div className="who">
                   <div className="name">{testimonial.name}</div>
                   <div className="meta">
-                    {testimonial.vehicle} · {testimonial.disciplines}
+                    {testimonial.sourceUrl ? (
+                      <a
+                        href={testimonial.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                      >
+                        {testimonial.vehicle}
+                      </a>
+                    ) : (
+                      testimonial.vehicle
+                    )}{" "}
+                    · {testimonial.disciplines}
                   </div>
                 </div>
               </Reveal>

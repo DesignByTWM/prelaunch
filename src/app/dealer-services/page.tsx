@@ -36,13 +36,12 @@ import { nap, routes, serviceAreas, site } from "@/lib/site";
  *   - dealerValue, four drafted commercial arguments
  *   - CustomBand
  *
- * COMPLIANCE NOTE: her hero stat strip and her third program card both
- * assert "Priority Turnaround". On August 27 Liz removed "Priority
- * scheduling" from the retail package tiers as an unconfirmed operational
- * commitment. Her dealer mock predates that instruction and this is her
- * own division's stated selling point, so it ships as she wrote it, but
- * it is the same class of published promise and Henry should confirm it.
- * Flagged for the delivery email.
+ * COMPLIANCE: her hero stat strip and her fourth program card both
+ * asserted "Priority Turnaround". Both removed on August 31 2026 per
+ * Jose, on the same reasoning Liz applied to "Priority scheduling" in
+ * the retail tiers on August 27: it is a published operational promise
+ * nobody has confirmed the house can keep. Her dealer mock predates
+ * that instruction. The band runs three across now.
  */
 
 export const metadata: Metadata = {
@@ -55,12 +54,11 @@ export const metadata: Metadata = {
 /* Hers lead, ours follow. Same pattern as Shop Wheels. */
 const allDealerFaqs = [...dealerQuickFaqs, ...dealerFaqs];
 
-/** Her four program pillars, verbatim, with her pill labels. */
+/** Her program pillars, minus Priority Turnaround. See the note above. */
 const programCards = [
   { pill: "Recon", name: "Reconditioning", frame: "/svc-paint-body.webp" },
   { pill: "Custom", name: "Fleet Customization", frame: "/svc-wraps.webp" },
   { pill: "Volume", name: "Volume Pricing", frame: "/svc-wheels.webp" },
-  { pill: "Rush", name: "Priority Turnaround", frame: "/svc-blackout.webp" },
 ];
 
 /** Her four process steps, verbatim. */
@@ -117,7 +115,7 @@ export default function DealerServicesPage() {
         ctaHref="#apply"
         secondaryLabel="Text the House"
         secondaryHref={nap.smsHref}
-        stats={["Volume Pricing", "Priority Turnaround", "One Point of Contact"]}
+        stats={["Volume Pricing", "One Point of Contact"]}
       />
 
       {/* Her overview block. */}
@@ -155,7 +153,7 @@ export default function DealerServicesPage() {
         <div className="wrap">
           <SecHead eyebrow="Program" title="What the program covers" center />
 
-          <div className="cov-grid">
+          <div className="cov-grid three">
             {programCards.map((card, i) => (
               <Reveal
                 key={card.name}
