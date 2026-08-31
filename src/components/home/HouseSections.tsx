@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Monogram } from "@/components/BrandMarks";
+import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/Reveal";
 import { featuredBuilds } from "@/content/builds";
 import { routes } from "@/lib/site";
@@ -39,7 +40,7 @@ export function Materials() {
               delay={(i + 1) as 1 | 2 | 3}
             >
               <div className="ph r11">
-                <img src={material.image} alt={material.alt} loading="lazy" />
+                <Photo src={material.image} alt={material.alt} />
               </div>
               <figcaption>{material.caption}</figcaption>
             </Reveal>
@@ -89,7 +90,7 @@ export function FeaturedBuilds() {
               delay={(i + 1) as 1 | 2 | 3}
             >
               <div className="ph r169">
-                <img src={build.hero} alt={build.heroAlt} loading="lazy" />
+                <Photo src={build.hero} alt={build.heroAlt} />
               </div>
               <h3>
                 {build.vehicle}: {build.title}
@@ -144,7 +145,7 @@ export function ShopWheels() {
               delay={(i + 1) as 1 | 2 | 3 | 4}
             >
               <div className="ph r11">
-                <img src={wheel.image} alt={wheel.alt} loading="lazy" />
+                <Photo src={wheel.image} alt={wheel.alt} />
               </div>
               <h4>{wheel.name}</h4>
               <p>Inquire for fitment</p>

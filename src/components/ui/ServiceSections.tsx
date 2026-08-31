@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Monogram } from "@/components/BrandMarks";
 import { Reveal } from "@/components/Reveal";
+import { Photo } from "@/components/ui/Photo";
 import { routes, nap } from "@/lib/site";
 import type {
   ServiceCoverage,
@@ -113,8 +114,18 @@ export function ServiceHero({
  *
  * Her mock linked each card to a dead href="#". They anchor to the
  * packages block instead, since that is where a reader picks a level.
+ *
+ * Frames fill from /{prefix}-cov-1.webp through -cov-4.webp. The number
+ * is the card's position, so the four files drop in against the order
+ * the coverage array is written in.
  */
-export function Coverage({ items }: { items: ServiceCoverage[] }) {
+export function Coverage({
+  items,
+  prefix,
+}: {
+  items: ServiceCoverage[];
+  prefix: string;
+}) {
   return (
     <div className="cov-grid">
       {items.map((item, i) => (
@@ -126,6 +137,7 @@ export function Coverage({ items }: { items: ServiceCoverage[] }) {
           delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
         >
           <div className="ph r45">
+            <Photo src={`/${prefix}-cov-${i + 1}.webp`} alt={item.name} />
             <span className="pill">{item.pill}</span>
           </div>
           <div className="cov-body">
@@ -184,11 +196,18 @@ export function Process({
 /**
  * RecentWork
  *
- * Four captioned frames. Photography is still outstanding, so these
- * render the approved placeholder treatment rather than a broken image.
+ * Four captioned frames, filling from /{prefix}-ref-1.webp through
+ * -ref-4.webp. Any file not yet delivered leaves the approved placeholder
+ * treatment in place rather than a broken image.
  * Captions are real: they are the build types Liz named.
  */
-export function RecentWork({ items }: { items: ServiceRecentWork[] }) {
+export function RecentWork({
+  items,
+  prefix,
+}: {
+  items: ServiceRecentWork[];
+  prefix: string;
+}) {
   return (
     <>
       <div className="recent-grid">
@@ -198,7 +217,9 @@ export function RecentWork({ items }: { items: ServiceRecentWork[] }) {
             className="recent rv-card"
             delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
           >
-            <div className="ph fill" />
+            <div className="ph fill">
+              <Photo src={`/${prefix}-ref-${i + 1}.webp`} alt={item.name} />
+            </div>
             <div className="recent-scrim" />
             <span className="recent-cap label">{item.name}</span>
             <span className="pill">{item.tag}</span>
@@ -313,11 +334,16 @@ export function FinalCta({
  *
  * Frames carry the approved 34px 0 34px 0 corner. Her cards are square
  * with a bottom-only radius.
+ *
+ * These reuse the target service's own `image`, the same photograph the
+ * homepage card and the OpenGraph tag use, rather than a pairing specific
+ * file. A pairing is a pointer at another discipline, so it should look
+ * like that discipline everywhere it appears.
  */
 export function Related({
   items,
 }: {
-  items: { slug: string; name: string }[];
+  items: { slug: string; name: string; image: string; imageAlt: string }[];
 }) {
   return (
     <div className="rel-grid">
@@ -329,7 +355,9 @@ export function Related({
           className="rel rv-card"
           delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
         >
-          <div className="ph fill" />
+          <div className="ph fill">
+            <Photo src={item.image} alt={item.imageAlt} />
+          </div>
           <div className="rel-scrim" />
           <div className="rel-body">
             <h3>{item.name}</h3>

@@ -17,7 +17,7 @@ export function Hero() {
     <section className="hero">
       <div className="ph">
         <img
-          src="/hero.webp"
+          src="/dbtwmmainpagehero.webp"
           alt="Completed DESIGNBYTWM build photographed in an open environmental setting"
           fetchPriority="high"
         />

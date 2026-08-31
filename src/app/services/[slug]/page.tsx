@@ -11,6 +11,7 @@ import {
   FinalCta,
 } from "@/components/ui/ServiceSections";
 import { Reveal } from "@/components/Reveal";
+import { Photo } from "@/components/ui/Photo";
 import {
   JsonLd,
   breadcrumbSchema,
@@ -160,7 +161,12 @@ export default async function ServicePage({
               </Reveal>
             </div>
             <Reveal className="media rv-card">
-              <div className="ph" role="img" aria-label={service.imageAlt} />
+              <div className="ph">
+                <Photo
+                  src={`/${service.imagePrefix}-overview.webp`}
+                  alt={service.imageAlt}
+                />
+              </div>
             </Reveal>
           </div>
         </div>
@@ -170,7 +176,7 @@ export default async function ServicePage({
       <section className="alt" id="coverage">
         <div className="wrap">
           <SecHead eyebrow="Coverage" title={service.coverageTitle} center />
-          <Coverage items={service.coverage} />
+          <Coverage items={service.coverage} prefix={service.imagePrefix} />
         </div>
       </section>
 
@@ -190,7 +196,7 @@ export default async function ServicePage({
       <section className="alt" id="recent">
         <div className="wrap">
           <SecHead eyebrow="Reference" title={service.recentTitle} center />
-          <RecentWork items={service.recentWork} />
+          <RecentWork items={service.recentWork} prefix={service.imagePrefix} />
         </div>
       </section>
 
@@ -215,7 +221,14 @@ export default async function ServicePage({
         <section className="alt">
           <div className="wrap">
             <SecHead eyebrow="Related" title="Often paired with" center />
-            <Related items={pairs.map((p) => ({ slug: p.slug, name: p.name }))} />
+            <Related
+              items={pairs.map((p) => ({
+                slug: p.slug,
+                name: p.name,
+                image: p.image,
+                imageAlt: p.imageAlt,
+              }))}
+            />
           </div>
         </section>
       )}

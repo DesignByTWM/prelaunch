@@ -97,6 +97,17 @@ export interface Service {
   pairsWith: string[];
   image: string;
   imageAlt: string;
+  /**
+   * Filename stem for this service's photography. Every slot on the
+   * service page is derived from it by convention rather than by a
+   * field per image: {prefix}-overview.webp, {prefix}-cov-1.webp
+   * through -cov-4, and {prefix}-ref-1.webp through -ref-4.
+   *
+   * Photo hides a file that 404s, so a slot stays a flat placeholder
+   * until the artwork lands. Dropping a correctly named file into
+   * /public fills it with no code change.
+   */
+  imagePrefix: string;
   /** Primary commercial intent phrase this page is built to answer. */
   primaryKeyword: string;
 
@@ -156,6 +167,7 @@ export const services: Service[] = [
     pairsWith: ["paint-protection-film", "wheels-and-fitment", "vehicle-wraps", "lighting"],
     image: "/svc-blackout.webp",
     imageAlt: "Blacked out trim and grille detail on a customized luxury SUV",
+    imagePrefix: "blackout",
     primaryKeyword: "blackout package Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
@@ -289,6 +301,7 @@ export const services: Service[] = [
     pairsWith: ["vehicle-wraps", "wheels-and-fitment", "blackout-packages", "interior-transformation"],
     image: "/svc-ppf.webp",
     imageAlt: "Paint protection film being installed on the hood of a luxury vehicle",
+    imagePrefix: "ppf",
     primaryKeyword: "paint protection film Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
@@ -423,6 +436,7 @@ export const services: Service[] = [
     pairsWith: ["paint-protection-film", "blackout-packages", "wheels-and-fitment", "suspension"],
     image: "/svc-wraps.webp",
     imageAlt: "Color change vinyl wrap applied to a luxury coupe",
+    imagePrefix: "wraps",
     primaryKeyword: "vehicle wrap Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
@@ -561,6 +575,7 @@ export const services: Service[] = [
     pairsWith: ["suspension", "blackout-packages", "paint-protection-film", "vehicle-wraps"],
     image: "/svc-wheels.webp",
     imageAlt: "Forged wheel and tire fitment on a customized luxury vehicle",
+    imagePrefix: "wheels",
     primaryKeyword: "custom wheels Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
@@ -694,6 +709,7 @@ export const services: Service[] = [
     pairsWith: ["audio", "lighting", "blackout-packages", "paint-protection-film"],
     image: "/svc-interior.webp",
     imageAlt: "Custom stitched leather interior with ambient lighting",
+    imagePrefix: "interior",
     primaryKeyword: "custom car interior Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
@@ -826,6 +842,7 @@ export const services: Service[] = [
     pairsWith: ["wheels-and-fitment", "truck-accessories", "blackout-packages"],
     image: "/svc-suspension.webp",
     imageAlt: "Suspension and ride height work on a lifted truck",
+    imagePrefix: "suspension",
     primaryKeyword: "lift kit Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
@@ -958,6 +975,7 @@ export const services: Service[] = [
     pairsWith: ["blackout-packages", "paint-protection-film", "wheels-and-fitment"],
     image: "/svc-paint-body.webp",
     imageAlt: "Custom paint finish on a refinished vehicle panel",
+    imagePrefix: "paintbody",
     primaryKeyword: "custom paint Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
@@ -1090,6 +1108,7 @@ export const services: Service[] = [
     pairsWith: ["blackout-packages", "interior-transformation", "truck-accessories"],
     image: "/svc-lighting.webp",
     imageAlt: "Custom lighting detail on a customized vehicle at night",
+    imagePrefix: "lighting",
     primaryKeyword: "custom car lighting Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
@@ -1217,6 +1236,7 @@ export const services: Service[] = [
     pairsWith: ["interior-transformation", "lighting"],
     image: "/svc-audio.webp",
     imageAlt: "Custom audio installation integrated into a vehicle interior",
+    imagePrefix: "audio",
     primaryKeyword: "car audio Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
@@ -1349,6 +1369,7 @@ export const services: Service[] = [
     pairsWith: ["suspension", "wheels-and-fitment", "lighting", "blackout-packages"],
     image: "/svc-truck-accessories.webp",
     imageAlt: "Custom truck with accessories, wheels and lift package",
+    imagePrefix: "truck",
     primaryKeyword: "truck accessories Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
