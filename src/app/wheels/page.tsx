@@ -132,14 +132,15 @@ export default function WheelsPage() {
               </Reveal>
             ))}
 
-            {/* Fifth card. No photograph, because there is no single
-                product to show. The frame stays so the grid keeps its
-                rhythm. The button is the same Inquire route. */}
-            <Reveal className="wheel rv-card" delay={5}>
-              <div className="ph r11" />
+            {/* Fifth tile. Not a wheel card, so it does not wear one. An
+                empty photo frame here read as a missing image rather than
+                a deliberate slot, so the frame is gone and the tile sits
+                on charcoal to mark it as the odd one out. Same grid
+                position as before. */}
+            <Reveal className="wheel-cta" delay={5}>
               <h3>Something else in mind</h3>
               <p>We source outside these four where a build calls for it.</p>
-              <Link href={routes.designYourBuild} className="btn btn-line">
+              <Link href={routes.designYourBuild} className="btn btn-primary">
                 Inquire
               </Link>
             </Reveal>

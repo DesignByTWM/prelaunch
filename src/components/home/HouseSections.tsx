@@ -3,6 +3,7 @@ import { Monogram } from "@/components/BrandMarks";
 import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/Reveal";
 import { featuredBuilds } from "@/content/builds";
+import { wheelBrands } from "@/content/wheels";
 import { routes } from "@/lib/site";
 
 /* ===== MATERIALS OF THE HOUSE ===============================
@@ -109,19 +110,21 @@ export function FeaturedBuilds() {
 }
 
 /* ===== SHOP WHEELS ==========================================
-   Approved V2 module. Ships as an inquiry form at launch, not a
+   Approved V2 module. Ships as an inquiry module at launch, not a
    catalog: the wheel program is thousands of SKUs and is deferred
    to a later ecommerce integration. Each card routes into the
-   intake form with the wheel prefilled, and the /wheels route is
-   reserved so the catalog can drop in without a URL change.
-   ============================================================ */
+   intake form, and the /wheels route is reserved so the catalog can
+   drop in without a URL change.
 
-const wheels = [
-  { image: "/wheel-1.webp", alt: "20 inch forged wheel, gloss black", name: "20″ Forged · Gloss Black" },
-  { image: "/wheel-2.webp", alt: "22 inch monoblock wheel, brushed titanium", name: "22″ Monoblock · Brushed Titanium" },
-  { image: "/wheel-3.webp", alt: "21 inch multi-spoke wheel, satin black", name: "21″ Multi-Spoke · Satin Black" },
-  { image: "/wheel-4.webp", alt: "24 inch deep concave wheel, matte black", name: "24″ Deep Concave · Matte Black" },
-];
+   Reads wheelBrands from content/wheels.ts, which is the same source
+   /wheels renders from. It previously carried its own hardcoded list
+   of four anonymous wheel sets, which was left behind when the brands
+   landed on September 2 2026 and quietly disagreed with /wheels. One
+   source means the two cannot drift apart again.
+
+   The fifth CTA tile on /wheels is deliberately not repeated here.
+   This module is a glance at the brands, not the full grid.
+   ============================================================ */
 
 export function ShopWheels() {
   return (
@@ -137,18 +140,18 @@ export function ShopWheels() {
         </Reveal>
 
         <div className="wheels">
-          {wheels.map((wheel, i) => (
+          {wheelBrands.map((brand, i) => (
             <Reveal
-              key={wheel.name}
+              key={brand.name}
               className="wheel"
               card
               delay={(i + 1) as 1 | 2 | 3 | 4}
             >
               <div className="ph r11">
-                <Photo src={wheel.image} alt={wheel.alt} />
+                <Photo src={brand.frame} alt={`${brand.name} wheel`} />
               </div>
-              <h4>{wheel.name}</h4>
-              <p>Inquire for fitment</p>
+              <h4>{brand.name}</h4>
+              <p>{brand.blurb}</p>
               <a href="#intake" className="btn btn-line">Inquire</a>
             </Reveal>
           ))}
