@@ -106,8 +106,18 @@ export interface Service {
    * Photo hides a file that 404s, so a slot stays a flat placeholder
    * until the artwork lands. Dropping a correctly named file into
    * /public fills it with no code change.
+   *
+   * Where a delivered filename does not follow the convention, override
+   * that one slot rather than bending the prefix, which would move all
+   * nine slots at once. See overviewImage below.
    */
   imagePrefix: string;
+  /**
+   * Overrides the derived {prefix}-overview.webp for this service only.
+   * Set it when the delivered file does not match the convention, and
+   * leave it unset otherwise so the convention keeps working by default.
+   */
+  overviewImage?: string;
   /** Primary commercial intent phrase this page is built to answer. */
   primaryKeyword: string;
 
@@ -168,6 +178,8 @@ export const services: Service[] = [
     image: "/maincard1blackout.webp",
     imageAlt: "Blacked out trim and grille detail on a customized luxury SUV",
     imagePrefix: "blackout",
+    /* Delivered as svcblackout1.webp rather than blackout-overview.webp. */
+    overviewImage: "/svcblackout1.webp",
     primaryKeyword: "blackout package Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */

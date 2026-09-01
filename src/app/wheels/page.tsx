@@ -4,7 +4,7 @@ import { Reveal } from "@/components/Reveal";
 import { Photo } from "@/components/ui/Photo";
 import { PageHero, SecHead, FaqBlock } from "@/components/ui/Page";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
-import { wheelFaqs, wheelCatalog, wheelQuickFaqs } from "@/content/wheels";
+import { wheelFaqs, wheelBrands, wheelQuickFaqs } from "@/content/wheels";
 import { routes, site } from "@/lib/site";
 
 /**
@@ -13,7 +13,12 @@ import { routes, site } from "@/lib/site";
  * REBUILT August 28 2026 to Liz's mock of August 14 2026, approved by Jose.
  *
  * Her page, in her order:
- *   hero -> catalog grid, eight sets -> fitment FAQ -> closing CTA.
+ *   hero -> catalog grid -> fitment FAQ -> closing CTA.
+ *
+ * CATALOG REBUILT September 2 2026 per Liz. The eight anonymous sets are
+ * replaced by the four brands carried plus a fifth card for anything
+ * outside them. Brand names are hers, blurbs are ours and unverified.
+ * See CLIENT_REVIEW_NOTES.md section 30.
  *
  * This is a browse grid rather than a store. No prices, no cart, no stock.
  * Every card routes to the fitment inquiry, which is her own treatment:
@@ -82,11 +87,11 @@ export default function WheelsPage() {
             about: { "@id": `${site.url}/#organization` },
             mainEntity: {
               "@type": "ItemList",
-              numberOfItems: wheelCatalog.length,
-              itemListElement: wheelCatalog.map((item, index) => ({
+              numberOfItems: wheelBrands.length,
+              itemListElement: wheelBrands.map((brand, index) => ({
                 "@type": "ListItem",
                 position: index + 1,
-                name: item.name,
+                name: brand.name,
               })),
             },
           },
@@ -104,28 +109,40 @@ export default function WheelsPage() {
         secondaryHref={routes.designYourBuild}
       />
 
-      {/* Catalog. Eight representative sets, her grid. */}
+      {/* Catalog. Four brands carried, then a card for everything else. */}
       <section id="catalog">
         <div className="wrap">
           <SecHead eyebrow="Catalog" title="Browse the wheel program" center />
 
           <div className="wheels">
-            {wheelCatalog.map((item, i) => (
+            {wheelBrands.map((brand, i) => (
               <Reveal
-                key={item.name}
+                key={brand.name}
                 className="wheel rv-card"
                 delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
               >
                 <div className="ph r11">
-                  <Photo src={item.frame} alt={`${item.name} wheel`} />
+                  <Photo src={brand.frame} alt={`${brand.name} wheel`} />
                 </div>
-                <h3>{item.name}</h3>
-                <p>Inquire for fitment</p>
+                <h3>{brand.name}</h3>
+                <p>{brand.blurb}</p>
                 <Link href={routes.designYourBuild} className="btn btn-line">
                   Inquire
                 </Link>
               </Reveal>
             ))}
+
+            {/* Fifth card. No photograph, because there is no single
+                product to show. The frame stays so the grid keeps its
+                rhythm. The button is the same Inquire route. */}
+            <Reveal className="wheel rv-card" delay={5}>
+              <div className="ph r11" />
+              <h3>Something else in mind</h3>
+              <p>We source outside these four where a build calls for it.</p>
+              <Link href={routes.designYourBuild} className="btn btn-line">
+                Inquire
+              </Link>
+            </Reveal>
           </div>
         </div>
       </section>

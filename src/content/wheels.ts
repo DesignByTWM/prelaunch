@@ -101,30 +101,67 @@ export const fitmentFactors = [
 ];
 
 /**
- * CATALOG PREVIEW
+ * BRANDS CARRIED
  *
- * From Liz's Shop Wheels mock, August 14 2026. Eight representative sets
- * shown as a browse grid so the page reads as a program rather than a
- * form. No prices, by client instruction: every card routes to a fitment
- * inquiry, matching her "Inquire for fitment" treatment.
+ * From Liz's instruction of September 2 2026. The page now names the four
+ * brands rather than describing eight anonymous sets.
  *
- * These are construction and finish descriptions, not manufacturer SKUs.
- * No brand names appear, consistent with Liz's answer of August 14 that
- * wheel brand access is not to be published. See review notes item 11.7.
+ * WHAT IS HERS: the four vendor names, and their order.
+ * WHAT IS OURS: every blurb below.
  *
- * When a real catalog lands, this array is replaced by a CMS or commerce
- * feed and the component underneath does not change.
+ * The blurbs are deliberately non-committal. We were given names and
+ * nothing else, so they do not claim a model, a finish, a size or a stock
+ * level, none of which anyone here has been told. They describe how a
+ * wheel is specified rather than what is on a shelf.
+ *
+ * This reverses review item 11.7, which was closed on August 14 2026 as
+ * "confirmed no" to publishing brand names. See CLIENT_REVIEW_NOTES.md
+ * section 30.
  */
-export const wheelCatalog = [
-  { name: '20" Forged, Gloss Black', style: "Forged", finish: "Gloss Black", size: '20"', frame: "/wheel-1.webp" },
-  { name: '22" Monoblock, Brushed Titanium', style: "Monoblock", finish: "Brushed Titanium", size: '22"', frame: "/wheel-2.webp" },
-  { name: '21" Multi-Spoke, Satin Black', style: "Multi-Spoke", finish: "Satin Black", size: '21"', frame: "/wheel-3.webp" },
-  { name: '24" Deep Concave, Matte Black', style: "Deep Concave", finish: "Matte Black", size: '24"', frame: "/wheel-4.webp" },
-  { name: '19" Forged, Polished', style: "Forged", finish: "Polished", size: '19"', frame: "/wheel-1.webp" },
-  { name: '20" Split-Spoke, Gunmetal', style: "Split-Spoke", finish: "Gunmetal", size: '20"', frame: "/wheel-2.webp" },
-  { name: '22" Concave, Satin Bronze', style: "Concave", finish: "Satin Bronze", size: '22"', frame: "/wheel-3.webp" },
-  { name: '21" Forged, Gloss White', style: "Forged", finish: "Gloss White", size: '21"', frame: "/wheel-4.webp" },
+export const wheelBrands = [
+  {
+    name: "Giovanna Wheels",
+    frame: "/wheel-1.webp",
+    blurb: "Forged and monoblock lines, specified to your vehicle.",
+  },
+  {
+    name: "Lexani",
+    frame: "/wheel-2.webp",
+    blurb: "Luxury fitments for sedans, SUVs and trucks.",
+  },
+  {
+    name: "Vossen Wheels",
+    frame: "/wheel-3.webp",
+    blurb: "Forged and flow formed designs, sized on measurement.",
+  },
+  {
+    name: "Forgiato Wheels",
+    frame: "/wheel-4.webp",
+    blurb: "Bespoke forged construction, built to order.",
+  },
 ];
+
+/**
+ * PLACEHOLDER CATALOG CONTENT, REPLACED BY BRAND CARDS SEPTEMBER 2 2026.
+ *
+ * Eight representative sets from Liz's Shop Wheels mock of August 14
+ * 2026. They were construction and finish descriptions rather than
+ * manufacturer SKUs, written that way because brand names were not to be
+ * published at the time. Kept here rather than deleted, because nothing
+ * in it was ever confirmed as real inventory and it is the only record of
+ * what the page showed before the brands landed.
+ *
+ * export const wheelCatalog = [
+ *   { name: '20" Forged, Gloss Black', style: "Forged", finish: "Gloss Black", size: '20"', frame: "/wheel-1.webp" },
+ *   { name: '22" Monoblock, Brushed Titanium', style: "Monoblock", finish: "Brushed Titanium", size: '22"', frame: "/wheel-2.webp" },
+ *   { name: '21" Multi-Spoke, Satin Black', style: "Multi-Spoke", finish: "Satin Black", size: '21"', frame: "/wheel-3.webp" },
+ *   { name: '24" Deep Concave, Matte Black', style: "Deep Concave", finish: "Matte Black", size: '24"', frame: "/wheel-4.webp" },
+ *   { name: '19" Forged, Polished', style: "Forged", finish: "Polished", size: '19"', frame: "/wheel-1.webp" },
+ *   { name: '20" Split-Spoke, Gunmetal', style: "Split-Spoke", finish: "Gunmetal", size: '20"', frame: "/wheel-2.webp" },
+ *   { name: '22" Concave, Satin Bronze', style: "Concave", finish: "Satin Bronze", size: '22"', frame: "/wheel-3.webp" },
+ *   { name: '21" Forged, Gloss White', style: "Forged", finish: "Gloss White", size: '21"', frame: "/wheel-4.webp" },
+ * ];
+ */
 
 /**
  * The three fitment questions from Liz's mock. Kept separate from the

@@ -462,6 +462,13 @@ footer li a:hover { color: var(--white); }
 
 /* ===== INDEX GRIDS ===== */
 .index-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+
+/* Build case study gallery. Two by two rather than the three column
+   index rhythm, because four frames in a three column grid leaves one
+   stranded on its own row. Same 24px gutter as every other grid. */
+.build-gallery { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+.build-gallery .ph { border-radius: 34px 0 34px 0; overflow: hidden; }
+@media (max-width: 700px) { .build-gallery { grid-template-columns: 1fr; } }
 @media (max-width: 960px) { .index-grid { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 600px) { .index-grid { grid-template-columns: 1fr; } }
 

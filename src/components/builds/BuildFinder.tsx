@@ -59,7 +59,7 @@ export function BuildFinder({ builds }: { builds: FeaturedBuild[] }) {
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search by make or model, for example G-Class, F-150, M5"
+          placeholder="Search by make or model, for example G 63, Corvette, Sierra"
           autoComplete="off"
         />
       </div>

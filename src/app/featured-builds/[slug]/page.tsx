@@ -145,15 +145,21 @@ export default async function BuildPage({
       <section>
         <div className="wrap">
           <SecHead eyebrow="Finished" title={<>The result.</>} lede={build.outcome} />
-          <div className="index-grid">
-            {build.gallery.map((shot, i) => (
+          {/* Four frames by convention, /gallery-{prefix}-1.webp through
+              -4.webp. Photo hides a file that is not there yet, so an
+              undelivered slot stays flat charcoal rather than breaking. */}
+          <div className="build-gallery">
+            {[1, 2, 3, 4].map((n) => (
               <Reveal
-                key={shot.src + i}
+                key={n}
                 card
-                delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
+                delay={(Math.min(n, 5)) as 1 | 2 | 3 | 4 | 5}
               >
-                <div className="ph r45" style={{ borderRadius: "34px 0 34px 0" }}>
-                  <Photo src={shot.src} alt={shot.alt} />
+                <div className="ph r45">
+                  <Photo
+                    src={`/gallery-${build.galleryPrefix}-${n}.webp`}
+                    alt={`${build.vehicle}, ${build.title}`}
+                  />
                 </div>
               </Reveal>
             ))}

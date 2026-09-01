@@ -163,7 +163,10 @@ export default async function ServicePage({
             <Reveal className="media rv-card">
               <div className="ph">
                 <Photo
-                  src={`/${service.imagePrefix}-overview.webp`}
+                  src={
+                    service.overviewImage ??
+                    `/${service.imagePrefix}-overview.webp`
+                  }
                   alt={service.imageAlt}
                 />
               </div>

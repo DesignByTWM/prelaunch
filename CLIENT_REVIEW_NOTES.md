@@ -857,6 +857,213 @@ which had not been true since the array grew past six.
 
 ---
 
+## 30. WHEEL BRANDS NAMED, BLURBS UNVERIFIED, SEPTEMBER 2 2026
+
+The Shop Wheels catalog was rebuilt from eight anonymous sets to four
+brand cards plus a fifth card for anything outside them.
+
+### What Liz supplied
+
+Four vendor names, and the order to show them in. That is the whole of
+it:
+
+| Order | Brand |
+|---|---|
+| 1 | Giovanna Wheels |
+| 2 | Lexani |
+| 3 | Vossen Wheels |
+| 4 | Forgiato Wheels |
+
+**No wheel models were given. No finishes, no sizes, no stock levels and
+no confirmation of which lines within each brand are actually available.**
+Nothing was said about lead times or whether all four are equally
+accessible.
+
+### What is ours
+
+Every blurb on the page. One line per brand:
+
+| Brand | Blurb, written by us |
+|---|---|
+| Giovanna Wheels | Forged and monoblock lines, specified to your vehicle. |
+| Lexani | Luxury fitments for sedans, SUVs and trucks. |
+| Vossen Wheels | Forged and flow formed designs, sized on measurement. |
+| Forgiato Wheels | Bespoke forged construction, built to order. |
+
+They are written to be non-committal on purpose. They describe how a
+wheel gets specified rather than what is in stock, and they name no
+model, finish or size, because none of that was supplied. Even so they
+are our words about a third party's product line, published on a page
+that reads as an inventory statement. **Liz needs to confirm all four.**
+
+The fifth card is also ours: "Something else in mind", with the line "We
+source outside these four where a build calls for it." That sentence
+asserts a sourcing capability nobody here has confirmed.
+
+### This reverses item 11.7
+
+Item 11.7 was closed on August 14 2026 as **confirmed no** to publishing
+wheel brand access, and item 17.1 was closed against it on the same
+basis. The whole anonymous catalog existed because of that answer. Naming
+four brands reverses it.
+
+Worth noting alongside the earlier research in this log: the brands
+recorded then as carried by Tire and Wheel Master were Blaque Diamond,
+Giovanna, Azad, Gianelle, Versus, Force Off-Road and Havok. Only Giovanna
+appears on both lists. Whether the other three are a new arrangement or a
+correction of the earlier note is not recorded anywhere.
+
+### Where the old content went
+
+The eight-entry `wheelCatalog` array is kept commented out in
+`src/content/wheels.ts` rather than deleted, with a note that it was
+placeholder content replaced on September 2 2026. It was never confirmed
+as real inventory either.
+
+### Schema
+
+The CollectionPage ItemList now lists the four brands. The fifth card is
+not a brand and is deliberately absent from it.
+
+---
+
+## 31. FEATURED BUILDS RESOLVED TO LIZ'S SIX, SEPTEMBER 2 2026
+
+Liz confirmed her final list of six. This closes most of what section 29
+left open.
+
+### Removed
+
+| Slug | Vehicle |
+|---|---|
+| m5-wrap-wheel-package | BMW M5 |
+| f150-suspension-overland | Ford F-150 |
+
+Neither is on her list. Both entries were deleted from
+`src/content/builds.ts` in full. Their urls now 404. Nothing elsewhere in
+`src/` linked to either slug.
+
+### The six, in her order
+
+| Order | Slug | Vehicle |
+|---|---|---|
+| 1 | cadillac-iq-monochromatic | Cadillac IQ |
+| 2 | lamborghini-sto-dsb-el-chavez | Lamborghini Huracan STO |
+| 3 | range-rover-rose-pink-interior | Range Rover |
+| 4 | sierra-blackout-lift | GMC Sierra Denali HD Ultimate |
+| 5 | corvette-interior-audio | Chevrolet Corvette Stingray C8 |
+| 6 | g-class-complete-transformation | Mercedes-AMG G 63 |
+
+The first three are the homepage cards, which is intended.
+
+Three entries were renamed to her fuller vehicle names. The G 63 is the
+same entry as the former Mercedes-Benz G-Class, not a new one, and the
+Sierra and Corvette are the same entries under fuller names. **Slugs were
+left unchanged** so existing urls keep resolving, which means three slugs
+no longer read like the vehicle they describe.
+
+This settles the group 3 concern from section 29. corvette-interior-audio
+and sierra-blackout-lift were recorded there as having no traceable
+source. Both are on her list, so their vehicle, name and place in the
+running order are now client confirmed.
+
+### Still open: the descriptive copy
+
+**The copy on all seven entries is still ours.** No replacement text has
+been supplied for any build. `brief`, `stages[].detail`, `outcome`,
+`summary` and `heroAlt` are the text we wrote, unchanged, on every entry
+including the six she verified.
+
+What she confirmed is the list, the vehicle names and the order. That is
+a narrower thing than confirming the paragraphs underneath them, and the
+two should not be conflated when this gets signed off. The section 29
+concern about our writing standing as case studies of real customers'
+vehicles is unchanged for all seven.
+
+One consequence of the renaming: `heroAlt` on the three renamed entries
+still describes the older vehicle name, so the alt text and the vehicle
+field disagree on those three.
+
+### Still open: Range Rover Sport
+
+`range-rover-sport-ppf-paint` is not on her list of six. It is not yet
+clear whether it duplicates her Range Rover entry or is a separate
+vehicle, so it has been left in place and untouched, ordered last in the
+array, pending her answer. It should not be published as verified while
+that is unresolved.
+
+---
+
+## 32. VERIFIED BUILD SCOPE RECEIVED, SEPTEMBER 2 2026
+
+Liz supplied written scope for six featured builds. This is
+client-supplied fact. It supersedes the copy we wrote, which is now
+deleted from those six rather than sitting underneath her material.
+
+### What changed on each
+
+| Slug | Title now | Was | Disciplines now |
+|---|---|---|---|
+| cadillac-iq-monochromatic | Monochromatic | Monochromatic | Wraps, Wheels |
+| lamborghini-sto-dsb-el-chavez | DSB x El Chavez | DSB x El Chavez | Interior, Audio, Paint & Body |
+| range-rover-rose-pink-interior | Blush Pink Interior | Rose Pink Interior | Interior, Blackout, Wheels |
+| sierra-blackout-lift | White on White | Full Blackout & Lift | Blackout, Wraps, Suspension, Wheels, Lighting |
+| corvette-interior-audio | Desert Tan Wrap | Interior & Audio Build | Wraps, Blackout, Wheels |
+| g-class-complete-transformation | Satin Black | Complete Transformation | Wraps, Blackout, Audio |
+
+`tags`, `stages`, `brief`, `summary`, `outcome` and `heroAlt` were
+rewritten on all six from her bullets. Every stage links to the service
+page for that discipline. All six now carry `placeholder: false`.
+
+### Our copy was not merely unverified, it was wrong
+
+Section 29 recorded that the descriptive copy was ours and unconfirmed.
+Her scope shows that on two builds it was not just unconfirmed but
+inaccurate:
+
+- **The Lamborghini was described as a wrap build** and tagged Wraps. It
+  is an interior and audio build: a full bespoke Tiffany Blue leather
+  interior, custom embroidery and stitching, a 16 speaker system through
+  the factory interface plus colour matched brake calipers. **There is no
+  wrap anywhere in her scope.** That entry was rebuilt from nothing.
+- **The Corvette was described as an interior and audio build.** It is a
+  Gloss Desert Tan colour change with a full exterior blackout.
+
+Both were inventions of ours that read as fact on a public page
+describing a real customer's vehicle. This is the concrete case for why
+the section 29 concern mattered.
+
+Three titles were also wrong, including Rose Pink for what Liz calls
+Blush Pink.
+
+### What is hers and what is still ours
+
+Hers, which makes it fact: the vehicle, the build name, the order plus
+every discipline and specification in the scope. `tags` and
+`stages[].detail` trace back to her bullets line by line.
+
+Still ours: the phrasing of `brief`, `summary`, `outcome` and
+`heroAlt`, which arrange her scope into sentences. They introduce no
+timeline, no client story and no specification beyond what she supplied.
+Her scope carries no timings, so `duration` stays absent.
+
+### Slugs kept, two now misdescribe their build
+
+Slugs were left unchanged so published urls keep resolving. Two are now
+actively misleading as strings: `corvette-interior-audio` is a wrap and
+blackout build. `g-class-complete-transformation` is a satin black
+wrap. They are internal identifiers rather than copy, but anyone reading
+the data file should know they no longer describe the entry.
+
+### Range Rover Sport, still open
+
+`range-rover-sport-ppf-paint` is not on her list of six and is not
+covered by this scope. It is untouched, still `placeholder: true`, and
+still carries the copy we wrote. The open question from section 31 stands:
+whether it duplicates her Range Rover entry or is a separate vehicle.
+
+---
+
 ---
 
 *Log opened during the services build. Append every new item as pages are completed.*
