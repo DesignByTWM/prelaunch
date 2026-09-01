@@ -47,7 +47,7 @@ export const journalPosts: JournalPost[] = [
     category: "Protection",
     readingTime: "6 min",
     published: "2026-08-04",
-    hero: "/svc-ppf.webp",
+    hero: "/maincard2ppf.webp",
     heroAlt: "Paint protection film being installed on a vehicle hood",
     intro: [
       "This is the most common question that comes through the house, and the framing is usually wrong. People ask which one is better, as though they solve the same problem. They do not.",
@@ -124,7 +124,7 @@ export const journalPosts: JournalPost[] = [
     category: "Finish",
     readingTime: "7 min",
     published: "2026-07-28",
-    hero: "/svc-wraps.webp",
+    hero: "/maincard3wraps.webp",
     heroAlt: "Vinyl wrap being applied to a luxury coupe",
     intro: [
       "Both change the colour of the car. That is where the similarity ends, and picking the wrong one is an expensive mistake in either direction.",
@@ -194,7 +194,7 @@ export const journalPosts: JournalPost[] = [
     category: "Fitment",
     readingTime: "8 min",
     published: "2026-07-19",
-    hero: "/svc-wheels.webp",
+    hero: "/maincard4wheels.webp",
     heroAlt: "Forged wheel and tire fitment detail on a customized vehicle",
     intro: [
       "Almost everybody who has bought wheels online has a story about a set that did not work. The bolt pattern matched, the diameter was right, and something else was wrong.",
@@ -270,7 +270,7 @@ export const journalPosts: JournalPost[] = [
     category: "Finish",
     readingTime: "5 min",
     published: "2026-07-11",
-    hero: "/svc-blackout.webp",
+    hero: "/maincard1blackout.webp",
     heroAlt: "Blacked out trim and grille detail on a luxury SUV",
     intro: [
       "Two shops quote a blackout package. One quote is a third of the other. They are not quoting the same work, and the difference is almost never explained.",

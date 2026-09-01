@@ -92,8 +92,6 @@ export default async function JournalPostPage({
       />
 
       <PageHero
-        image={post.hero}
-        imageAlt={post.heroAlt}
         crumbs={[
           { label: "Home", href: routes.home },
           { label: "Journal", href: routes.journal },

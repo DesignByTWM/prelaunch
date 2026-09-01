@@ -768,6 +768,95 @@ The old lede claimed "the pattern in the feedback is consistent: one timeline, o
 
 Ask Henry for the Google Business Profile URL so each quote can link to the review it came from. Not required, and it turns an assertion into something checkable.
 
+## 29. THREE NEW FEATURED BUILDS, COPY UNVERIFIED, SEPTEMBER 1 2026
+
+Three builds were added to the front of `featuredBuilds` in
+`src/content/builds.ts`, which also makes them the three cards on the
+homepage:
+
+| Slug | Vehicle | Title |
+|---|---|---|
+| cadillac-iq-monochromatic | Cadillac IQ | Monochromatic |
+| lamborghini-sto-dsb-el-chavez | Lamborghini Huracan STO | DSB x El Chavez |
+| range-rover-rose-pink-interior | Range Rover | Rose Pink Interior |
+
+### Where the copy came from
+
+The vehicle names and the descriptors are the only part of these three
+entries that came from Liz. They were taken from her Dropbox folder
+names and nothing else. There was no build sheet, no work order, no
+photograph caption and no conversation behind them.
+
+Everything descriptive was written by us from those folder names alone:
+
+- `brief`, both paragraphs on each build
+- `stages[].detail`, every discipline description
+- `outcome`
+- `summary` and `heroAlt`
+
+It follows the same rule as the existing builds and contains no invented
+timeline, no invented specification and no invented client story. It
+describes what each discipline is and why the disciplines pair, rather
+than asserting what was done to these particular vehicles.
+
+That restraint does not make it verified. It is our writing about a
+vehicle we know only by a folder name, published as a case study of a
+real customer's car. **Liz needs to read all three and confirm or
+correct them before launch.** In particular, nobody here has confirmed
+that the discipline pairings inferred from each folder name match the
+work actually performed.
+
+All three carry `placeholder: true`.
+
+### The older three are also unconfirmed
+
+The same question is open on the three builds that preceded these:
+G-Class, M5 and F-150. Their vehicle, title, tags and type came from
+Liz's Featured Builds mock of August 14 2026, so the pairings are hers,
+but it has never been confirmed that they are real completed builds
+rather than illustrative examples she composed for the layout. Their
+`brief`, `stages[].detail` and `outcome` are ours on the same terms as
+the three above.
+
+This was already flagged as an open item in sections 8, 17 and 21. It is
+repeated here because adding three more builds of unverified origin
+raises the total to six of the nine on the page, and the three newest
+are the three most prominent.
+
+### Nine builds against a stated six, and three with no source at all
+
+`featuredBuilds` now holds nine entries. Liz has stated six at launch.
+Nobody has decided which six, or whether the number has changed. The
+page and the homepage cards both render whatever the array contains, so
+the count currently shipping is nine by default rather than by decision.
+
+Grouped by where each one came from:
+
+| Provenance | Count | Builds |
+|---|---|---|
+| Liz's Dropbox folder names, September 1 2026 | 3 | Cadillac IQ, Lamborghini Huracan STO, Range Rover |
+| Liz's mock, August 14 2026, origin unconfirmed | 3 | G-Class, M5, F-150 |
+| No recorded source | 3 | Corvette, Range Rover Sport, Sierra |
+
+The third row is the part that has never been written down before.
+`corvette-interior-audio`, `range-rover-sport-ppf-paint` and
+`sierra-blackout-lift` are not in Liz's Featured Builds mock, are not
+among the Dropbox folder names, and are not traceable to any instruction
+recorded in this log. Their vehicle, title, tags and type have no
+identified origin, which puts them on a weaker footing than the other
+six: for those, at least the vehicle and pairing are attributable to
+Liz, and only the descriptive copy is ours.
+
+They are published as case studies of real customers' vehicles on the
+same terms as the rest. All three carry `placeholder: true`.
+
+The header of `src/content/builds.ts` was rewritten on September 1 2026
+to state all three provenances at the top of the file, because it still
+described the array as "the six builds below are the six she named",
+which had not been true since the array grew past six.
+
+---
+
 ---
 
 *Log opened during the services build. Append every new item as pages are completed.*

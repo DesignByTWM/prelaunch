@@ -76,8 +76,6 @@ export default async function BuildPage({
       />
 
       <PageHero
-        image={build.hero}
-        imageAlt={build.heroAlt}
         crumbs={[
           { label: "Home", href: routes.home },
           { label: "Featured Builds", href: routes.builds },

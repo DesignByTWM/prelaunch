@@ -52,45 +52,54 @@ export default async function CityPage({
   if (!location) notFound();
 
   return (
-    <section style={{ paddingTop: "clamp(80px,11vw,150px)", paddingBottom: "clamp(80px,11vw,150px)" }}>
-      <div className="wrap" style={{ textAlign: "center" }}>
-        <Reveal>
-          <Monogram />
+    /* Uses the shared inner hero rather than its own padding. PageHero
+       does not fit: this hero is centred, its eyebrow is a plain city
+       label rather than breadcrumbs, and it closes on a link that
+       PageHero has no slot for. So it carries the same
+       `hero inner` / `hero-in` / `hero-content` structure instead and
+       inherits the shared charcoal ground and 50px spacing. */
+    <section className="hero inner">
+      <div className="hero-in">
+        <div className="wrap">
+          <Reveal className="hero-content" style={{ margin: "0 auto", textAlign: "center" }}>
+            <Monogram />
 
-          <span className="eyebrow" style={{ marginTop: 18 }}>
-            {location.name}, {nap.stateFull}
-          </span>
+            <span className="eyebrow on-dark" style={{ marginTop: 18 }}>
+              {location.name}, {nap.stateFull}
+            </span>
 
-          <h1
-            className="display"
-            style={{ fontSize: "clamp(30px,5vw,62px)", margin: "14px 0 18px" }}
-          >
-            {location.name}
-            <br />
-            coming soon.
-          </h1>
+            <h1
+              className="display"
+              style={{ fontSize: "clamp(30px,5vw,62px)", margin: "14px 0 18px" }}
+            >
+              {location.name}
+              <br />
+              coming soon.
+            </h1>
 
-          <p className="lede" style={{ margin: "0 auto 34px" }}>
-            This page is in progress. In the meantime, every discipline is
-            performed at the {nap.city} facility and clients travel in from{" "}
-            {location.name} regularly.
-          </p>
+            <p className="lede" style={{ margin: "0 auto 34px" }}>
+              This page is in progress. In the meantime, every discipline is
+              performed at the {nap.city} facility and clients travel in from{" "}
+              {location.name} regularly.
+            </p>
 
-          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href={routes.designYourBuild} className="btn btn-primary">
-              Design Your Build
-            </Link>
-            <a href={nap.phoneHref} className="btn btn-line">
-              Contact the House
-            </a>
-          </div>
+            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+              <Link href={routes.designYourBuild} className="btn btn-primary">
+                Design Your Build
+              </Link>
+              {/* Light variant: the hero ground is charcoal now. */}
+              <a href={nap.phoneHref} className="btn btn-line-light">
+                Contact the House
+              </a>
+            </div>
 
-          <p style={{ marginTop: 44 }}>
-            <Link href={routes.services} className="arrow-link">
-              See all ten disciplines →
-            </Link>
-          </p>
-        </Reveal>
+            <p style={{ marginTop: 44 }}>
+              <Link href={routes.services} className="arrow-link">
+                See all ten disciplines →
+              </Link>
+            </p>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

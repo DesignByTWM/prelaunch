@@ -57,8 +57,6 @@ export default function FaqPage() {
       />
 
       <PageHero
-        image="/hero.webp"
-        imageAlt="Completed DESIGNBYTWM build photographed in an open environmental setting"
         crumbs={[{ label: "Home", href: routes.home }, { label: "FAQ" }]}
         title={<>Questions,<br />answered.</>}
         intro="Everything clients ask before, during and after a build, plus the technical questions on all ten disciplines performed in house."

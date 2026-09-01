@@ -56,9 +56,9 @@ const allDealerFaqs = [...dealerQuickFaqs, ...dealerFaqs];
 
 /** Her program pillars, minus Priority Turnaround. See the note above. */
 const programCards = [
-  { pill: "Recon", name: "Reconditioning", frame: "/svc-paint-body.webp" },
-  { pill: "Custom", name: "Fleet Customization", frame: "/svc-wraps.webp" },
-  { pill: "Volume", name: "Volume Pricing", frame: "/svc-wheels.webp" },
+  { pill: "Recon", name: "Reconditioning", frame: "/services7paintbody.webp" },
+  { pill: "Custom", name: "Fleet Customization", frame: "/maincard3wraps.webp" },
+  { pill: "Volume", name: "Volume Pricing", frame: "/maincard4wheels.webp" },
 ];
 
 /** Her four process steps, verbatim. */
@@ -103,8 +103,6 @@ export default function DealerServicesPage() {
       />
 
       <PageHero
-        image="/build-truck.webp"
-        imageAlt="Dealership inventory prepared in the DESIGNBYTWM facility"
         crumbs={[
           { label: "Home", href: routes.home },
           { label: "Dealer Services" },
@@ -139,7 +137,7 @@ export default function DealerServicesPage() {
             <Reveal className="media rv-card">
               <div className="ph">
                 <Photo
-                  src="/mat-fitment.webp"
+                  src="/mainmaterial3fitment.webp"
                   alt="Dealership vehicle being assessed at intake"
                 />
               </div>

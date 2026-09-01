@@ -18,13 +18,16 @@ export interface Crumb {
 /**
  * PageHero
  *
- * The homepage hero treatment applied to inner pages: full photo,
- * bottom scrim, teal monogram, content anchored bottom left.
+ * The homepage hero treatment applied to inner pages: flat charcoal,
+ * teal monogram, content anchored bottom left.
  * Breadcrumbs occupy the eyebrow slot so no new element is added.
+ *
+ * No photograph. Inner heroes are flat charcoal per Jose's instruction
+ * of August 21 2026, and `.hero.inner .ph` is display:none, so the
+ * image this used to render was never visible on any page. It was still
+ * requested on every one of them, so it is gone.
  */
 export function PageHero({
-  image,
-  imageAlt,
   crumbs,
   title,
   intro,
@@ -35,8 +38,6 @@ export function PageHero({
   stats,
   hideCta = false,
 }: {
-  image: string;
-  imageAlt: string;
   crumbs: Crumb[];
   title: React.ReactNode;
   intro?: string;
@@ -55,9 +56,7 @@ export function PageHero({
 }) {
   return (
     <section className="hero inner">
-      <div className="ph">
-        <img src={image} alt={imageAlt} fetchPriority="high" />
-      </div>
+      <div className="ph" />
       <div className="hero-scrim" />
 
       <div className="hero-in">

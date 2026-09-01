@@ -51,8 +51,6 @@ export default function DesignYourBuildPage() {
       />
 
       <PageHero
-        image="/build-sedan.webp"
-        imageAlt="Completed multi discipline build by DESIGNBYTWM"
         crumbs={[
           { label: "Home", href: routes.home },
           { label: "Design Your Build" },

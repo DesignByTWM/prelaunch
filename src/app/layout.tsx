@@ -70,8 +70,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${quicksand.variable} ${inter.variable}`}>
       <body>
         {/*
-          Hides any image that fails to load, leaving the charcoal frame
-          behind it visible instead of a broken image icon.
+          Marks any image that fails to load with data-broken, which
+          globals.css hides, leaving the charcoal frame behind it visible
+          instead of a broken image icon.
+
+          It sets an attribute rather than an inline style because React
+          manages style, and mutating it before hydration causes a
+          mismatch.
 
           This has to be a plain inline script rather than the onError
           handler on the Photo component. An image referenced in server
@@ -86,7 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'){t.style.display='none'}},true)",
+              "addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'){t.setAttribute('data-broken','')}},true)",
           }}
         />
         <BrandSprite />

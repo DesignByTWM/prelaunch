@@ -70,8 +70,6 @@ export default function ServicesPage() {
       />
 
       <PageHero
-        image="/hero.webp"
-        imageAlt="Completed DESIGNBYTWM build photographed in an open environmental setting"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Services" }]}
         title={<>Ten disciplines.<br />One team.</>}
         intro="Every discipline below is practiced inside the same building by the same team, so a build drawing on four of them is still planned and run as a single project, with one point of contact."

@@ -44,8 +44,6 @@ export default function LocationsPage() {
       />
 
       <PageHero
-        image="/hero.webp"
-        imageAlt="Completed DESIGNBYTWM build photographed in an open environmental setting"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Areas We Serve" }]}
         title={
           <>

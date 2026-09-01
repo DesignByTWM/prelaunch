@@ -70,8 +70,6 @@ export default function JournalPage() {
       />
 
       <PageHero
-        image="/mat-metal.webp"
-        imageAlt="Detail of finish work in the DESIGNBYTWM facility"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Journal" }]}
         title="Insights from the shop floor."
         intro="Straight answers on wraps, protection and care, written by the team that does the work."

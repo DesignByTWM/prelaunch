@@ -147,6 +147,11 @@ h3.display { font-size: clamp(20px, 2vw, 26px); }
 /* ===== MEDIA FRAMES ===== */
 .ph { position: relative; background: repeating-linear-gradient(135deg,#ececec 0 14px,#e3e3e3 14px 28px); overflow: hidden; }
 .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* Set by the inline error listener in layout.tsx. A data attribute
+   rather than an inline style, because React manages style and
+   mutating it before hydration causes a mismatch. */
+img[data-broken] { display: none !important; }
 .r169 { aspect-ratio: 16/9; } .r45 { aspect-ratio: 4/5; } .r11 { aspect-ratio: 1/1; }
 /* Journal featured frame. Liz uses 16:10 here rather than 16:9. */
 .r1610 { aspect-ratio: 16/10; }
@@ -214,6 +219,13 @@ header.site {
 .hero-content .mark-mono { margin-bottom: 16px; }
 .hero-content h1 { color: var(--white); margin: 12px 0 18px; }
 .hero-content p { color: rgba(255,255,255,.88); font-size: 15.5px; max-width: 52ch; margin-bottom: 28px; }
+/* A hero that passes hideCta ends on this paragraph rather than on the
+   button row, and its 28px would otherwise land on top of the hero's own
+   bottom padding. Zeroed so the spacing is the same either way. */
+.hero-content > p:last-child { margin-bottom: 0; }
+/* The underline is black by default, which disappears on the charcoal
+   hero ground. */
+.hero-content .arrow-link { border-bottom-color: rgba(255,255,255,.6); }
 
 /* ===== TICKER ===== */
 .ticker {
@@ -923,12 +935,16 @@ section#intake { background: var(--off-white); }
   display: block;
   height: auto;
   min-height: 0;
+  /* Zeroed for the same reason as .hero.inner: the base
+     `section { padding: clamp(64px,9vw,110px) 0 }` would otherwise stack
+     on top of the hero's own spacing. .hero-in owns it. */
+  padding: 0;
 }
 .hero.svc-hero .hero-in {
   position: relative;
   inset: auto;
   width: 100%;
-  padding: clamp(96px,13vh,150px) 0 clamp(30px,3.4vh,40px);
+  padding: clamp(36px,3.5vw,50px) 0 clamp(36px,3.5vw,50px);
 }
 
 /* The section directly after the service hero opens tighter, so the stat
@@ -950,14 +966,28 @@ section#intake { background: var(--off-white); }
   display: block;
   height: auto;
   min-height: 0;
+  /* Zeroed deliberately. Every <section> takes
+     `padding: clamp(64px,9vw,110px) 0` from the base rule near the top
+     of this file, and that would stack on top of the hero's own
+     spacing: at desktop it added 110px above and below, so the hero
+     looked padded no matter what .hero-in was set to. .hero-in owns
+     the spacing instead, and is the only place it is declared. */
+  padding: 0;
 }
 .hero.inner .ph,
 .hero.inner .hero-scrim { display: none; }
+/* Inner heroes are sized by their content. Liz confirmed no photography
+   on any inner hero, so the frame no longer needs to hold space for an
+   image. 50px above the monogram and 50px below the last element at
+   desktop, floored at 36px so it does not collapse on a narrow viewport.
+
+   Piloted on /services and adopted as the standard for every inner page
+   on September 1 2026, which is why there is no longer a variant class. */
 .hero.inner .hero-in {
   position: relative;
   inset: auto;
   width: 100%;
-  padding: clamp(96px,13vh,150px) 0 clamp(30px,3.4vh,40px);
+  padding: clamp(36px,3.5vw,50px) 0 clamp(36px,3.5vw,50px);
 }
 .hero.inner + section { padding-top: clamp(34px,4.5vw,56px); }
 .hero.svc-hero .hero-content { max-width: 780px; }

@@ -35,8 +35,6 @@ export function LegalDocument({ slug }: { slug: string }) {
       />
 
       <PageHero
-        image="/mat-metal.webp"
-        imageAlt="Detail of finish work in the DESIGNBYTWM facility"
         crumbs={[{ label: "Home", href: routes.home }, { label: doc.title }]}
         title={doc.title}
         intro={doc.summary}

@@ -42,7 +42,7 @@ export function organizationSchema() {
     url: site.url,
     telephone: nap.phone,
     email: nap.email,
-    image: `${site.url}/hero.webp`,
+    image: `${site.url}/dbtwmmainpagehero.webp`,
     logo: {
       "@type": "ImageObject",
       url: `${site.url}/logos/designbytwm_logo_black.svg`,

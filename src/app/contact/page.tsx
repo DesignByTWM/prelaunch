@@ -68,8 +68,6 @@ export default function ContactPage() {
       />
 
       <PageHero
-        image="/hero.webp"
-        imageAlt="Completed DESIGNBYTWM build photographed in an open environmental setting"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Contact" }]}
         title="Let's talk about your build."
         intro="Text, call or stop by the shop, whichever is easiest."

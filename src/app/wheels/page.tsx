@@ -95,8 +95,6 @@ export default function WheelsPage() {
       />
 
       <PageHero
-        image="/wheel-1.webp"
-        imageAlt="Forged wheel fitted to a customized vehicle"
         crumbs={[{ label: "Home", href: routes.home }, { label: "Shop Wheels" }]}
         title="Fitment first. Then the look."
         intro="Browse the wheel program. Fitment is confirmed for your exact vehicle before anything is ordered."

@@ -70,8 +70,6 @@ export default function FeaturedBuildsPage() {
       />
 
       <PageHero
-        image="/build-suv.webp"
-        imageAlt="Completed multi-discipline build by DESIGNBYTWM"
         crumbs={[
           { label: "Home", href: routes.home },
           { label: "Featured Builds" },

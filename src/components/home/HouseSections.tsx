@@ -11,9 +11,9 @@ import { routes } from "@/lib/site";
    ============================================================ */
 
 const materials = [
-  { image: "/mat-metal.webp", alt: "Hand-finished panel detail", caption: "Hand-finished metal" },
-  { image: "/mat-stitch.webp", alt: "Leather stitching detail", caption: "Cabin stitching detail" },
-  { image: "/mat-fitment.webp", alt: "Wheel and brake fitment detail", caption: "Wheel & brake fitment" },
+  { image: "/mainmaterial1metal.webp", alt: "Hand-finished panel detail", caption: "Hand-finished metal" },
+  { image: "/mainmaterial2stitch.webp", alt: "Leather stitching detail", caption: "Cabin stitching detail" },
+  { image: "/mainmaterial3fitment.webp", alt: "Wheel and brake fitment detail", caption: "Wheel & brake fitment" },
 ];
 
 export function Materials() {

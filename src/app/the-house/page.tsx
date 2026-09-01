@@ -56,8 +56,6 @@ export default function TheHousePage() {
       />
 
       <PageHero
-        image="/hero.webp"
-        imageAlt="Completed DESIGNBYTWM build photographed in an open environmental setting"
         crumbs={[{ label: "Home", href: routes.home }, { label: "The House" }]}
         title={<>Not a shop.<br />A house.</>}
         intro="Ten disciplines, one building, one team and one point of contact. Here is what that means for a vehicle that comes through the door."
