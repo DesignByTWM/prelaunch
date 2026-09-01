@@ -2,10 +2,14 @@
  * FEATURED BUILDS
  *
  * ============================================================
- * SIX BUILDS ON LIZ'S VERIFIED SCOPE, PLUS ONE AWAITING AN ANSWER
+ * SIX BUILDS, ALL ON LIZ'S VERIFIED SCOPE
  * ============================================================
- * Liz supplied verified scope for six builds on September 2 2026. It is
- * client-supplied fact and it supersedes everything we had written.
+ * Liz supplied verified scope for six builds on September 2 2026 and
+ * confirmed the list is those six. It is client-supplied fact and it
+ * supersedes everything we had written.
+ *
+ * The array holds exactly those six and nothing else. Every entry in it
+ * is client confirmed.
  *
  * HER SIX, IN HER ORDER:
  *      cadillac-iq-monochromatic         Cadillac IQ
@@ -43,16 +47,15 @@
  * g-class-complete-transformation is a satin black wrap on a G 63. That
  * is the cost of not breaking a published link.
  *
- * REMOVED September 2 2026, not on her list:
+ * REMOVED September 2 2026, none of them on her list:
  *      m5-wrap-wheel-package             BMW M5
  *      f150-suspension-overland          Ford F-150
- *
- * UNRESOLVED, HELD LAST:
  *      range-rover-sport-ppf-paint       Range Rover Sport
- *    Not on her list of six and not covered by her scope. It is not yet
- *    clear whether it duplicates her Range Rover entry or is a separate
- *    vehicle. Left in place and untouched, still placeholder: true, with
- *    the copy we wrote. Do not publish it as verified.
+ *
+ *    The Range Rover Sport was held back rather than deleted while it
+ *    was unclear whether it duplicated her Range Rover entry. Liz
+ *    confirmed her six and it is not among them, so it is gone. That
+ *    was the last entry carrying copy we wrote and never verified.
  *
  * `duration` is intentionally absent. Inventing a turnaround figure for
  * a real customer's vehicle is the kind of claim that gets a business in
@@ -60,12 +63,11 @@
  * in services.ts. Her scope of September 2 carries no timings either.
  *
  * STILL REQUIRED BEFORE LAUNCH:
- *   - Her answer on range-rover-sport-ppf-paint
  *   - Real photography, promised by Liz on August 14
  *   - Written owner permission where a vehicle is identifiable
  *
- * Tracked in CLIENT_REVIEW_NOTES.md section 32, which supersedes the
- * build provenance parts of sections 8, 17, 21, 29 and 31.
+ * Tracked in CLIENT_REVIEW_NOTES.md sections 32 and 33, which supersede
+ * the build provenance parts of sections 8, 17, 21, 29 and 31.
  *
  * Data shape mirrors what Sanity will return, so switching to the
  * CMS is a data source change and not a rewrite.
@@ -104,8 +106,21 @@ export interface FeaturedBuild {
    * array pointed at generic discipline photographs standing in for
    * pictures of the actual vehicle, which is exactly the substitution
    * this project has been removing everywhere else.
+   *
+   * Where a delivered filename does not follow the convention, override
+   * it per build with galleryFiles below rather than bending the prefix.
    */
   galleryPrefix: string;
+  /**
+   * Explicit gallery filenames, overriding the galleryPrefix convention
+   * for this build only. Set it when the photography arrives under names
+   * that do not match, which is how these files are being produced.
+   *
+   * Paths are used verbatim and in the order given, so they are absolute
+   * from /public. Leave it unset and the convention applies as normal.
+   * Photo still hides anything that 404s.
+   */
+  galleryFiles?: string[];
   placeholder: boolean;
 }
 
@@ -116,9 +131,16 @@ export const featuredBuilds: FeaturedBuild[] = [
     vehicle: "Cadillac IQ",
     type: "SUV",
     summary: "A satin wrap with the wheels colour matched to it.",
-    hero: "/mainfeatbuild1cadillac.webp",
+    hero: "/featurebuild1cadillac.webp",
     heroAlt: "Cadillac IQ wrapped in Satin Silver White Aluminum on colour matched Giovanna Panik wheels",
     galleryPrefix: "cadillac",
+    /* Delivered under ad hoc names rather than the convention. */
+    galleryFiles: [
+      "/fbcad1.webp",
+      "/fbcad2.webp",
+      "/fbcad3.webp",
+      "/fbcad4.webp",
+    ],
     tags: ["Wraps", "Wheels"],
     brief: [
       "Two disciplines specified as one finish. The body is wrapped in Satin Silver White Aluminum and the wheels are matched to it rather than set against it.",
@@ -145,9 +167,16 @@ export const featuredBuilds: FeaturedBuild[] = [
     vehicle: "Lamborghini Huracan STO",
     type: "Coupe",
     summary: "A bespoke Tiffany Blue interior with a 16 speaker audio system.",
-    hero: "/mainfeatbuild2lambo.webp",
+    hero: "/featurebuild2lambo.webp",
     heroAlt: "Lamborghini Huracan STO with a bespoke Tiffany Blue leather interior",
     galleryPrefix: "lambo",
+    /* Delivered under ad hoc names rather than the convention. */
+    galleryFiles: [
+      "/fblambo1.webp",
+      "/fblambo2.webp",
+      "/fblambo3.webp",
+      "/fblambo4.webp",
+    ],
     tags: ["Interior", "Audio", "Paint & Body"],
     brief: [
       "A collaboration between DESIGNBYTWM and El Chavez, executed inside the car rather than on the paint. The cabin is Tiffany Blue leather throughout, with the El Chavez signature embroidered into the seats.",
@@ -180,9 +209,16 @@ export const featuredBuilds: FeaturedBuild[] = [
     vehicle: "Range Rover",
     type: "SUV",
     summary: "A full blush pink cabin, with a blackout package and Forgiato wheels outside.",
-    hero: "/mainfeatbuild3rangerover.webp",
+    hero: "/featurebuild3range.webp",
     heroAlt: "Range Rover with a full blush pink interior transformation and Forgiato wheels",
     galleryPrefix: "rangerover",
+    /* Delivered under ad hoc names rather than the convention. */
+    galleryFiles: [
+      "/fbrange1.webp",
+      "/fbrange2.webp",
+      "/fbrange3.webp",
+      "/fbrange4.webp",
+    ],
     tags: ["Interior", "Blackout", "Wheels"],
     brief: [
       "The cabin is the build. A full blush pink interior transformation means every surface inside is specified together rather than matched to a stock trim.",
@@ -214,9 +250,16 @@ export const featuredBuilds: FeaturedBuild[] = [
     vehicle: "GMC Sierra Denali HD Ultimate",
     type: "Truck",
     summary: "A two-tone wrap on a lifted truck, blacked out and running RBP wheels.",
-    hero: "/build-truck.webp",
+    hero: "/featurebuild4denali.webp",
     heroAlt: "GMC Sierra Denali HD Ultimate in a two-tone wrap on a suspension lift with RBP wheels",
     galleryPrefix: "sierra",
+    /* Delivered under ad hoc names rather than the convention. */
+    galleryFiles: [
+      "/fbdenali1.webp",
+      "/fbdenali2.webp",
+      "/fbdenali3.webp",
+      "/fbdenali4.webp",
+    ],
     tags: ["Blackout", "Wraps", "Suspension", "Wheels", "Lighting"],
     brief: [
       "Five disciplines on one truck. The wrap and the blackout decide what it reads as, the lift and the wheels decide how it sits.",
@@ -258,9 +301,16 @@ export const featuredBuilds: FeaturedBuild[] = [
     vehicle: "Chevrolet Corvette Stingray C8",
     type: "Coupe",
     summary: "A gloss desert tan colour change, blacked out from the roof to the wheels.",
-    hero: "/maincard5interior.webp",
+    hero: "/featurebuild5corvette.webp",
     heroAlt: "Chevrolet Corvette Stingray C8 wrapped in Gloss Desert Tan with a gloss black roof",
     galleryPrefix: "corvette",
+    /* Delivered under ad hoc names rather than the convention. */
+    galleryFiles: [
+      "/fbcorve1.webp",
+      "/fbcorve2.webp",
+      "/fbcorve3.webp",
+      "/fbcorve4.webp",
+    ],
     tags: ["Wraps", "Blackout", "Wheels"],
     brief: [
       "A colour change in Gloss Desert Tan, with everything that would otherwise interrupt it taken to gloss black.",
@@ -293,9 +343,16 @@ export const featuredBuilds: FeaturedBuild[] = [
     vehicle: "Mercedes-AMG G 63",
     type: "SUV",
     summary: "A satin black colour change over a black-on-black exterior, with a bespoke sound system.",
-    hero: "/build-suv.webp",
+    hero: "/featurebuild6benz.webp",
     heroAlt: "Mercedes-AMG G 63 in a full satin black wrap with blacked out badging and grille",
     galleryPrefix: "g63",
+    /* Delivered under ad hoc names rather than the convention. */
+    galleryFiles: [
+      "/fbbenz1.webp",
+      "/fbbenz2.webp",
+      "/fbbenz3.webp",
+      "/fbbenz4.webp",
+    ],
     tags: ["Wraps", "Blackout", "Audio"],
     brief: [
       "Satin black over the whole vehicle, with every bright element on the exterior taken to black so nothing breaks the finish.",
@@ -321,38 +378,6 @@ export const featuredBuilds: FeaturedBuild[] = [
     ],
     outcome: "A black-on-black exterior with the audio built into the factory controls.",
     placeholder: false,
-  },
-  {
-    slug: "range-rover-sport-ppf-paint",
-    title: "PPF & Paint Correction",
-    vehicle: "Range Rover Sport",
-    type: "SUV",
-    summary: "Paint brought back to standard before any film was laid over it.",
-    hero: "/maincard2ppf.webp",
-    heroAlt: "Range Rover Sport with paint protection film applied over corrected paint",
-    galleryPrefix: "rrsport",
-    tags: ["PPF", "Paint & Body"],
-    brief: [
-      "Film applied over unresolved paint permanently seals in whatever is underneath it.",
-      "Correction and protection are one job in the right order, which is the only order worth doing them in.",
-    ],
-    stages: [
-      {
-        discipline: "Paint & Body",
-        slug: "paint-and-body",
-        detail:
-          "Correction performed to our own standard before any protection was considered, with colour matched to the vehicle rather than to the paint code.",
-      },
-      {
-        discipline: "Paint Protection Film",
-        slug: "paint-protection-film",
-        detail:
-          "Every panel measured and cut in house, then installed under controlled shop conditions with no silvering at the edges and no visible seams.",
-      },
-    ],
-    outcome:
-      "Protection applied to paint worth protecting, in the sequence that makes the film an investment rather than a cover.",
-    placeholder: true,
   },
 ];
 

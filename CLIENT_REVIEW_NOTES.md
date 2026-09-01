@@ -1064,6 +1064,51 @@ whether it duplicates her Range Rover entry or is a separate vehicle.
 
 ---
 
+## 33. RANGE ROVER SPORT REMOVED, BUILD LIST CLOSED, SEPTEMBER 2 2026
+
+Liz confirmed her featured builds are six. `range-rover-sport-ppf-paint`
+is not among them and has been deleted from `src/content/builds.ts`.
+
+**This closes the open question from section 31.** That entry was held
+back rather than deleted while it was unclear whether it duplicated her
+Range Rover, so the answer is now on record: it is not part of the
+featured set. Nothing elsewhere in `src/` referenced the slug, so the
+only trace left is the removal note in the builds.ts header. Its url now
+404s.
+
+### The array is closed at six
+
+| Order | Slug | Vehicle |
+|---|---|---|
+| 1 | cadillac-iq-monochromatic | Cadillac IQ |
+| 2 | lamborghini-sto-dsb-el-chavez | Lamborghini Huracan STO |
+| 3 | range-rover-rose-pink-interior | Range Rover |
+| 4 | sierra-blackout-lift | GMC Sierra Denali HD Ultimate |
+| 5 | corvette-interior-audio | Chevrolet Corvette Stingray C8 |
+| 6 | g-class-complete-transformation | Mercedes-AMG G 63 |
+
+All six carry her verified scope of September 2 2026 and
+`placeholder: false`. The first three are the homepage cards.
+
+Three entries have now been removed against her list: BMW M5 and Ford
+F-150 in section 31, plus the Range Rover Sport here.
+
+### What this settles
+
+The provenance thread running through sections 8, 17, 21, 29, 31 and 32
+is closed on the question of **which builds are real**. Every entry in
+the array is client confirmed. The Range Rover Sport was the last one
+carrying descriptive copy we wrote that Liz had never seen.
+
+One distinction from section 32 still stands and should not be lost now
+that the list is settled: what she verified is the vehicles, the build
+names, the order and the disciplines. The phrasing of `brief`,
+`summary`, `outcome` and `heroAlt` is still ours, arranging her scope
+into sentences. It introduces no timeline, client story or specification
+beyond what she supplied, but it has not been read back to her.
+
+---
+
 ---
 
 *Log opened during the services build. Append every new item as pages are completed.*

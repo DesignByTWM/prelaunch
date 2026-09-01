@@ -332,7 +332,7 @@ export const journalPosts: JournalPost[] = [
     category: "Aftercare",
     readingTime: "5 min",
     published: "2026-07-02",
-    hero: "/build-sedan.webp",
+    hero: "/svc-ppf.webp",
     heroAlt: "Wrapped vehicle photographed in Houston sunlight",
     intro: [
       "A wrap that lasts five years in a mild climate might give you three here. Most of that gap is avoidable, and almost none of it is about the film you chose.",
