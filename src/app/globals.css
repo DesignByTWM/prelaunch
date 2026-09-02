@@ -1424,3 +1424,18 @@ section.dark .sec-head .eyebrow { color: var(--signal-teal); }
 @media (max-width: 600px) {
   .field-note { display: none; }
 }
+
+/* =============================================================
+   CLOSING BAND FORM  ·  SUCCESS PANEL
+   Added September 2 2026, fixing a white heading on a white panel.
+
+   The success panel keeps its own light ground, .form-done is
+   var(--off-white) everywhere, so it is the one part of the band
+   that must not take the band's light text. The heading carried no
+   colour of its own and so inherited var(--white) from .final-cta,
+   which put white on off-white. These pin it back, scoped to
+   .final-cta so the panel is untouched on every other page.
+   ============================================================= */
+.final-cta .form-done h3 { color: var(--black); }
+.final-cta .form-done p { color: var(--gray-mid); }
+.final-cta .form-done .eyebrow { color: var(--signal-teal); }
