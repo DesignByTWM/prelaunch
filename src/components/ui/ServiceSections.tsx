@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Monogram } from "@/components/BrandMarks";
 import { Reveal } from "@/components/Reveal";
 import { Photo } from "@/components/ui/Photo";
-import { routes, nap } from "@/lib/site";
+import { IntakeForm } from "@/components/home/IntakeForm";
+import { routes } from "@/lib/site";
 import type {
   ServiceCoverage,
   ServiceProcessStep,
@@ -64,11 +65,13 @@ export function ServiceHero({
   eyebrow,
   title,
   lede,
+  ctaLabel,
   stats,
 }: {
   eyebrow: string;
   title: string;
   lede: string;
+  ctaLabel: string;
   stats: string[];
 }) {
   return (
@@ -82,9 +85,9 @@ export function ServiceHero({
             <p>{lede}</p>
 
             <div className="hero-actions">
-              <Link href={routes.designYourBuild} className="btn btn-primary">
-                Design Your Build
-              </Link>
+              <a href="#build" className="btn btn-primary">
+                {ctaLabel}
+              </a>
               <a href="#recent" className="btn btn-line-light">
                 View Recent Work
               </a>
@@ -132,13 +135,12 @@ export function Coverage({
         <Reveal
           key={item.name}
           as="a"
-          href="#packages"
+          href="#build"
           className="cov rv-card"
           delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
         >
           <div className="ph r45">
             <Photo src={`/${prefix}-cov-${i + 1}.webp`} alt={item.name} />
-            <span className="pill">{item.pill}</span>
           </div>
           <div className="cov-body">
             <h3>{item.name}</h3>
@@ -222,7 +224,6 @@ export function RecentWork({
             </div>
             <div className="recent-scrim" />
             <span className="recent-cap label">{item.name}</span>
-            <span className="pill">{item.tag}</span>
           </Reveal>
         ))}
       </div>
@@ -249,10 +250,8 @@ export function RecentWork({
  */
 export function Packages({
   items,
-  serviceName,
 }: {
   items: ServicePackage[];
-  serviceName: string;
 }) {
   return (
     <div className="pkg-grid" id="packages">
@@ -275,7 +274,7 @@ export function Packages({
           </ul>
           {pkg.note && <p className="pkg-note">{pkg.note}</p>}
           <Link
-            href={`${routes.designYourBuild}?service=${encodeURIComponent(serviceName)}&tier=${encodeURIComponent(pkg.name)}`}
+            href={`?tier=${encodeURIComponent(pkg.name)}#build`}
             className={`btn ${pkg.featured ? "btn-primary" : "btn-line"}`}
           >
             Request a Quote
@@ -289,20 +288,25 @@ export function Packages({
 /**
  * FinalCta
  *
- * The closing band. Two calls to action, matching the structure Liz
- * asked to be carried across all ten pages: primary into the build
- * flow, secondary to the text line.
+ * The closing band. The two buttons that stood here were replaced on
+ * September 2 2026 by the intake form itself, so a service page ends in
+ * the conversion rather than in a link to it. Every route that used to
+ * leave the page, the hero button, the coverage cards and the package
+ * tiers, now scrolls to #build on this same page.
  *
- * The SMS number is read from lib/site.ts. It is never written into a
- * component. Her mocks carried a placeholder 713 number in 54 places
- * and none of it reached this file.
+ * The form arrives pre-selected to this service and stamped with this
+ * page's source tag, and a tier button adds ?tier= for the house email.
  */
 export function FinalCta({
   title,
   lede,
+  serviceName,
+  sourceTag,
 }: {
   title: string;
   lede: string;
+  serviceName: string;
+  sourceTag: string;
 }) {
   return (
     <Reveal className="final-cta">
@@ -311,14 +315,12 @@ export function FinalCta({
         <span className="eyebrow on-dark">Ready When You Are</span>
         <h2 className="display">{title}</h2>
         <p>{lede}</p>
-        <div className="final-actions">
-          <Link href={routes.designYourBuild} className="btn btn-primary">
-            Design Your Build
-          </Link>
-          <a href={nap.smsHref} className="btn btn-line-light">
-            Contact the House
-          </a>
-        </div>
+        <IntakeForm
+          bare
+          tierParam
+          preselect={serviceName}
+          source={sourceTag}
+        />
       </div>
     </Reveal>
   );

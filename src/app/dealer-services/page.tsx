@@ -7,7 +7,7 @@ import { PageHero, SecHead, FaqBlock } from "@/components/ui/Page";
 import { DealerForm } from "@/components/forms/DealerForm";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { dealerPackages, dealerFaqs, dealerQuickFaqs } from "@/content/dealers";
-import { nap, routes, serviceAreas, site } from "@/lib/site";
+import { routes, serviceAreas, site } from "@/lib/site";
 
 /**
  * DEALER SERVICES DIVISION
@@ -56,9 +56,9 @@ const allDealerFaqs = [...dealerQuickFaqs, ...dealerFaqs];
 
 /** Her program pillars, minus Priority Turnaround. See the note above. */
 const programCards = [
-  { pill: "Recon", name: "Reconditioning", frame: "/services7paintbody.webp" },
-  { pill: "Custom", name: "Fleet Customization", frame: "/maincard3wraps.webp" },
-  { pill: "Volume", name: "Volume Pricing", frame: "/maincard4wheels.webp" },
+  { name: "Reconditioning", frame: "/services7paintbody.webp" },
+  { name: "Fleet Customization", frame: "/maincard3wraps.webp" },
+  { name: "Volume Pricing", frame: "/maincard4wheels.webp" },
 ];
 
 /** Her four process steps, verbatim. */
@@ -111,8 +111,6 @@ export default function DealerServicesPage() {
         intro="Reconditioning, customization and fleet work, handled by the same in-house team, on dealer timelines."
         ctaLabel="Apply for an Account"
         ctaHref="#apply"
-        secondaryLabel="Text the House"
-        secondaryHref={nap.smsHref}
         stats={["Volume Pricing", "One Point of Contact"]}
       />
 
@@ -162,7 +160,6 @@ export default function DealerServicesPage() {
               >
                 <div className="ph r45">
                   <Photo src={card.frame} alt={card.name} />
-                  <span className="pill">{card.pill}</span>
                 </div>
                 <div className="cov-body">
                   <h3>{card.name}</h3>

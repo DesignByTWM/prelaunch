@@ -1377,3 +1377,50 @@ section.dark .sec-head .eyebrow { color: var(--signal-teal); }
   letter-spacing: .10em; font-size: clamp(19px,2.4vw,24px); margin: 10px 0 12px;
 }
 .form-done p { font-size: 14px; color: var(--gray-mid); }
+
+/* =============================================================
+   CLOSING BAND FORM  ·  SERVICE PAGES
+   Added September 2 2026. The two buttons that closed a service
+   page were replaced by the intake form itself.
+
+   Every rule here is scoped to .final-cta. The form card is shared
+   with the homepage, /contact, /dealer-services and the build flow,
+   all of which sit on light ground and must not inherit any of
+   this. Nothing above this block is modified.
+   ============================================================= */
+.final-cta .final-in { max-width: 780px; }
+
+/* The band already carries generous padding, so the card gives up
+   its own and becomes an outline rather than a panel. */
+.final-cta .form-card {
+  background: transparent; border: 1px solid rgba(255,255,255,.18);
+  text-align: left; padding: clamp(0px,2vw,8px); margin-top: 8px;
+}
+.final-cta .field label { color: rgba(255,255,255,.72); }
+.final-cta input, .final-cta select, .final-cta textarea {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18);
+  color: var(--white);
+}
+.final-cta input::placeholder, .final-cta textarea::placeholder {
+  color: rgba(255,255,255,.42);
+}
+.final-cta input:focus, .final-cta select:focus, .final-cta textarea:focus {
+  border-color: var(--white);
+}
+/* The native dropdown paints on the OS surface, not the band, so the
+   options need the light treatment back or they are unreadable. */
+.final-cta select option { background: var(--white); color: var(--black); }
+.final-cta .form-note, .final-cta .form-status { color: rgba(255,255,255,.72); }
+
+/* The label and its pre-selected marker share one line. */
+.field-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.field-note {
+  font-size: 11px; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--signal-teal);
+}
+
+/* Narrow enough that the marker would wrap under the label, which
+   reads as a second field. It is confirmation, not instruction. */
+@media (max-width: 600px) {
+  .field-note { display: none; }
+}

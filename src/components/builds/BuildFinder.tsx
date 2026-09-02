@@ -92,7 +92,6 @@ export function BuildFinder({ builds }: { builds: FeaturedBuild[] }) {
             >
               <div className="ph r45">
                 <Photo src={build.hero} alt={build.heroAlt} />
-                <span className="pill">{build.type}</span>
               </div>
               <div className="build-card-body">
                 <h3>

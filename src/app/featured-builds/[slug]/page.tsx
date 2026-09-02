@@ -85,8 +85,40 @@ export default async function BuildPage({
         intro={`${build.vehicle} · ${build.summary}`}
       />
 
-      {/* Brief */}
+      {/* Gallery */}
       <section>
+        <div className="wrap">
+          <SecHead
+            eyebrow="Gallery"
+            title={<>The vehicle.</>}
+            lede="Every finish in these frames was applied here, under one roof."
+          />
+          {/* Four frames. galleryFiles wins where the delivered names do
+              not follow the convention, otherwise they are derived as
+              /gallery-{prefix}-1.webp through -4.webp. Photo hides a file
+              that is not there yet, so an undelivered slot stays flat
+              charcoal rather than breaking. */}
+          <div className="build-gallery">
+            {(
+              build.galleryFiles ??
+              [1, 2, 3, 4].map((n) => `/gallery-${build.galleryPrefix}-${n}.webp`)
+            ).map((src, i) => (
+              <Reveal
+                key={src}
+                card
+                delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
+              >
+                <div className="ph r45">
+                  <Photo src={src} alt={`${build.vehicle}, ${build.title}`} />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Brief */}
+      <section className="alt">
         <div className="wrap split">
           <SecHead eyebrow="The Brief" title={<>Why these disciplines<br />were planned together.</>} />
           <Reveal className="prose">
@@ -112,7 +144,7 @@ export default async function BuildPage({
       </section>
 
       {/* Stages */}
-      <section className="alt">
+      <section>
         <div className="wrap">
           <SecHead
             eyebrow="The Build"
@@ -138,34 +170,9 @@ export default async function BuildPage({
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section>
-        <div className="wrap">
-          <SecHead eyebrow="Finished" title={<>The result.</>} lede={build.outcome} />
-          {/* Four frames. galleryFiles wins where the delivered names do
-              not follow the convention, otherwise they are derived as
-              /gallery-{prefix}-1.webp through -4.webp. Photo hides a file
-              that is not there yet, so an undelivered slot stays flat
-              charcoal rather than breaking. */}
-          <div className="build-gallery">
-            {(
-              build.galleryFiles ??
-              [1, 2, 3, 4].map((n) => `/gallery-${build.galleryPrefix}-${n}.webp`)
-            ).map((src, i) => (
-              <Reveal
-                key={src}
-                card
-                delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
-              >
-                <div className="ph r45">
-                  <Photo src={src} alt={`${build.vehicle}, ${build.title}`} />
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal className="prose">
+            <p style={{ marginTop: 28 }}>{build.outcome}</p>
+          </Reveal>
         </div>
       </section>
 

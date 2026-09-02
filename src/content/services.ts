@@ -48,8 +48,6 @@ export interface ServiceFaq {
 
 /** A named sub variant of a discipline. Drives the coverage grid. */
 export interface ServiceCoverage {
-  /** Short badge over the image. */
-  pill: string;
   name: string;
 }
 
@@ -62,7 +60,6 @@ export interface ServiceProcessStep {
 
 export interface ServiceRecentWork {
   name: string;
-  tag: string;
 }
 
 export interface ServicePackage {
@@ -123,6 +120,13 @@ export interface Service {
 
   /* ---- Layout copy, from Liz's approved mocks of August 14 2026 ---- */
 
+  /**
+   * Per-service CTA label, approved by Liz September 2 2026.
+   * Renders on the hero button, the closing band button, and as
+   * the closing band headline. Replaces the generic
+   * "Design Your Build" on service pages only.
+   */
+  ctaLabel: string;
   /** Page H1. Replaces the service name as the visible headline. */
   heroTitle: string;
   /** Hero supporting line, sits under the H1. */
@@ -183,6 +187,7 @@ export const services: Service[] = [
     primaryKeyword: "blackout package Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
+    ctaLabel: "Design Your Blackout",
     heroTitle: "Every detail, finished in black.",
     heroLede:
       "Chrome delete, trim wrap and gloss-to-matte conversions, planned as one cohesive blackout, not a patchwork of separate jobs.",
@@ -196,10 +201,10 @@ export const services: Service[] = [
       "Done right, a blackout package changes the whole read of a vehicle, not just the trim. Every surface is planned together so the finish is consistent panel to panel, then applied by the same in-house team from first piece to last.",
     coverageTitle: "Choose your coverage",
     coverage: [
-      { pill: "Full", name: "Full Blackout Package" },
-      { pill: "Trim", name: "Trim & Badge Blackout" },
-      { pill: "Chrome", name: "Chrome Delete" },
-      { pill: "Wheels", name: "Wheel & Caliper Blackout" },
+      { name: "Full Blackout Package" },
+      { name: "Trim & Badge Blackout" },
+      { name: "Chrome Delete" },
+      { name: "Wheel & Caliper Blackout" },
     ],
     processStatement: "Every surface, unified.",
     processTitle: "The process",
@@ -227,10 +232,10 @@ export const services: Service[] = [
     ],
     recentTitle: "Design directions",
     recentWork: [
-      { name: "Full Blackout", tag: "Full" },
-      { name: "Chrome Delete", tag: "Trim" },
-      { name: "Badge & Trim", tag: "Accent" },
-      { name: "Wheel Blackout", tag: "Detail" },
+      { name: "Full Blackout" },
+      { name: "Chrome Delete" },
+      { name: "Badge & Trim" },
+      { name: "Wheel Blackout" },
     ],
     packagesTitle: "Find your coverage level",
     packages: [
@@ -266,7 +271,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    ctaTitle: "Design your blackout",
+    ctaTitle: "Design Your Blackout",
     ctaLede:
       "Tell us about your vehicle and how much of it you want blacked out. We'll plan it, price it and book it, all in-house.",
     faqs: [
@@ -317,6 +322,7 @@ export const services: Service[] = [
     primaryKeyword: "paint protection film Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
+    ctaLabel: "Design Your Protection",
     heroTitle: "Protection planned before the first mile.",
     heroLede:
       "Self-healing film applied to the panels that take the most impact, fitted and installed in-house alongside the rest of your build.",
@@ -330,10 +336,10 @@ export const services: Service[] = [
       "A PPF install should disappear into the car. Edges are wrapped where the panel allows, seams are placed with intent, and every panel is measured and cut in-house before it goes on under controlled shop conditions.",
     coverageTitle: "Choose your coverage",
     coverage: [
-      { pill: "Full", name: "Full Front Package" },
-      { pill: "Track", name: "Track Package (High-Impact)" },
-      { pill: "Body", name: "Full Vehicle Coverage" },
-      { pill: "Touch", name: "High-Touch Panels" },
+      { name: "Full Front Package" },
+      { name: "Track Package (High-Impact)" },
+      { name: "Full Vehicle Coverage" },
+      { name: "High-Touch Panels" },
     ],
     processStatement: "Protection you never see.",
     processTitle: "The process",
@@ -361,10 +367,10 @@ export const services: Service[] = [
     ],
     recentTitle: "Design directions",
     recentWork: [
-      { name: "Full Front Package", tag: "Front" },
-      { name: "Full Body Coverage", tag: "Complete" },
-      { name: "Track Package", tag: "Track" },
-      { name: "Edge Wrap Detail", tag: "Craft" },
+      { name: "Full Front Package" },
+      { name: "Full Body Coverage" },
+      { name: "Track Package" },
+      { name: "Edge Wrap Detail" },
     ],
     packagesTitle: "Find your coverage level",
     packages: [
@@ -401,7 +407,7 @@ export const services: Service[] = [
         note: "Ceramic coating is a liquid glass layer applied over the film. It adds depth to the finish and gives the surface a hydrophobic top layer, so water and dirt sit on it rather than in it. Specified and applied as part of the same build.",
       },
     ],
-    ctaTitle: "Design your protection",
+    ctaTitle: "Design Your Protection",
     ctaLede:
       "Tell us about your vehicle and the coverage you're considering. We'll plan it, price it and book it, all in-house.",
     faqs: [
@@ -452,6 +458,7 @@ export const services: Service[] = [
     primaryKeyword: "vehicle wrap Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
+    ctaLabel: "Design Your Wrap",
     heroTitle: "Wrapped in something unmistakably yours.",
     heroLede:
       "Full-body, partial and color-change wraps, designed and installed by one in-house team, start to finish.",
@@ -465,10 +472,10 @@ export const services: Service[] = [
       "The right wrap changes how a vehicle feels to own, not just how it looks in the driveway. Color and coverage are planned alongside the rest of your build, then installed by the same in-house team from consultation through final inspection.",
     coverageTitle: "Choose your coverage",
     coverage: [
-      { pill: "Full", name: "Full Vehicle Wrap" },
-      { pill: "Accent", name: "Partial & Accent" },
-      { pill: "Color", name: "Color Change" },
-      { pill: "Trim", name: "Chrome Delete & Trim" },
+      { name: "Full Vehicle Wrap" },
+      { name: "Partial & Accent" },
+      { name: "Color Change" },
+      { name: "Chrome Delete & Trim" },
     ],
     processStatement: "Every panel, considered.",
     processTitle: "The process",
@@ -496,10 +503,10 @@ export const services: Service[] = [
     ],
     recentTitle: "Design directions",
     recentWork: [
-      { name: "Satin Military Green", tag: "Full Wrap" },
-      { name: "Midnight Blue", tag: "Color Change" },
-      { name: "Accent Roof & Hood", tag: "Partial" },
-      { name: "Edge Detail", tag: "Craft" },
+      { name: "Satin Military Green" },
+      { name: "Midnight Blue" },
+      { name: "Accent Roof & Hood" },
+      { name: "Edge Detail" },
     ],
     packagesTitle: "Find your coverage level",
     packages: [
@@ -535,7 +542,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    ctaTitle: "Design your wrap",
+    ctaTitle: "Design Your Wrap",
     ctaLede:
       "Tell us about your vehicle and the finish you have in mind. We'll plan it, price it and book it, all in-house.",
     faqs: [
@@ -591,6 +598,7 @@ export const services: Service[] = [
     primaryKeyword: "custom wheels Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
+    ctaLabel: "Design Your Fitment",
     heroTitle: "Fitment calculated, not guessed.",
     heroLede:
       "Wheels, tires and fitment planned together in-house, so the stance is right the first time, not adjusted after the fact.",
@@ -604,10 +612,10 @@ export const services: Service[] = [
       "Offset, width and tire profile are calculated for your exact vehicle before anything is ordered, not eyeballed. Every wheel is mounted, balanced and torqued in-house, then re-checked before the vehicle leaves.",
     coverageTitle: "Choose your coverage",
     coverage: [
-      { pill: "Forged", name: "Forged Wheels" },
-      { pill: "Cast", name: "Cast & Monoblock Wheels" },
-      { pill: "Susp", name: "Wheels + Suspension Package" },
-      { pill: "Fit", name: "Fitment Consultation Only" },
+      { name: "Forged Wheels" },
+      { name: "Cast & Monoblock Wheels" },
+      { name: "Wheels + Suspension Package" },
+      { name: "Fitment Consultation Only" },
     ],
     processStatement: "Fitment, to the millimeter.",
     processTitle: "The process",
@@ -635,10 +643,10 @@ export const services: Service[] = [
     ],
     recentTitle: "Design directions",
     recentWork: [
-      { name: "22in Forged", tag: "Forged" },
-      { name: "Deep Concave", tag: "Concave" },
-      { name: "Wheels + Suspension", tag: "Combo" },
-      { name: "Fitment Detail", tag: "Craft" },
+      { name: "22in Forged" },
+      { name: "Deep Concave" },
+      { name: "Wheels + Suspension" },
+      { name: "Fitment Detail" },
     ],
     packagesTitle: "Find your coverage level",
     packages: [
@@ -674,7 +682,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    ctaTitle: "Design your fitment",
+    ctaTitle: "Design Your Fitment",
     ctaLede:
       "Tell us about your vehicle and the stance you're after. We'll calculate it, price it and book it, all in-house.",
     faqs: [
@@ -725,6 +733,7 @@ export const services: Service[] = [
     primaryKeyword: "custom car interior Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
+    ctaLabel: "Design Your Interior",
     heroTitle: "Matched to the vision outside.",
     heroLede:
       "Full retrims, upgraded materials and custom interior work, designed alongside the rest of your build, not as an afterthought.",
@@ -738,10 +747,10 @@ export const services: Service[] = [
       "An interior finished separately from the rest of the vehicle always shows. Material, stitching and color are planned against the exterior direction from the start, then executed by our own upholstery and trim team.",
     coverageTitle: "Choose your coverage",
     coverage: [
-      { pill: "Seats", name: "Seat Retrim" },
-      { pill: "Full", name: "Full Cabin Retrim" },
-      { pill: "Trim", name: "Trim & Stitching Detail" },
-      { pill: "Custom", name: "Custom Console & Trim" },
+      { name: "Seat Retrim" },
+      { name: "Full Cabin Retrim" },
+      { name: "Trim & Stitching Detail" },
+      { name: "Custom Console & Trim" },
     ],
     processStatement: "Every stitch, intentional.",
     processTitle: "The process",
@@ -769,10 +778,10 @@ export const services: Service[] = [
     ],
     recentTitle: "Design directions",
     recentWork: [
-      { name: "Full Retrim", tag: "Full" },
-      { name: "Contrast Stitch", tag: "Detail" },
-      { name: "Custom Console", tag: "Custom" },
-      { name: "Seat Detail", tag: "Craft" },
+      { name: "Full Retrim" },
+      { name: "Contrast Stitch" },
+      { name: "Custom Console" },
+      { name: "Seat Detail" },
     ],
     packagesTitle: "Find your coverage level",
     packages: [
@@ -808,7 +817,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    ctaTitle: "Design your interior",
+    ctaTitle: "Design Your Interior",
     ctaLede:
       "Tell us about your vehicle and the materials you have in mind. We'll plan it, price it and book it, all in-house.",
     faqs: [
@@ -858,6 +867,7 @@ export const services: Service[] = [
     primaryKeyword: "lift kit Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
+    ctaLabel: "Design Your Setup",
     heroTitle: "Set up for the stance and the ride.",
     heroLede:
       "Air and coilover suspension, tuned in-house for the look you want without giving up how the vehicle actually drives.",
@@ -871,10 +881,10 @@ export const services: Service[] = [
       "Dropping a vehicle is easy. Keeping it comfortable, aligned and drivable is the part that takes experience. Every setup is tuned in-house to the wheel and tire package it's paired with, not installed and left as-is.",
     coverageTitle: "Choose your coverage",
     coverage: [
-      { pill: "Air", name: "Air Suspension" },
-      { pill: "Coil", name: "Coilover Suspension" },
-      { pill: "Lower", name: "Lowering Springs" },
-      { pill: "Tune", name: "Tune & Alignment Only" },
+      { name: "Air Suspension" },
+      { name: "Coilover Suspension" },
+      { name: "Lowering Springs" },
+      { name: "Tune & Alignment Only" },
     ],
     processStatement: "Set right, not just set low.",
     processTitle: "The process",
@@ -902,10 +912,10 @@ export const services: Service[] = [
     ],
     recentTitle: "Design directions",
     recentWork: [
-      { name: "Full Air Setup", tag: "Air" },
-      { name: "Coilover Install", tag: "Coil" },
-      { name: "Wheels + Suspension", tag: "Combo" },
-      { name: "Tune Detail", tag: "Craft" },
+      { name: "Full Air Setup" },
+      { name: "Coilover Install" },
+      { name: "Wheels + Suspension" },
+      { name: "Tune Detail" },
     ],
     packagesTitle: "Find your coverage level",
     packages: [
@@ -941,7 +951,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    ctaTitle: "Design your setup",
+    ctaTitle: "Design Your Setup",
     ctaLede:
       "Tell us about your vehicle and the stance you're after. We'll plan it, price it and book it, all in-house.",
     faqs: [
@@ -991,6 +1001,7 @@ export const services: Service[] = [
     primaryKeyword: "custom paint Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
+    ctaLabel: "Design Your Finish",
     heroTitle: "Finished the way it should have left the factory.",
     heroLede:
       "Paint correction, bodywork and full respray work, handled in-house with the same standard as the rest of your build.",
@@ -1004,10 +1015,10 @@ export const services: Service[] = [
       "Panel gaps, color match and finish depth are what separate a real paint job from a quick one. Every project runs through our own booth, under our own standard, from prep through final clear.",
     coverageTitle: "Choose your coverage",
     coverage: [
-      { pill: "Correct", name: "Paint Correction" },
-      { pill: "Respray", name: "Full Respray" },
-      { pill: "Body", name: "Bodywork & Panel Repair" },
-      { pill: "Match", name: "Color Match Touch-Up" },
+      { name: "Paint Correction" },
+      { name: "Full Respray" },
+      { name: "Bodywork & Panel Repair" },
+      { name: "Color Match Touch-Up" },
     ],
     processStatement: "Depth you can see in the reflection.",
     processTitle: "The process",
@@ -1035,10 +1046,10 @@ export const services: Service[] = [
     ],
     recentTitle: "Design directions",
     recentWork: [
-      { name: "Full Respray", tag: "Respray" },
-      { name: "Panel Repair", tag: "Body" },
-      { name: "Correction Detail", tag: "Correct" },
-      { name: "Color Match", tag: "Match" },
+      { name: "Full Respray" },
+      { name: "Panel Repair" },
+      { name: "Correction Detail" },
+      { name: "Color Match" },
     ],
     packagesTitle: "Find your coverage level",
     packages: [
@@ -1074,7 +1085,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    ctaTitle: "Design your finish",
+    ctaTitle: "Design Your Finish",
     ctaLede:
       "Tell us about your vehicle and the finish you have in mind. We'll plan it, price it and book it, all in-house.",
     faqs: [
@@ -1124,6 +1135,7 @@ export const services: Service[] = [
     primaryKeyword: "custom car lighting Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
+    ctaLabel: "Design Your Lighting",
     heroTitle: "Light that looks intentional, not installed.",
     heroLede:
       "Headlight, taillight and underglow lighting upgrades, wired and finished in-house so nothing looks bolted on.",
@@ -1137,10 +1149,10 @@ export const services: Service[] = [
       "A lighting upgrade done well disappears into the vehicle's factory lines. Every install is wired and finished in-house, matched to the rest of the build rather than treated as a separate add-on.",
     coverageTitle: "Choose your coverage",
     coverage: [
-      { pill: "Head", name: "Headlight Retrofit" },
-      { pill: "Tail", name: "Taillight Tint & Upgrade" },
-      { pill: "Ambient", name: "Ambient & Accent Lighting" },
-      { pill: "Full", name: "Full Lighting Package" },
+      { name: "Headlight Retrofit" },
+      { name: "Taillight Tint & Upgrade" },
+      { name: "Ambient & Accent Lighting" },
+      { name: "Full Lighting Package" },
     ],
     processStatement: "Light that belongs there.",
     processTitle: "The process",
@@ -1168,10 +1180,10 @@ export const services: Service[] = [
     ],
     recentTitle: "Design directions",
     recentWork: [
-      { name: "Headlight Retrofit", tag: "Head" },
-      { name: "Taillight Tint", tag: "Tail" },
-      { name: "Underglow Install", tag: "Under" },
-      { name: "Wiring Detail", tag: "Craft" },
+      { name: "Headlight Retrofit" },
+      { name: "Taillight Tint" },
+      { name: "Underglow Install" },
+      { name: "Wiring Detail" },
     ],
     packagesTitle: "Find your coverage level",
     packages: [
@@ -1207,7 +1219,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    ctaTitle: "Design your lighting",
+    ctaTitle: "Design Your Lighting",
     ctaLede:
       "Tell us about your vehicle and the look you're after. We'll plan it, price it and book it, all in-house.",
     faqs: [
@@ -1252,6 +1264,7 @@ export const services: Service[] = [
     primaryKeyword: "car audio Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
+    ctaLabel: "Design Your Sound",
     heroTitle: "Sound built into the vehicle, not bolted on.",
     heroLede:
       "Custom audio systems designed and installed in-house, integrated into the cabin rather than added on top of it.",
@@ -1265,10 +1278,10 @@ export const services: Service[] = [
       "Anyone can add speakers. A system that's fabricated to fit the cabin, tuned to the vehicle and wired cleanly in-house is a different level of work. It's the only way we install audio.",
     coverageTitle: "Choose your coverage",
     coverage: [
-      { pill: "Sound", name: "Sound System Upgrade" },
-      { pill: "Sub", name: "Custom Subwoofer Enclosure" },
-      { pill: "Full", name: "Full Audio Build" },
-      { pill: "Tune", name: "Tuning Only" },
+      { name: "Sound System Upgrade" },
+      { name: "Custom Subwoofer Enclosure" },
+      { name: "Full Audio Build" },
+      { name: "Tuning Only" },
     ],
     processStatement: "Built into the cabin, not onto it.",
     processTitle: "The process",
@@ -1296,10 +1309,10 @@ export const services: Service[] = [
     ],
     recentTitle: "Design directions",
     recentWork: [
-      { name: "Full Audio Build", tag: "Full" },
-      { name: "Custom Enclosure", tag: "Sub" },
-      { name: "Cabin Integration", tag: "Detail" },
-      { name: "Wiring Detail", tag: "Craft" },
+      { name: "Full Audio Build" },
+      { name: "Custom Enclosure" },
+      { name: "Cabin Integration" },
+      { name: "Wiring Detail" },
     ],
     packagesTitle: "Find your coverage level",
     packages: [
@@ -1335,7 +1348,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    ctaTitle: "Design your sound",
+    ctaTitle: "Design Your Sound",
     ctaLede:
       "Tell us about your vehicle and what you're looking for. We'll plan it, price it and book it, all in-house.",
     faqs: [
@@ -1385,6 +1398,7 @@ export const services: Service[] = [
     primaryKeyword: "truck accessories Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
+    ctaLabel: "Design Your Build-Out",
     heroTitle: "Built for how the truck actually gets used.",
     heroLede:
       "Bed accessories, lift kits and functional upgrades, installed in-house and matched to the rest of the build.",
@@ -1398,10 +1412,10 @@ export const services: Service[] = [
       "Truck accessories have to hold up to real use, not just look right in photos. Every upgrade is installed in-house and finished to match the rest of the vehicle, from bed accessories to lift kits.",
     coverageTitle: "Choose your coverage",
     coverage: [
-      { pill: "Bed", name: "Bed Accessories" },
-      { pill: "Lift", name: "Lift Kits" },
-      { pill: "Rack", name: "Racks & Overland Builds" },
-      { pill: "Armor", name: "Bumpers & Armor" },
+      { name: "Bed Accessories" },
+      { name: "Lift Kits" },
+      { name: "Racks & Overland Builds" },
+      { name: "Bumpers & Armor" },
     ],
     processStatement: "Built for the way it's actually driven.",
     processTitle: "The process",
@@ -1429,10 +1443,10 @@ export const services: Service[] = [
     ],
     recentTitle: "Design directions",
     recentWork: [
-      { name: "Lift + Wheels", tag: "Lift" },
-      { name: "Bed Accessories", tag: "Bed" },
-      { name: "Overland Build", tag: "Rack" },
-      { name: "Armor Detail", tag: "Craft" },
+      { name: "Lift + Wheels" },
+      { name: "Bed Accessories" },
+      { name: "Overland Build" },
+      { name: "Armor Detail" },
     ],
     packagesTitle: "Find your coverage level",
     packages: [
@@ -1468,7 +1482,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    ctaTitle: "Design your build-out",
+    ctaTitle: "Design Your Build-Out",
     ctaLede:
       "Tell us about your truck and how it's actually used. We'll plan it, price it and book it, all in-house.",
     faqs: [

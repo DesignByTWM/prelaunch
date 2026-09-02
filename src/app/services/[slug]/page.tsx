@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { SecHead, FaqBlock } from "@/components/ui/Page";
 import {
@@ -147,6 +148,7 @@ export default async function ServicePage({
         eyebrow={service.name}
         title={service.heroTitle}
         lede={service.heroLede}
+        ctaLabel={service.ctaLabel}
         stats={service.statStrip}
       />
 
@@ -207,7 +209,7 @@ export default async function ServicePage({
       <section className="dark">
         <div className="wrap">
           <SecHead eyebrow="Packages" title={service.packagesTitle} center />
-          <Packages items={service.packages} serviceName={service.name} />
+          <Packages items={service.packages} />
         </div>
       </section>
 
@@ -236,12 +238,21 @@ export default async function ServicePage({
         </section>
       )}
 
-      {/* Closing band. Her page ends here. */}
-      <section id="final-cta">
-        <div className="wrap">
-          <FinalCta title={service.ctaTitle} lede={service.ctaLede} />
-        </div>
-      </section>
+      {/* Closing band. Her page ends in the form itself. Suspense is
+          required because the form reads ?tier= with useSearchParams
+          and this page is statically generated. */}
+      <Suspense fallback={null}>
+        <section id="build">
+          <div className="wrap">
+            <FinalCta
+              title={service.ctaTitle}
+              lede={service.ctaLede}
+              serviceName={service.name}
+              sourceTag={`service-${service.slug}`}
+            />
+          </div>
+        </section>
+      </Suspense>
     </>
   );
 }

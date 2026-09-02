@@ -88,7 +88,6 @@ export default function JournalPage() {
           >
             <div className="ph r1610">
               <Photo src={lead.hero} alt={lead.heroAlt} priority />
-              <span className="pill">{lead.category}</span>
             </div>
 
             <div>
@@ -124,7 +123,6 @@ export default function JournalPage() {
               >
                 <div className="ph r45">
                   <Photo src={post.hero} alt={post.heroAlt} />
-                  <span className="pill">{post.category}</span>
                 </div>
                 <h3>{post.title}</h3>
                 <p>{post.summary}</p>
