@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Quicksand } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
 import { BrandSprite } from "@/components/BrandMarks";
 import { Header } from "@/components/Header";
 import { Footer, SmsFloat } from "@/components/Footer";
@@ -111,6 +113,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <SmsFloat />
+        <Analytics />
+        {site.isProduction && process.env.NEXT_PUBLIC_GA_ID ? (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        ) : null}
       </body>
     </html>
   );
