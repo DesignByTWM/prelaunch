@@ -1439,3 +1439,6 @@ section.dark .sec-head .eyebrow { color: var(--signal-teal); }
 .final-cta .form-done h3 { color: var(--black); }
 .final-cta .form-done p { color: var(--gray-mid); }
 .final-cta .form-done .eyebrow { color: var(--signal-teal); }
+
+/* Agency credit, riding on the end of the legal row. */
+.foot-credit { margin-left: 22px; padding-left: 22px; border-left: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.55); }
