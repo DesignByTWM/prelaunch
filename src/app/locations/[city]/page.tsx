@@ -88,9 +88,9 @@ export default async function CityPage({
                 Design Your Build
               </Link>
               {/* Light variant: the hero ground is charcoal now. */}
-              <a href={nap.phoneHref} className="btn btn-line-light">
+              <Link href={routes.contact} className="btn btn-line-light">
                 Contact the House
-              </a>
+              </Link>
             </div>
 
             <p style={{ marginTop: 44 }}>

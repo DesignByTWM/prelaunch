@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Monogram } from "@/components/BrandMarks";
 import { headlineServices } from "@/content/services";
-import { nap, routes } from "@/lib/site";
+import { routes } from "@/lib/site";
 
 /**
  * 404
@@ -31,9 +31,9 @@ export default function NotFound() {
           <Link href={routes.home} className="btn btn-primary">
             Back to the house
           </Link>
-          <a href={nap.phoneHref} className="btn btn-line">
+          <Link href={routes.contact} className="btn btn-line">
             Contact the House
-          </a>
+          </Link>
         </div>
 
         <div className="cross-grid" style={{ textAlign: "left" }}>

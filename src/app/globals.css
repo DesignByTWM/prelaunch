@@ -75,9 +75,9 @@ h3.display { font-size: clamp(20px, 2vw, 26px); }
 /* Black label on teal. Never white. */
 .btn-primary { background: var(--signal-teal); color: var(--black); border-radius: 16px 0 16px 0; }
 .btn-primary:hover, .btn-primary:focus-visible { transform: translateY(-2px); box-shadow: 0 12px 26px -14px rgba(0,161,155,.75); }
-.btn-line { background: transparent; color: var(--black); border-color: var(--black); }
+.btn-line { background: transparent; color: var(--black); border-color: var(--black); border-radius: 0 16px 0 16px; }
 .btn-line:hover, .btn-line:focus-visible { background: var(--black); color: var(--white); }
-.btn-line-light { background: transparent; color: var(--white); border-color: rgba(255,255,255,.85); }
+.btn-line-light { background: transparent; color: var(--white); border-color: rgba(255,255,255,.85); border-radius: 0 16px 0 16px; }
 .btn-line-light:hover, .btn-line-light:focus-visible { background: var(--white); color: var(--black); }
 .arrow-link {
   font-family: var(--body); font-weight: 600; font-size: 12.5px; text-transform: uppercase;

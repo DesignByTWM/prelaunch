@@ -48,9 +48,9 @@ export default function ThankYouPage() {
             <a href={nap.phoneHref} className="btn btn-primary">
               Call {nap.phone}
             </a>
-            <a href={nap.smsHref} className="btn btn-line">
-              Text the house
-            </a>
+            <Link href={routes.contact} className="btn btn-line">
+              Contact the House
+            </Link>
           </div>
         </div>
       </section>
