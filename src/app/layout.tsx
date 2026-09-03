@@ -38,8 +38,19 @@ export const metadata: Metadata = {
     title: "DESIGNBYTWM | Luxury Automotive Customization in Houston, Texas",
     description: site.description,
     locale: "en_US",
+    images: [
+      {
+        url: "/sharepreviewdbtwm.webp",
+        width: 1200,
+        height: 630,
+        alt: "DESIGNBYTWM, the automotive customization house in Houston, Texas",
+      },
+    ],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/sharepreviewdbtwm.webp"],
+  },
   icons: {
     icon: "/logos/designbytwm_monogram_black.svg",
     apple: "/logos/designbytwm_monogram_black.svg",
