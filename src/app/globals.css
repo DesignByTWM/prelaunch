@@ -1442,3 +1442,17 @@ section.dark .sec-head .eyebrow { color: var(--signal-teal); }
 
 /* Agency credit, riding on the end of the legal row. */
 .foot-credit { margin-left: 22px; padding-left: 22px; border-left: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.55); }
+
+/* =============================================================
+   CLOSING BAND FORM  ·  ERROR MESSAGE
+   Added September 3 2026, fixing near white text on the pale error
+   panel. Same shape of defect as the success panel above.
+
+   .form-error keeps its own light ground everywhere, so it must not
+   take the band's light text. The rule that was winning is
+   `.final-in p`, a descendant selector that outranks the single
+   class on .form-error, so the pin needs two classes to beat it.
+   Scoped to .final-cta, so the panel is untouched elsewhere.
+   ============================================================= */
+.final-cta .form-error { color: #b00020; }
+.final-cta .form-status[data-state="error"] { color: #b00020; }
