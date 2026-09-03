@@ -839,7 +839,7 @@ Grouped by where each one came from:
 | No recorded source | 3 | Corvette, Range Rover Sport, Sierra |
 
 The third row is the part that has never been written down before.
-`corvette-interior-audio`, `range-rover-sport-ppf-paint` and
+`corvette-desert-tan-wrap`, `range-rover-sport-ppf-paint` and
 `sierra-blackout-lift` are not in Liz's Featured Builds mock, are not
 among the Dropbox folder names, and are not traceable to any instruction
 recorded in this log. Their vehicle, title, tags and type have no
@@ -951,18 +951,18 @@ Neither is on her list. Both entries were deleted from
 | 2 | lamborghini-sto-dsb-el-chavez | Lamborghini Huracan STO |
 | 3 | range-rover-rose-pink-interior | Range Rover |
 | 4 | sierra-blackout-lift | GMC Sierra Denali HD Ultimate |
-| 5 | corvette-interior-audio | Chevrolet Corvette Stingray C8 |
-| 6 | g-class-complete-transformation | Mercedes-AMG G 63 |
+| 5 | corvette-desert-tan-wrap | Chevrolet Corvette Stingray C8 |
+| 6 | g-class-satin-black-wrap | Mercedes-AMG G 63 |
 
 The first three are the homepage cards, which is intended.
 
 Three entries were renamed to her fuller vehicle names. The G 63 is the
 same entry as the former Mercedes-Benz G-Class, not a new one, and the
 Sierra and Corvette are the same entries under fuller names. **Slugs were
-left unchanged** so existing urls keep resolving, which means three slugs
-no longer read like the vehicle they describe.
+left unchanged** at the time so existing urls would keep resolving. Two of
+them were renamed on September 3 2026, before the domain went live.
 
-This settles the group 3 concern from section 29. corvette-interior-audio
+This settles the group 3 concern from section 29. corvette-desert-tan-wrap
 and sierra-blackout-lift were recorded there as having no traceable
 source. Both are on her list, so their vehicle, name and place in the
 running order are now client confirmed.
@@ -1008,8 +1008,8 @@ deleted from those six rather than sitting underneath her material.
 | lamborghini-sto-dsb-el-chavez | DSB x El Chavez | DSB x El Chavez | Interior, Audio, Paint & Body |
 | range-rover-rose-pink-interior | Blush Pink Interior | Rose Pink Interior | Interior, Blackout, Wheels |
 | sierra-blackout-lift | White on White | Full Blackout & Lift | Blackout, Wraps, Suspension, Wheels, Lighting |
-| corvette-interior-audio | Desert Tan Wrap | Interior & Audio Build | Wraps, Blackout, Wheels |
-| g-class-complete-transformation | Satin Black | Complete Transformation | Wraps, Blackout, Audio |
+| corvette-desert-tan-wrap | Desert Tan Wrap | Interior & Audio Build | Wraps, Blackout, Wheels |
+| g-class-satin-black-wrap | Satin Black | Complete Transformation | Wraps, Blackout, Audio |
 
 `tags`, `stages`, `brief`, `summary`, `outcome` and `heroAlt` were
 rewritten on all six from her bullets. Every stage links to the service
@@ -1047,13 +1047,14 @@ Still ours: the phrasing of `brief`, `summary`, `outcome` and
 timeline, no client story and no specification beyond what she supplied.
 Her scope carries no timings, so `duration` stays absent.
 
-### Slugs kept, two now misdescribe their build
+### Slugs kept at the time, two renamed before launch
 
-Slugs were left unchanged so published urls keep resolving. Two are now
-actively misleading as strings: `corvette-interior-audio` is a wrap and
-blackout build. `g-class-complete-transformation` is a satin black
-wrap. They are internal identifiers rather than copy, but anyone reading
-the data file should know they no longer describe the entry.
+Slugs were left unchanged here so published urls would keep resolving,
+which left two misleading as strings. On September 3 2026, with the
+domain still not live and nothing published pointing at them, both were
+renamed: `corvette-interior-audio` became `corvette-desert-tan-wrap`
+and `g-class-complete-transformation` became `g-class-satin-black-wrap`.
+No redirects were added because none are needed.
 
 ### Range Rover Sport, still open
 
@@ -1084,8 +1085,8 @@ only trace left is the removal note in the builds.ts header. Its url now
 | 2 | lamborghini-sto-dsb-el-chavez | Lamborghini Huracan STO |
 | 3 | range-rover-rose-pink-interior | Range Rover |
 | 4 | sierra-blackout-lift | GMC Sierra Denali HD Ultimate |
-| 5 | corvette-interior-audio | Chevrolet Corvette Stingray C8 |
-| 6 | g-class-complete-transformation | Mercedes-AMG G 63 |
+| 5 | corvette-desert-tan-wrap | Chevrolet Corvette Stingray C8 |
+| 6 | g-class-satin-black-wrap | Mercedes-AMG G 63 |
 
 All six carry her verified scope of September 2 2026 and
 `placeholder: false`. The first three are the homepage cards.

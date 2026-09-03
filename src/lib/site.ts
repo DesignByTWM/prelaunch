@@ -87,7 +87,7 @@ export const socials = [
   { label: "Instagram", href: "https://www.instagram.com/designbytwm" },
   { label: "Facebook", href: "https://www.facebook.com/designbytwm" },
   { label: "X", href: "https://x.com/designbytwm" },
-  { label: "Pinterest", href: "https://www.pinterest.com/designbytwm" },
+  { label: "Pinterest", href: "https://www.pinterest.com/designbytwmhtx" },
   { label: "TikTok", href: "https://www.tiktok.com/@designbytwm" },
   { label: "YouTube", href: "https://www.youtube.com/@designbytwm" },
 ] as const;

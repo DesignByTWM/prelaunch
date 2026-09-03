@@ -16,8 +16,8 @@
  *      lamborghini-sto-dsb-el-chavez     Lamborghini Huracan STO
  *      range-rover-rose-pink-interior    Range Rover
  *      sierra-blackout-lift              GMC Sierra Denali HD Ultimate
- *      corvette-interior-audio           Chevrolet Corvette Stingray C8
- *      g-class-complete-transformation   Mercedes-AMG G 63
+ *      corvette-desert-tan-wrap          Chevrolet Corvette Stingray C8
+ *      g-class-satin-black-wrap          Mercedes-AMG G 63
  *
  * The first three are the homepage cards, which is intended.
  *
@@ -42,10 +42,13 @@
  * interior and audio build and is a wrap and blackout build. Three
  * titles were wrong, including Rose Pink for what is Blush Pink.
  *
- * SLUGS ARE UNCHANGED so existing urls keep resolving. Two now actively
- * misdescribe their build: corvette-interior-audio is a wrap build, and
- * g-class-complete-transformation is a satin black wrap on a G 63. That
- * is the cost of not breaking a published link.
+ * SLUGS RENAMED September 3 2026. Two of them misdescribed their build
+ * after her scope arrived, and the domain was not live yet, so they were
+ * corrected rather than carried:
+ *      corvette-interior-audio         -> corvette-desert-tan-wrap
+ *      g-class-complete-transformation -> g-class-satin-black-wrap
+ * Nothing published pointed at the old strings, so no redirects exist
+ * and none are needed. The other four are unchanged.
  *
  * REMOVED September 2 2026, none of them on her list:
  *      m5-wrap-wheel-package             BMW M5
@@ -296,7 +299,7 @@ export const featuredBuilds: FeaturedBuild[] = [
     placeholder: false,
   },
   {
-    slug: "corvette-interior-audio",
+    slug: "corvette-desert-tan-wrap",
     title: "Desert Tan Wrap",
     vehicle: "Chevrolet Corvette Stingray C8",
     type: "Coupe",
@@ -338,7 +341,7 @@ export const featuredBuilds: FeaturedBuild[] = [
     placeholder: false,
   },
   {
-    slug: "g-class-complete-transformation",
+    slug: "g-class-satin-black-wrap",
     title: "Satin Black",
     vehicle: "Mercedes-AMG G 63",
     type: "SUV",

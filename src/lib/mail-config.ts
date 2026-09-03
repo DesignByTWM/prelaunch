@@ -33,10 +33,15 @@ export const MAIL_REPLY_FROM = "Design By TWM <info@designbytwm.com>";
 /**
  * Who receives a new lead.
  *
- * TESTING, until Henry is ready. Jose and Liz only.
- * AT LAUNCH: add "info@designbytwm.com" as the first entry.
+ * info@designbytwm.com is the primary address and the only public facing
+ * one. It is first because it is where a lead is answered from.
+ *
+ * The gmail and media@ entries below it are internal copies, kept so a
+ * lead is visible to Jose and Liz without either of them working out of
+ * the public inbox.
  */
 export const LEAD_RECIPIENTS = [
+  "info@designbytwm.com",
   "designbytwmwebmaster@gmail.com",
   "media@designbytwm.com",
 ];
@@ -48,4 +53,16 @@ export const SOURCE_LABELS: Record<string, string> = {
   "design-your-build": "Design Your Build flow",
   "dealer-services": "Dealer account application",
   wheels: "Wheel fitment inquiry",
+
+  /* The ten service pages, each closing band stamping its own slug. */
+  "service-blackout-packages": "Blackout Packages service page",
+  "service-paint-protection-film": "Paint Protection Film (PPF) service page",
+  "service-vehicle-wraps": "Vehicle Wraps service page",
+  "service-wheels-and-fitment": "Wheels & Fitment service page",
+  "service-interior-transformation": "Interior Transformation service page",
+  "service-suspension": "Suspension service page",
+  "service-paint-and-body": "Paint & Body service page",
+  "service-lighting": "Lighting service page",
+  "service-audio": "Audio service page",
+  "service-truck-accessories": "Truck Accessories service page",
 };
