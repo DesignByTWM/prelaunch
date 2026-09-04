@@ -14,6 +14,16 @@ const nextConfig: NextConfig = {
     imageSizes: [96, 128, 192, 256, 384],
   },
 
+  // Legacy URLs from the previous Wix site. Both 404 today and both have a
+  // direct equivalent on the current site. Permanent so the old paths are
+  // dropped from the index rather than re-crawled.
+  async redirects() {
+    return [
+      { source: "/blog", destination: "/journal", permanent: true },
+      { source: "/vehicle-wrap", destination: "/services/vehicle-wraps", permanent: true },
+    ];
+  },
+
   async headers() {
     return [
       {
