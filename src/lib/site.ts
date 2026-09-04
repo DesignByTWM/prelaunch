@@ -71,9 +71,9 @@ export const nap = {
   stateFull: "Texas",
   postalCode: "77060",
   country: "US",
-  /** Approximate coordinates for the Ammi Trail facility. Verify against GBP before launch. */
-  latitude: 29.9469,
-  longitude: -95.4133,
+  // Verified against the Google Business Profile pin, September 4 2026.
+  latitude: 29.96596788453699,
+  longitude: -95.39701566741802,
 } as const;
 
 export const napLine = `${nap.street}, ${nap.city}, ${nap.state} ${nap.postalCode}`;
