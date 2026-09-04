@@ -92,6 +92,11 @@ export function websiteSchema() {
     url: site.url,
     name: nap.businessName,
     publisher: { "@id": ORG_ID },
+    creator: {
+      "@type": "Organization",
+      name: "Bizsual",
+      url: "https://bizsual.com",
+    },
     inLanguage: "en-US",
   };
 }
@@ -172,6 +177,10 @@ export function howToSchema(input: {
 export function faqSchema(faqs: { question: string; answer: string }[]) {
   return {
     "@type": "FAQPage",
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: [".faq-question", ".faq-answer"],
+    },
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,

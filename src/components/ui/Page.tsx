@@ -187,8 +187,8 @@ export function FaqBlock({
     <div className={`faq${center ? " center" : ""}`}>
       {faqs.map((faq, i) => (
         <Reveal key={faq.question} as="details" delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}>
-          <summary>{faq.question}</summary>
-          <div className="answer">{faq.answer}</div>
+          <summary className="faq-question">{faq.question}</summary>
+          <div className="answer faq-answer">{faq.answer}</div>
         </Reveal>
       ))}
     </div>

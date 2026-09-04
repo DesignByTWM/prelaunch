@@ -1,0 +1,14 @@
+/* THE HOUSE */
+
+  Business: DESIGNBYTWM
+  Positioning: Not a shop. The Automotive Customization House.
+  Location: 18235 Ammi Trail, Houston, TX 77060
+  Contact: info@designbytwm.com
+
+/* SITE */
+
+  Built by: Bizsual
+  Site: https://bizsual.com
+  Stack: Next.js, TypeScript, Vercel
+  Launched: September 2026
+  Language: English
