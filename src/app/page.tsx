@@ -4,7 +4,7 @@ import { KeywordTicker } from "@/components/home/KeywordTicker";
 import { Services } from "@/components/home/Services";
 import { Materials, FeaturedBuilds, ShopWheels } from "@/components/home/HouseSections";
 import { IntakeForm } from "@/components/home/IntakeForm";
-import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { JsonLd, breadcrumbSchema } from "@/lib/schema";
 import { headlineServices } from "@/content/services";
 import { nap } from "@/lib/site";
 
@@ -36,7 +36,7 @@ const homeFaqs = [
 export default function HomePage() {
   return (
     <>
-      <JsonLd graph={[faqSchema(homeFaqs), breadcrumbSchema([{ name: "Home", path: "/" }])]} />
+      <JsonLd graph={[breadcrumbSchema([{ name: "Home", path: "/" }])]} />
       <Hero />
       <KeywordTicker />
       <Services />
