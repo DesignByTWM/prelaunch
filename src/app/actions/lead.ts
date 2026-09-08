@@ -119,7 +119,7 @@ function customerEmail(lead: LeadPayload) {
         <p style="margin:0 0 26px;font:400 15px/1.6 Arial,sans-serif;color:#000;">
           If you would rather not wait, call or text ${esc(nap.phone)} and you can usually get an answer during shop hours.
         </p>
-        <a href="${site.url}" style="display:inline-block;background:#00a19b;color:#ffffff;text-decoration:none;padding:14px 28px;font:700 12px/1 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;">See the work</a>
+        <a href="${site.url}" style="display:inline-block;background:#00a19b;color:#000000;text-decoration:none;padding:14px 28px;font:700 12px/1 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;">See the work</a>
       </div>
       <div style="padding:20px 28px;border-top:1px solid #e7e5e2;">
         <p style="margin:0;font:400 12px/1.6 Arial,sans-serif;color:#6e6e6e;">

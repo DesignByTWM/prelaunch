@@ -1194,8 +1194,9 @@ section.dark .sec-head .eyebrow { color: var(--signal-teal); }
 /* 10. View More Builds mirrors the same corner as the hero secondary. */
 .recent-more .btn-line { border-radius: 0 16px 0 16px; }
 
-/* 11. Featured ribbon on teal. */
-.pkg .ribbon { background: var(--signal-teal); color: var(--white); }
+/* 11. Featured ribbon on teal. Black label, matching every other teal
+   surface after the September 8 2026 contrast decision. */
+.pkg .ribbon { background: var(--signal-teal); color: var(--black); }
 
 /* =============================================================
    SERVICE PAGE  ·  THIRD PASS, AUGUST 21 2026
