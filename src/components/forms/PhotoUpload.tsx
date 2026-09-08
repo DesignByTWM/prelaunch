@@ -43,7 +43,7 @@ export function PhotoUpload({
 
   return (
     <div className="field">
-      <label htmlFor="photos">Reference photos, optional</label>
+      <label htmlFor="photos">Send us your references photos (optional)</label>
       <input
         id="photos"
         type="file"
