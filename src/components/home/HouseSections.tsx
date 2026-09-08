@@ -150,7 +150,7 @@ export function ShopWheels() {
               <div className="ph r11">
                 <Photo src={brand.frame} alt={`${brand.name} wheel`} />
               </div>
-              <h4>{brand.name}</h4>
+              <h3>{brand.name}</h3>
               <p>{brand.blurb}</p>
               <a href="#intake" className="btn btn-line">Inquire</a>
             </Reveal>

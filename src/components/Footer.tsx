@@ -51,7 +51,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h5>Services</h5>
+            <h2>Services</h2>
             <ul>
               {services.map((service) => (
                 <li key={service.slug}>
@@ -62,7 +62,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h5>Explore</h5>
+            <h2>Explore</h2>
             <ul>
               {explore.map((item) => (
                 <li key={item.href}>
@@ -73,7 +73,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h5>Areas We Serve</h5>
+            <h2>Areas We Serve</h2>
             <p className="areas">
               {locations.map((location, i) => (
                 <span key={location.slug}>
