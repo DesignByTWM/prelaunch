@@ -1457,3 +1457,53 @@ section.dark .sec-head .eyebrow { color: var(--signal-teal); }
    ============================================================= */
 .final-cta .form-error { color: #b00020; }
 .final-cta .form-status[data-state="error"] { color: #b00020; }
+
+/* =============================================================
+   REFERENCE PHOTO UPLOAD
+   Added September 8 2026. Optional field on the consumer forms.
+   Utility only, so it borrows the existing field conventions
+   rather than introducing a token of its own.
+   ============================================================= */
+
+/* The base input rule already carries the border, ground and focus
+   treatment. This only tames the native button inside it. */
+input[type="file"] {
+  padding: 10px 12px; font-size: 12.5px; color: var(--gray-mid); cursor: pointer;
+}
+input[type="file"]::file-selector-button {
+  margin-right: 12px; padding: 8px 16px; border: 1px solid var(--black);
+  background: var(--white); font-family: var(--body); font-weight: 600;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--black); cursor: pointer; transition: background .25s, color .25s;
+}
+input[type="file"]:hover::file-selector-button { background: var(--black); color: var(--white); }
+input[type="file"]:disabled { cursor: not-allowed; opacity: .55; }
+input[type="file"]:disabled::file-selector-button { cursor: not-allowed; }
+
+/* Same helper text treatment as .form-note, tightened to sit under
+   its own field rather than under the whole card. */
+.upload-note { font-size: 11.5px; color: var(--gray-mid); margin-top: 8px; }
+
+.upload-list { list-style: none; margin: 10px 0 0; padding: 0; }
+.upload-list li {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 8px 0; border-bottom: 1px solid var(--gray-light);
+  font-size: 12.5px; color: var(--black);
+}
+.upload-list li:last-child { border-bottom: 0; }
+.upload-list button {
+  width: auto; padding: 0; border: 0; background: none; cursor: pointer;
+  font-family: var(--body); font-weight: 600; font-size: 11px;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--gray-mid);
+  transition: color .25s;
+}
+.upload-list button:hover, .upload-list button:focus-visible { color: var(--black); }
+
+/* The closing band renders this form on charcoal, which already
+   restyles labels and inputs. The note and the list need the same
+   treatment or they read as grey on near-black. */
+.final-cta .upload-note { color: rgba(255,255,255,.72); }
+.final-cta .upload-list li { color: var(--white); border-bottom-color: rgba(255,255,255,.22); }
+.final-cta .upload-list button { color: rgba(255,255,255,.72); }
+.final-cta .upload-list button:hover, .final-cta .upload-list button:focus-visible { color: var(--white); }
+.final-cta input[type="file"] { color: rgba(255,255,255,.72); }

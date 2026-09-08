@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { SubmitLead } from "@/components/forms/SubmitLead";
+import { PhotoUpload } from "@/components/forms/PhotoUpload";
+import type { CompressedImage } from "@/lib/compress-image";
 
 /**
  * ContactForm
@@ -23,6 +25,8 @@ export function ContactForm() {
     referredBy: "",
     company: "",
   });
+
+  const [photos, setPhotos] = useState<CompressedImage[]>([]);
 
   const set = (key: keyof typeof form, value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -107,6 +111,8 @@ export function ContactForm() {
         ) : null}
       </div>
 
+      <PhotoUpload images={photos} onChange={setPhotos} />
+
       {/* Honeypot. Never shown, never focusable, never announced. */}
       <input
         type="text"
@@ -132,6 +138,7 @@ export function ContactForm() {
             ...(form.heardFrom ? [{ label: "How they heard about us", value: form.heardFrom }] : []),
             ...(form.referredBy ? [{ label: "Referred by", value: form.referredBy }] : []),
           ],
+          attachments: photos,
         })}
       />
     </>

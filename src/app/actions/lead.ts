@@ -42,6 +42,8 @@ export interface LeadPayload {
   company?: string;
   fields?: { label: string; value: string }[];
   message?: string;
+  /** Optional reference photos, compressed in the browser. */
+  attachments?: { filename: string; content: string }[];
 }
 
 export interface LeadResult {
@@ -61,6 +63,9 @@ function houseEmail(lead: LeadPayload, label: string) {
     { label: "Name", value: lead.name },
     { label: "Email", value: lead.email },
     ...(lead.phone ? [{ label: "Phone", value: lead.phone }] : []),
+    ...(lead.attachments?.length
+      ? [{ label: "Attachments", value: `${lead.attachments.length} reference photo${lead.attachments.length === 1 ? "" : "s"}` }]
+      : []),
     ...(lead.fields ?? []),
   ]
     .filter((row) => row.value && row.value.trim() !== "")
@@ -169,6 +174,12 @@ export async function submitLead(lead: LeadPayload): Promise<LeadResult> {
       replyTo: lead.email,
       subject: `New Request: ${lead.name}, ${label}`,
       html: houseEmail(lead, label),
+      attachments: lead.attachments?.length
+        ? lead.attachments.map((file) => ({
+            filename: file.filename,
+            content: file.content,
+          }))
+        : undefined,
     });
 
     if (houseSend.error) {

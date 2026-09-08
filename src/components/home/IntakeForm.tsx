@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Reveal } from "@/components/Reveal";
 import { SubmitLead } from "@/components/forms/SubmitLead";
+import { PhotoUpload } from "@/components/forms/PhotoUpload";
+import type { CompressedImage } from "@/lib/compress-image";
 import { services } from "@/content/services";
 
 /**
@@ -83,6 +85,8 @@ export function IntakeForm({
     referredBy: "",
     company: "",
   });
+
+  const [photos, setPhotos] = useState<CompressedImage[]>([]);
 
   const [tier, setTier] = useState("");
 
@@ -224,6 +228,8 @@ export function IntakeForm({
         ) : null}
       </div>
 
+      <PhotoUpload images={photos} onChange={setPhotos} />
+
       {/* Honeypot. Never shown, never focusable, never announced. */}
       <input
         type="text"
@@ -253,6 +259,7 @@ export function IntakeForm({
             ...(form.heardFrom ? [{ label: "How they heard about us", value: form.heardFrom }] : []),
             ...(form.referredBy ? [{ label: "Referred by", value: form.referredBy }] : []),
           ],
+          attachments: photos,
         })}
       />
     </Reveal>

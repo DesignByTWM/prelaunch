@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
     imageSizes: [96, 128, 192, 256, 384],
   },
 
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
+  },
+
   // Legacy URLs from the previous Wix site. Both 404 today and both have a
   // direct equivalent on the current site. Permanent so the old paths are
   // dropped from the index rather than re-crawled.
