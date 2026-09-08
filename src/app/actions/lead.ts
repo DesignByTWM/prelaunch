@@ -83,6 +83,7 @@ function houseEmail(lead: LeadPayload, label: string) {
   <div style="background:#f5f5f5;padding:32px 16px;">
     <div style="max-width:600px;margin:0 auto;background:#fff;border:1px solid #e7e5e2;">
       <div style="background:#1c1c1c;padding:24px 28px;">
+        <img src="${site.url}/logos/designbytwm_logo_white.png" alt="DESIGNBYTWM" width="150" style="display:block;border:0;outline:none;text-decoration:none;height:auto;max-width:100%;margin-bottom:14px;">
         <p style="margin:0;font:600 11px/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.18em;color:#00a19b;">New Request</p>
         <p style="margin:8px 0 0;font:300 22px/1.2 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#fff;">${esc(lead.name)}</p>
         <p style="margin:6px 0 0;font:400 12px/1.4 Arial,sans-serif;color:rgba(255,255,255,.65);">${esc(label)}</p>
@@ -105,27 +106,30 @@ function customerEmail(lead: LeadPayload) {
   <div style="background:#f5f5f5;padding:32px 16px;">
     <div style="max-width:600px;margin:0 auto;background:#fff;border:1px solid #e7e5e2;">
       <div style="background:#1c1c1c;padding:28px;">
-        <p style="margin:0;font:600 13px/1.4 Arial,sans-serif;letter-spacing:.12em;color:#fff;">DESIGNBYTWM</p>
-        <p style="margin:8px 0 0;font:300 12px/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#00a19b;">Designed in-house.</p>
+        <img src="${site.url}/logos/designbytwm_logo_white.png" alt="DESIGNBYTWM" width="190" style="display:block;border:0;outline:none;text-decoration:none;height:auto;max-width:100%;">
+        <p style="margin:12px 0 0;font:300 12px/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#00a19b;">Not a shop. The Automotive Customization House.</p>
       </div>
       <div style="padding:32px 28px;">
         <p style="margin:0 0 18px;font:400 15px/1.6 Arial,sans-serif;color:#000;">${esc(firstName)},</p>
         <p style="margin:0 0 18px;font:400 15px/1.6 Arial,sans-serif;color:#000;">
-          Thank you for getting in touch. Your request has reached the house and someone will follow up to arrange a consultation.
+          Thank you for reaching out to DESIGNBYTWM. We have received your vehicle customization request. A member of our design team will be in touch soon.
         </p>
-        <p style="margin:0 0 18px;font:400 15px/1.6 Arial,sans-serif;color:#000;">
-          We quote per vehicle after seeing it in person rather than from a price list, because the same work can differ a great deal between two cars. The consultation is where that gets worked out.
+        <p style="margin:0 0 30px;font:400 15px/1.6 Arial,sans-serif;color:#000;">
+          We look forward to bringing your vision to life and taking your build to the next level.
         </p>
-        <p style="margin:0 0 26px;font:400 15px/1.6 Arial,sans-serif;color:#000;">
-          If you would rather not wait, call or text ${esc(nap.phone)} and you can usually get an answer during shop hours.
+        <p style="margin:0 0 12px;font:600 11px/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#6e6e6e;">Prefer to connect now?</p>
+        <a href="${nap.smsHref}" style="display:inline-block;background:#00a19b;color:#000000;text-decoration:none;padding:14px 28px;font:700 12px/1 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;">Text our team</a>
+        <p style="margin:12px 0 26px;font:400 12px/1.5 Arial,sans-serif;color:#6e6e6e;">Our team responds during business hours.</p>
+        <p style="margin:0;font:400 14px/1.5 Arial,sans-serif;">
+          <a href="${site.url}/featured-builds" style="color:#000;text-decoration:underline;">Explore our builds</a>
         </p>
-        <a href="${site.url}" style="display:inline-block;background:#00a19b;color:#000000;text-decoration:none;padding:14px 28px;font:700 12px/1 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;">See the work</a>
       </div>
       <div style="padding:20px 28px;border-top:1px solid #e7e5e2;">
         <p style="margin:0;font:400 12px/1.6 Arial,sans-serif;color:#6e6e6e;">
           ${esc(nap.businessName)}<br>
           ${esc(nap.street)}, ${esc(nap.city)}, ${esc(nap.state)} ${esc(nap.postalCode)}<br>
-          ${esc(nap.phone)}
+          ${esc(nap.phone)}<br>
+          <a href="${site.url}" style="color:#6e6e6e;text-decoration:underline;">designbytwm.com</a>
         </p>
       </div>
     </div>
@@ -191,7 +195,7 @@ export async function submitLead(lead: LeadPayload): Promise<LeadResult> {
     await resend.emails.send({
       from: MAIL_REPLY_FROM,
       to: [lead.email],
-      subject: "We have your request, DESIGNBYTWM",
+      subject: "Your Design Request Has Been Received | DESIGNBYTWM",
       html: customerEmail(lead),
     });
   } catch (err) {
