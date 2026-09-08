@@ -117,16 +117,16 @@ function customerEmail(lead: LeadPayload) {
         <p style="margin:0 0 30px;font:400 15px/1.6 Arial,sans-serif;color:#000;">
           We look forward to bringing your vision to life and taking your build to the next level.
         </p>
-        <p style="margin:0 0 12px;font:600 11px/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#6e6e6e;">Prefer to connect now?</p>
-        <a href="${nap.smsHref}" style="display:inline-block;background:#00a19b;color:#000000;text-decoration:none;padding:14px 28px;font:700 12px/1 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;">Text our team</a>
-        <p style="margin:12px 0 26px;font:400 12px/1.5 Arial,sans-serif;color:#6e6e6e;">Our team responds during business hours.</p>
-        <p style="margin:0;font:400 14px/1.5 Arial,sans-serif;">
-          <a href="${site.url}/featured-builds" style="color:#000;text-decoration:underline;">Explore our builds</a>
+        <p style="margin:0 0 6px;font:400 15px/1.6 Arial,sans-serif;color:#000;">
+          If you would rather speak with someone right away, call or text the house.
         </p>
+        <p style="margin:0 0 4px;font:700 22px/1.3 Arial,sans-serif;color:#000;">${esc(nap.phone)}</p>
+        <p style="margin:0 0 30px;font:400 12px/1.5 Arial,sans-serif;color:#6e6e6e;">Our team responds during business hours.</p>
+        <a href="${site.url}/featured-builds" style="display:inline-block;background:#00a19b;color:#000000;text-decoration:none;padding:14px 28px;font:700 12px/1 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;border-radius:16px 0 16px 0;">Explore our builds</a>
       </div>
       <div style="padding:20px 28px;border-top:1px solid #e7e5e2;">
         <p style="margin:0;font:400 12px/1.6 Arial,sans-serif;color:#6e6e6e;">
-          ${esc(nap.businessName)}<br>
+          <strong style="color:#000;font-weight:700;">${esc(nap.businessName)}</strong><br>
           ${esc(nap.street)}, ${esc(nap.city)}, ${esc(nap.state)} ${esc(nap.postalCode)}<br>
           ${esc(nap.phone)}<br>
           <a href="${site.url}" style="color:#6e6e6e;text-decoration:underline;">designbytwm.com</a>
