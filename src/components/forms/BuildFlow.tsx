@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { SubmitLead } from "@/components/forms/SubmitLead";
+import { PhotoUpload } from "@/components/forms/PhotoUpload";
+import type { CompressedImage } from "@/lib/compress-image";
 import { services } from "@/content/services";
 import { nap, routes } from "@/lib/site";
 
@@ -40,6 +42,8 @@ interface FormState {
   timeline: string;
   budget: string;
   vision: string;
+  heardFrom: string;
+  referredBy: string;
   name: string;
   email: string;
   phone: string;
@@ -57,6 +61,8 @@ const EMPTY: FormState = {
   timeline: "",
   budget: "",
   vision: "",
+  heardFrom: "",
+  referredBy: "",
   name: "",
   email: "",
   phone: "",
@@ -67,6 +73,7 @@ const EMPTY: FormState = {
 export function BuildFlow() {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormState>(EMPTY);
+  const [photos, setPhotos] = useState<CompressedImage[]>([]);
 
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -279,6 +286,8 @@ export function BuildFlow() {
                 onChange={(e) => set("vision", e.target.value)}
               />
             </div>
+
+            <PhotoUpload images={photos} onChange={setPhotos} />
           </>
         )}
 
@@ -345,6 +354,37 @@ export function BuildFlow() {
               </div>
             </div>
 
+            <div className="row">
+              <div className="field">
+                <label htmlFor="f-heard-from">How did you hear about us?</label>
+                <select
+                  id="f-heard-from"
+                  value={form.heardFrom}
+                  onChange={(e) => set("heardFrom", e.target.value)}
+                >
+                  <option value="">Select an option</option>
+                  <option>Google</option>
+                  <option>Instagram/Facebook</option>
+                  <option>Referral from a friend</option>
+                  <option>Drive-by / saw the shop</option>
+                  <option>Repeat customer</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              {form.heardFrom === "Referral from a friend" ? (
+                <div className="field">
+                  <label htmlFor="f-referred-by">Who referred you?</label>
+                  <input
+                    id="f-referred-by"
+                    type="text"
+                    placeholder="Person or business name"
+                    value={form.referredBy}
+                    onChange={(e) => set("referredBy", e.target.value)}
+                  />
+                </div>
+              ) : null}
+            </div>
+
             <div style={{ marginTop: 30 }}>
               <div className="k" style={{ marginBottom: 6 }} />
               <ul className="flow-summary">
@@ -372,6 +412,14 @@ export function BuildFlow() {
                   <span className="k">Budget</span>
                   <span>{form.budget || "Not specified"}</span>
                 </li>
+                <li>
+                  <span className="k">Photos</span>
+                  <span>
+                    {photos.length > 0
+                      ? `${photos.length} attached`
+                      : "None attached"}
+                  </span>
+                </li>
               </ul>
             </div>
 
@@ -397,6 +445,7 @@ export function BuildFlow() {
                   phone: form.phone,
                   message: form.vision,
                   company: form.company,
+                  attachments: photos,
                   fields: [
                     { label: "Year", value: form.year },
                     { label: "Make", value: form.make },
@@ -409,6 +458,8 @@ export function BuildFlow() {
                     { label: "Timeline", value: form.timeline },
                     { label: "Budget", value: form.budget },
                     { label: "Preferred contact", value: form.preferred },
+                    ...(form.heardFrom ? [{ label: "How they heard about us", value: form.heardFrom }] : []),
+                    ...(form.referredBy ? [{ label: "Referred by", value: form.referredBy }] : []),
                   ],
                 })}
               />
