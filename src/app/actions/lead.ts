@@ -8,6 +8,7 @@ import {
   SOURCE_LABELS,
 } from "@/lib/mail-config";
 import { nap, site } from "@/lib/site";
+import { sendToCrm } from "@/lib/crm";
 
 /**
  * LEAD DELIVERY
@@ -196,6 +197,10 @@ export async function submitLead(lead: LeadPayload): Promise<LeadResult> {
   } catch (err) {
     console.error("Customer confirmation failed:", err);
   }
+
+  // Secondary destination. Never throws, so email delivery and the
+  // thank-you redirect are unaffected by a CRM outage.
+  await sendToCrm(lead);
 
   return { ok: true };
 }
