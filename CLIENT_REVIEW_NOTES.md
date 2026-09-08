@@ -615,6 +615,28 @@ Also changed in the same pass, no brand implication:
 - Coverage and Recent Work pills set to a white shape with a black label, matching Liz's mocks
 - Footer tagline under the wordmark changed to "Designed in-house.", teal, all caps, replacing "Complete, in-house luxury automotive customization."
 
+### 24.5 REVERSED, SEPTEMBER 8 2026
+
+Instructed by Jose on September 8 2026. Item 24.5 above, white label text on
+teal, is reversed. Black labels on teal are the standing rule again, as in
+Brand Guidelines v2.0.
+
+The reason is contrast, not preference. White on the brand teal measures
+3.2:1, which fails WCAG 2.2 AA at button text size. Black on the same teal
+measures 6.6:1 and passes. The site's own accessibility page states the site
+meets AA, so the white treatment was contradicting a published claim.
+
+What changed: the two override rules in `globals.css` were deleted rather
+than re-declared, which restores the v2.0 base rules that already specify
+black. This affects the primary buttons sitewide, including the nav Design
+Your Build button, and the floating SMS button including its monogram.
+
+The "Most Popular" ribbon at 24.4 keeps its white label. It is a ribbon, not
+interactive text, and was not part of this decision.
+
+The original 24.5 entry is left above deliberately. This log is a running
+record, so the reversal is appended rather than substituted.
+
 ---
 
 ## 25. WHAT IS AND IS NOT CARRIED SITEWIDE, AUGUST 21 2026

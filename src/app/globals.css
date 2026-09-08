@@ -1201,11 +1201,12 @@ section.dark .sec-head .eyebrow { color: var(--signal-teal); }
    SERVICE PAGE  ·  THIRD PASS, AUGUST 21 2026
    ============================================================= */
 
-/* Label text on every teal surface is now white, per Jose.
-   This reverses the standing v2.0 rule that teal always carries a black
-   label. Logged in CLIENT_REVIEW_NOTES.md section 24. */
-.btn-primary { color: var(--white); }
-.sms, .sms .mark-mono { color: var(--white); }
+/* The August 21 2026 rule making labels white on teal was reversed by Jose
+   on September 8 2026. White on the brand teal measures 3.2:1 and fails
+   WCAG 2.2 AA at button text size. Black on the same teal measures 6.6:1.
+   The v2.0 base rules at lines 76 and 425 already specify black, so the
+   overrides here were removed rather than re-declared. Section 24 of
+   CLIENT_REVIEW_NOTES.md is superseded. */
 
 /* Pills sit on a white shape with a black label, matching Liz's mocks.
    Approved 16px 0 16px 0 corner retained. */
