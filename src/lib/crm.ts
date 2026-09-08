@@ -10,11 +10,13 @@ import { SOURCE_LABELS } from "@/lib/mail-config";
  *
  * Field names follow Henry's integration guide of September 5 2026.
  *
- * referral_source is deliberately not populated. In Base44 that field is a
- * "how did you hear about us" answer from the customer. Our `source` is
- * which form on the site was used, which is a different thing. Conflating
- * them would corrupt the CRM's own reporting, so our source is written
- * into the message body instead.
+ * referral_source is populated from the "How did you hear about us?"
+ * question added to the consumer forms on September 8 2026. When the
+ * visitor names who referred them, that name is appended in parentheses,
+ * so Henry sees the source and the referrer in one field.
+ *
+ * Our `source`, meaning which form on the site was used, is a different
+ * thing and still goes into the message body rather than referral_source.
  */
 
 const CRM_ENDPOINT = "https://dsbos.base44.app/functions/submitLead";
@@ -25,6 +27,7 @@ const FIELD_MAP: Record<string, string> = {
   "service of interest": "service_interest",
   "timeline": "timeline",
   "package tier": "package_tier",
+  "how they heard about us": "referral_source",
 };
 
 export async function sendToCrm(lead: LeadPayload): Promise<void> {
@@ -44,14 +47,35 @@ export async function sendToCrm(lead: LeadPayload): Promise<void> {
   // rather than dropped, so no customer input is ever lost.
   const unmapped: string[] = [];
 
+  // Held back from both the field map and the unmapped list, because it is
+  // not a field of its own in Base44. It is folded into referral_source
+  // below so the source and the referrer read as one answer.
+  let referredBy = "";
+
   for (const field of lead.fields ?? []) {
     if (!field.value?.trim()) continue;
-    const mapped = FIELD_MAP[field.label.trim().toLowerCase()];
+    const label = field.label.trim().toLowerCase();
+
+    if (label === "referred by") {
+      referredBy = field.value.trim();
+      continue;
+    }
+
+    const mapped = FIELD_MAP[label];
     if (mapped) {
       payload[mapped] = field.value.trim();
     } else {
       unmapped.push(`${field.label}: ${field.value.trim()}`);
     }
+  }
+
+  // "Referral from a friend" plus "Mike Torres" becomes
+  // "Referral from a friend (Mike Torres)". A name arriving without a
+  // selection stands on its own rather than being dropped.
+  if (referredBy) {
+    payload.referral_source = payload.referral_source
+      ? `${payload.referral_source} (${referredBy})`
+      : referredBy;
   }
 
   const sourceLabel = SOURCE_LABELS[lead.source] ?? lead.source;

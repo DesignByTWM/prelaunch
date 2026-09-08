@@ -19,6 +19,8 @@ export function ContactForm() {
     email: "",
     phone: "",
     message: "",
+    heardFrom: "",
+    referredBy: "",
     company: "",
   });
 
@@ -74,6 +76,37 @@ export function ContactForm() {
         />
       </div>
 
+      <div className="row">
+        <div className="field">
+          <label htmlFor="heard-from">How did you hear about us?</label>
+          <select
+            id="heard-from"
+            value={form.heardFrom}
+            onChange={(e) => set("heardFrom", e.target.value)}
+          >
+            <option value="">Select an option</option>
+            <option>Google</option>
+            <option>Instagram/Facebook</option>
+            <option>Referral from a friend</option>
+            <option>Drive-by / saw the shop</option>
+            <option>Repeat customer</option>
+            <option>Other</option>
+          </select>
+        </div>
+        {form.heardFrom === "Referral from a friend" ? (
+          <div className="field">
+            <label htmlFor="referred-by">Who referred you?</label>
+            <input
+              id="referred-by"
+              type="text"
+              placeholder="Person or business name"
+              value={form.referredBy}
+              onChange={(e) => set("referredBy", e.target.value)}
+            />
+          </div>
+        ) : null}
+      </div>
+
       {/* Honeypot. Never shown, never focusable, never announced. */}
       <input
         type="text"
@@ -95,6 +128,10 @@ export function ContactForm() {
           phone: form.phone,
           message: form.message,
           company: form.company,
+          fields: [
+            ...(form.heardFrom ? [{ label: "How they heard about us", value: form.heardFrom }] : []),
+            ...(form.referredBy ? [{ label: "Referred by", value: form.referredBy }] : []),
+          ],
         })}
       />
     </>
