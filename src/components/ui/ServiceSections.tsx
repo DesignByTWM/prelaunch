@@ -125,9 +125,12 @@ export function ServiceHero({
 export function Coverage({
   items,
   prefix,
+  alts,
 }: {
   items: ServiceCoverage[];
   prefix: string;
+  /** Per-slot alt text keyed "cov-1" to "cov-4". Falls back to the card name. */
+  alts?: Record<string, string>;
 }) {
   return (
     <div className="cov-grid">
@@ -140,7 +143,7 @@ export function Coverage({
           delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
         >
           <div className="ph r45">
-            <Photo src={`/${prefix}-cov-${i + 1}.webp`} alt={item.name} />
+            <Photo src={`/${prefix}-cov-${i + 1}.webp`} alt={alts?.[`cov-${i + 1}`] ?? item.name} />
           </div>
           <div className="cov-body">
             <h3>{item.name}</h3>
@@ -206,9 +209,12 @@ export function Process({
 export function RecentWork({
   items,
   prefix,
+  alts,
 }: {
   items: ServiceRecentWork[];
   prefix: string;
+  /** Per-slot alt text keyed "ref-1" to "ref-4". Falls back to the caption. */
+  alts?: Record<string, string>;
 }) {
   return (
     <>
@@ -220,7 +226,7 @@ export function RecentWork({
             delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
           >
             <div className="ph fill">
-              <Photo src={`/${prefix}-ref-${i + 1}.webp`} alt={item.name} />
+              <Photo src={`/${prefix}-ref-${i + 1}.webp`} alt={alts?.[`ref-${i + 1}`] ?? item.name} />
             </div>
             <div className="recent-scrim" />
             <span className="recent-cap label">{item.name}</span>

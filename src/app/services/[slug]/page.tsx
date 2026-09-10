@@ -169,7 +169,7 @@ export default async function ServicePage({
                     service.overviewImage ??
                     `/${service.imagePrefix}-overview.webp`
                   }
-                  alt={service.imageAlt}
+                  alt={service.imageAlts?.overview ?? service.imageAlt}
                 />
               </div>
             </Reveal>
@@ -181,7 +181,7 @@ export default async function ServicePage({
       <section className="alt" id="coverage">
         <div className="wrap">
           <SecHead eyebrow="Coverage" title={service.coverageTitle} center />
-          <Coverage items={service.coverage} prefix={service.imagePrefix} />
+          <Coverage items={service.coverage} prefix={service.imagePrefix} alts={service.imageAlts} />
         </div>
       </section>
 
@@ -201,7 +201,7 @@ export default async function ServicePage({
       <section className="alt" id="recent">
         <div className="wrap">
           <SecHead eyebrow="Reference" title={service.recentTitle} center />
-          <RecentWork items={service.recentWork} prefix={service.imagePrefix} />
+          <RecentWork items={service.recentWork} prefix={service.imagePrefix} alts={service.imageAlts} />
         </div>
       </section>
 

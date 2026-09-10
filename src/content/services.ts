@@ -115,6 +115,12 @@ export interface Service {
    * leave it unset otherwise so the convention keeps working by default.
    */
   overviewImage?: string;
+  /**
+   * Alt text per gallery slot, keyed by the slot suffix used in the
+   * filename. Supplied by Liz with the delivered photography. Services
+   * without photography yet fall back to imageAlt.
+   */
+  imageAlts?: Record<string, string>;
   /** Primary commercial intent phrase this page is built to answer. */
   primaryKeyword: string;
 
@@ -182,8 +188,17 @@ export const services: Service[] = [
     image: "/maincard1blackout.webp",
     imageAlt: "Blacked out trim and grille detail on a customized luxury SUV",
     imagePrefix: "blackout",
-    /* Delivered as svcblackout1.webp rather than blackout-overview.webp. */
-    overviewImage: "/svcblackout1.webp",
+    imageAlts: {
+      overview: "Blacked-out Land Rover Defender in a studio bay with overhead lighting",
+      "cov-1": "Satin black Cadillac CT5-V Blackwing with full blackout treatment",
+      "cov-2": "Blacked-out RAM grille lettering on a Ram TRX",
+      "cov-3": "Sand-colored Cadillac Escalade with all chrome trim blacked out",
+      "cov-4": "Gloss black wheel with blacked-out brake caliper on a Cadillac Escalade-V",
+      "ref-1": "Satin black Range Rover Sport, rear three-quarter view",
+      "ref-2": "Satin white Cadillac Escalade IQ with blacked-out grille and badging",
+      "ref-3": "Blacked-out Cadillac crest on the grille of a white Cadillac XT6",
+      "ref-4": "All-black turbine wheel on a Bentley Flying Spur",
+    },
     primaryKeyword: "blackout package Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
@@ -319,6 +334,17 @@ export const services: Service[] = [
     image: "/maincard2ppf.webp",
     imageAlt: "Paint protection film being installed on the hood of a luxury vehicle",
     imagePrefix: "ppf",
+    imageAlts: {
+      overview: "Stealth-finished Range Rover Sport after full paint protection film",
+      "cov-1": "Range Rover Sport with the hood raised during a full front paint protection film install",
+      "cov-2": "Technicians applying protection film to the front bumper of a Range Rover Sport",
+      "cov-3": "Range Rover Sport with every panel open during a full vehicle paint protection film install",
+      "cov-4": "Technician applying protection film along the door frame of a Range Rover Sport",
+      "ref-1": "Front grille and hood of a stealth-finished Range Rover Sport",
+      "ref-2": "Rear three-quarter view of a Range Rover Sport with full-body paint protection film",
+      "ref-3": "Low front three-quarter view of a Range Rover Sport emphasizing front-end film coverage",
+      "ref-4": "Close-up of clear protection film being laid over the front bumper corner and headlight",
+    },
     primaryKeyword: "paint protection film Houston",
 
     /* Layout copy from Liz's approved mocks, August 14 2026. */
