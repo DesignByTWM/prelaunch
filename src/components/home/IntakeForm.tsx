@@ -64,6 +64,7 @@ export function IntakeForm({
   preselect,
   bare = false,
   tierParam = false,
+  city,
 }: {
   eyebrow?: string;
   title?: string;
@@ -72,6 +73,8 @@ export function IntakeForm({
   preselect?: string;
   bare?: boolean;
   tierParam?: boolean;
+  /** City page this form is rendered on. Tags the lead for the house. */
+  city?: string;
 }) {
   const [form, setForm] = useState({
     name: "",
@@ -251,6 +254,7 @@ export function IntakeForm({
           phone: form.phone,
           message: form.vision,
           company: form.company,
+          city,
           fields: [
             { label: "Vehicle", value: form.vehicle },
             { label: "Service of interest", value: form.service },

@@ -1132,6 +1132,34 @@ beyond what she supplied, but it has not been read back to her.
 
 ---
 
+## 34. HOUSTON LOCATION PAGE, SEPTEMBER 24 2026
+
+The Houston master location page is built and live in the repo at
+`/locations/houston`. It is **noindex** while it is in review, which is a
+one line change in `src/content/locations.ts` once it is signed off. The
+other 21 cities are untouched and still render the coming soon
+placeholder.
+
+Copy on the page was supplied and ships exactly as written. Four items
+in it are ours rather than yours, and need checking before the page is
+indexed:
+
+| # | Item | What to confirm |
+|---|---|---|
+| 34.1 | **Drive time** | The strip reads "About 20 min from Downtown". That is our estimate from the Ammi Trail address, not a measured figure. Confirm or correct it. |
+| 34.2 | **Neighborhood list** | The line under the strip names Downtown, the Heights, River Oaks, the Galleria and Greenspoint. That selection is ours. Confirm these are the areas the house wants to be found for. |
+| 34.3 | **G 63 scope** | The featured build card points at the Mercedes-AMG G 63, `g-class-satin-black-wrap`. Its verified scope is wraps, blackout and audio, with no PPF in it. Confirm it is the right build to carry a page whose two lead disciplines are Blackout Packages and Paint Protection Film. |
+| 34.4 | **FAQ 3 answer** | "Can I pair a blackout package with paint protection film?" is answered with "Both are planned together at intake so trim finishes and film coverage line up." Confirm that is how a combined job is actually sequenced. |
+
+Everything else on the page is pulled from existing sources rather than
+retyped: the address and phone number come from `nap`, the ten
+discipline cards from `services.ts`, the featured build from `builds.ts`
+and the wheel module from `wheels.ts`. None of it can drift from the
+rest of the site.
+
+Leads from this page carry a "City page" row in the house email reading
+Houston, so enquiries the page produces can be counted separately.
+
 ---
 
 *Log opened during the services build. Append every new item as pages are completed.*

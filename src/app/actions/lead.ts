@@ -44,6 +44,8 @@ export interface LeadPayload {
   message?: string;
   /** Optional reference photos, compressed in the browser. */
   attachments?: { filename: string; content: string }[];
+  /** Set by a city location page, so the house can see which one produced the lead. */
+  city?: string;
 }
 
 export interface LeadResult {
@@ -63,6 +65,7 @@ function houseEmail(lead: LeadPayload, label: string) {
     { label: "Name", value: lead.name },
     { label: "Email", value: lead.email },
     ...(lead.phone ? [{ label: "Phone", value: lead.phone }] : []),
+    ...(lead.city ? [{ label: "City page", value: lead.city }] : []),
     ...(lead.attachments?.length
       ? [{ label: "Attachments", value: `${lead.attachments.length} reference photo${lead.attachments.length === 1 ? "" : "s"}` }]
       : []),

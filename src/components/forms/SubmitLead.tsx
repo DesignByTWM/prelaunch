@@ -51,7 +51,10 @@ export function SubmitLead({
          */
         if (!payload.company?.trim()) {
           try {
-            sendGAEvent("event", "generate_lead", { lead_source: payload.source });
+            sendGAEvent("event", "generate_lead", {
+              lead_source: payload.source,
+              ...(payload.city ? { city: payload.city } : {}),
+            });
           } catch {
             // Analytics must never break a submission.
           }

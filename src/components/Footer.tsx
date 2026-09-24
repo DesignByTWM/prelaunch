@@ -82,6 +82,9 @@ export function Footer() {
                 </span>
               ))}
             </p>
+            <p style={{ marginTop: 12 }}>
+              <Link href={routes.locations}>View all locations</Link>
+            </p>
           </div>
         </div>
 
