@@ -2,7 +2,8 @@ import type { MetadataRoute } from "next";
 import { services } from "@/content/services";
 import { featuredBuilds } from "@/content/builds";
 import { journalPosts } from "@/content/journal";
-import { routes, site } from "@/lib/site";
+import { getLocationContent } from "@/content/locations";
+import { locations, routes, site } from "@/lib/site";
 
 /**
  * sitemap.xml
@@ -10,10 +11,15 @@ import { routes, site } from "@/lib/site";
  * Generated from the same content files that render the pages, so a new
  * service, build or article appears in the sitemap automatically.
  *
+ * City pages are included only when their content entry is marked
+ * indexable, which today means Houston alone. The other 21 are still
+ * placeholders served noindex, and listing a noindexed URL in a sitemap
+ * sends Google a contradictory instruction and wastes crawl budget. The
+ * filter reads the same flag the page reads, so the two can never
+ * disagree, and a new city is added here by flipping its flag rather than
+ * by editing this file.
+ *
  * Deliberately excluded:
- *   - the 22 city pages, which are noindex until real content is written.
- *     Listing a noindexed URL in a sitemap sends Google a contradictory
- *     instruction and wastes crawl budget.
  *   - /thank-you, which has no search value.
  *
  * Priority values are relative hints only. The ordering below reflects
@@ -61,5 +67,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...core, ...servicePages, ...buildPages, ...journalPages];
+  /* Only cities whose content entry is marked indexable. A city with no
+     content entry, or one still in review, is left out. */
+  const cityPages: MetadataRoute.Sitemap = locations
+    .filter((location) => getLocationContent(location.slug)?.indexable)
+    .map((location) => ({
+      url: `${site.url}${routes.location(location.slug)}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
+
+  return [...core, ...servicePages, ...cityPages, ...buildPages, ...journalPages];
 }

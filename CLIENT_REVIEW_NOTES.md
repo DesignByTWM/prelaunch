@@ -1134,15 +1134,17 @@ beyond what she supplied, but it has not been read back to her.
 
 ## 34. HOUSTON LOCATION PAGE, SEPTEMBER 24 2026
 
-The Houston master location page is built and live in the repo at
-`/locations/houston`. It is **noindex** while it is in review, which is a
-one line change in `src/content/locations.ts` once it is signed off. The
-other 21 cities are untouched and still render the coming soon
-placeholder.
+**APPROVED by Liz, September 24 2026, by email. Indexed the same day.**
 
-Copy on the page was supplied and ships exactly as written. Four items
-in it are ours rather than yours, and need checking before the page is
-indexed:
+The Houston master location page is live at `/locations/houston`,
+indexable, and listed in the sitemap. The other 21 cities are untouched
+and still render the coming soon placeholder, excluded from the sitemap
+until each one gets real content and its own flag flipped.
+
+Copy on the page was supplied and ships exactly as written. Four items in
+it are ours rather than yours. They are open items and did not block
+launch, but they are still worth confirming so they can be corrected in
+place:
 
 | # | Item | What to confirm |
 |---|---|---|

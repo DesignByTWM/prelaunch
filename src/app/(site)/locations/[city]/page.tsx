@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Monogram } from "@/components/BrandMarks";
 import { Reveal } from "@/components/Reveal";
 import { IntakeForm } from "@/components/home/IntakeForm";
-import { LocationMotion } from "@/components/location/LocationMotion";
+import { LocationMotionLazy } from "@/components/location/LocationMotionLazy";
 import "@/components/location/location.css";
 import {
   JsonLd,
@@ -228,7 +228,7 @@ function LocationPage({ slug }: { slug: string }) {
         ]}
       />
 
-      <LocationMotion
+      <LocationMotionLazy
         sweep={content.hero.sweep}
         imageWidth={content.hero.width}
         imageHeight={content.hero.height}

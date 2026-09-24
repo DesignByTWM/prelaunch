@@ -10,8 +10,10 @@
  * near-identical pages is the pattern Google treats as doorway pages, so
  * they are published one at a time with genuinely distinct content.
  *
- * `indexable` is per city and deliberately false for Houston while it is
- * in review. Turning it on is a one line change once Liz signs off.
+ * `indexable` is per city. Houston was approved by Liz on September 24
+ * 2026 by email and indexed the same day. The sitemap reads this flag, so
+ * a future city goes live by flipping its own flag rather than by editing
+ * the sitemap.
  *
  * DESIGN, September 24 2026. The location pages carry the animated
  * concept Jose approved (light sweep hero, pinned pair scene, route map,
@@ -20,8 +22,11 @@
  * new city is data entry against the same template.
  *
  * ============================================================
- * VERIFY WITH LIZ BEFORE THIS PAGE IS INDEXED
+ * OPEN ITEMS, NOT BLOCKING LAUNCH
  * ============================================================
+ * Liz approved the page with these outstanding. They are ours rather than
+ * hers, so they are still worth confirming and correcting in place.
+ *
  *   1. DRIVE TIMES AND ROUTES. Every "Getting here" row below is our
  *      estimate from the Ammi Trail address, including "About 20 min
  *      from Downtown". None of them are figures Liz supplied.
@@ -115,8 +120,8 @@ export interface LocationContent {
 export const locationContent: Record<string, LocationContent> = {
   houston: {
     slug: "houston",
-    /* Off while the page is in review. See the VERIFY list above. */
-    indexable: false,
+    /* Approved by Liz, September 24 2026. Indexed the same day. */
+    indexable: true,
     title: "Blackout Packages and PPF in Houston, TX",
     description:
       "Blackout packages, paint protection film and eight more disciplines under one roof at 18235 Ammi Trail, Houston. Design your build with the House.",
