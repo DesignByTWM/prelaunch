@@ -1,5 +1,3 @@
-import { locations } from "@/lib/site";
-
 /**
  * LOCATION PAGE CONTENT
  *
@@ -15,32 +13,60 @@ import { locations } from "@/lib/site";
  * `indexable` is per city and deliberately false for Houston while it is
  * in review. Turning it on is a one line change once Liz signs off.
  *
+ * DESIGN, September 24 2026. The location pages carry the animated
+ * concept Jose approved (light sweep hero, pinned pair scene, route map,
+ * horizontal disciplines run). The main website is not touched. Every
+ * animated section reads its words and coordinates from this file, so a
+ * new city is data entry against the same template.
+ *
  * ============================================================
  * VERIFY WITH LIZ BEFORE THIS PAGE IS INDEXED
  * ============================================================
- *   1. DRIVE TIME. "About 20 min from Downtown" is our estimate from the
- *      Ammi Trail address, not a measured figure Liz supplied.
+ *   1. DRIVE TIMES AND ROUTES. Every "Getting here" row below is our
+ *      estimate from the Ammi Trail address, including "About 20 min
+ *      from Downtown". None of them are figures Liz supplied.
  *   2. NEIGHBOURHOOD LIST. Downtown, the Heights, River Oaks, the
  *      Galleria and Greenspoint are our selection. Confirm these are the
  *      areas the house actually wants to be found for.
- *   3. G 63 SCOPE. The featured build card points at
- *      g-class-satin-black-wrap. Her verified scope for it is wraps,
- *      blackout and audio, with no PPF, so confirm it is the right build
- *      to carry a page whose pair is Blackout and PPF.
+ *   3. G 63 SCOPE. The featured build points at g-class-satin-black-wrap.
+ *      Her verified scope for it is wraps, blackout and audio, with no
+ *      PPF, so confirm it is the right build to carry a page whose pair
+ *      is Blackout and PPF.
  *   4. FAQ 3 ANSWER. The pairing answer describes intake planning trim
  *      finishes and film coverage together. Confirm that is how the shop
  *      actually sequences a combined job.
  *
  * Everything else on the page is drawn from nap in lib/site.ts, from
- * services.ts or from builds.ts, so it cannot drift from the rest of the
- * site.
+ * services.ts, builds.ts or wheels.ts, so it cannot drift from the rest
+ * of the site.
  */
 
 export interface LocationPairService {
-  /** Slug in services.ts. The card's link and CTA label come from there. */
+  /** Slug in services.ts. The link and CTA label come from there. */
   slug: string;
   title: string;
   copy: string;
+  /** Large frame in the pinned pair scene. */
+  image: string;
+  imageAlt: string;
+}
+
+/** One origin on the map, drawn as a route into the House. */
+export interface LocationRoute {
+  /** Origin as shown in the "Getting here" list and on the map. */
+  from: string;
+  /** Road guidance, e.g. "I-45 North". */
+  via: string;
+  /** Estimated drive, e.g. "About 20 min". VERIFY. */
+  time: string;
+  /** Map dot position in the 620 x 560 map viewBox. */
+  x: number;
+  y: number;
+  /** Label anchor for the dot. */
+  labelX: number;
+  labelY: number;
+  /** SVG path from the origin to the House. Must end at the House pin. */
+  d: string;
 }
 
 export interface LocationContent {
@@ -49,17 +75,34 @@ export interface LocationContent {
   indexable: boolean;
   title: string;
   description: string;
-  eyebrow: string;
-  h1: string;
+  h1: { line1: string; line2: string };
   lede: string;
+  hero: {
+    image: string;
+    alt: string;
+    /** Natural pixel size of the image, used to aim the light. */
+    width: number;
+    height: number;
+    /**
+     * The light sweep path, as fractions of the image (0 to 1). The last
+     * point is where the light rests and opens up.
+     */
+    sweep: [number, number][];
+  };
   /** The two disciplines this city page leads on. */
   pair: {
+    headline: string;
+    lede: string;
     primary: LocationPairService;
     secondary: LocationPairService;
   };
-  /** Slim row of four facts, plus the neighbourhood line beneath it. */
-  strip: {
-    items: string[];
+  /** The "From [City] to the House" section. */
+  access: {
+    headline: string;
+    where: string;
+    routes: LocationRoute[];
+    /** House pin position in the map viewBox. */
+    house: { x: number; y: number };
     neighborhoods: string;
   };
   faqs: { question: string; answer: string }[];
@@ -67,8 +110,6 @@ export interface LocationContent {
   featuredBuildSlug: string;
   /** Slug in services.ts. Resolved to the service name for the form. */
   preselectService: string;
-  /** Other city pages linked at the foot of this one. */
-  nearby: string[];
 }
 
 export const locationContent: Record<string, LocationContent> = {
@@ -79,30 +120,77 @@ export const locationContent: Record<string, LocationContent> = {
     title: "Blackout Packages and PPF in Houston, TX",
     description:
       "Blackout packages, paint protection film and eight more disciplines under one roof at 18235 Ammi Trail, Houston. Design your build with the House.",
-    eyebrow: "Houston, TX",
-    h1: "Houston. The Automotive Customization House.",
+    h1: { line1: "Houston.", line2: "The Automotive Customization House." },
     lede:
       "Every Houston build starts and finishes at 18235 Ammi Trail. Blackout packages, paint protection film and eight more disciplines run under one roof with one team. No subcontractors and no handoffs.",
+    hero: {
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
+      width: 1456,
+      height: 816,
+      /* Headlight, roof light bar, teal caliper, then rest on the body. */
+      sweep: [
+        [0.433, 0.397],
+        [0.584, 0.078],
+        [0.604, 0.684],
+        [0.52, 0.42],
+      ],
+    },
     pair: {
+      headline: "Darker trim. Protected paint.",
+      lede: "Blackout and paint protection, planned together at intake and finished under one roof.",
       primary: {
         slug: "blackout-packages",
         title: "Blackout Packages",
         copy:
           "Emblems, grilles, trim and accents refinished in gloss, satin or matte black. One darker, cleaner finish carried from front to rear.",
+        image: "/blackout-overview.webp",
+        imageAlt: "Land Rover Defender with a full blackout package in satin black",
       },
       secondary: {
         slug: "paint-protection-film",
         title: "Paint Protection Film",
         copy:
           "Clear film against rock chips and road debris from I-45 to the Loop. Full front or full body coverage, installed in-house.",
+        image: "/ppf-overview.webp",
+        imageAlt: "Range Rover Sport with paint protection film installed",
       },
     },
-    strip: {
-      items: [
-        "Off I-45 at Rankin Rd",
-        "Minutes from Beltway 8 and the Hardy Toll Road",
-        "About 20 min from Downtown",
-        "Mon to Fri 8 AM to 5 PM",
+    access: {
+      headline: "One address. All of Houston.",
+      where:
+        "Off I-45 at Rankin Road in north Houston, minutes from Beltway 8 and the Hardy Toll Road.",
+      house: { x: 328, y: 132 },
+      /* VERIFY: routes and times are our estimates, not Liz's figures. */
+      routes: [
+        {
+          from: "Downtown",
+          via: "I-45 North",
+          time: "About 20 min",
+          x: 306, y: 384, labelX: 318, labelY: 404,
+          d: "M306 384 C316 300 318 230 328 132",
+        },
+        {
+          from: "The Heights",
+          via: "I-45 North",
+          time: "About 20 min",
+          x: 252, y: 318, labelX: 160, labelY: 310,
+          d: "M252 318 C282 300 316 240 328 132",
+        },
+        {
+          from: "River Oaks",
+          via: "610 to I-45 North",
+          time: "About 25 min",
+          x: 232, y: 374, labelX: 204, labelY: 410,
+          d: "M232 374 C250 300 300 220 328 132",
+        },
+        {
+          from: "The Galleria",
+          via: "610 to I-45 North",
+          time: "About 30 min",
+          x: 192, y: 392, labelX: 88, labelY: 426,
+          d: "M192 392 C150 300 230 170 328 132",
+        },
       ],
       neighborhoods:
         "Serving Downtown, the Heights, River Oaks, the Galleria, Greenspoint and every Houston neighborhood in between.",
@@ -131,9 +219,8 @@ export const locationContent: Record<string, LocationContent> = {
     ],
     featuredBuildSlug: "g-class-satin-black-wrap",
     preselectService: "blackout-packages",
-    /* Derived rather than listed, so it can never drift from the
-       location program in lib/site.ts. */
-    nearby: locations.filter((l) => l.slug !== "houston").map((l) => l.slug),
+    /* No nearby cities list: the footer's Areas We Serve already links
+       every city page. Removed September 24 2026 per Jose. */
   },
 };
 
