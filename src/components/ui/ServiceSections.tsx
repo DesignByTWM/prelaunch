@@ -10,6 +10,7 @@ import type {
   ServiceRecentWork,
   ServicePackage,
 } from "@/content/services";
+import type { ResolvedSlot } from "@/sanity/servicePhotos";
 
 /* =============================================================
    SERVICE SECTION COMPONENTS
@@ -126,11 +127,18 @@ export function Coverage({
   items,
   prefix,
   alts,
+  slots,
 }: {
   items: ServiceCoverage[];
   prefix: string;
   /** Per-slot alt text keyed "cov-1" to "cov-4". Falls back to the card name. */
   alts?: Record<string, string>;
+  /**
+   * Slots already resolved against Sanity by the page. When a slot has no
+   * Sanity photo it carries the local path, so this is the same output as
+   * before. Absent entirely, the naming convention is used directly.
+   */
+  slots?: ResolvedSlot[];
 }) {
   return (
     <div className="cov-grid">
@@ -143,10 +151,13 @@ export function Coverage({
           delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
         >
           <div className="ph r45">
-            <Photo src={`/${prefix}-cov-${i + 1}.webp`} alt={alts?.[`cov-${i + 1}`] ?? item.name} />
+            <Photo
+              src={slots?.[i]?.src ?? `/${prefix}-cov-${i + 1}.webp`}
+              alt={slots?.[i]?.alt ?? alts?.[`cov-${i + 1}`] ?? item.name}
+            />
           </div>
           <div className="cov-body">
-            <h3>{item.name}</h3>
+            <h3>{slots?.[i]?.label || item.name}</h3>
             <span className="go">Explore →</span>
           </div>
         </Reveal>
@@ -210,11 +221,14 @@ export function RecentWork({
   items,
   prefix,
   alts,
+  slots,
 }: {
   items: ServiceRecentWork[];
   prefix: string;
   /** Per-slot alt text keyed "ref-1" to "ref-4". Falls back to the caption. */
   alts?: Record<string, string>;
+  /** Slots already resolved against Sanity by the page. See Coverage. */
+  slots?: ResolvedSlot[];
 }) {
   return (
     <>
@@ -226,10 +240,13 @@ export function RecentWork({
             delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
           >
             <div className="ph fill">
-              <Photo src={`/${prefix}-ref-${i + 1}.webp`} alt={alts?.[`ref-${i + 1}`] ?? item.name} />
+              <Photo
+                src={slots?.[i]?.src ?? `/${prefix}-ref-${i + 1}.webp`}
+                alt={slots?.[i]?.alt ?? alts?.[`ref-${i + 1}`] ?? item.name}
+              />
             </div>
             <div className="recent-scrim" />
-            <span className="recent-cap label">{item.name}</span>
+            <span className="recent-cap label">{slots?.[i]?.label || item.name}</span>
           </Reveal>
         ))}
       </div>

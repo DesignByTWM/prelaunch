@@ -22,6 +22,8 @@ import {
 } from "@/lib/schema";
 import { services, getService } from "@/content/services";
 import { serviceAreas, nap, routes } from "@/lib/site";
+import { getServicePhotos, resolveSlot } from "@/sanity/servicePhotos";
+import { COVERAGE_SLOTS, OVERVIEW_SLOT, REFERENCE_SLOTS } from "@/sanity/slots";
 
 /**
  * SERVICE PAGE TEMPLATE
@@ -108,6 +110,43 @@ export default async function ServicePage({
     .filter((s): s is NonNullable<typeof s> => Boolean(s))
     .slice(0, 3);
 
+  /**
+   * Photos from the Studio, resolved at build time.
+   *
+   * Null when Sanity has nothing for this service, is unreachable or is
+   * not configured. Every slot then falls back to the local file by
+   * naming convention, and then to the striped placeholder, so the page
+   * renders exactly as it did before Sanity existed.
+   */
+  const photos = await getServicePhotos(service.slug);
+
+  const overview = resolveSlot(
+    photos,
+    OVERVIEW_SLOT,
+    service.overviewImage ?? `/${service.imagePrefix}-overview.webp`,
+    service.imageAlts?.overview ?? service.imageAlt,
+  );
+
+  const coverageSlots = COVERAGE_SLOTS.map((slot, i) =>
+    resolveSlot(
+      photos,
+      slot,
+      `/${service.imagePrefix}-${slot.suffix}.webp`,
+      service.imageAlts?.[slot.suffix] ?? service.coverage[i]?.name ?? service.imageAlt,
+      service.coverage[i]?.name ?? "",
+    ),
+  );
+
+  const referenceSlots = REFERENCE_SLOTS.map((slot, i) =>
+    resolveSlot(
+      photos,
+      slot,
+      `/${service.imagePrefix}-${slot.suffix}.webp`,
+      service.imageAlts?.[slot.suffix] ?? service.recentWork[i]?.name ?? service.imageAlt,
+      service.recentWork[i]?.name ?? "",
+    ),
+  );
+
   return (
     <>
       <JsonLd
@@ -164,13 +203,7 @@ export default async function ServicePage({
             </div>
             <Reveal className="media rv-card">
               <div className="ph">
-                <Photo
-                  src={
-                    service.overviewImage ??
-                    `/${service.imagePrefix}-overview.webp`
-                  }
-                  alt={service.imageAlts?.overview ?? service.imageAlt}
-                />
+                <Photo src={overview.src} alt={overview.alt} />
               </div>
             </Reveal>
           </div>
@@ -181,7 +214,12 @@ export default async function ServicePage({
       <section className="alt" id="coverage">
         <div className="wrap">
           <SecHead eyebrow="Coverage" title={service.coverageTitle} center />
-          <Coverage items={service.coverage} prefix={service.imagePrefix} alts={service.imageAlts} />
+          <Coverage
+            items={service.coverage}
+            prefix={service.imagePrefix}
+            alts={service.imageAlts}
+            slots={coverageSlots}
+          />
         </div>
       </section>
 
@@ -201,7 +239,12 @@ export default async function ServicePage({
       <section className="alt" id="recent">
         <div className="wrap">
           <SecHead eyebrow="Reference" title={service.recentTitle} center />
-          <RecentWork items={service.recentWork} prefix={service.imagePrefix} alts={service.imageAlts} />
+          <RecentWork
+            items={service.recentWork}
+            prefix={service.imagePrefix}
+            alts={service.imageAlts}
+            slots={referenceSlots}
+          />
         </div>
       </section>
 

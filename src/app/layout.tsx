@@ -1,13 +1,24 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Quicksand } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import { Analytics } from "@vercel/analytics/next";
-import { BrandSprite } from "@/components/BrandMarks";
-import { Header } from "@/components/Header";
-import { Footer, SmsFloat } from "@/components/Footer";
-import { JsonLd, organizationSchema, websiteSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
-import "./globals.css";
+
+/**
+ * ROOT LAYOUT
+ *
+ * The HTML shell and nothing else: html, body, the two font variables and
+ * the site wide metadata defaults.
+ *
+ * Everything that makes a page look like the site, the header, the footer,
+ * the floating text button, the organization schema, GA4, Vercel Analytics
+ * and globals.css, lives in app/(site)/layout.tsx instead.
+ *
+ * That split exists for /studio. The Sanity Studio is a full screen
+ * application with its own styling, and it must not carry the site chrome
+ * or fire analytics. Keeping the chrome one level down in the (site) route
+ * group means /studio cannot inherit any of it, rather than relying on a
+ * conditional that could quietly stop working. Route groups do not change
+ * URLs, so every existing path is unchanged.
+ */
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -81,43 +92,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${quicksand.variable} ${inter.variable}`}>
-      <body>
-        {/*
-          Marks any image that fails to load with data-broken, which
-          globals.css hides, leaving the charcoal frame behind it visible
-          instead of a broken image icon.
-
-          It sets an attribute rather than an inline style because React
-          manages style, and mutating it before hydration causes a
-          mismatch.
-
-          This has to be a plain inline script rather than the onError
-          handler on the Photo component. An image referenced in server
-          rendered HTML can fail before React hydrates, and React never
-          sees that error, so the broken icon stays on screen. A capture
-          phase listener registered at the top of the body catches it
-          whenever it happens.
-
-          Every photo slot on the site is deliberately empty right now,
-          so this is doing real work rather than guarding an edge case.
-        */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'){t.setAttribute('data-broken','')}},true)",
-          }}
-        />
-        <BrandSprite />
-        <JsonLd graph={[organizationSchema(), websiteSchema()]} />
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <SmsFloat />
-        <Analytics />
-        {site.isProduction && process.env.NEXT_PUBLIC_GA_ID ? (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        ) : null}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

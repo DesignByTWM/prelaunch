@@ -29,7 +29,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/thank-you", "/api/"],
+        disallow: ["/thank-you", "/api/", "/studio"],
       },
       // Named explicitly so the intent is unmistakable to anyone auditing.
       {
@@ -48,7 +48,7 @@ export default function robots(): MetadataRoute.Robots {
           "CCBot",
         ],
         allow: "/",
-        disallow: ["/thank-you", "/api/"],
+        disallow: ["/thank-you", "/api/", "/studio"],
       },
     ],
     sitemap: `${site.url}/sitemap.xml`,

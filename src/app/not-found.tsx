@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Monogram } from "@/components/BrandMarks";
+import { SiteChrome } from "@/components/SiteChrome";
 import { headlineServices } from "@/content/services";
 import { routes } from "@/lib/site";
 
@@ -9,9 +10,15 @@ import { routes } from "@/lib/site";
  * A dead end is a lead about to leave. Rather than a bare message, this
  * routes to the five headline disciplines and gives the phone number, so a
  * broken link becomes a navigation problem rather than a lost inquiry.
+ *
+ * It stays at the app root rather than inside the (site) group, because
+ * Next only uses a not-found file at the root for unmatched URLs. That
+ * puts it outside the site layout, so it renders SiteChrome itself and
+ * looks exactly as it did before.
  */
 export default function NotFound() {
   return (
+    <SiteChrome>
     <section style={{ paddingTop: "clamp(70px,10vw,130px)" }}>
       <div className="wrap" style={{ textAlign: "center" }}>
         <Monogram />
@@ -53,5 +60,6 @@ export default function NotFound() {
         </p>
       </div>
     </section>
+    </SiteChrome>
   );
 }

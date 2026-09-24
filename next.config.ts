@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
     // Sized for the hero full-bleed down to the 5-up service card grid.
     deviceSizes: [360, 480, 640, 828, 1080, 1280, 1600, 1920, 2560],
     imageSizes: [96, 128, 192, 256, 384],
+    // Service page photos Liz uploads through the Studio are served from
+    // the Sanity CDN, already cropped to the slot by the image builder.
+    remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
   },
 
   experimental: {
