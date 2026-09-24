@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
 import { submitLead, type LeadPayload } from "@/app/actions/lead";
 
 /**
@@ -36,8 +37,25 @@ export function SubmitLead({
     setState("sending");
 
     try {
-      const result = await submitLead(collect());
+      const payload = collect();
+      const result = await submitLead(payload);
       if (result.ok) {
+        /**
+         * GA4 cannot detect these submissions by itself. The button is
+         * type="button" and delivery happens server side through Resend,
+         * so there is no form navigation for it to observe. The event is
+         * sent explicitly on success instead.
+         *
+         * Bots that fill the honeypot still get an ok result, so they are
+         * excluded here rather than counted as leads.
+         */
+        if (!payload.company?.trim()) {
+          try {
+            sendGAEvent("event", "generate_lead", { lead_source: payload.source });
+          } catch {
+            // Analytics must never break a submission.
+          }
+        }
         setState("done");
       } else {
         setError(result.error ?? "Something went wrong. Please try again.");

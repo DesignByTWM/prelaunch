@@ -20,13 +20,17 @@ const nextConfig: NextConfig = {
     },
   },
 
-  // Legacy URLs from the previous Wix site. Both 404 today and both have a
-  // direct equivalent on the current site. Permanent so the old paths are
-  // dropped from the index rather than re-crawled.
+  // Legacy URLs, from the previous Wix site, the Shopify store's /pages/
+  // routes, and the old coming soon page's index.html. All of them 404
+  // today and all have a direct equivalent on the current site. Permanent
+  // so the old paths are dropped from the index rather than re-crawled.
   async redirects() {
     return [
       { source: "/blog", destination: "/journal", permanent: true },
       { source: "/vehicle-wrap", destination: "/services/vehicle-wraps", permanent: true },
+      { source: "/index.html", destination: "/", permanent: true },
+      { source: "/pages/blackout-packages", destination: "/services/blackout-packages", permanent: true },
+      { source: "/pages/contact", destination: "/contact", permanent: true },
     ];
   },
 
