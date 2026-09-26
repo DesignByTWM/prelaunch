@@ -20,15 +20,6 @@ import dynamic from "next/dynamic";
  * schema on the page is server rendered by the page itself.
  */
 
-/* Mirrors the props on LocationMotion. Declared rather than derived,
-   because the component is loaded dynamically and has no exported type. */
-interface LocationMotionProps {
-  /** Light path over the hero image, as 0 to 1 fractions. */
-  sweep: [number, number][];
-  imageWidth: number;
-  imageHeight: number;
-}
-
 const LocationMotion = dynamic(
   () =>
     import("@/components/location/LocationMotion").then(
@@ -37,6 +28,6 @@ const LocationMotion = dynamic(
   { ssr: false },
 );
 
-export function LocationMotionLazy(props: LocationMotionProps) {
-  return <LocationMotion {...props} />;
+export function LocationMotionLazy() {
+  return <LocationMotion />;
 }

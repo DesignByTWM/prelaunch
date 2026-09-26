@@ -40,9 +40,10 @@ import { hours, locations, nap, routes } from "@/lib/site";
  * doorway pages, and publishing them thin now would attach that signal to
  * the domain before the real program ever launches. Indexing gets switched
  * on page by page as genuine content is written for each city, through the
- * `indexable` flag on the content entry. Houston carries real content but
- * stays noindex while Liz reviews it. Removing the noindex is one line,
- * undoing a doorway page penalty is not.
+ * `indexable` flag on the content entry. Houston was approved by Liz and
+ * indexed September 24 2026; every other city stays noindex until its own
+ * content is written. Removing a noindex is one line, undoing a doorway
+ * page penalty is not.
  */
 
 export function generateStaticParams() {
@@ -156,7 +157,7 @@ function clock(time: string) {
 /**
  * The real location page, section by section in Jose's approved order:
  *
- *   1. Hero, the build revealed by light
+ *   1. Hero, the full photo with the headline rising in
  *   2. The city's two disciplines, one pinned scene
  *   3. From the city to the House, route map
  *   4. The ten disciplines, horizontal run
@@ -228,13 +229,11 @@ function LocationPage({ slug }: { slug: string }) {
         ]}
       />
 
-      <LocationMotionLazy
-        sweep={content.hero.sweep}
-        imageWidth={content.hero.width}
-        imageHeight={content.hero.height}
-      />
+      <LocationMotionLazy />
 
-      {/* 1. HERO. The photo sits in the dark and the light finds it. */}
+      {/* 1. HERO. The full photo from the first frame. The light sweep
+          effect was removed September 26 2026 at Henry's request; the
+          headline still rises in, in CSS, so nothing waits on script. */}
       <section className="lp-hero" aria-label={`${location.name}, ${content.h1.line2}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -243,9 +242,7 @@ function LocationPage({ slug }: { slug: string }) {
           alt={content.hero.alt}
           fetchPriority="high"
         />
-        <div className="lp-hero-dark" aria-hidden="true" />
         <div className="lp-hero-fade" aria-hidden="true" />
-        <div className="lp-ring" aria-hidden="true" />
 
         <div className="lp-hero-copy">
           <div className="lp-rv">
@@ -263,11 +260,6 @@ function LocationPage({ slug }: { slug: string }) {
             </Link>
           </div>
         </div>
-
-        <p className="lp-hint" aria-hidden="true">
-          <i />
-          <span>Move to light the build</span>
-        </p>
       </section>
 
       {/* 2. THE PAIR. Desktop pins this and hands one service to the

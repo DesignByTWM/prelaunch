@@ -16,7 +16,7 @@
  * the sitemap.
  *
  * DESIGN, September 24 2026. The location pages carry the animated
- * concept Jose approved (light sweep hero, pinned pair scene, route map,
+ * concept Jose approved (full photo hero, pinned pair scene, route map,
  * horizontal disciplines run). The main website is not touched. Every
  * animated section reads its words and coordinates from this file, so a
  * new city is data entry against the same template.
@@ -82,17 +82,11 @@ export interface LocationContent {
   description: string;
   h1: { line1: string; line2: string };
   lede: string;
+  /* The light sweep path that used to live here was removed with the
+     effect itself, September 26 2026, at Henry's request. */
   hero: {
     image: string;
     alt: string;
-    /** Natural pixel size of the image, used to aim the light. */
-    width: number;
-    height: number;
-    /**
-     * The light sweep path, as fractions of the image (0 to 1). The last
-     * point is where the light rests and opens up.
-     */
-    sweep: [number, number][];
   };
   /** The two disciplines this city page leads on. */
   pair: {
@@ -131,15 +125,6 @@ export const locationContent: Record<string, LocationContent> = {
     hero: {
       image: "/dbtwmmainpagehero.webp",
       alt: "Blacked-out Land Rover Defender outside the House",
-      width: 1456,
-      height: 816,
-      /* Headlight, roof light bar, teal caliper, then rest on the body. */
-      sweep: [
-        [0.433, 0.397],
-        [0.584, 0.078],
-        [0.604, 0.684],
-        [0.52, 0.42],
-      ],
     },
     pair: {
       headline: "Darker trim. Protected paint.",

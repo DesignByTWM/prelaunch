@@ -9,34 +9,32 @@ import Lenis from "lenis";
 /**
  * LocationMotion
  *
- * Every animation on the location pages, in one place. Renders nothing.
- * The page itself is fully server rendered, so all copy, links and schema
- * are in the HTML before this runs. This only adds motion on top.
+ * Every scripted animation on the location pages, in one place. Renders
+ * nothing. The page itself is fully server rendered, so all copy, links
+ * and schema are in the HTML before this runs. This only adds motion on
+ * top.
  *
  * Stack, approved by Jose September 24 2026: GSAP with ScrollTrigger and
  * MotionPathPlugin, plus Lenis for smooth scroll. GSAP is free for
  * commercial use including all plugins. Lenis is MIT. Both are imported
- * here and nowhere else, so they ship only with the location pages and
- * the rest of the site loads exactly as before.
+ * here and nowhere else, and this file is itself loaded through
+ * LocationMotionLazy, so they ship only with city pages that have content.
+ *
+ * HERO, September 26 2026: the light sweep and the cursor-driven light
+ * were removed at Henry's request. The hero now shows the full photo from
+ * the first frame. Its headline rise is pure CSS in location.css, so it
+ * never waits on this script. All that remains here for the hero is the
+ * slow zoom as it scrolls away.
  *
  * Everything is created inside a gsap.context and torn down on unmount,
  * and Lenis is destroyed, so navigating away leaves no scroll hijack or
  * pinned spacer behind on the next page.
  *
- * prefers-reduced-motion: no light sweep, no smooth scroll, no pins, no
- * scrubs. The CSS falls back to a lit hero and stacked sections. The map
- * hover still works, because that is information rather than motion.
+ * prefers-reduced-motion: no smooth scroll, no pins, no scrubs. The CSS
+ * falls back to stacked sections. The map hover still works, because that
+ * is information rather than motion.
  */
-export function LocationMotion({
-  sweep,
-  imageWidth,
-  imageHeight,
-}: {
-  /** Light path over the hero image, as 0 to 1 fractions. */
-  sweep: [number, number][];
-  imageWidth: number;
-  imageHeight: number;
-}) {
+export function LocationMotion() {
   useEffect(() => {
     const root = document.getElementById("lp");
     if (!root) return;
@@ -72,10 +70,7 @@ export function LocationMotion({
       });
     });
 
-    const hero = root.querySelector<HTMLElement>(".lp-hero");
-    const img = root.querySelector<HTMLImageElement>(".lp-hero-img");
-
-    if (reduce || !hero || !img) {
+    if (reduce) {
       return () => cleanups.forEach((fn) => fn());
     }
 
@@ -83,11 +78,6 @@ export function LocationMotion({
 
     const header = document.querySelector<HTMLElement>("header.site");
     const hdrH = header?.offsetHeight ?? 78;
-
-    if (touch) {
-      const hint = root.querySelector(".lp-hint span");
-      if (hint) hint.textContent = "Drag to light the build";
-    }
 
     /* ---------- smooth scroll ---------- */
     const lenis = new Lenis({ lerp: 0.09 });
@@ -108,105 +98,18 @@ export function LocationMotion({
     };
     root.addEventListener("click", onAnchor);
 
-    /* ---------- the light ---------- */
-    const L = { x: 0, y: 0, r: 0 };
-    const T = { x: 0, y: 0 };
-    let following = false;
-    let moved = false;
-    let raf = 0;
-    let idleRaf = 0;
-
-    /** Where a point on the image lands on screen, honouring object-fit. */
-    const point = (fx: number, fy: number) => {
-      const h = hero.getBoundingClientRect();
-      const b = img.getBoundingClientRect();
-      const s = Math.max(b.width / imageWidth, b.height / imageHeight);
-      const pos = getComputedStyle(img).objectPosition.split(" ");
-      const px = (parseFloat(pos[0]) || 50) / 100;
-      const py = (parseFloat(pos[1] ?? "50") || 50) / 100;
-      const ox = b.left - h.left + (b.width - imageWidth * s) * px;
-      const oy = b.top - h.top + (b.height - imageHeight * s) * py;
-      return { x: ox + fx * imageWidth * s, y: oy + fy * imageHeight * s };
-    };
-
-    const paint = () => {
-      if (following) {
-        L.x += (T.x - L.x) * 0.12;
-        L.y += (T.y - L.y) * 0.12;
-      }
-      hero.style.setProperty("--x", `${L.x}px`);
-      hero.style.setProperty("--y", `${L.y}px`);
-      hero.style.setProperty("--r", `${L.r}px`);
-      raf = requestAnimationFrame(paint);
-    };
-
-    /* On a phone the light drifts on its own until a finger takes it. */
-    const idle = () => {
-      const t0 = performance.now();
-      const drift = (now: number) => {
-        if (moved) return;
-        const rest = point(...sweep[sweep.length - 1]);
-        const k = (now - t0) / 1000;
-        T.x = rest.x + Math.sin(k * 0.7) * hero.offsetWidth * 0.22;
-        T.y = rest.y + Math.sin(k * 1.1) * hero.offsetHeight * 0.08;
-        idleRaf = requestAnimationFrame(drift);
-      };
-      idleRaf = requestAnimationFrame(drift);
-    };
-
-    const onMove = (e: PointerEvent | TouchEvent) => {
-      const h = hero.getBoundingClientRect();
-      const p = "touches" in e ? e.touches[0] : e;
-      if (!p) return;
-      T.x = p.clientX - h.left;
-      T.y = p.clientY - h.top;
-      if (following && !moved) {
-        moved = true;
-        hero.classList.add("is-moved");
-      }
-    };
-    hero.addEventListener("pointermove", onMove);
-    hero.addEventListener("touchmove", onMove, { passive: true });
-    cleanups.push(() => {
-      hero.removeEventListener("pointermove", onMove);
-      hero.removeEventListener("touchmove", onMove);
-    });
-
     const ctx = gsap.context(() => {
-      /* ----- page load: the light finds the build ----- */
-      const pts = sweep.map(([fx, fy]) => point(fx, fy));
-      const scale = Math.max(hero.offsetWidth / 1440, 0.6);
-      const first = pts[0];
-      const last = pts[pts.length - 1];
-      L.x = first.x - 260 * scale;
-      L.y = first.y;
-
-      gsap.set(".lp-mask > span", { yPercent: 110 });
-      gsap.set(".lp-hero-copy .lp-rv", { autoAlpha: 0, y: 18 });
-
-      const intro = gsap.timeline({ delay: 0.35 });
-      intro.to(L, { x: first.x, r: 150 * scale, duration: 1.1, ease: "power2.out" });
-      pts.slice(1, -1).forEach((p) => {
-        intro.to(L, { x: p.x, y: p.y, duration: 1.1, ease: "power2.inOut" });
-      });
-      intro
-        .to(L, { x: last.x, y: last.y, r: 440 * scale, duration: 1.2, ease: "power3.inOut" })
-        .to(".lp-mask > span", { yPercent: 0, duration: 1.1, stagger: 0.12, ease: "power4.out" }, 1.2)
-        .to(".lp-hero-copy .lp-rv", { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.1, ease: "power3.out" }, 1.7)
-        .add(() => {
-          T.x = L.x;
-          T.y = L.y;
-          following = true;
-          hero.classList.add("is-live");
-          if (touch) idle();
+      /* ----- hero: a slow zoom as it scrolls away ----- */
+      const hero = root.querySelector<HTMLElement>(".lp-hero");
+      const img = root.querySelector<HTMLImageElement>(".lp-hero-img");
+      if (hero && img) {
+        gsap.to(img, {
+          scale: 1.08,
+          yPercent: 5,
+          ease: "none",
+          scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
         });
-
-      gsap.to(img, {
-        scale: 1.08,
-        yPercent: 5,
-        ease: "none",
-        scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
-      });
+      }
 
       /* ----- desktop only: the two pinned scenes ----- */
       const mm = gsap.matchMedia();
@@ -347,16 +250,12 @@ export function LocationMotion({
       }
     }, root);
 
-    raf = requestAnimationFrame(paint);
-
     /* Photos change the page height as they arrive, which moves every
        pin and trigger. Recalculate once everything has loaded. */
     const onLoad = () => ScrollTrigger.refresh();
     window.addEventListener("load", onLoad);
 
     return () => {
-      cancelAnimationFrame(raf);
-      cancelAnimationFrame(idleRaf);
       window.removeEventListener("load", onLoad);
       root.removeEventListener("click", onAnchor);
       cleanups.forEach((fn) => fn());
@@ -364,7 +263,7 @@ export function LocationMotion({
       gsap.ticker.remove(tick);
       lenis.destroy();
     };
-  }, [sweep, imageWidth, imageHeight]);
+  }, []);
 
   return null;
 }
