@@ -51,9 +51,20 @@ export function SubmitLead({
          */
         if (!payload.company?.trim()) {
           try {
+            /**
+             * The tier is carried inside fields rather than as a top level
+             * property, because that is where the forms put it for the
+             * house email. Read it back out here rather than changing the
+             * payload shape for analytics.
+             */
+            const tier = payload.fields?.find(
+              (field) => field.label === "Package tier",
+            )?.value;
+
             sendGAEvent("event", "generate_lead", {
               lead_source: payload.source,
               ...(payload.city ? { city: payload.city } : {}),
+              ...(tier ? { package_tier: tier } : {}),
             });
           } catch {
             // Analytics must never break a submission.
