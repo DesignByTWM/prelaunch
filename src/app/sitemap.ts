@@ -1,9 +1,12 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/content/services";
-import { featuredBuilds } from "@/content/builds";
-import { journalPosts } from "@/content/journal";
+import { getArticles, getBuilds } from "@/sanity/content";
 import { getLocationContent } from "@/content/locations";
 import { locations, routes, site } from "@/lib/site";
+
+/* Builds and articles come from the Studio. Refreshed hourly and whenever
+   one is published, changed or removed. */
+export const revalidate = 3600;
 
 /**
  * sitemap.xml
@@ -25,9 +28,15 @@ import { locations, routes, site } from "@/lib/site";
  * Priority values are relative hints only. The ordering below reflects
  * commercial intent: service pages earn more than the journal, because a
  * service page is where a search turns into an inquiry.
+ *
+ * STAGE 2: builds and articles are read from the Studio, so a published
+ * article appears here and a removed one disappears, without a deploy. An
+ * article's lastModified is its updated date when Liz sets one, otherwise
+ * its published date, the same date the page gives search engines.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const [featuredBuilds, journalPosts] = await Promise.all([getBuilds(), getArticles()]);
 
   const core: MetadataRoute.Sitemap = [
     { url: `${site.url}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
@@ -62,7 +71,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const journalPages: MetadataRoute.Sitemap = journalPosts.map((post) => ({
     url: `${site.url}${routes.journal}/${post.slug}`,
-    lastModified: new Date(post.published),
+    lastModified: new Date(post.updatedAt ?? post.published),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
