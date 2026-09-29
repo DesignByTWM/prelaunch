@@ -68,6 +68,7 @@ export const build = defineType({
       previews: [
         { title: "Homepage and More Work cards", aspectRatio: 16 / 9 },
         { title: "Featured Builds card", aspectRatio: 4 / 5 },
+        { title: "Link preview when shared", aspectRatio: 1.91 },
       ],
     }),
     defineField({

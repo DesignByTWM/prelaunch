@@ -77,6 +77,7 @@ export const article = defineType({
       previews: [
         { title: "Featured article", aspectRatio: 16 / 10 },
         { title: "Journal card", aspectRatio: 4 / 5 },
+        { title: "Link preview when shared", aspectRatio: 1.91 },
       ],
     }),
     paragraphsField(
