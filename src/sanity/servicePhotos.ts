@@ -1,6 +1,6 @@
 import type { SanityImageSource } from "@sanity/image-url";
 import { sanityClient } from "./client";
-import { imageUrl } from "./image";
+import { sanityImageSet } from "./image";
 import { servicePhotosId, type SlotSpec } from "./slots";
 
 /**
@@ -61,6 +61,12 @@ export interface ResolvedSlot {
   src: string;
   alt: string;
   label: string;
+  /**
+   * Only present for a Sanity photo. A local fallback file carries neither,
+   * so its img tag renders exactly as it did before.
+   */
+  srcSet?: string;
+  sizes?: string;
 }
 
 /**
@@ -87,14 +93,24 @@ export function resolveSlot(
   const label = entry?.label?.trim() ? entry.label.trim() : fallbackLabel;
 
   const hasImage = Boolean(entry?.image?.asset?._ref);
-  const url = hasImage && entry?.image ? imageUrl(entry.image, slot.width, slot.height) : null;
+  const image =
+    hasImage && entry?.image
+      ? sanityImageSet(entry.image, {
+          aspectRatio: slot.aspectRatio,
+          maxWidth: slot.maxWidth,
+          fallbackWidth: slot.width,
+          sizes: slot.sizes,
+        })
+      : null;
 
-  if (!url) {
+  if (!image) {
     return { src: fallbackSrc, alt: fallbackAlt, label };
   }
 
   return {
-    src: url,
+    src: image.src,
+    srcSet: image.srcSet,
+    sizes: image.sizes,
     alt: entry?.alt?.trim() ? entry.alt.trim() : fallbackAlt,
     label,
   };

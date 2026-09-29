@@ -33,15 +33,26 @@ export function Photo({
   src,
   alt,
   priority = false,
+  srcSet,
+  sizes,
 }: {
   src: string;
   alt: string;
   priority?: boolean;
+  /**
+   * Responsive candidates, for photos served from Sanity. Left out for
+   * files in /public, and React then omits the attribute entirely, so a
+   * local file renders exactly as it always has.
+   */
+  srcSet?: string;
+  sizes?: string;
 }) {
   return (
     <img
       suppressHydrationWarning
       src={src}
+      srcSet={srcSet}
+      sizes={sizes}
       alt={alt}
       loading={priority ? "eager" : "lazy"}
       fetchPriority={priority ? "high" : "auto"}

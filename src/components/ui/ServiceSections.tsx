@@ -153,6 +153,8 @@ export function Coverage({
           <div className="ph r45">
             <Photo
               src={slots?.[i]?.src ?? `/${prefix}-cov-${i + 1}.webp`}
+              srcSet={slots?.[i]?.srcSet}
+              sizes={slots?.[i]?.sizes}
               alt={slots?.[i]?.alt ?? alts?.[`cov-${i + 1}`] ?? item.name}
             />
           </div>
@@ -242,6 +244,8 @@ export function RecentWork({
             <div className="ph fill">
               <Photo
                 src={slots?.[i]?.src ?? `/${prefix}-ref-${i + 1}.webp`}
+                srcSet={slots?.[i]?.srcSet}
+                sizes={slots?.[i]?.sizes}
                 alt={slots?.[i]?.alt ?? alts?.[`ref-${i + 1}`] ?? item.name}
               />
             </div>

@@ -203,7 +203,12 @@ export default async function ServicePage({
             </div>
             <Reveal className="media rv-card">
               <div className="ph">
-                <Photo src={overview.src} alt={overview.alt} />
+                <Photo
+                  src={overview.src}
+                  srcSet={overview.srcSet}
+                  sizes={overview.sizes}
+                  alt={overview.alt}
+                />
               </div>
             </Reveal>
           </div>

@@ -44,6 +44,20 @@ export interface SlotSpec {
    * height.
    */
   aspectRatio: number;
+  /**
+   * The widest this frame is ever drawn, in CSS pixels, across every
+   * breakpoint. Not the desktop width: most of these frames are drawn
+   * larger on a tablet than on a desktop, because the grid drops columns
+   * before the frames shrink. Sizing images to the desktop box alone is
+   * what made them soft. The srcset tops out at twice this, for 2x screens.
+   */
+  maxWidth: number;
+  /**
+   * The browser's guide to how wide the frame is at each viewport, so it
+   * picks the right srcset candidate. Mirrors the grid rules in
+   * globals.css, where the page padding is clamp(20px, 5vw, 40px).
+   */
+  sizes: string;
   /** Whether this frame shows a text label on the page. */
   label: boolean;
 }
@@ -55,6 +69,9 @@ export const OVERVIEW_SLOT: SlotSpec = {
   height: 411,
   /* .svc-overview .ph, aspect-ratio 4/3 */
   aspectRatio: 4 / 3,
+  /* One column at 900px and below, so the frame is widest at 900px. */
+  maxWidth: 820,
+  sizes: "(max-width: 900px) 92vw, (max-width: 1240px) 45vw, 548px",
   label: false,
 };
 
@@ -65,14 +82,21 @@ export const COVERAGE_SLOTS: SlotSpec[] = [1, 2, 3, 4].map((n) => ({
   height: 344,
   /* .ph.r45, aspect-ratio 4/5 */
   aspectRatio: 4 / 5,
+  /* Two columns from 541px to 1100px, so widest at 1100px. */
+  maxWidth: 500,
+  sizes: "(max-width: 540px) 92vw, (max-width: 1100px) 46vw, (max-width: 1240px) 23vw, 275px",
   label: true,
 }));
 
+/* One column at 800px and below with a fixed 270px height, so the three
+   smaller reference frames are widest at 800px, not on desktop. */
+const REF_NARROW = "(max-width: 800px) 92vw";
+
 export const REFERENCE_SLOTS: SlotSpec[] = [
-  { field: "reference1", suffix: "ref-1", width: 666, height: 428, aspectRatio: 666 / 428, label: true },
-  { field: "reference2", suffix: "ref-2", width: 476, height: 205, aspectRatio: 476 / 205, label: true },
-  { field: "reference3", suffix: "ref-3", width: 476, height: 205, aspectRatio: 476 / 205, label: true },
-  { field: "reference4", suffix: "ref-4", width: 1160, height: 240, aspectRatio: 1160 / 240, label: true },
+  { field: "reference1", suffix: "ref-1", width: 666, height: 428, aspectRatio: 666 / 428, maxWidth: 720, sizes: `${REF_NARROW}, (max-width: 1240px) 54vw, 666px`, label: true },
+  { field: "reference2", suffix: "ref-2", width: 476, height: 205, aspectRatio: 476 / 205, maxWidth: 720, sizes: `${REF_NARROW}, (max-width: 1240px) 39vw, 476px`, label: true },
+  { field: "reference3", suffix: "ref-3", width: 476, height: 205, aspectRatio: 476 / 205, maxWidth: 720, sizes: `${REF_NARROW}, (max-width: 1240px) 39vw, 476px`, label: true },
+  { field: "reference4", suffix: "ref-4", width: 1160, height: 240, aspectRatio: 1160 / 240, maxWidth: 1160, sizes: "(max-width: 1240px) 94vw, 1160px", label: true },
 ];
 
 /** All nine, in page order. */

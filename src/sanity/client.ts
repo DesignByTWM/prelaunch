@@ -19,10 +19,14 @@ export const sanityClient = isConfigured
       projectId,
       dataset,
       apiVersion,
-      /* The CDN is a cache of its own. Off in development for the same
-         reason the fetch is uncached there, so an edit shows on refresh.
-         Production keeps it on. */
-      useCdn: process.env.NODE_ENV !== "development",
+      /* Off everywhere. The API CDN is a cache of its own, and when the
+         publish webhook triggers a revalidation the page can regenerate
+         from the CDN before it holds the new version, baking a stale photo
+         back in. These requests only happen at build or revalidation time,
+         never per visitor, so going straight to the API costs nothing a
+         visitor would notice. Photos themselves still come from the image
+         CDN, which is separate. */
+      useCdn: false,
       perspective: "published",
     })
   : null;
