@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Monogram } from "@/components/BrandMarks";
 import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/Reveal";
-import { featuredBuilds } from "@/content/builds";
+import { framed, getBuilds } from "@/sanity/content";
+import { FRAMES } from "@/sanity/frames";
 import { wheelBrands } from "@/content/wheels";
 import { routes } from "@/lib/site";
 
@@ -63,10 +64,12 @@ export function Materials() {
    It now renders the first three entries of featuredBuilds, the same
    source the Featured Builds page uses, so a card can never again point
    at a build that does not exist.
+
+   STAGE 2: the first three by position in the Studio.
    ============================================================ */
 
-export function FeaturedBuilds() {
-  const builds = featuredBuilds.slice(0, 3);
+export async function FeaturedBuilds() {
+  const builds = (await getBuilds()).slice(0, 3);
 
   return (
     <section id="builds">
@@ -81,7 +84,9 @@ export function FeaturedBuilds() {
         </Reveal>
 
         <div className="builds">
-          {builds.map((build, i) => (
+          {builds.map((build, i) => {
+            const photo = framed(build.hero, FRAMES.buildHome);
+            return (
             <Reveal
               key={build.slug}
               as={Link}
@@ -91,7 +96,7 @@ export function FeaturedBuilds() {
               delay={(i + 1) as 1 | 2 | 3}
             >
               <div className="ph r169">
-                <Photo src={build.hero} alt={build.heroAlt} />
+                <Photo src={photo.src} alt={photo.alt} {...photo.extra} />
               </div>
               <h3>
                 {build.vehicle}: {build.title}
@@ -102,7 +107,8 @@ export function FeaturedBuilds() {
                 ))}
               </div>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

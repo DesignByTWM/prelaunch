@@ -8,6 +8,10 @@ import { JsonLd, breadcrumbSchema } from "@/lib/schema";
 import { headlineServices } from "@/content/services";
 import { nap } from "@/lib/site";
 
+/* The hero, the card photos and the featured builds are read from Sanity.
+   Rebuilt at most hourly, and immediately when the publish webhook fires. */
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "Luxury Automotive Customization in Houston, Texas",
   description:

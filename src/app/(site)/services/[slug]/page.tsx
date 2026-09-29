@@ -24,6 +24,8 @@ import { services, getService } from "@/content/services";
 import { serviceAreas, nap, routes } from "@/lib/site";
 import { getServicePhotos, resolveSlot } from "@/sanity/servicePhotos";
 import { COVERAGE_SLOTS, OVERVIEW_SLOT, REFERENCE_SLOTS } from "@/sanity/slots";
+import { cardFor, framed, getServiceCards, ogImage } from "@/sanity/content";
+import { FRAMES } from "@/sanity/frames";
 
 /**
  * SERVICE PAGE TEMPLATE
@@ -81,6 +83,10 @@ export async function generateMetadata({
   const service = getService(slug);
   if (!service) return {};
 
+  /* The share image is the service's card photo, from the Studio when Liz
+     has set one, otherwise the current file. */
+  const cards = await getServiceCards();
+
   return {
     title: service.name,
     description: service.summary,
@@ -89,7 +95,7 @@ export async function generateMetadata({
       title: `${service.name} | DESIGNBYTWM`,
       description: service.summary,
       url: routes.service(service.slug),
-      images: [{ url: service.image }],
+      images: [{ url: ogImage(cardFor(cards, service.slug)) }],
     },
   };
 }
@@ -109,6 +115,19 @@ export default async function ServicePage({
     .map((pairSlug) => getService(pairSlug))
     .filter((s): s is NonNullable<typeof s> => Boolean(s))
     .slice(0, 3);
+
+  /* Related cards show each paired service's card photo. */
+  const cards = await getServiceCards();
+  const relatedItems = pairs.map((p) => {
+    const photo = framed(cardFor(cards, p.slug), FRAMES.relatedCard);
+    return {
+      slug: p.slug,
+      name: p.name,
+      image: photo.src,
+      imageAlt: photo.alt,
+      ...(photo.fromSanity ? { imageExtra: photo.extra } : {}),
+    };
+  });
 
   /**
    * Photos from the Studio, resolved at build time.
@@ -274,14 +293,7 @@ export default async function ServicePage({
         <section className="alt">
           <div className="wrap">
             <SecHead eyebrow="Related" title="Often paired with" center />
-            <Related
-              items={pairs.map((p) => ({
-                slug: p.slug,
-                name: p.name,
-                image: p.image,
-                imageAlt: p.imageAlt,
-              }))}
-            />
+            <Related items={relatedItems} />
           </div>
         </section>
       )}

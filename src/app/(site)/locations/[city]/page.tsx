@@ -14,7 +14,8 @@ import {
 } from "@/lib/schema";
 import { getLocationContent } from "@/content/locations";
 import { services, serviceBySlug } from "@/content/services";
-import { featuredBuilds } from "@/content/builds";
+import { cardFor, framed, framedNatural, getBuilds, getServiceCards } from "@/sanity/content";
+import { FRAMES, NATURAL } from "@/sanity/frames";
 import { wheelBrands } from "@/content/wheels";
 import { hours, locations, nap, routes } from "@/lib/site";
 
@@ -45,6 +46,9 @@ import { hours, locations, nap, routes } from "@/lib/site";
  * content is written. Removing a noindex is one line, undoing a doorway
  * page penalty is not.
  */
+
+/* Houston reads its featured build and card photos from the Studio. */
+export const revalidate = 3600;
 
 export function generateStaticParams() {
   return locations.map((location) => ({ city: location.slug }));
@@ -171,7 +175,7 @@ function clock(time: string) {
  * footer's Areas We Serve already links every city page, so the row was
  * a duplicate. Internal linking between cities is unchanged.
  */
-function LocationPage({ slug }: { slug: string }) {
+async function LocationPage({ slug }: { slug: string }) {
   const content = getLocationContent(slug);
   if (!content) notFound();
 
@@ -190,7 +194,12 @@ function LocationPage({ slug }: { slug: string }) {
     ...services.filter((service) => !pairSlugs.includes(service.slug)),
   ];
 
-  const build = featuredBuilds.find((b) => b.slug === content.featuredBuildSlug);
+  /* Stage 2: the featured build and the discipline card photos come from
+     the Studio. A build removed there drops this section rather than
+     being rebuilt from code. */
+  const build = (await getBuilds()).find((b) => b.slug === content.featuredBuildSlug);
+  const buildPhoto = build ? framedNatural(build.hero, NATURAL.houstonFeature) : null;
+  const cards = await getServiceCards();
   const wheels = wheelBrands.slice(0, 2);
 
   /* The form's select carries service names as its values, so the slug
@@ -429,26 +438,29 @@ function LocationPage({ slug }: { slug: string }) {
             <div className="lp-bar" aria-hidden="true"><i /></div>
           </div>
           <div className="lp-track">
-            {disciplines.map((service) => (
+            {disciplines.map((service) => {
+              const photo = framed(cardFor(cards, service.slug), FRAMES.houstonCard);
+              return (
               <Link key={service.slug} href={routes.service(service.slug)} className="lp-card">
                 <div className="lp-card-img">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={service.image} alt={service.imageAlt} loading="lazy" />
+                  <img src={photo.src} alt={photo.alt} loading="lazy" {...photo.extra} />
                 </div>
                 <h3 className="display">{service.name}</h3>
                 <p>{service.cardLine}</p>
                 <span className="lp-go">{service.ctaLabel ?? "Explore"} →</span>
               </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* 5. FEATURED BUILD. */}
-      {build && (
+      {build && buildPhoto && (
         <section className="lp-feat" aria-label="Featured build">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={build.hero} alt={build.heroAlt} loading="lazy" />
+          <img src={buildPhoto.src} alt={buildPhoto.alt} loading="lazy" {...buildPhoto.extra} />
           <div className="lp-feat-copy">
             <span className="eyebrow">Featured Build</span>
             <h2 className="display">Built at the House.</h2>

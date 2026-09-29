@@ -4,7 +4,8 @@ import { Reveal } from "@/components/Reveal";
 import { PageHero, SecHead } from "@/components/ui/Page";
 import { BuildFinder } from "@/components/builds/BuildFinder";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
-import { featuredBuilds } from "@/content/builds";
+import { framed, getBuilds } from "@/sanity/content";
+import { FRAMES } from "@/sanity/frames";
 import { routes, site } from "@/lib/site";
 
 /**
@@ -29,7 +30,12 @@ import { routes, site } from "@/lib/site";
  * ItemList schema is emitted for the six builds. It describes a list of
  * pages rather than making any claim about the work itself, which matters
  * while the build descriptions are still unverified draft copy.
+ *
+ * STAGE 2: builds come from the Studio in position order. The finder is
+ * handed only what its cards show, not the whole build record.
  */
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Featured Builds",
@@ -38,7 +44,20 @@ export const metadata: Metadata = {
   alternates: { canonical: routes.builds },
 };
 
-export default function FeaturedBuildsPage() {
+export default async function FeaturedBuildsPage() {
+  const featuredBuilds = await getBuilds();
+  const cards = featuredBuilds.map((build) => {
+    const photo = framed(build.hero, FRAMES.buildFinder);
+    return {
+      slug: build.slug,
+      title: build.title,
+      vehicle: build.vehicle,
+      type: build.type,
+      tags: build.tags,
+      image: { src: photo.src, alt: photo.alt, ...photo.extra },
+    };
+  });
+
   return (
     <>
       <JsonLd
@@ -89,7 +108,7 @@ export default function FeaturedBuildsPage() {
           />
 
           <Reveal>
-            <BuildFinder builds={featuredBuilds} />
+            <BuildFinder builds={cards} />
           </Reveal>
         </div>
       </section>

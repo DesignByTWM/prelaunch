@@ -4,7 +4,13 @@ import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { PageHero, SecHead, CustomBand, FaqBlock, CrossSell } from "@/components/ui/Page";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
-import { journalPosts, getPost } from "@/content/journal";
+import {
+  absoluteImage,
+  getArticle,
+  getArticleSlugs,
+  getArticles,
+  ogImage,
+} from "@/sanity/content";
 import { getService } from "@/content/services";
 import { routes, site } from "@/lib/site";
 
@@ -18,10 +24,17 @@ import { routes, site } from "@/lib/site";
  *
  * Each post also emits its own FAQPage block, so a single article can be
  * cited both as long-form explanation and as a direct answer.
+ *
+ * STAGE 2: articles come from the Studio. Every published article is built
+ * ahead of time, and one published after the build renders on its first
+ * visit. An article removed from the Studio is gone, never rebuilt from
+ * code.
  */
 
-export function generateStaticParams() {
-  return journalPosts.map((post) => ({ slug: post.slug }));
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  return (await getArticleSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -30,7 +43,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getArticle(slug);
   if (!post) return {};
 
   return {
@@ -42,7 +55,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.summary,
       publishedTime: post.published,
-      images: [{ url: post.hero }],
+      images: [{ url: ogImage(post.hero) }],
     },
   };
 }
@@ -53,14 +66,14 @@ export default async function JournalPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getArticle(slug);
   if (!post) notFound();
 
   const related = post.related
     .map((s) => getService(s))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
-  const more = journalPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const more = (await getArticles()).filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
     <>
@@ -76,9 +89,11 @@ export default async function JournalPostPage({
             headline: post.title,
             description: post.summary,
             url: `${site.url}${routes.journal}/${post.slug}`,
-            image: `${site.url}${post.hero}`,
+            image: absoluteImage(post.hero),
             datePublished: post.published,
-            dateModified: post.published,
+            /* The real revision date when Liz sets one, otherwise the
+               published date, which is exactly what was emitted before. */
+            dateModified: post.updatedAt ?? post.published,
             author: { "@id": `${site.url}/#organization` },
             publisher: { "@id": `${site.url}/#organization` },
             articleSection: post.category,

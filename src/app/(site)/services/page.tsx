@@ -6,7 +6,12 @@ import { PageHero, SecHead } from "@/components/ui/Page";
 import { IntakeForm } from "@/components/home/IntakeForm";
 import { JsonLd, breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import { headlineServices, additionalServices, services } from "@/content/services";
+import { cardFor, framed, getServiceCards, type Framed } from "@/sanity/content";
+import { FRAMES } from "@/sanity/frames";
 import { routes } from "@/lib/site";
+
+/* Card photos come from the Studio. Rebuilt hourly and on publish. */
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Services",
@@ -26,9 +31,12 @@ export const metadata: Metadata = {
 function DisciplineCard({
   service,
   index,
+  photo,
 }: {
   service: (typeof services)[number];
   index: number;
+  /** The card photo, resolved from the service's card slot in the Studio. */
+  photo: Framed;
 }) {
   return (
     <Reveal
@@ -39,7 +47,7 @@ function DisciplineCard({
       delay={(Math.min(index + 1, 5)) as 1 | 2 | 3 | 4 | 5}
     >
       <div className="ph r45">
-        <Photo src={service.image} alt={service.imageAlt} />
+        <Photo src={photo.src} alt={photo.alt} {...photo.extra} />
       </div>
       <div className="svc-body">
         <div className="name">{service.name}</div>
@@ -50,7 +58,10 @@ function DisciplineCard({
   );
 }
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const cards = await getServiceCards();
+  const photoFor = (slug: string) => framed(cardFor(cards, slug), FRAMES.serviceCard);
+
   return (
     <>
       <JsonLd
@@ -85,7 +96,7 @@ export default function ServicesPage() {
 
           <div className="svc-grid">
             {headlineServices.map((service, i) => (
-              <DisciplineCard key={service.slug} service={service} index={i} />
+              <DisciplineCard key={service.slug} service={service} index={i} photo={photoFor(service.slug)} />
             ))}
           </div>
 
@@ -98,7 +109,7 @@ export default function ServicesPage() {
 
           <div className="svc-grid">
             {additionalServices.map((service, i) => (
-              <DisciplineCard key={service.slug} service={service} index={i} />
+              <DisciplineCard key={service.slug} service={service} index={i} photo={photoFor(service.slug)} />
             ))}
           </div>
         </div>

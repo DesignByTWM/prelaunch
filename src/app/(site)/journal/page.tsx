@@ -4,7 +4,8 @@ import { Reveal } from "@/components/Reveal";
 import { Photo } from "@/components/ui/Photo";
 import { PageHero, SecHead } from "@/components/ui/Page";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
-import { journalPosts } from "@/content/journal";
+import { absoluteImage, framed, getArticles } from "@/sanity/content";
+import { FRAMES } from "@/sanity/frames";
 import { routes, site } from "@/lib/site";
 
 /**
@@ -31,7 +32,12 @@ import { routes, site } from "@/lib/site";
  * Wrong Call", "Two Questions That Expose a Cheap Blackout Quote". Those
  * are not our articles. The five real posts render in her layout instead,
  * since renaming published slugs to match a mock would break the URLs.
+ *
+ * STAGE 2: articles come from the Studio, newest first, and the newest
+ * leads. Rebuilt hourly and whenever an article is published.
  */
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Journal",
@@ -40,8 +46,10 @@ export const metadata: Metadata = {
   alternates: { canonical: routes.journal },
 };
 
-export default function JournalPage() {
-  const [lead, ...rest] = journalPosts;
+export default async function JournalPage() {
+  const posts = await getArticles();
+  const [lead, ...rest] = posts;
+  const leadPhoto = lead ? framed(lead.hero, FRAMES.articleFeatured) : null;
 
   return (
     <>
@@ -56,13 +64,13 @@ export default function JournalPage() {
             name: "DESIGNBYTWM Journal",
             url: `${site.url}${routes.journal}`,
             publisher: { "@id": `${site.url}/#organization` },
-            blogPost: journalPosts.map((post) => ({
+            blogPost: posts.map((post) => ({
               "@type": "BlogPosting",
               headline: post.title,
               url: `${site.url}${routes.journal}/${post.slug}`,
               description: post.summary,
               datePublished: post.published,
-              image: `${site.url}${post.hero}`,
+              image: absoluteImage(post.hero),
               author: { "@id": `${site.url}/#organization` },
             })),
           },
@@ -78,6 +86,7 @@ export default function JournalPage() {
       />
 
       {/* Featured. Her two column block, frame left, no section head above. */}
+      {lead && leadPhoto && (
       <section>
         <div className="wrap">
           <Reveal
@@ -87,7 +96,7 @@ export default function JournalPage() {
             card
           >
             <div className="ph r1610">
-              <Photo src={lead.hero} alt={lead.heroAlt} priority />
+              <Photo src={leadPhoto.src} alt={leadPhoto.alt} priority {...leadPhoto.extra} />
             </div>
 
             <div>
@@ -106,6 +115,7 @@ export default function JournalPage() {
           </Reveal>
         </div>
       </section>
+      )}
 
       {/* Her four card grid. */}
       <section className="alt">
@@ -113,7 +123,9 @@ export default function JournalPage() {
           <SecHead eyebrow="More Articles" title="From the journal" center />
 
           <div className="journal-grid">
-            {rest.map((post, i) => (
+            {rest.map((post, i) => {
+              const photo = framed(post.hero, FRAMES.articleCard);
+              return (
               <Reveal
                 key={post.slug}
                 as={Link}
@@ -122,13 +134,14 @@ export default function JournalPage() {
                 delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
               >
                 <div className="ph r45">
-                  <Photo src={post.hero} alt={post.heroAlt} />
+                  <Photo src={photo.src} alt={photo.alt} {...photo.extra} />
                 </div>
                 <h3>{post.title}</h3>
                 <p>{post.summary}</p>
                 <span className="go">Read Article →</span>
               </Reveal>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

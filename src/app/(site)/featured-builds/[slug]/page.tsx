@@ -6,7 +6,15 @@ import { Photo } from "@/components/ui/Photo";
 import { PageHero, SecHead, CustomBand } from "@/components/ui/Page";
 import { IntakeForm } from "@/components/home/IntakeForm";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
-import { featuredBuilds, getBuild } from "@/content/builds";
+import {
+  absoluteImage,
+  framed,
+  getBuild,
+  getBuildSlugs,
+  getBuilds,
+  ogImage,
+} from "@/sanity/content";
+import { FRAMES } from "@/sanity/frames";
 import { routes, site } from "@/lib/site";
 
 /**
@@ -16,10 +24,15 @@ import { routes, site } from "@/lib/site";
  * demonstrate coordination. Each stage links to the service page for that
  * discipline, which turns a case study into an internal linking hub and
  * gives a reader a route from "that looks good" to "how much is that".
+ *
+ * STAGE 2: builds come from the Studio. A build removed there is gone,
+ * never rebuilt from code.
  */
 
-export function generateStaticParams() {
-  return featuredBuilds.map((build) => ({ slug: build.slug }));
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  return (await getBuildSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -28,7 +41,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const build = getBuild(slug);
+  const build = await getBuild(slug);
   if (!build) return {};
 
   return {
@@ -38,7 +51,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${build.title}, ${build.vehicle} | DESIGNBYTWM`,
       description: build.summary,
-      images: [{ url: build.hero }],
+      images: [{ url: ogImage(build.hero) }],
     },
   };
 }
@@ -49,10 +62,10 @@ export default async function BuildPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const build = getBuild(slug);
+  const build = await getBuild(slug);
   if (!build) notFound();
 
-  const others = featuredBuilds.filter((b) => b.slug !== build.slug);
+  const others = (await getBuilds()).filter((b) => b.slug !== build.slug);
 
   return (
     <>
@@ -68,7 +81,7 @@ export default async function BuildPage({
             name: `${build.title}, ${build.vehicle}`,
             url: `${site.url}${routes.builds}/${build.slug}`,
             description: build.summary,
-            image: `${site.url}${build.hero}`,
+            image: absoluteImage(build.hero),
             creator: { "@id": `${site.url}/#organization` },
             about: build.tags.join(", "),
           },
@@ -93,26 +106,25 @@ export default async function BuildPage({
             title={<>The vehicle.</>}
             lede="Every finish in these frames was applied here, under one roof."
           />
-          {/* Four frames. galleryFiles wins where the delivered names do
-              not follow the convention, otherwise they are derived as
-              /gallery-{prefix}-1.webp through -4.webp. Photo hides a file
-              that is not there yet, so an undelivered slot stays flat
-              charcoal rather than breaking. */}
+          {/* Two to eight frames from the Studio, each with its own alt.
+              A migrated frame shows its original file until Liz uploads a
+              replacement. Photo hides a file that is not there, so an
+              undelivered frame stays flat charcoal rather than breaking. */}
           <div className="build-gallery">
-            {(
-              build.galleryFiles ??
-              [1, 2, 3, 4].map((n) => `/gallery-${build.galleryPrefix}-${n}.webp`)
-            ).map((src, i) => (
+            {build.gallery.map((image, i) => {
+              const photo = framed(image, FRAMES.buildGallery);
+              return (
               <Reveal
-                key={src}
+                key={image.src || photo.src}
                 card
                 delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
               >
                 <div className="ph r45">
-                  <Photo src={src} alt={`${build.vehicle}, ${build.title}`} />
+                  <Photo src={photo.src} alt={photo.alt} {...photo.extra} />
                 </div>
               </Reveal>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -182,7 +194,9 @@ export default async function BuildPage({
           <div className="wrap">
             <SecHead eyebrow="More Work" title={<>Other builds.</>} />
             <div className="index-grid">
-              {others.slice(0, 3).map((other, i) => (
+              {others.slice(0, 3).map((other, i) => {
+                const photo = framed(other.hero, FRAMES.buildOther);
+                return (
                 <Reveal
                   key={other.slug}
                   as={Link}
@@ -192,7 +206,7 @@ export default async function BuildPage({
                   delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
                 >
                   <div className="ph r169">
-                    <Photo src={other.hero} alt={other.heroAlt} />
+                    <Photo src={photo.src} alt={photo.alt} {...photo.extra} />
                   </div>
                   <h3>{other.title}, {other.vehicle}</h3>
                   <div className="tags">
@@ -201,7 +215,8 @@ export default async function BuildPage({
                     ))}
                   </div>
                 </Reveal>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>

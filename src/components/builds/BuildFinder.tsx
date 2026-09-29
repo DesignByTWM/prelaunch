@@ -4,7 +4,22 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Photo } from "@/components/ui/Photo";
 import { routes } from "@/lib/site";
-import type { FeaturedBuild } from "@/content/builds";
+import type { BuildType } from "@/content/builds";
+
+/**
+ * Only what a card shows. Stage 2 stopped passing the whole build record,
+ * brief, stages and gallery included, into the browser for a component
+ * that renders none of them.
+ */
+export interface BuildCard {
+  slug: string;
+  title: string;
+  vehicle: string;
+  type: BuildType;
+  tags: string[];
+  /** Resolved photo. srcSet and sizes are present only for a Sanity photo. */
+  image: { src: string; alt: string; srcSet?: string; sizes?: string };
+}
 
 /**
  * BUILD FINDER
@@ -31,7 +46,7 @@ import type { FeaturedBuild } from "@/content/builds";
 const TYPES = ["All", "SUV", "Sedan", "Truck", "Coupe"] as const;
 type Filter = (typeof TYPES)[number];
 
-export function BuildFinder({ builds }: { builds: FeaturedBuild[] }) {
+export function BuildFinder({ builds }: { builds: BuildCard[] }) {
   const [query, setQuery] = useState("");
   const [type, setType] = useState<Filter>("All");
 
@@ -91,7 +106,7 @@ export function BuildFinder({ builds }: { builds: FeaturedBuild[] }) {
               className="build-card"
             >
               <div className="ph r45">
-                <Photo src={build.hero} alt={build.heroAlt} />
+                <Photo {...build.image} />
               </div>
               <div className="build-card-body">
                 <h3>

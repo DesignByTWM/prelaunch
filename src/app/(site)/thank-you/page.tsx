@@ -4,7 +4,7 @@ import { Monogram } from "@/components/BrandMarks";
 import { Reveal } from "@/components/Reveal";
 import { SecHead } from "@/components/ui/Page";
 import { processSteps } from "@/content/house";
-import { journalPosts } from "@/content/journal";
+import { getArticles } from "@/sanity/content";
 import { nap, routes, socials } from "@/lib/site";
 
 /**
@@ -22,14 +22,17 @@ import { nap, routes, socials } from "@/lib/site";
  * as a confusing result.
  */
 
+/* The three newest articles, from the Studio. */
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "Thank You",
   description: "Your request has been received by DESIGNBYTWM.",
   robots: { index: false, follow: false },
 };
 
-export default function ThankYouPage() {
-  const reading = journalPosts.slice(0, 3);
+export default async function ThankYouPage() {
+  const reading = (await getArticles()).slice(0, 3);
 
   return (
     <>

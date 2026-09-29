@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Monogram } from "@/components/BrandMarks";
 import { Reveal } from "@/components/Reveal";
 import { additionalServices, headlineServices } from "@/content/services";
+import { cardFor, framed, getServiceCards } from "@/sanity/content";
+import { FRAMES } from "@/sanity/frames";
 import { routes } from "@/lib/site";
 
 /**
@@ -14,8 +16,14 @@ import { routes } from "@/lib/site";
  *
  * Everything else is untouched: the 4:5 frame, the 34px 0 34px 0 corner,
  * the hover lift, the umbrella strip and the black metal custom build band.
+ *
+ * Card photos come from each service's card slot in the Studio, the same
+ * one every other service card on the site reads. An empty slot keeps the
+ * current photo.
  */
-export function Services() {
+export async function Services() {
+  const cards = await getServiceCards();
+
   return (
     <section id="services">
       <div className="wrap">
@@ -34,7 +42,9 @@ export function Services() {
         </Reveal>
 
         <div className="svc-grid">
-          {headlineServices.map((service, i) => (
+          {headlineServices.map((service, i) => {
+            const photo = framed(cardFor(cards, service.slug), FRAMES.serviceCard);
+            return (
             <Reveal
               key={service.slug}
               as={Link}
@@ -44,7 +54,7 @@ export function Services() {
               delay={(i + 1) as 1 | 2 | 3 | 4 | 5}
             >
               <div className="ph r45">
-                <img src={service.image} alt={service.imageAlt} loading="lazy" />
+                <img src={photo.src} alt={photo.alt} loading="lazy" {...photo.extra} />
               </div>
               <div className="svc-body">
                 <div className="name">{service.name}</div>
@@ -52,7 +62,8 @@ export function Services() {
                 <span className="go">Explore →</span>
               </div>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
 
         <Reveal className="umbrella">

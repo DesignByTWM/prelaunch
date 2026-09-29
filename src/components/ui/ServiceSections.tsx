@@ -368,11 +368,21 @@ export function FinalCta({
  * homepage card and the OpenGraph tag use, rather than a pairing specific
  * file. A pairing is a pointer at another discipline, so it should look
  * like that discipline everywhere it appears.
+ *
+ * Stage 2: that photograph now comes from the target service's card slot
+ * in the Studio, so a new card photo shows here too. `imageExtra` carries
+ * the srcset for a Sanity photo and is empty for a local file.
  */
 export function Related({
   items,
 }: {
-  items: { slug: string; name: string; image: string; imageAlt: string }[];
+  items: {
+    slug: string;
+    name: string;
+    image: string;
+    imageAlt: string;
+    imageExtra?: { srcSet?: string; sizes?: string };
+  }[];
 }) {
   return (
     <div className="rel-grid">
@@ -385,7 +395,7 @@ export function Related({
           delay={(Math.min(i + 1, 5)) as 1 | 2 | 3 | 4 | 5}
         >
           <div className="ph fill">
-            <Photo src={item.image} alt={item.imageAlt} />
+            <Photo src={item.image} alt={item.imageAlt} {...item.imageExtra} />
           </div>
           <div className="rel-scrim" />
           <div className="rel-body">
