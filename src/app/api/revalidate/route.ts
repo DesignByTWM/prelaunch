@@ -49,6 +49,15 @@ interface Target {
   type?: "page";
 }
 
+/**
+ * Dynamic route patterns name the route FILE, not the URL, and every page
+ * of the site lives in the (site) route group. So the pattern has to
+ * include the group: "/services/[slug]" on its own matches no file and
+ * refreshes nothing, silently. Plain URLs, such as "/services/audio", are
+ * not affected.
+ */
+const every = (pattern: string): Target => ({ path: `/(site)${pattern}`, type: "page" });
+
 function targetsFor(body: WebhookPayload): Target[] | { error: string } {
   const slug = body.slug ?? undefined;
   const previous = body.previousSlug && body.previousSlug !== slug ? body.previousSlug : undefined;
@@ -64,8 +73,8 @@ function targetsFor(body: WebhookPayload): Target[] | { error: string } {
         { path: "/services" },
         { path: "/" },
         /* The card photo: every Related band and the city pages. */
-        { path: "/services/[slug]", type: "page" },
-        { path: "/locations/[city]", type: "page" },
+        every("/services/[slug]"),
+        every("/locations/[city]"),
       ];
     }
 
@@ -78,7 +87,7 @@ function targetsFor(body: WebhookPayload): Target[] | { error: string } {
         ...(slug ? [{ path: `/journal/${slug}` }] : []),
         ...(previous ? [{ path: `/journal/${previous}` }] : []),
         { path: "/journal" },
-        { path: "/journal/[slug]", type: "page" as const },
+        every("/journal/[slug]"),
         { path: "/thank-you" },
         { path: "/sitemap.xml" },
         { path: "/llms.txt" },
@@ -92,8 +101,8 @@ function targetsFor(body: WebhookPayload): Target[] | { error: string } {
         ...(previous ? [{ path: `/featured-builds/${previous}` }] : []),
         { path: "/featured-builds" },
         { path: "/" },
-        { path: "/featured-builds/[slug]", type: "page" as const },
-        { path: "/locations/[city]", type: "page" as const },
+        every("/featured-builds/[slug]"),
+        every("/locations/[city]"),
         { path: "/sitemap.xml" },
         { path: "/llms.txt" },
       ];
