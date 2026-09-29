@@ -121,6 +121,50 @@ export const servicePhotos = defineType({
             : `The ${i === 1 ? "upper" : "lower"} frame on the right of the Reference block.`,
       ),
     ),
+
+    /* Added in Stage 2. Not a slot on this service's own page: it is the
+       photo on this service's card everywhere else on the site. Its
+       previews are the shapes of every place that card appears. */
+    defineField({
+      name: "card",
+      title: "Card photo",
+      type: "object",
+      description:
+        "The photo on this service's card across the site: the homepage, the Services page, related cards on other service pages and the Houston page. Leave empty to keep the current photo.",
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({
+          name: "image",
+          title: "Photo",
+          type: "image",
+          options: {
+            hotspot: {
+              previews: [
+                { title: "Homepage, Services and Houston cards", aspectRatio: 4 / 5 },
+                { title: "Related cards", aspectRatio: 1.74 },
+                { title: "Link preview when shared", aspectRatio: 1.91 },
+              ],
+            },
+          },
+          description:
+            "Leave empty to keep the current photo on the site. Drag the hotspot to set what stays in frame. The previews below show every shape the card is shown in.",
+        }),
+        defineField({
+          name: "alt",
+          title: "Alt text",
+          type: "string",
+          description: "Describe what is in the photo for search engines and screen readers.",
+          validation: (rule) =>
+            rule.custom((value, context) => {
+              const parent = context.parent as { image?: unknown } | undefined;
+              if (parent?.image && !String(value ?? "").trim()) {
+                return "Add alt text whenever there is a photo in this slot.";
+              }
+              return true;
+            }),
+        }),
+      ],
+    }),
   ],
   preview: {
     select: { title: "serviceName", subtitle: "slug", media: "overview.image" },

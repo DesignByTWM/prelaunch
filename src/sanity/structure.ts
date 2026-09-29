@@ -5,26 +5,65 @@ import { servicePhotosId } from "./slots";
 /**
  * STUDIO STRUCTURE
  *
- * One list, "Service Photos", holding the ten services in the order they
- * are declared in services.ts. That order is the same one the site uses,
- * so the Studio list reads the way the site does.
+ * Four sections, in the order the site reads:
  *
- * Each entry opens its own fixed document. Nothing in here creates a
- * document, so the list can never grow a duplicate or an orphan.
+ *   Homepage         one fixed document
+ *   Journal          articles, newest first
+ *   Featured Builds  builds, in their position order
+ *   Service Photos   the ten services, in services.ts order
+ *
+ * Homepage and Service Photos open fixed documents, so they can never grow
+ * a duplicate or an orphan. Journal and Featured Builds are lists where Liz
+ * can add new entries.
  */
+
+export const HOMEPAGE_ID = "homepage";
+
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title("Service Photos")
-    .items(
-      services.map((service) =>
-        S.listItem()
-          .id(service.slug)
-          .title(service.name)
-          .child(
-            S.document()
-              .schemaType("servicePhotos")
-              .documentId(servicePhotosId(service.slug))
-              .title(service.name),
-          ),
-      ),
-    );
+    .title("DESIGNBYTWM")
+    .items([
+      S.listItem()
+        .id("homepage")
+        .title("Homepage")
+        .child(S.document().schemaType("homepage").documentId(HOMEPAGE_ID).title("Homepage")),
+
+      S.listItem()
+        .id("journal")
+        .title("Journal")
+        .child(
+          S.documentTypeList("article")
+            .title("Journal")
+            .defaultOrdering([{ field: "publishedAt", direction: "desc" }]),
+        ),
+
+      S.listItem()
+        .id("builds")
+        .title("Featured Builds")
+        .child(
+          S.documentTypeList("build")
+            .title("Featured Builds")
+            .defaultOrdering([{ field: "order", direction: "asc" }]),
+        ),
+
+      S.listItem()
+        .id("servicePhotos")
+        .title("Service Photos")
+        .child(
+          S.list()
+            .title("Service Photos")
+            .items(
+              services.map((service) =>
+                S.listItem()
+                  .id(service.slug)
+                  .title(service.name)
+                  .child(
+                    S.document()
+                      .schemaType("servicePhotos")
+                      .documentId(servicePhotosId(service.slug))
+                      .title(service.name),
+                  ),
+              ),
+            ),
+        ),
+    ]);

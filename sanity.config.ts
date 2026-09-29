@@ -8,26 +8,38 @@ import { StudioLogo } from "./src/sanity/StudioLogo";
 /**
  * SANITY STUDIO
  *
- * Mounted at /studio inside the Next app. Photos and slot labels only.
+ * Mounted at /studio inside the Next app.
  *
- * Creating and deleting servicePhotos documents is turned off. There is
- * exactly one document per service, seeded by scripts/sanity-seed-services,
- * and the list in structure.ts points at each by its fixed id. Allowing new
- * ones would only ever produce a document the site does not read.
+ * FIXED DOCUMENTS. The homepage and the ten servicePhotos documents each
+ * have exactly one document at a fixed id, which structure.ts opens
+ * directly. Creating, duplicating, deleting and unpublishing them is turned
+ * off. A second one would only ever be a document the site does not read,
+ * and an unpublished one would take the homepage hero offline.
+ *
+ * LISTS. Articles and builds are real lists: Liz can add new ones. They are
+ * the only two types offered when creating a document.
  */
+
+const FIXED_TYPES = new Set(["homepage", "servicePhotos"]);
+const CREATABLE_TYPES = new Set(["article", "build"]);
+
 export default defineConfig({
   basePath: "/studio",
   title: "DESIGNBYTWM",
   projectId,
   dataset,
-  schema: { types: schemaTypes },
+  schema: {
+    types: schemaTypes,
+    /* No template for the fixed types, so nothing can create a second. */
+    templates: (prev) => prev.filter((template) => !FIXED_TYPES.has(template.schemaType)),
+  },
   plugins: [structureTool({ structure })],
   studio: {
     components: { logo: StudioLogo },
   },
   document: {
     actions: (prev, context) =>
-      context.schemaType === "servicePhotos"
+      FIXED_TYPES.has(context.schemaType)
         ? prev.filter(
             (action) =>
               action.action !== "duplicate" &&
@@ -35,7 +47,8 @@ export default defineConfig({
               action.action !== "unpublish",
           )
         : prev,
-    newDocumentOptions: () => [],
+    newDocumentOptions: (prev) =>
+      prev.filter((item) => CREATABLE_TYPES.has(item.templateId)),
   },
   apiVersion,
 });
