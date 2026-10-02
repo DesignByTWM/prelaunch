@@ -234,24 +234,51 @@ section.lp-disc { background: var(--off-white); padding: 0; overflow: hidden; }
 }
 
 /* ===== 5. FEATURED BUILD ===== */
+/* Same vertical padding as section.lp-wheels. */
 section.lp-feat {
-  position: relative; padding: 0; height: 100vh; min-height: 620px;
+  position: relative; padding: clamp(80px, 10vw, 130px) 0;
   overflow: hidden; color: var(--white); background: var(--black);
 }
-.lp-feat img {
-  position: absolute; left: 0; top: -12%; width: 100%; height: 124%;
+/* The build photos are 760 by 950 portraits, so full width they only
+   work as a blurred, darkened backdrop. Oversized both ways so the soft
+   blur edge and the parallax travel never show. The fixed 100px and 60px
+   on top of the percentages keep at least 90px past every edge through
+   the whole parallax, which is clear of the fade a 28px blur leaves at
+   the image edge, however short the section is. max-width: none, or the
+   site-wide img rule caps the width at 100% and the right edge shows. */
+.lp-feat-bg {
+  position: absolute; left: calc(-8% - 60px); top: calc(-12% - 100px);
+  width: calc(116% + 120px); height: calc(124% + 200px); max-width: none;
   object-fit: cover; will-change: transform;
+  filter: blur(28px) brightness(.42) saturate(1.1);
 }
 .lp-feat::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(0deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.15) 55%, rgba(0,0,0,.3) 100%);
 }
-.lp-feat-copy {
-  position: absolute; left: var(--pad); right: var(--pad); bottom: clamp(50px, 10vh, 110px);
-  z-index: 2; max-width: 660px;
+/* Copy in the narrower column, the card in the wider one, the same
+   proportions and gap as .lp-wheels-grid. Above the backdrop and the
+   overlay. */
+.lp-feat-grid {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(30px, 5vw, 80px); align-items: center;
 }
+/* The sharp photo, as a 4:3 card. */
+.lp-feat-card {
+  position: relative; width: 100%; aspect-ratio: 4 / 3;
+  border-radius: 28px 0 28px 0; overflow: hidden;
+  background: var(--charcoal);
+  box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 8px 24px rgba(0,0,0,.35);
+}
+.lp-feat-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .lp-feat-copy h2 { font-size: clamp(34px, 5.4vw, 80px); margin: 14px 0 18px; line-height: 1; color: var(--white); }
 .lp-feat-copy p { color: rgba(255,255,255,.8); margin-bottom: 26px; max-width: 46ch; }
+@media (max-width: 900px) {
+  /* One column, the card first and the copy under it. */
+  .lp-feat-grid { grid-template-columns: 1fr; }
+  .lp-feat-card { order: -1; }
+}
 
 /* ===== 6. SHOP WHEELS (WHITE) ===== */
 section.lp-wheels { background: var(--white); padding: clamp(80px, 10vw, 130px) 0; }
@@ -312,6 +339,8 @@ section.lp-faq { background: var(--black); color: var(--white); padding: clamp(8
    stacked mobile layout so both services are readable without motion. */
 @media (prefers-reduced-motion: reduce) {
   .lp-hero .lp-mask > span, .lp-hero .lp-rv { animation: none; }
+  /* No parallax runs, so the backdrop is not primed for it. */
+  .lp-feat-bg { will-change: auto; }
   .lp-tabs, .lp-frame { display: none; }
   .lp-swap { min-height: 0; }
   .lp-swap-item { position: static; margin-top: 34px; }

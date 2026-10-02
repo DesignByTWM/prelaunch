@@ -89,6 +89,17 @@ export const FRAMES = {
     fallbackWidth: 568,
     sizes: "(max-width: 700px) 92vw, (max-width: 1240px) 46vw, 568px",
   },
+  /* Location page featured build card, .lp-feat-card. 4:3, sits in the
+     wider column of a two column grid inside the 1240px wrap, full width
+     of the wrap at 900px and below. Measured: 641px at most on desktop,
+     the 7fr column at a 1240px viewport, and 820px at 900px, where it
+     runs the full width of the wrap, so that is its widest. */
+  locationFeature: {
+    aspectRatio: 4 / 3,
+    maxWidth: 820,
+    fallbackWidth: 641,
+    sizes: "(max-width: 900px) 92vw, (max-width: 1240px) calc(55.4vw - 47px), 641px",
+  },
   /* "Other builds" on a build page, .index-grid .ph.r169. */
   buildOther: {
     aspectRatio: 16 / 9,

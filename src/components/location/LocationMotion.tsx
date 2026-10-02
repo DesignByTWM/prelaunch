@@ -209,7 +209,7 @@ export function LocationMotion() {
 
       /* ----- featured build ----- */
       gsap.fromTo(
-        ".lp-feat img",
+        ".lp-feat .lp-feat-bg",
         { yPercent: -8, scale: 1.12 },
         {
           yPercent: 8,

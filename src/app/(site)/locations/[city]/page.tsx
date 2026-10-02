@@ -241,6 +241,10 @@ async function LocationPage({ slug }: { slug: string }) {
      being rebuilt from code. */
   const build = (await getBuilds()).find((b) => b.slug === content.featuredBuildSlug);
   const buildPhoto = build ? framedNatural(build.hero, NATURAL.houstonFeature) : null;
+  /* The build photos are portrait, so the full-width frame above only
+     works blurred as a backdrop. The sharp photo sits beside the copy as
+     a 4:3 card. */
+  const buildCard = build ? framed(build.hero, FRAMES.locationFeature) : null;
   const cards = await getServiceCards();
   const wheels = wheelBrands.slice(0, 2);
 
@@ -524,20 +528,33 @@ async function LocationPage({ slug }: { slug: string }) {
       </section>
 
       {/* 5. FEATURED BUILD. */}
-      {build && buildPhoto && (
+      {build && buildPhoto && buildCard && (
         <section className="lp-feat" aria-label="Featured build">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={buildPhoto.src} alt={buildPhoto.alt} loading="lazy" {...buildPhoto.extra} />
-          <div className="lp-feat-copy">
-            <span className="eyebrow">Featured Build</span>
-            <h2 className="display">Built at the House.</h2>
-            <p>
-              {build.vehicle}: {build.title}. Every finish in these frames was
-              applied here, under one roof.
-            </p>
-            <Link href={`${routes.builds}/${build.slug}`} className="btn btn-line-light">
-              See the build
-            </Link>
+          <img
+            className="lp-feat-bg"
+            src={buildPhoto.src}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            {...buildPhoto.extra}
+          />
+          <div className="wrap lp-feat-grid">
+            <div className="lp-feat-copy">
+              <span className="eyebrow">Featured Build</span>
+              <h2 className="display">Built at the House.</h2>
+              <p>
+                {build.vehicle}: {build.title}. Every finish in these frames was
+                applied here, under one roof.
+              </p>
+              <Link href={`${routes.builds}/${build.slug}`} className="btn btn-line-light">
+                See the build
+              </Link>
+            </div>
+            <div className="lp-feat-card">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={buildCard.src} alt={buildCard.alt} loading="lazy" {...buildCard.extra} />
+            </div>
           </div>
         </section>
       )}
