@@ -16,6 +16,8 @@ import { getLocationContent } from "@/content/locations";
 import { services, serviceBySlug } from "@/content/services";
 import { cardFor, framed, framedNatural, getBuilds, getServiceCards } from "@/sanity/content";
 import { FRAMES, NATURAL } from "@/sanity/frames";
+import { getServicePhotos, resolveSlot } from "@/sanity/servicePhotos";
+import { OVERVIEW_SLOT, type SlotSpec } from "@/sanity/slots";
 import { wheelBrands } from "@/content/wheels";
 import { hours, locations, nap, routes } from "@/lib/site";
 
@@ -150,6 +152,30 @@ export default async function CityPage({
   );
 }
 
+/**
+ * The pair photo. Reads the same Sanity field as a service page's overview
+ * slot, so the photo Liz publishes there also fills this city's pair, but
+ * it is cut to the location frames rather than the service page's.
+ *
+ * Measured from location.css, where both frames are aspect-ratio 4 / 3 and
+ * --pad is clamp(20px, 5vw, 40px):
+ *
+ *   .lp-frame   desktop only, the 7fr column of .lp-pair-stage, whose grid
+ *               is 5fr 7fr with a clamp(30px, 5vw, 80px) gap inside a
+ *               1440px max-width. Widest at a 1440px viewport:
+ *               (1440 - 80 - 72) x 7/12 = 751px wide, 563px tall.
+ *   .lp-mframe  900px and below, one column, the full width less the
+ *               padding. Widest at 900px: 900 - 80 = 820px.
+ */
+const PAIR_SLOT: SlotSpec = {
+  ...OVERVIEW_SLOT,
+  width: 751,
+  height: 563,
+  aspectRatio: 4 / 3,
+  maxWidth: 820,
+  sizes: "(max-width: 900px) 92vw, (max-width: 1440px) calc(55.4vw - 47px), 751px",
+};
+
 /** "08:00" to "8 AM", "17:00" to "5 PM". */
 function clock(time: string) {
   const [h, m] = time.split(":").map(Number);
@@ -184,6 +210,22 @@ async function LocationPage({ slug }: { slug: string }) {
 
   const pair = [content.pair.primary, content.pair.secondary];
   const pairSlugs = pair.map((entry) => entry.slug);
+
+  /* Each pair photo, in order: Liz's published overview photo for that
+     service, then the image in locations.ts, then nothing, which leaves
+     an empty striped frame. Resolved once and used by both the stacked
+     and the pinned layouts. */
+  const pairPhotos = await Promise.all(
+    pair.map(async (entry) => {
+      const photo = resolveSlot(
+        await getServicePhotos(entry.slug),
+        PAIR_SLOT,
+        entry.image,
+        entry.imageAlt,
+      );
+      return photo.src ? photo : null;
+    }),
+  );
 
   /* The two paired disciplines lead, then the remaining eight in the
      order services.ts declares them. */
@@ -288,13 +330,24 @@ async function LocationPage({ slug }: { slug: string }) {
             </div>
 
             <div className="lp-swap">
-              {pair.map((entry) => {
+              {pair.map((entry, i) => {
                 const service = serviceBySlug.get(entry.slug);
+                const photo = pairPhotos[i];
                 return (
                   <div key={entry.slug} className="lp-swap-item">
                     <div className="lp-mframe">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={entry.image} alt={entry.imageAlt} loading="lazy" />
+                      {photo ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={photo.src}
+                          srcSet={photo.srcSet}
+                          sizes={photo.sizes}
+                          alt={photo.alt}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="ph" aria-hidden="true" />
+                      )}
                     </div>
                     <h3 className="display">{entry.title}</h3>
                     <p>{entry.copy}</p>
@@ -308,10 +361,24 @@ async function LocationPage({ slug }: { slug: string }) {
           </div>
 
           <div className="lp-frame" aria-hidden="true">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="lp-frame-a" src={pair[0].image} alt="" />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="lp-frame-b" src={pair[1].image} alt="" />
+            {/* LocationMotion animates these two by class, so an empty
+                frame keeps the class on its div and the scene still runs. */}
+            {(["lp-frame-a", "lp-frame-b"] as const).map((frameClass, i) => {
+              const photo = pairPhotos[i];
+              return photo ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  key={frameClass}
+                  className={frameClass}
+                  src={photo.src}
+                  srcSet={photo.srcSet}
+                  sizes={photo.sizes}
+                  alt=""
+                />
+              ) : (
+                <div key={frameClass} className={`ph ${frameClass}`} aria-hidden="true" />
+              );
+            })}
             <span className="lp-film" />
           </div>
         </div>
