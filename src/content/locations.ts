@@ -243,8 +243,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "From Town Center to the House is one highway. Paint protection film and interior work are planned together at Ammi Trail, then finished by the same team that scoped them.",
     hero: {
-      image: "/featurebuild6benz.webp",
-      alt: "Mercedes-AMG G 63 in a full satin black wrap with blacked out badging",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Protected outside. Rebuilt inside.",
@@ -334,8 +334,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Katy builds come in on I-10 and around the Beltway to Ammi Trail. Wheels and blackout are specified together, so the stance and the finish read as one decision.",
     hero: {
-      image: "/featurebuild4denali.webp",
-      alt: "GMC Sierra Denali HD Ultimate in a two-tone wrap on a suspension lift",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "The right stance. One finish.",
@@ -425,8 +425,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "From Sugar Land Town Square it is a straight run up US 59 and around the Beltway to Ammi Trail. Wraps and paint protection film are designed together, then installed by one team.",
     hero: {
-      image: "/featurebuild5corvette.webp",
-      alt: "Chevrolet Corvette Stingray C8 wrapped in Gloss Desert Tan with a gloss black roof",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "New color. Protected finish.",
@@ -516,8 +516,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Cypress builds come in on US 290 and the Beltway. Wheels and suspension are planned at the same consultation, so ride height and fitment are settled before anything is ordered.",
     hero: {
-      image: "/featurebuild4denali.webp",
-      alt: "GMC Sierra Denali HD Ultimate in a two-tone wrap on a suspension lift",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Ride height and fitment, decided once.",
@@ -607,8 +607,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Spring is the shortest drive to the House. Fifteen minutes down I-45 to Ammi Trail, where wraps and blackout work are designed together and finished in house.",
     hero: {
-      image: "/featurebuild6benz.webp",
-      alt: "Mercedes-AMG G 63 in a full satin black wrap with blacked out badging",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "A new color. Nothing bright left.",
@@ -698,8 +698,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Tomball trucks come down SH 249 to Ammi Trail. Accessories and suspension are fitted together, so the bumpers, steps and lift work as one setup.",
     hero: {
-      image: "/featurebuild6benz.webp",
-      alt: "Mercedes-AMG G 63 in a full satin black wrap with blacked out badging",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Lifted, fitted, finished.",
@@ -789,8 +789,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Humble sits just east of the House. Blackout work and truck accessories are specified together at Ammi Trail, so new parts arrive already matched to the finish.",
     hero: {
-      image: "/featurebuild4denali.webp",
-      alt: "GMC Sierra Denali HD Ultimate in a two-tone wrap on a suspension lift",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Blacked out. Built out.",
@@ -880,8 +880,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Kingwood builds come down US 59 and across the Beltway to Ammi Trail. Paint protection and new wheels are planned at one consultation and installed by one team.",
     hero: {
-      image: "/featurebuild6benz.webp",
-      alt: "Mercedes-AMG G 63 in a full satin black wrap with blacked out badging",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Protect the paint. Change the stance.",
@@ -971,8 +971,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Pearland builds come up SH 288 and I-45 to Ammi Trail. Wraps and audio are designed at the same consultation, so how the car looks and how it sounds are one plan.",
     hero: {
-      image: "/featurebuild1cadillac.webp",
-      alt: "Cadillac IQ wrapped in Satin Silver White Aluminum on color matched wheels",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "How it looks. How it sounds.",
@@ -1062,8 +1062,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Friendswood builds come straight up I-45 to Ammi Trail. Paint is refinished in the House's own booth, then protected with film by the same team.",
     hero: {
-      image: "/featurebuild5corvette.webp",
-      alt: "Chevrolet Corvette Stingray C8 wrapped in Gloss Desert Tan with a gloss black roof",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Refinished. Then protected.",
@@ -1153,8 +1153,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "League City builds come up I-45 from the Bay Area to Ammi Trail. Paint protection and lighting are planned together and installed by one team.",
     hero: {
-      image: "/featurebuild1cadillac.webp",
-      alt: "Cadillac IQ wrapped in Satin Silver White Aluminum on color matched wheels",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Protected by day. Lit by night.",
@@ -1244,8 +1244,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Missouri City builds come up US 59 to Ammi Trail. Interior and audio are designed together, so the cabin is built around the system rather than cut to fit it.",
     hero: {
-      image: "/featurebuild6benz.webp",
-      alt: "Mercedes-AMG G 63 in a full satin black wrap with blacked out badging",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "A new cabin. A tuned system.",
@@ -1335,8 +1335,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Pasadena builds come up SH 225 and Loop 610 to I-45 and Ammi Trail. Wraps and truck accessories are designed together and fitted by the same team.",
     hero: {
-      image: "/featurebuild4denali.webp",
-      alt: "GMC Sierra Denali HD Ultimate in a two-tone wrap on a suspension lift",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "A new color. A working truck.",
@@ -1426,8 +1426,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Baytown builds come in on I-10 and around the Beltway to Ammi Trail. Accessories and lighting are fitted together, wired by the same team that mounts them.",
     hero: {
-      image: "/featurebuild5corvette.webp",
-      alt: "Chevrolet Corvette Stingray C8 wrapped in Gloss Desert Tan with a gloss black roof",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Fitted out. Lit up.",
@@ -1517,8 +1517,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Conroe builds come straight down I-45 to Ammi Trail. Suspension and lighting are planned together, so ride height and light placement are settled as one.",
     hero: {
-      image: "/featurebuild6benz.webp",
-      alt: "Mercedes-AMG G 63 in a full satin black wrap with blacked out badging",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Higher stance. Better light.",
@@ -1608,8 +1608,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Richmond builds come up US 59 and around the Beltway to Ammi Trail. Paint and wheels are specified together, so the color and the fitment are decided as one.",
     hero: {
-      image: "/featurebuild5corvette.webp",
-      alt: "Chevrolet Corvette Stingray C8 wrapped in Gloss Desert Tan with a gloss black roof",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "New paint. The wheels to match.",
@@ -1699,8 +1699,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Fulshear builds come east on I-10 and around the Beltway to Ammi Trail. Wraps and interiors are designed together, so the outside and the cabin are one specification.",
     hero: {
-      image: "/featurebuild1cadillac.webp",
-      alt: "Cadillac IQ wrapped in Satin Silver White Aluminum on color matched wheels",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Outside and in, one specification.",
@@ -1790,8 +1790,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Bellaire builds come up Loop 610 and I-45 to Ammi Trail. Interiors and paint are specified together, so the cabin and the finish are one decision.",
     hero: {
-      image: "/featurebuild1cadillac.webp",
-      alt: "Cadillac IQ wrapped in Satin Silver White Aluminum on color matched wheels",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "The cabin and the finish, together.",
@@ -1874,8 +1874,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Memorial builds come up Beltway 8 to Ammi Trail. Wraps and wheels are designed at the same consultation, so the color and the stance are one specification.",
     hero: {
-      image: "/featurebuild5corvette.webp",
-      alt: "Chevrolet Corvette Stingray C8 wrapped in Gloss Desert Tan with a gloss black roof",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "A new color. The right stance.",
@@ -1965,8 +1965,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Magnolia trucks come down SH 249 to Ammi Trail. Accessories and wheels are fitted together, so bumpers, steps and tires are set up as one.",
     hero: {
-      image: "/featurebuild4denali.webp",
-      alt: "GMC Sierra Denali HD Ultimate in a two-tone wrap on a suspension lift",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Fitted out on the right wheels.",
@@ -2056,8 +2056,8 @@ export const locationContent: Record<string, LocationContent> = {
     lede:
       "Hockley builds come east on US 290 to Ammi Trail. Suspension and blackout work are planned together, so the stance and the finish are settled as one.",
     hero: {
-      image: "/featurebuild1cadillac.webp",
-      alt: "Cadillac IQ wrapped in Satin Silver White Aluminum on color matched wheels",
+      image: "/dbtwmmainpagehero.webp",
+      alt: "Blacked-out Land Rover Defender outside the House",
     },
     pair: {
       headline: "Lifted. Blacked out.",
