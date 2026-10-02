@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -303,7 +304,12 @@ async function LocationPage({ slug }: { slug: string }) {
           <div className="lp-rv">
             <Monogram />
           </div>
-          <h1 className="display lp-h1">
+          {/* The name's length, so location.css can shrink a long one to
+              fit on its line rather than run past the mask. */}
+          <h1
+            className="display lp-h1"
+            style={{ "--l1-chars": content.h1.line1.length } as CSSProperties}
+          >
             <span className="lp-mask lp-l1"><span>{content.h1.line1}</span></span>
             <span className="lp-mask lp-l2"><span>{content.h1.line2}</span></span>
           </h1>

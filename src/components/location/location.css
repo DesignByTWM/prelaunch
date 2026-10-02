@@ -49,8 +49,15 @@ section.lp-hero {
 }
 .lp-hero-copy .mark-mono { height: 40px; width: 53px; display: block; }
 .lp-h1 { margin: 18px 0 22px; color: var(--white); }
+/* One line, always. A long name is shrunk to fit the copy column rather
+   than wrapping or running past the mask, which clips it. --l1-chars is
+   the name's length, set on the h1. 0.72em is the average width of one
+   character in this face at .06em tracking: The Woodlands. measures
+   0.6816em, the widest of the city names, plus a 5.6 percent margin.
+   Short names, such as Houston, keep the original clamp at every width. */
 .lp-h1 .lp-l1 {
-  display: block; font-size: clamp(54px, 8vw, 124px); letter-spacing: .06em; line-height: .95;
+  display: block; white-space: nowrap; letter-spacing: .06em; line-height: .95;
+  font-size: min(clamp(54px, 8vw, 124px), calc(min(780px, 92vw) / (var(--l1-chars) * 0.72)));
 }
 .lp-h1 .lp-l2 {
   display: block; font-size: clamp(17px, 1.9vw, 27px); letter-spacing: .14em;
