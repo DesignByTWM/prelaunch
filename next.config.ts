@@ -34,6 +34,22 @@ const nextConfig: NextConfig = {
       { source: "/index.html", destination: "/", permanent: true },
       { source: "/pages/blackout-packages", destination: "/services/blackout-packages", permanent: true },
       { source: "/pages/contact", destination: "/contact", permanent: true },
+
+      // More of the old Shopify store, seen in GA4 as real visits ending
+      // in a 404. Specific URLs first so they win over the catch-alls
+      // below, which send each old section to its nearest equivalent.
+      // The two /pages/ entries above also sit ahead of /pages/:path*.
+      { source: "/blogs/news/elevating-the-land-rover-defender-white-wrap-lift-kit-wheel-upgrade-custom-blackout-package", destination: "/featured-builds", permanent: true },
+      { source: "/blogs/news/range-rover-pink-statement-piece", destination: "/featured-builds/range-rover-rose-pink-interior", permanent: true },
+      { source: "/pages/service-contact", destination: "/contact", permanent: true },
+      { source: "/404-contact-sheet", destination: "/contact", permanent: true },
+      { source: "/cart", destination: "/wheels", permanent: true },
+      { source: "/blogs/:path*", destination: "/journal", permanent: true },
+      { source: "/products/:path*", destination: "/wheels", permanent: true },
+      { source: "/collections/:path*", destination: "/wheels", permanent: true },
+      { source: "/pages/:path*", destination: "/", permanent: true },
+      { source: "/account/:path*", destination: "/", permanent: true },
+      { source: "/customer_authentication/:path*", destination: "/", permanent: true },
     ];
   },
 
