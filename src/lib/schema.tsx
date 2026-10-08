@@ -25,13 +25,25 @@
  *   action risk, so they are never allowed to diverge.
  */
 
-import { hours, nap, site, socials } from "@/lib/site";
+import { googleBusinessProfile, hours, nap, site, socials } from "@/lib/site";
 import { services } from "@/content/services";
+import type { Review } from "@/content/reviews";
 
 const ORG_ID = `${site.url}/#organization`;
 const SITE_ID = `${site.url}/#website`;
 
-export function organizationSchema() {
+/**
+ * The business. Emitted once per page by SiteChrome.
+ *
+ * `reviews` is passed on the homepage only, the one page where the
+ * reviews are visible, so there they sit inside this same full node
+ * rather than in a second one. Every other page gets the node without
+ * them. Built from content/reviews.ts, the list the cards render, so the
+ * markup can never disagree with the visible text. Nested reviews take
+ * no itemReviewed. No datePublished, because the dates are not known,
+ * and no AggregateRating.
+ */
+export function organizationSchema(options: { reviews?: Review[] } = {}) {
   return {
     "@type": "AutoBodyShop",
     "@id": ORG_ID,
@@ -68,7 +80,8 @@ export function organizationSchema() {
         opens: entry.opens,
         closes: entry.closes,
       })),
-    sameAs: socials.map((social) => social.href),
+    hasMap: googleBusinessProfile,
+    sameAs: [...socials.map((social) => social.href), googleBusinessProfile],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "In-house automotive customization disciplines",
@@ -82,6 +95,19 @@ export function organizationSchema() {
         },
       })),
     },
+    ...(options.reviews?.length
+      ? {
+          review: options.reviews.map((review) => ({
+            "@type": "Review",
+            author: { "@type": "Person", name: review.name },
+            reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
+            reviewBody: review.quote,
+            name: review.title,
+            url: review.url,
+            publisher: { "@type": "Organization", name: "Google" },
+          })),
+        }
+      : {}),
   };
 }
 

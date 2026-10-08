@@ -301,14 +301,100 @@ section.alt { background: var(--off-white); }
 }
 .custom .inner { position: relative; z-index: 3; }
 
-/* ===== MATERIALS ===== */
-.mat-wrap { position: relative; }
-.mat-watermark { position: absolute; right: 0; top: -40px; height: 230px; width: 303px; color: rgba(0,0,0,.045); pointer-events: none; }
-.mat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-.mat-grid figure .ph { border-radius: 0 34px 0 34px; overflow: hidden; }
-.mat-grid figcaption { margin-top: 12px; font-size: 11.5px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--gray-mid); }
-.mat-grid figure:hover .ph img { transform: scale(1.05); }
-@media (max-width: 760px) { .mat-grid { grid-template-columns: 1fr 1fr; } .mat-watermark { display: none; } }
+/* ===== TESTIMONIALS =====
+   Homepage, October 8 2026, in the slot Materials of the house held.
+   The wrap and the watermark are that section's, unchanged in place,
+   size and colour. The watermark sits at the bottom of the stack and
+   the cards and the trust strip above it, so it never draws over a
+   card: the cards lose their transform once revealed, and without
+   these the absolutely positioned watermark would paint over them. */
+.rev-wrap { position: relative; }
+.rev-watermark { position: absolute; right: 0; top: -40px; height: 230px; width: 303px; color: rgba(0,0,0,.045); pointer-events: none; z-index: 0; }
+.rev-row, .rev-trust { position: relative; z-index: 1; }
+@media (max-width: 760px) { .rev-watermark { display: none; } }
+
+/* Equal height cards in a row: each card is a column with the divider
+   and footer pushed to the bottom. */
+.rev-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.rev-grid:focus-visible { outline: 2px solid var(--signal-teal); outline-offset: 6px; }
+.rev-card {
+  display: flex; flex-direction: column; min-width: 0;
+  background: var(--white); border-radius: 0 34px 0 34px;
+  padding: clamp(24px, 2.4vw, 30px);
+}
+.rev-stars { display: flex; gap: 3px; color: var(--signal-teal); }
+.rev-stars svg { display: block; width: 20px; height: 20px; }
+.rev-title {
+  margin: 18px 0 28px; font-family: var(--body); font-weight: 600; font-size: 12.5px;
+  line-height: 1.4; letter-spacing: .08em; text-transform: uppercase;
+}
+.rev-quote { margin-bottom: 24px; font-weight: 400; font-size: 14.5px; line-height: 1.65; color: var(--charcoal); }
+.rev-foot {
+  margin-top: auto; padding-top: 16px; border-top: 1px solid var(--gray-light);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.rev-who { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.rev-name { font-weight: 600; font-size: 14px; line-height: 1.3; }
+.rev-label { font-weight: 600; font-size: 10.5px; line-height: 1.3; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-mid); }
+/* The G is 20px; the link around it is at least 24px, and 44px on touch,
+   pulled back by the difference so the logo stays on the card's edge. */
+.rev-g { flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; min-width: 24px; min-height: 24px; margin-right: -2px; }
+.rev-g img { width: 20px; height: 20px; }
+.rev-g:focus-visible { outline: 2px solid var(--signal-teal); outline-offset: 2px; }
+@media (pointer: coarse) { .rev-g { min-width: 44px; min-height: 44px; margin: -10px -12px -10px 0; } }
+
+/* Trust strip, under a hairline. */
+.rev-trust {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px;
+  margin-top: 40px; padding-top: clamp(24px, 2vw, 28px);
+  border-top: 1px solid var(--gray-light);
+}
+.rev-point-head { font-size: clamp(18px, 1.7vw, 22px); line-height: 1.2; }
+.rev-point-sub { margin-top: 8px; font-weight: 500; font-size: 11px; line-height: 1.5; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-mid); }
+
+/* Tablet: two by two. */
+@media (max-width: 1100px) {
+  .rev-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rev-trust { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+}
+/* Mobile: one swipe row, scroll-snap only. Each card is 85 percent of the
+   screen so the next one shows. The row runs edge to edge by cancelling
+   the wrap's padding, and scrolls inside itself, so the page never
+   scrolls sideways. */
+@media (max-width: 640px) {
+  .rev-grid {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 85vw; gap: 14px;
+    overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--pad);
+    margin: 0 calc(-1 * var(--pad)); padding: 0 var(--pad) 6px;
+    scrollbar-width: none;
+  }
+  .rev-grid::-webkit-scrollbar { display: none; }
+  .rev-card { scroll-snap-align: start; }
+}
+
+/* The quiet next arrow on the mobile swipe row. A 36px white disc inside
+   a 44px tap area, at the row's right edge and centred on the cards.
+   Fades once the last card is in view; visibility follows the fade so
+   the hidden arrow cannot be tapped or tabbed to. */
+.rev-next { display: none; }
+@media (max-width: 640px) {
+  .rev-next {
+    position: absolute; top: calc(50% - 3px); right: calc(4px - var(--pad)); z-index: 2;
+    transform: translateY(-50%); display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
+    color: var(--gray-mid); transition: opacity .25s ease, visibility 0s;
+  }
+  .rev-next.is-end { opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility 0s linear .25s; }
+  .rev-next-disc {
+    display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;
+    border-radius: 50%; background: var(--white); border: 1px solid rgba(0,0,0,.12);
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .rev-next-disc svg { display: block; }
+  .rev-next:focus-visible { outline: none; }
+  .rev-next:focus-visible .rev-next-disc { outline: 2px solid var(--signal-teal); outline-offset: 2px; }
+}
 
 /* ===== BUILDS ===== */
 .builds { display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; }

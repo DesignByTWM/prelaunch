@@ -79,6 +79,13 @@ export const nap = {
 export const napLine = `${nap.street}, ${nap.city}, ${nap.state} ${nap.postalCode}`;
 
 /**
+ * The Google Business Profile, as Google's share link, exactly as
+ * supplied October 8 2026. Do not expand or rewrite it. The schema uses it
+ * as hasMap and sameAs, and llms.txt points to it for reviews.
+ */
+export const googleBusinessProfile = "https://share.google/nd1uCyKXIAJiHjcxz";
+
+/**
  * All six profiles carried over from Shopify. These double as schema
  * sameAs entities, which is a direct trust signal for both classic
  * search and AI answer engines resolving the brand.

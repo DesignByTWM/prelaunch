@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Monogram } from "@/components/BrandMarks";
 import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/Reveal";
 import { framed, getBuilds } from "@/sanity/content";
@@ -7,51 +6,8 @@ import { FRAMES } from "@/sanity/frames";
 import { wheelBrands } from "@/content/wheels";
 import { routes } from "@/lib/site";
 
-/* ===== MATERIALS OF THE HOUSE ===============================
-   Approved V2: off-white .alt section, monogram watermark at 4.5
-   percent, three 1:1 figures with the mirrored 0 34px 0 34px corner.
-   ============================================================ */
-
-const materials = [
-  { image: "/mainmaterial1metal.webp", alt: "Hand-finished panel detail", caption: "Hand-finished metal" },
-  { image: "/mainmaterial2stitch.webp", alt: "Leather stitching detail", caption: "Cabin stitching detail" },
-  { image: "/mainmaterial3fitment.webp", alt: "Wheel and brake fitment detail", caption: "Wheel & brake fitment" },
-];
-
-export function Materials() {
-  return (
-    <section className="alt">
-      <div className="wrap mat-wrap">
-        <Monogram className="mat-watermark" />
-
-        <Reveal className="sec-head">
-          <span className="eyebrow">Process</span>
-          <h2 className="display">Materials of the house.</h2>
-          <p className="lede">
-            A closer look at the fabrication, fitment and material selection
-            behind every build.
-          </p>
-        </Reveal>
-
-        <div className="mat-grid">
-          {materials.map((material, i) => (
-            <Reveal
-              key={material.caption}
-              as="figure"
-              card
-              delay={(i + 1) as 1 | 2 | 3}
-            >
-              <div className="ph r11">
-                <Photo src={material.image} alt={material.alt} />
-              </div>
-              <figcaption>{material.caption}</figcaption>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+/* Materials of the house was here until October 8 2026. The homepage
+   Testimonials section, components/home/Reviews.tsx, took its place. */
 
 /* ===== FEATURED BUILDS ======================================
    Approved V2: 16:9 frames, body-font h3 at 14.5px, outlined tags.

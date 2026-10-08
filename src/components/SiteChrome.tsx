@@ -24,8 +24,19 @@ import "../app/globals.css";
  * The stylesheet is imported here rather than in the layout so it travels
  * with the chrome. Anything that does not render SiteChrome, which today
  * means /studio, gets no site CSS at all.
+ *
+ * `schema` replaces the organization and website schema. The site layout
+ * passes its @schema slot, which is how the homepage gets the business
+ * node with its reviews inside it while every other page gets it without.
+ * Left out, as on the 404, the plain node is emitted.
  */
-export function SiteChrome({ children }: { children: React.ReactNode }) {
+export function SiteChrome({
+  children,
+  schema,
+}: {
+  children: React.ReactNode;
+  schema?: React.ReactNode;
+}) {
   return (
     <>
       {/*
@@ -54,7 +65,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         }}
       />
       <BrandSprite />
-      <JsonLd graph={[organizationSchema(), websiteSchema()]} />
+      {schema ?? <JsonLd graph={[organizationSchema(), websiteSchema()]} />}
       <Header />
       <main id="main">{children}</main>
       <Footer />

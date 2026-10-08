@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
 import { KeywordTicker } from "@/components/home/KeywordTicker";
 import { Services } from "@/components/home/Services";
-import { Materials, FeaturedBuilds, ShopWheels } from "@/components/home/HouseSections";
+import { FeaturedBuilds, ShopWheels } from "@/components/home/HouseSections";
+import { Reviews } from "@/components/home/Reviews";
 import { IntakeForm } from "@/components/home/IntakeForm";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
 import { headlineServices } from "@/content/services";
@@ -40,11 +41,13 @@ const homeFaqs = [
 export default function HomePage() {
   return (
     <>
+      {/* The review structured data is inside the business node, emitted
+          for this page only by app/(site)/@schema/page.tsx. */}
       <JsonLd graph={[breadcrumbSchema([{ name: "Home", path: "/" }])]} />
       <Hero />
       <KeywordTicker />
       <Services />
-      <Materials />
+      <Reviews />
       <FeaturedBuilds />
       <ShopWheels />
       <IntakeForm />
