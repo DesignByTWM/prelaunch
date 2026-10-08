@@ -85,6 +85,9 @@ export const napLine = `${nap.street}, ${nap.city}, ${nap.state} ${nap.postalCod
  */
 export const googleBusinessProfile = "https://share.google/nd1uCyKXIAJiHjcxz";
 
+/** The business node's priceRange, set October 8 2026. */
+export const priceRange = "$$$";
+
 /**
  * All six profiles carried over from Shopify. These double as schema
  * sameAs entities, which is a direct trust signal for both classic

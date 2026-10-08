@@ -11,3 +11,6 @@ build
 .vercel
 next-env.d.ts
 *.tsbuildinfo
+
+# Local Rich Results test export of the homepage JSON-LD. Never committed.
+_homepage-schema-test.html

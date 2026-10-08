@@ -5,8 +5,9 @@ import { Services } from "@/components/home/Services";
 import { FeaturedBuilds, ShopWheels } from "@/components/home/HouseSections";
 import { Reviews } from "@/components/home/Reviews";
 import { IntakeForm } from "@/components/home/IntakeForm";
-import { JsonLd, breadcrumbSchema } from "@/lib/schema";
+import { JsonLd, JsonLdNode, breadcrumbSchema, reviewSchemas } from "@/lib/schema";
 import { headlineServices } from "@/content/services";
+import { reviews } from "@/content/reviews";
 import { nap } from "@/lib/site";
 
 /* The hero, the card photos and the featured builds are read from Sanity.
@@ -41,9 +42,12 @@ const homeFaqs = [
 export default function HomePage() {
   return (
     <>
-      {/* The review structured data is inside the business node, emitted
-          for this page only by app/(site)/@schema/page.tsx. */}
       <JsonLd graph={[breadcrumbSchema([{ name: "Home", path: "/" }])]} />
+      {/* The reviews are visible only here, so their structured data is
+          emitted only here: one standalone Review per card. */}
+      {reviewSchemas(reviews).map((node) => (
+        <JsonLdNode key={node.url} node={node} />
+      ))}
       <Hero />
       <KeywordTicker />
       <Services />

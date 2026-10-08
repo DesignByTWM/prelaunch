@@ -25,25 +25,15 @@
  *   action risk, so they are never allowed to diverge.
  */
 
-import { googleBusinessProfile, hours, nap, site, socials } from "@/lib/site";
+import { googleBusinessProfile, hours, nap, priceRange, site, socials } from "@/lib/site";
 import { services } from "@/content/services";
 import type { Review } from "@/content/reviews";
 
 const ORG_ID = `${site.url}/#organization`;
 const SITE_ID = `${site.url}/#website`;
 
-/**
- * The business. Emitted once per page by SiteChrome.
- *
- * `reviews` is passed on the homepage only, the one page where the
- * reviews are visible, so there they sit inside this same full node
- * rather than in a second one. Every other page gets the node without
- * them. Built from content/reviews.ts, the list the cards render, so the
- * markup can never disagree with the visible text. Nested reviews take
- * no itemReviewed. No datePublished, because the dates are not known,
- * and no AggregateRating.
- */
-export function organizationSchema(options: { reviews?: Review[] } = {}) {
+/** The business. Emitted once per page by SiteChrome, the same on every page. */
+export function organizationSchema() {
   return {
     "@type": "AutoBodyShop",
     "@id": ORG_ID,
@@ -54,6 +44,7 @@ export function organizationSchema(options: { reviews?: Review[] } = {}) {
     url: site.url,
     telephone: nap.phone,
     email: nap.email,
+    priceRange,
     image: `${site.url}/dbtwmmainpagehero.webp`,
     logo: {
       "@type": "ImageObject",
@@ -95,20 +86,36 @@ export function organizationSchema(options: { reviews?: Review[] } = {}) {
         },
       })),
     },
-    ...(options.reviews?.length
-      ? {
-          review: options.reviews.map((review) => ({
-            "@type": "Review",
-            author: { "@type": "Person", name: review.name },
-            reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
-            reviewBody: review.quote,
-            name: review.title,
-            url: review.url,
-            publisher: { "@type": "Organization", name: "Google" },
-          })),
-        }
-      : {}),
   };
+}
+
+/**
+ * The homepage reviews, as standalone Review entities, one per review.
+ *
+ * Standalone rather than nested in the business node: Google's Rich
+ * Results Test rejects several nested reviews without an aggregateRating
+ * ("Multiple reviews without aggregateRating object"), and there is no
+ * aggregate to give. Each review points back at the business by @id
+ * through itemReviewed, which carries the @id, the type and the name
+ * only, never a second copy of the business.
+ *
+ * Emitted on the homepage only, the one page where the reviews are
+ * visible. Built from content/reviews.ts, the list the cards render, so
+ * the markup can never disagree with the visible text. No datePublished,
+ * because the dates are not known, and no AggregateRating.
+ */
+export function reviewSchemas(reviews: Review[]) {
+  return reviews.map((review) => ({
+    "@context": "https://schema.org",
+    "@type": "Review",
+    itemReviewed: { "@type": "AutoBodyShop", "@id": ORG_ID, name: nap.businessName },
+    author: { "@type": "Person", name: review.name },
+    reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
+    reviewBody: review.quote,
+    name: review.title,
+    url: review.url,
+    publisher: { "@type": "Organization", name: "Google" },
+  }));
 }
 
 export function websiteSchema() {
@@ -243,6 +250,20 @@ export function JsonLd({ graph }: { graph: object[] }) {
       type="application/ld+json"
       // Content is generated from typed local data, never from user input.
       dangerouslySetInnerHTML={{ __html: JSON.stringify(payload) }}
+    />
+  );
+}
+
+/**
+ * One standalone entity in its own script block, for a node that carries
+ * its own @context rather than sitting in the page's @graph.
+ */
+export function JsonLdNode({ node }: { node: object }) {
+  return (
+    <script
+      type="application/ld+json"
+      // Content is generated from typed local data, never from user input.
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(node) }}
     />
   );
 }
