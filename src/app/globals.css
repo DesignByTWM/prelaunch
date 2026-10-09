@@ -1672,3 +1672,43 @@ input[type="file"]:disabled::file-selector-button { cursor: not-allowed; }
   text-underline-offset: 3px; transition: color .25s;
 }
 .foot-credit a:hover, .foot-credit a:focus-visible { color: var(--white); }
+
+/* =============================================================
+   ACCESSIBILITY  ·  TEAL TEXT ON LIGHT GROUNDS
+   Added October 9 2026, approved by Jose (option A).
+
+   Signal Teal #00a19b as small text measures 3.20:1 on white and
+   2.93:1 on off white. WCAG AA needs 4.5:1. Small teal text on a
+   light ground now uses one deeper teal, #007a75, which measures
+   5.20:1 on white and 4.77:1 on off white.
+
+   Signal Teal itself is unchanged: buttons, the monogram, the
+   footer tagline and every label on a dark ground keep #00a19b,
+   which already passes there at 5.33:1 on charcoal. The deeper
+   teal would fail on dark, so the dark grounds are named below.
+   ============================================================= */
+:root { --teal-text: #007a75; }
+
+/* Eyebrows on light grounds, which is the default. */
+.eyebrow,
+.final-cta .form-done .eyebrow { color: var(--teal-text); }
+
+/* Eyebrows on dark grounds keep Signal Teal. */
+.eyebrow.on-dark,
+.proc .sec-head .eyebrow,
+section.dark .sec-head .eyebrow,
+.lp-map .eyebrow,
+.lp-feat .eyebrow,
+.lp-faq .eyebrow { color: var(--signal-teal); }
+
+/* Arrow links: View Build, Read, Explore. All sit on light grounds.
+   The location card link is changed in location.css. */
+.cov-body .go,
+.rel-body .go,
+.journal-card .go,
+.build-card-body .go { color: var(--teal-text); }
+
+/* The pre-selected marker beside a form label. Light forms take the
+   deeper teal, the charcoal closing band keeps Signal Teal. */
+.field-note { color: var(--teal-text); }
+.final-cta .field-note { color: var(--signal-teal); }

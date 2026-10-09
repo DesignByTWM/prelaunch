@@ -230,7 +230,7 @@ section.lp-disc { background: var(--off-white); padding: 0; overflow: hidden; }
 .lp-card p { font-size: 13px; color: var(--gray-mid); margin-top: 6px; max-width: 36ch; }
 .lp-card .lp-go {
   display: inline-flex; gap: 8px; margin-top: 10px; font-size: 11.5px; font-weight: 600;
-  letter-spacing: .06em; text-transform: uppercase; color: var(--signal-teal); transition: gap .3s;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--teal-text); transition: gap .3s;
 }
 .lp-card:hover .lp-go { gap: 14px; }
 @media (max-width: 900px) {
