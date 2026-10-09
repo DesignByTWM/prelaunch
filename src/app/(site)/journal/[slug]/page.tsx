@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { PageHero, SecHead, CustomBand, FaqBlock, CrossSell } from "@/components/ui/Page";
+import { PreferredSourceButton } from "@/components/ui/PreferredSource";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import {
   absoluteImage,
@@ -148,6 +149,11 @@ export default async function JournalPostPage({
               <p>{post.takeaway}</p>
             </Reveal>
           </article>
+
+          {/* Directly after the article ends, before any inquiry section. */}
+          <div className="pref-end">
+            <PreferredSourceButton />
+          </div>
         </div>
       </section>
 

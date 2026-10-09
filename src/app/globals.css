@@ -1599,3 +1599,24 @@ input[type="file"]:disabled::file-selector-button { cursor: not-allowed; }
 .final-cta .upload-list button { color: rgba(255,255,255,.72); }
 .final-cta .upload-list button:hover, .final-cta .upload-list button:focus-visible { color: var(--white); }
 .final-cta input[type="file"] { color: rgba(255,255,255,.72); }
+
+/* =============================================================
+   PREFERRED SOURCE  ·  GOOGLE
+   Added October 9 2026.
+
+   Two triggers for Google's "Add as preferred source" flow: the G
+   in the footer social row and one outlined button at the end of
+   every journal article and featured build. Both are real links
+   in the page's own HTML, so nothing shifts when Google's script
+   arrives. Loading rules are in lib/preferred-source.ts.
+   ============================================================= */
+
+/* Seven marks sit four over three, per Jose, October 9 2026. The
+   contact page row stays at six, three over three. */
+.soc.soc-4 { grid-template-columns: repeat(4,38px); }
+
+/* End of content button. Alone, on one line, inside the column. */
+.pref-end { margin-top: clamp(30px,4vw,44px); }
+.article + .pref-end { max-width: 720px; margin-left: auto; margin-right: auto; }
+.pref-btn { white-space: nowrap; }
+.pref-btn img { width: 18px; height: 18px; flex: none; }

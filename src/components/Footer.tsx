@@ -8,7 +8,8 @@ import { nap, routes, locations } from "@/lib/site";
  * Footer
  *
  * Approved V2: charcoal with the brushed metal texture, four columns,
- * six social marks on the 12px 0 12px 0 corner, and the Areas We Serve
+ * six social marks plus the Google preferred source G on the 12px 0 12px 0
+ * corner, four over three, and the Areas We Serve
  * block carrying all 22 cities from the location program.
  *
  * Social marks now come from the shared SocialRow so the contact page
@@ -47,7 +48,7 @@ export function Footer() {
               {nap.street}, {nap.city}, {nap.state} {nap.postalCode}
             </p>
 
-            <SocialRow />
+            <SocialRow preferredSource />
           </div>
 
           <div>

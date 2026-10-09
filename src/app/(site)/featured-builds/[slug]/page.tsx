@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Photo } from "@/components/ui/Photo";
 import { PageHero, SecHead, CustomBand } from "@/components/ui/Page";
+import { PreferredSourceButton } from "@/components/ui/PreferredSource";
 import { IntakeForm } from "@/components/home/IntakeForm";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
 import {
@@ -185,6 +186,11 @@ export default async function BuildPage({
           <Reveal className="prose">
             <p style={{ marginTop: 28 }}>{build.outcome}</p>
           </Reveal>
+
+          {/* Directly after the build story ends, before any inquiry section. */}
+          <div className="pref-end">
+            <PreferredSourceButton />
+          </div>
         </div>
       </section>
 
