@@ -1620,3 +1620,55 @@ input[type="file"]:disabled::file-selector-button { cursor: not-allowed; }
 .article + .pref-end { max-width: 720px; margin-left: auto; margin-right: auto; }
 .pref-btn { white-space: nowrap; }
 .pref-btn img { width: 18px; height: 18px; flex: none; }
+
+/* =============================================================
+   FOOTER EXTRAS  ·  SOCIAL TOOLTIPS AND AGENCY LINK
+   Added October 9 2026.
+   ============================================================= */
+
+/* Tooltip above each social mark, on hover and on keyboard focus.
+   The site's small label style on a white chip, black on white
+   over the dark footer and reversed on the light contact page.
+   Decorative: every link keeps its own accessible label. */
+.soc a { position: relative; }
+.soc-tip {
+  position: absolute; bottom: calc(100% + 9px); left: 50%;
+  transform: translate(-50%, 4px);
+  padding: 6px 9px; background: var(--white); color: var(--black);
+  font-family: var(--body); font-size: 10px; font-weight: 600; line-height: 1;
+  letter-spacing: .08em; text-transform: uppercase; white-space: nowrap;
+  border-radius: 6px 0 6px 0; opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .2s, transform .2s, visibility .2s; z-index: 5;
+}
+.soc.on-light .soc-tip { background: var(--black); color: var(--white); }
+@media (hover: hover) {
+  .soc a:hover .soc-tip { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+}
+.soc a:focus-visible .soc-tip { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+
+/* The first mark of each line sits at the edge of the page on a
+   phone, so its tooltip starts flush with the mark instead of
+   centring on it and running off screen. */
+.soc:not(.soc-4) a:nth-child(3n+1) .soc-tip,
+.soc.soc-4 a:nth-child(4n+1) .soc-tip { left: 0; transform: translate(0, 4px); }
+@media (hover: hover) {
+  .soc:not(.soc-4) a:nth-child(3n+1):hover .soc-tip,
+  .soc.soc-4 a:nth-child(4n+1):hover .soc-tip { transform: none; }
+}
+.soc:not(.soc-4) a:nth-child(3n+1):focus-visible .soc-tip,
+.soc.soc-4 a:nth-child(4n+1):focus-visible .soc-tip { transform: none; }
+
+/* The Google tooltip is the long one. It starts at the left edge of
+   the row, two marks back, so it never clips on a narrow phone. */
+.soc .soc-tip-row { left: -94px; transform: translate(0, 4px); }
+@media (hover: hover) { .soc a:hover .soc-tip-row { transform: none; } }
+.soc a:focus-visible .soc-tip-row { transform: none; }
+
+/* Powered by Bizsual. Same colour as the line it sits in, so the
+   underline is what marks it as a link. Set slightly below the
+   letters. Hover matches the footer links. */
+.foot-credit a {
+  color: inherit; text-decoration: underline; text-decoration-thickness: 1px;
+  text-underline-offset: 3px; transition: color .25s;
+}
+.foot-credit a:hover, .foot-credit a:focus-visible { color: var(--white); }

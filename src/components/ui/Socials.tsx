@@ -8,6 +8,10 @@ import { socials } from "@/lib/site";
  * treatment. Same 12px 0 12px 0 corner, same hover lift. `onLight` swaps
  * the stroke and fill for use on white rather than on the dark footer.
  *
+ * Every mark carries a small styled tooltip, shown on hover and on
+ * keyboard focus. It is decorative for screen readers: each link keeps
+ * its own accessible label.
+ *
  * Order below is the approved V2 order, which differs from the platform
  * list order in lib/site.ts.
  */
@@ -95,6 +99,9 @@ export function SocialRow({
             rel="noopener noreferrer"
           >
             {icons[label]}
+            <span className="soc-tip" aria-hidden="true">
+              {label}
+            </span>
           </a>
         );
       })}
@@ -104,6 +111,9 @@ export function SocialRow({
           label="Add Design by TWM as a preferred source on Google"
         >
           {googleG}
+          <span className="soc-tip soc-tip-row" aria-hidden="true">
+            Add as Preferred Source on Google
+          </span>
         </PreferredSourceTrigger>
       )}
     </div>

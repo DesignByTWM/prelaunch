@@ -94,7 +94,12 @@ export function Footer() {
           <span>
             © {year} {nap.businessName} · All rights reserved ·{" "}
             <Link href="/privacy-policy">Privacy Policy</Link>
-            <span className="foot-credit">Powered by Bizsual</span>
+            <span className="foot-credit">
+              Powered by{" "}
+              <a href="https://www.bizsual.com" target="_blank" rel="noopener">
+                Bizsual
+              </a>
+            </span>
           </span>
         </div>
       </div>
